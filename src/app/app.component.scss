@@ -1,0 +1,65 @@
+@mixin standard-flex($jc: center, $ai: center) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
+$headHeight: 5rem;
+$headBorderHeight: 6px;
+
+main {
+    margin: 0;
+    display: flex;
+
+    
+
+    >nav {
+        width: 10%;
+        height: 100vh;
+        background-color: grey;
+        @include standard-flex(space-between, start);
+        flex-direction: column;
+        padding-left: 4rem;
+
+        >img {
+            margin-top: 3rem;
+            width: 10rem;
+        }
+
+        >ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            >li {
+                @include standard-flex(start );
+                cursor: pointer;
+                >img {
+                    width: 2rem;
+                }
+            }
+        }
+
+        >div {
+            margin-bottom: 3rem;
+        }
+
+        
+    }
+
+    >section {
+        flex: 1;
+
+        .top-content {
+            @include standard-flex(space-between);
+            height: $headHeight;
+            border-bottom: $headBorderHeight solid rgba($color: #000000, $alpha: 0.2) ;
+        }
+
+        .routing-content {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+            height: calc(100% - $headHeight - $headBorderHeight);
+        }
+    }
+}
