@@ -1,6 +1,7 @@
 <p>contact-floating works!</p>
 <p>contact-floating.contact works!</p>
-<div class="main">
+<main>
+
     <div class="headline">
         <h1>Contacts</h1>
         <p>Better with a team</p>
@@ -8,26 +9,42 @@
 
     <div class="contact-floating">
         <div class="nameIcon">
-<!-- <p>{{.initials}}</p> -->
+            <div class="id">
+                <img src="../../../../assets/img/FrameTest.png" alt="">
+                <!-- @for (contact of contactsFromList; track $index) {
+            
+            <p>{{contact.initials}}</p>
+            } -->
 
+            </div>
+            <div class="contactField">
 
-           <!-- <p>{{.name}}</p> -->
+                <!-- @for (contact of contactsFromList; track $index) {
+            <p>{{contact.name}}</p>
+            } -->
+                <div class="imagesForContact">
+                    <img src="../../../../assets/img/editIcon.png" alt="">
+                    <p>Edit</p>
+                    <img src="../../../../assets/img/trash.png" alt="">
+                    <p>Delete</p>
+                </div>
+            </div>
         </div>
-        <div class="contactField">
-            <div></div>
-            <div class="imagesForContact"></div>
-            <img src="../../../../assets/img/editIcon.png" alt="">
-            <p>Edit</p>
-            <img src="../../../../assets/img/trash.png" alt="">
-            <p>Delete</p>
-        </div>
+
         <p>Contact Information</p>
 
+        <div>
 
-        <p>Email</p>
-        <!-- <p>{{.eMail}}</p> -->
+            <p>Email</p>
+            @for (contact of contactsFromList; track $index) {
+            <p>{{contact.eMail}}</p>
+            }
 
-        <p>Phone</p>
-        <!-- <p>{{.phone}}</p> -->
+            <p>Phone</p>
+            @for (contact of contactsFromList; track $index) {
+            <p>{{contact.phone}}</p>
+            }
+        </div>
+
     </div>
-</div>
+</main>
