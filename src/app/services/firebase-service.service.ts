@@ -55,7 +55,7 @@ export class FirebaseService {
       name: obj.name || "",
       eMail: obj.eMail || "",
       phone: obj.phone || 111,
-      initials: obj.getInitials(obj.name) || "",
+      // initials: obj.getInitials(obj.name) || "",
       id: id || "",
     }
   }
