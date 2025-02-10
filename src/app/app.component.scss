@@ -1,8 +1,4 @@
-@mixin standard-flex($jc: center, $ai: center) {
-    display: flex;
-    justify-content: $jc;
-    align-items: $ai;
-}
+@use "./styles.scss" as *;
 $headHeight: 5rem;
 $headBorderHeight: 6px;
 

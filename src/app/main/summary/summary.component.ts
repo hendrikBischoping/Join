@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent {
-
+ 
 }
