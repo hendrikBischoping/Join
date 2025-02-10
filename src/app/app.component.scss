@@ -1,4 +1,5 @@
-@use "./styles.scss" as *;
+@use './styles/mixins.scss' as *;
+
 $headHeight: 5rem;
 $headBorderHeight: 6px;
 

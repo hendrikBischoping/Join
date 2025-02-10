@@ -7,7 +7,7 @@ import { ITask } from '../interfaces/itask';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseServiceService {
+export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
   private contactSubject = new BehaviorSubject<IContact[]>([]);
