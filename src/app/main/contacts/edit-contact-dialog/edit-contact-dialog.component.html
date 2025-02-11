@@ -1,0 +1,41 @@
+<main>
+    <section class="logo-section">
+        <img src="" alt="">
+        <h2>Edit contact</h2>
+    </section>
+    <section class="initials-section">
+        <div>
+            {{contact.initials}}
+        </div>
+    </section>
+    <section class="edit-section">
+        <mat-dialog-content>
+            
+            <div>
+                <mat-form-field>
+                    <mat-label>name</mat-label>
+                    <input [(ngModel)]="contact.name" matInput placeholder="eMail">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>eMail</mat-label>
+                    <input [(ngModel)]="contact.eMail" matInput placeholder="eMail">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>phone</mat-label>
+                    <input [(ngModel)]="contact.phone" matInput placeholder="eMail">
+                </mat-form-field>
+            </div>
+    
+        </mat-dialog-content>
+        <div>
+            <button (click)="dialogRef.close()">Cancel</button>
+            <button (click)="saveUserInfo()" cdkFocusInitial>Save</button>
+        </div>
+    </section>
+    
+</main>
+
