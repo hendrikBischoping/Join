@@ -1,0 +1,50 @@
+<p>contact-floating works!</p>
+<p>contact-floating.contact works!</p>
+<main>
+
+    <div class="headline">
+        <h1>Contacts</h1>
+        <p>Better with a team</p>
+    </div>
+
+    <div class="contact-floating">
+        <div class="nameIcon">
+            <div class="id">
+                <img src="../../../../assets/img/FrameTest.png" alt="">
+                <!-- @for (contact of contactsFromList; track $index) {
+            
+            <p>{{contact.initials}}</p>
+            } -->
+
+            </div>
+            <div class="contactField">
+
+                <!-- @for (contact of contactsFromList; track $index) {
+            <p>{{contact.name}}</p>
+            } -->
+                <div class="imagesForContact">
+                    <img src="../../../../assets/img/editIcon.png" alt="">
+                    <p>Edit</p>
+                    <img src="../../../../assets/img/trash.png" alt="">
+                    <p>Delete</p>
+                </div>
+            </div>
+        </div>
+
+        <p>Contact Information</p>
+
+        <div>
+
+            <p>Email</p>
+            @for (contact of contactsFromList; track $index) {
+            <p>{{contact.eMail}}</p>
+            }
+
+            <p>Phone</p>
+            @for (contact of contactsFromList; track $index) {
+            <p>{{contact.phone}}</p>
+            }
+        </div>
+
+    </div>
+</main>

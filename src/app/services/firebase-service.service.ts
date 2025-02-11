@@ -10,6 +10,8 @@ import { ITask } from '../interfaces/itask';
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
+  unsubscribeContacts: () => void;
+  // contactList: IContact[] = [];
   private contactSubject = new BehaviorSubject<IContact[]>([]);
   contact$ = this.contactSubject.asObservable();
 
@@ -17,14 +19,23 @@ export class FirebaseService {
   task$ = this.taskSubject.asObservable();
 
   constructor() {
-    this.subContactList();
+    this.unsubscribeContacts = this.subContactList();
 
   }
 
+
+
+  // subContactList() {
+  //   return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
+      
+  //     snapshot.forEach((doc) => {
+  //       this.contactList.push(this.setContactData(doc.data(), doc.id));
+  //     });
+  //   });
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
       const updatedContacts: IContact[] = [];
-
+      
       snapshot.forEach((doc) => {
         updatedContacts.push(this.setContactData(doc.data(), doc.id));
       });
@@ -35,7 +46,7 @@ export class FirebaseService {
 
   subTaskList() {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
-      const updatedTasks: IContact[] = [];
+      const updatedTasks: ITask[] = [];
 
       snapshot.forEach((doc) => {
         updatedTasks.push(this.setContactData(doc.data(), doc.id));
@@ -51,21 +62,20 @@ export class FirebaseService {
   }
 
   setContactData(obj: any, id: string): IContact {
+    const nameInitials = this.getInitials(obj.name)
     return {
       name: obj.name || "",
       eMail: obj.eMail || "",
       phone: obj.phone || 111,
-      // initials: obj.getInitials(obj.name) || "",
+      initials: nameInitials || "",
       id: id || "",
     }
   }
 
   getInitials(name: string) {
     if (!name) return "";
-
-    const words = name.trim().split(/\s+/); // Trennt den Namen in Wörter
-    const initials = words.map(word => word[0].toUpperCase()).join(""); // Nimmt den ersten Buchstaben jedes Wortes und macht ihn groß
-
+    const words = name.trim().split(/\s+/); 
+    const initials = words.map(word => word[0].toUpperCase()).join(""); 
     return initials;
   }
 
@@ -126,5 +136,11 @@ export class FirebaseService {
     await deleteDoc(this.getSingleDocRef(colId, docId)).catch(
       (err) => (console.log(err))
     );
+  }
+
+  ngOnDestroy() {
+    if(this.unsubscribeContacts) {
+      this.unsubscribeContacts();
+    }
   }
 }

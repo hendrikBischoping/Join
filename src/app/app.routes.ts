@@ -9,4 +9,5 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent },
     { path: 'add-task', component: AddTaskComponent },
     { path: 'contacts', component: ContactsComponent }
+   
 ];

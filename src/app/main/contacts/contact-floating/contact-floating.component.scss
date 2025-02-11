@@ -1,0 +1,42 @@
+
+@use '../../../styles/mixins.scss' as *;
+
+
+main {
+    width: 100%;
+    height: 15rem;
+    @include standard-flex(space-between, start);
+    flex-direction: column;
+    gap: 2rem;
+    .headline {
+       
+        @include standard-flex(space-between, start);
+        flex-direction:row;
+
+    }
+    .contact-floating {
+        @include standard-flex(space-between, start);
+        flex-direction:column;
+        height: 14rem;
+        gap: 1rem;
+        // .id{
+        //     width: 1rem;
+        //     height: 1rem,
+        // }
+        .nameIcon{
+            @include standard-flex(space-between, start);
+            flex-direction:row;
+            width: 16rem;
+        }
+        .contactField{
+            @include standard-flex(space-between, start);
+            flex-direction: column;
+            height: 8,5rem;
+            .imagesForContact{
+                width:1rem;
+                @include standard-flex(space-between, start);
+                flex-direction: row;
+            }
+        }
+    }
+}

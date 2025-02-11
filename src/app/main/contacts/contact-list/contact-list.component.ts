@@ -19,12 +19,20 @@ export class ContactListComponent {
     // this.sortContacts();
   }
 
+<<<<<<< HEAD
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contactsFromList = contactList;
       this.sortContacts();
     })
   }
+=======
+  // ngOnInit() {
+  //   this.contactService.getContacts().subscribe((contactList) => {
+  //     this.contactsFromList = contactList;
+  //   })
+  // }
+>>>>>>> 1b713c06348356689aca44fa55dc874a33eae8e3
 
   sortContacts() {
     this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
