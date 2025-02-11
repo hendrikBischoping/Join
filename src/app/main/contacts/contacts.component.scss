@@ -1,5 +1,15 @@
-// @use '../../styles/mixins.scss' as *;
-.body{
+@use '../../styles/mixins.scss' as *;
+
+$listWidth: 40%;
+
+main {
     display: flex;
-    flex-direction: row-reverse;
+
+    .list {
+        width: $listWidth;
+    }
+
+    .detailed {
+        width: calc(100% - $listWidth);
+    }
 }
