@@ -10,24 +10,19 @@ import { IContact } from '../../../interfaces/icontact';
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  contactsFromList: IContact[]= [
-    {
-      name: "Hendrik Bischoping",
-      eMail: "hbischoping@googlemail.com",
-      phone: 31245,
-    },
-  ];
+  contactsFromList: IContact[]= [];
 
 
   
 
   constructor(private contactService: ContactService) {
-    this.sortContacts();
+    // this.sortContacts();
   }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contactsFromList = contactList;
+      this.sortContacts();
     })
   }
 
