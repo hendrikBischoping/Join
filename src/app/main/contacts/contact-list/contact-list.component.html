@@ -2,9 +2,12 @@
     <div class="contactsLeft">
         <button>Add new contact <img src="./../../../assets/img/contacts/person_add.png" alt="person_add"></button>
         <div class="contactList">
+            @for (item of items; track $index) {
+                <p><b></b></p>
             @for (contact of contactsFromList; track $index) {
                 <h3>{{ contact.name }}</h3>
                 <p>{{ contact.eMail }}</p>
+            }
             }
         </div>
     </div>
