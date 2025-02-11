@@ -27,6 +27,17 @@ main {
             @include standard-flex(space-between, start);
             flex-direction:row;
             width: 16rem;
+            
+                .initials-circle {
+                    border: 1px solid white;
+                    font-size: 2rem;
+                    color: white;
+                    border-radius: 100%;
+                    width: 5rem;
+                    height: 5rem;
+                    background-color: aqua;
+                    @include standard-flex();
+                }
         }
         .contactField{
             @include standard-flex(space-between, start);
