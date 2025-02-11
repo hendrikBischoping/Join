@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
+import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,8 +20,9 @@ export class ContactFloatingComponent {
       phone: 31245,
     },
   ];
+  readonly dialog = inject(MatDialog);
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef) {
     
   }
 
@@ -29,7 +32,32 @@ export class ContactFloatingComponent {
     })
   }
 
+  editData(contactId?: string) {
 
+    const selectedContact = this. contactsFromList.find(contact => contact.id === contactId);
+    if (!selectedContact) {
+      console.error("Contact not found!");
+      return;
+    }
+
+    const dialog = this.dialog.open(EditContactDialogComponent, {
+      data: { contact: { ...selectedContact } } // Kopie des Objekts übergeben
+    });
+    
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.contactService.updateContact(contactId!, result); 
+        this.cdRef.detectChanges(); 
+      }
+    });
+  }
+  deleteData(contactId?: string) {
+
+this.contactService.deleteContact(contactId!);
+
+  }
+  
 
 
 
