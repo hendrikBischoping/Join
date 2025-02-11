@@ -97,10 +97,9 @@ export class FirebaseService {
 
   async addToDB(colId: string, item: ITask | IContact) {
     try {
-      const docRef = await addDoc(this.getColRef(colId), item); // Erst das Dokument speichern
+      const docRef = await addDoc(this.getColRef(colId), item);
       console.log("Document written with ID: ", docRef.id);
       
-      // Optional: Falls du die ID im Dokument selbst speichern willst
       await this.updateDocWithID(colId, docRef.id);
   
       return docRef.id;
