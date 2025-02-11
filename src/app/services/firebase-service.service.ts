@@ -10,6 +10,8 @@ import { ITask } from '../interfaces/itask';
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
+  unsubscribeContacts: () => void;
+  // contactList: IContact[] = [];
   private contactSubject = new BehaviorSubject<IContact[]>([]);
   contact$ = this.contactSubject.asObservable();
 
@@ -17,14 +19,22 @@ export class FirebaseService {
   task$ = this.taskSubject.asObservable();
 
   constructor() {
-    this.subContactList();
+    this.unsubscribeContacts = this.subContactList();
 
   }
 
+
+
+  // subContactList() {
+  //   return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
+      
+  //     snapshot.forEach((doc) => {
+  //       this.contactList.push(this.setContactData(doc.data(), doc.id));
+  //     });
+  //   });
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
       const updatedContacts: IContact[] = [];
-      
       
       snapshot.forEach((doc) => {
         updatedContacts.push(this.setContactData(doc.data(), doc.id));
@@ -36,7 +46,7 @@ export class FirebaseService {
 
   subTaskList() {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
-      const updatedTasks: IContact[] = [];
+      const updatedTasks: ITask[] = [];
 
       snapshot.forEach((doc) => {
         updatedTasks.push(this.setContactData(doc.data(), doc.id));
@@ -126,5 +136,11 @@ export class FirebaseService {
     await deleteDoc(this.getSingleDocRef(colId, docId)).catch(
       (err) => (console.log(err))
     );
+  }
+
+  ngOnDestroy() {
+    if(this.unsubscribeContacts) {
+      this.unsubscribeContacts();
+    }
   }
 }

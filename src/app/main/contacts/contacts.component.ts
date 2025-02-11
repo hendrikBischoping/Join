@@ -25,6 +25,9 @@ export class ContactsComponent {
 
   constructor(private contactDatabase: ContactService, private cdRef: ChangeDetectorRef) { }
 
+  // ngOnInit(): void {
+  //     this.contactData = this.contactDatabase.getContacts();
+  // }
   ngOnInit(): void {
     this.contactDatabase.getContacts().subscribe((contactList) => {
       this.contactData = contactList;

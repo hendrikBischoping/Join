@@ -25,11 +25,11 @@ export class ContactListComponent {
     this.sortContacts();
   }
 
-  ngOnInit() {
-    this.contactService.getContacts().subscribe((contactList) => {
-      this.contactsFromList = contactList;
-    })
-  }
+  // ngOnInit() {
+  //   this.contactService.getContacts().subscribe((contactList) => {
+  //     this.contactsFromList = contactList;
+  //   })
+  // }
 
   sortContacts() {
     this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));

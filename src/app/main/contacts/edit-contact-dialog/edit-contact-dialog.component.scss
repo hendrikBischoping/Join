@@ -1,6 +1,54 @@
+@use '../../../styles/mixins.scss' as *;
+
 main {
-    width: 100rem;
+    width: 80rem;
     height: 60vh;
 
-    display: flex;
+    @include standard-flex();
+
+    .logo-section {
+        background-color: #2A3647;
+        width: 30%;
+        height: 100%;
+        @include standard-flex();
+        flex-direction: column;
+    }
+
+    .initials-section {
+        width: 20%;
+        height: 100%;
+        @include standard-flex();
+
+        >div {
+            border: 1px solid white;
+            font-size: 2rem;
+            color: white;
+            border-radius: 100%;
+            width: 5rem;
+            height: 5rem;
+            background-color: aqua;
+            @include standard-flex();
+
+        }
+    }
+
+    .edit-section {
+        width: 50%;
+        height: 100%;
+        @include standard-flex();
+        flex-direction: column;
+
+    }
+
+    >div {
+        width: 100%;
+
+        >div {
+            width: 100%;
+        }
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
 }
