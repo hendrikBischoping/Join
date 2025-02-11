@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use './app/styles/mixins.scss' as *;
 html,
 body {
     height: 100%;
@@ -52,7 +53,7 @@ $customBlue: #29abe2;
     aspect-ratio: 1;
 }
 
-.inital-circle {
+.initials-circle {
     border: 1px solid white;
     font-size: 2rem;
     color: white;
