@@ -1,7 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 p {
     margin: 0;
+}
+
+$standardColor: #2A3647;
+$customBlue: #29abe2;
+
+
+@mixin standardButton() {
+    width: 4.5rem;
+    aspect-ratio: 2;
+    border: 1px solid $standardColor;
+    border-radius: 12px
+}
+
+.button-bright-bg {
+    @include standardButton();
+
+    &:hover {
+        cursor: pointer;
+        border-color: $customBlue;
+        color: $customBlue;
+        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
+    }
+}
+
+.button-dark-bg {
+    @include standardButton();
+    background-color: $standardColor;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $customBlue;
+        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
+    }
+}
+
+.dialog-logo {
+    width: 3rem;
+    aspect-ratio: 1;
+}
+
+.inital-circle {
+    border: 1px solid white;
+    font-size: 2rem;
+    color: white;
+    border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
+    background-color: aqua;
+    @include standard-flex();
 }

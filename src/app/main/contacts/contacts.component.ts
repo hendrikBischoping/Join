@@ -43,7 +43,7 @@ export class ContactsComponent {
     }
 
     const dialog = this.dialog.open(EditContactDialogComponent, {
-      data: { contact: { ...selectedContact } } // Kopie des Objekts übergeben
+      data: { contact: { ...selectedContact } }
     });
     
 

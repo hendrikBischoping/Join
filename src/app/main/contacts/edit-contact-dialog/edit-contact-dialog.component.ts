@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ContactService } from '../../../services/contact-service.service';
 
 @Component({
   selector: 'app-edit-contact-dialog',
@@ -16,13 +17,18 @@ export class EditContactDialogComponent {
   contact: IContact;
 
   constructor(
+    private contactService: ContactService,
     public dialogRef: MatDialogRef<EditContactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { contact: IContact }
   ) {
     this.contact = data.contact;
   }
 
-  async saveUserInfo() {
+  async deleteContact() {
+    this.contactService.deleteContact(this.contact.id!);
+  }
+
+  async saveContactInfo() {
     this.dialogRef.close(this.contact);
   }
 }

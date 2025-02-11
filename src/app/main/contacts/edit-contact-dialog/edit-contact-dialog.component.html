@@ -1,7 +1,7 @@
 <main>
     <section class="logo-section">
-        <img src="./assets/img/joinLogoSmallWhite.png" alt="">
-        <h2>Edit contact</h2>
+        <img class="dialog-logo" src="./assets/img/joinLogoSmallWhite.png" alt="">
+        <h2><span>Edit</span> contact</h2>
     </section>
     <section class="initials-section">
         <div>
@@ -9,29 +9,27 @@
         </div>
     </section>
     <section class="edit-section">
+        <button (click)="dialogRef.close()">x</button>
         <div>
             <div>
                 <mat-form-field>
-                    <mat-label>name</mat-label>
                     <input [(ngModel)]="contact.name" matInput placeholder="eMail">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field>
-                    <mat-label>eMail</mat-label>
                     <input [(ngModel)]="contact.eMail" matInput placeholder="eMail">
                 </mat-form-field>
             </div>
             <div>
                 <mat-form-field>
-                    <mat-label>phone</mat-label>
                     <input [(ngModel)]="contact.phone" matInput placeholder="eMail">
                 </mat-form-field>
             </div>
         </div>
-        <div>
-            <button (click)="dialogRef.close()">Cancel</button>
-            <button (click)="saveUserInfo()" cdkFocusInitial>Save</button>
+        <div class="confirmation-buttons">
+            <button class="button-bright-bg" (click)="deleteContact()">Delete</button>
+            <button class="button-dark-bg" (click)="saveContactInfo()" cdkFocusInitial>Save</button>
         </div>
     </section>
     

@@ -1,35 +1,38 @@
 @use '../../../styles/mixins.scss' as *;
 
 main {
-    width: 80rem;
-    height: 60vh;
+    width: 80vw;
+    aspect-ratio: 2;
+    border-radius: 50%;
 
     @include standard-flex();
 
     .logo-section {
         background-color: #2A3647;
-        width: 30%;
+        width: 35%;
         height: 100%;
-        @include standard-flex();
+        @include standard-flex(center, start);
         flex-direction: column;
+        gap: 2rem;
+        padding-left: 2rem;
+
+        >h2 {
+            font-size: 3rem;
+            color: white;
+
+            >span {
+                text-decoration: underline;
+                text-decoration-color: #29abe2;
+                text-decoration-thickness: 2px;
+                text-underline-offset: 1rem;
+            }
+        }
     }
 
     .initials-section {
-        width: 20%;
+        width: 15%;
         height: 100%;
         @include standard-flex();
-
-        >div {
-            border: 1px solid white;
-            font-size: 2rem;
-            color: white;
-            border-radius: 100%;
-            width: 5rem;
-            height: 5rem;
-            background-color: aqua;
-            @include standard-flex();
-
-        }
     }
 
     .edit-section {
@@ -38,17 +41,19 @@ main {
         @include standard-flex();
         flex-direction: column;
 
-    }
-
-    >div {
-        width: 100%;
+        .confirmation-buttons {
+            display: flex;
+            gap: 1rem;
+        } 
 
         >div {
+            width: 90%;
+
+            
+        }
+
+        mat-form-field {
             width: 100%;
         }
-    }
-
-    mat-form-field {
-        width: 100%;
     }
 }
