@@ -2,15 +2,15 @@
 @import '../../../../styles.scss';
 
 .contacts{
-    width: 80%;
-    min-height: 100%;
+    width: 85%;
     background-color: white;
-    padding: 2rem 0;
 }
 
 .contactsLeft {
+    padding: 1rem 0 0 0;
+    padding-right: 0.25rem;
     >button{
-        margin: auto;
+        margin: 1rem auto;
         padding: 0.5rem 3rem;
         gap: 1rem;
         border: 0;
@@ -35,11 +35,32 @@
 }
 
 .contactList {
+    max-height: 50vh;
+    overflow: auto;
     >h2 {
         text-transform: uppercase;
         padding: 1rem 4rem;
         margin: 0;
     }
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+      }
+      
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 4px;
+      }
+       
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: rgb(168,168,168);
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+      }
 }
 
 .separationLine {
@@ -56,21 +77,31 @@
     list-style-type: none;
     @include standard-flex(flex-start, center);
     background-color: white;
-    margin: 2rem 0;
+    margin:  0;
     >.singleInitials {
-        padding: 1rem;
-        margin-right: 3rem;
+        padding: 0.75rem;
+        margin: 1rem;
         border-radius: 50%;
         color: white;
         background-color: rgb(0, 110, 255);
     }
+    &:hover {
+        cursor: pointer;
+        background-image: linear-gradient(rgb(249,249,249), rgb(241,241,241));
+        border-radius: 1rem;
+    }
+    &:focus {
+        background-color: rgb(42,54,71);
+        border-radius: 1rem;
+    }
 }
 
 .contactName {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-family: 'Inter';
 }
 
 .contactMail {
     text-decoration: none;
+    color: rgb(0,124,238);
 }

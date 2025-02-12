@@ -1,6 +1,6 @@
 <section class="contacts">
   <div class="contactsLeft">
-    <button (click)="simpleAddContact('Nicht Löschen', 'nicht@löschen.pls', 12454234)">
+    <button (click)="simpleAddContact('Nicht Löschen', 'nicht@löschen.pls', 12454234, false)">
       Add new contact <img src="./../../../assets/img/contacts/person_add.png" alt="person_add">
     </button>
     <div class="contactList">
@@ -9,7 +9,7 @@
         <div class="separationLine"></div>
         <ul class="contactListPerLetter">
           @for (contact of item.contacts; track $index) {
-            <li class="contactSmallInfo">
+            <li class="contactSmallInfo" (click)="openSingleContakt(contact)">
               <div class="singleInitials">{{ contact.initials }}</div>
               <div>
                 <p class="contactName">{{ contact.name }}</p>

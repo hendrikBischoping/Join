@@ -19,8 +19,7 @@ export class ContactListComponent {
   constructor(private contactService: ContactService) {
     setTimeout(() => {
       this.groupContacts();
-      console.log(this.contactsFromList);
-      
+      // console.log(this.contactsFromList);
     }, 1000);
   }
 
@@ -50,9 +49,18 @@ export class ContactListComponent {
     }));
   }
 
-  simpleAddContact(dName: string, dEmail: string, dPhone: number) {
-    const dummy = {name: dName, eMail: dEmail, phone:dPhone};
+  simpleAddContact(dName: string, dEmail: string, dPhone: number, dIsOpened: boolean) {
+    const dummy = {name: dName, eMail: dEmail, phone:dPhone, isOpened:dIsOpened};
 
     this.contactService.addContact(dummy);
+  }
+
+  openSingleContakt(contact: IContact){
+    console.log(contact.id);
+    if (!contact.isOpened) {
+      console.log('closed');
+      contact.isOpened = true;
+    } else {console.log('open');
+      contact.isOpened = false;}
   }
 }
