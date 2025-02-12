@@ -131,7 +131,7 @@ export class FirebaseService {
     }
   }
 
-  async deleteUser(colId: string, docId:string) {
+  async deleteDocument(colId: string, docId:string) {
     await deleteDoc(this.getSingleDocRef(colId, docId)).catch(
       (err) => (console.log(err))
     );

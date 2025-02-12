@@ -54,4 +54,10 @@ export class ContactListComponent {
       letter, contacts: groups[letter]
     }));
   }
+
+  simpleAddContact(dName: string, dEmail: string, dPhone: number) {
+    const dummy = {name: dName, eMail: dEmail, phone:dPhone};
+
+    this.contactService.addContact(dummy);
+  }
 }

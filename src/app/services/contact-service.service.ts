@@ -33,6 +33,6 @@ export class ContactService {
 
   // Kontakt löschen
   async deleteContact(contactId: string) {
-    return await this.firebaseService.deleteUser(this.collectionName, contactId);
+    return await this.firebaseService.deleteDocument(this.collectionName, contactId);
   }
 }
