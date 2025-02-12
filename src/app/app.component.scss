@@ -1,6 +1,6 @@
 @use './styles/mixins.scss' as *;
 
-$headHeight: 5rem;
+$headHeight: 7rem;
 $headBorderHeight: 6px;
 
 main {
@@ -10,7 +10,7 @@ main {
 
 
     >nav {
-        width: 10%;
+        width: 16%;
         height: 100vh;
         background-color: #2A3647;
         @include standard-flex(space-between, center);

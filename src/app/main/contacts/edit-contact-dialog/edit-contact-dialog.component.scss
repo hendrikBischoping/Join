@@ -1,9 +1,10 @@
 @use '../../../styles/mixins.scss' as *;
 
+
 main {
     width: 80vw;
-    aspect-ratio: 2;
-    border-radius: 50%;
+    aspect-ratio: 1.9;
+
 
     @include standard-flex();
 
@@ -13,11 +14,11 @@ main {
         height: 100%;
         @include standard-flex(center, start);
         flex-direction: column;
-        gap: 2rem;
+        gap: 4rem;
         padding-left: 2rem;
 
         >h2 {
-            font-size: 3rem;
+            font-size: 4vw;
             color: white;
 
             >span {
@@ -40,10 +41,18 @@ main {
         height: 100%;
         @include standard-flex();
         flex-direction: column;
+        gap: 2rem;
+
+        >button {
+            margin-right: 4rem;
+            align-self: flex-end;
+        }
 
         .confirmation-buttons {
             display: flex;
             gap: 1rem;
+            
+
         } 
 
         >div {

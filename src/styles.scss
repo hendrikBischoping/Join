@@ -1,13 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 @use './app/styles/mixins.scss' as *;
+
+@font-face {
+    font-display: swap;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/inter-v18-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-700 - latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./assets/fonts/inter-v18-latin-700.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.mat-body,
+.mat-body-2,
+.mat-typography .mat-body,
+.mat-typography .mat-body-2,
+.mat-typography {
+  font: 400 14px/20px "Inter", sans-serif !important;
+}
+
+// Falls nötig, auch für den body:
+body {
+    margin: 0;
+  font: 400 16px/20px "Inter", sans-serif !important;
+}
+
 html,
 body {
     height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: 'Inter' !important;
 }
 
 p {
@@ -19,10 +49,11 @@ $customBlue: #29abe2;
 
 
 @mixin standardButton() {
-    width: 4.5rem;
+    width: 4em;
     aspect-ratio: 2;
     border: 1px solid $standardColor;
-    border-radius: 12px
+    border-radius: 12px;
+    font-size: 1.75rem
 }
 
 .button-bright-bg {
@@ -49,8 +80,8 @@ $customBlue: #29abe2;
 }
 
 .dialog-logo {
-    width: 3rem;
-    aspect-ratio: 1;
+    width: 4rem;
+    aspect-ratio: 0.9;
 }
 
 .initials-circle {
@@ -58,7 +89,7 @@ $customBlue: #29abe2;
     font-size: 2rem;
     color: white;
     border-radius: 100%;
-    width: 5rem;
+    width: 8rem;
     aspect-ratio: 1;
     background-color: aqua;
     @include standard-flex();
