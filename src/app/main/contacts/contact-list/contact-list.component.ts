@@ -32,11 +32,6 @@ export class ContactListComponent {
 
   }
 
-  // sortContacts() {
-  //   this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
-  //   console.log(this.contactsFromList); 
-  // }
-
   groupContacts() {
     const sortedContacts = this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
 

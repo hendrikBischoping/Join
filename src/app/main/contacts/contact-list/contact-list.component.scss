@@ -2,9 +2,75 @@
 @import '../../../../styles.scss';
 
 .contacts{
-    min-width: 30%;
+    width: 80%;
+    min-height: 100%;
+    background-color: white;
+    padding: 2rem 0;
 }
 
-// .contactSmallInfo {
+.contactsLeft {
+    >button{
+        margin: auto;
+        padding: 0.5rem 3rem;
+        gap: 1rem;
+        border: 0;
+        border-radius: 0.5rem;
+        @include standard-flex(center, center);
+        font-size: 1rem;
+        font-family: 'Inter';
+        color: white;
+        align-self: center;
+        text-align: center;
+        background-color: rgba(42, 54, 71, 1);
+        >img {
+            height: 1.5rem;
+            aspect-ratio: 1 / 1;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(41,171,226);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+        }
+    }
+}
 
-// }
+.contactList {
+    >h2 {
+        text-transform: uppercase;
+        padding: 1rem 4rem;
+        margin: 0;
+    }
+}
+
+.separationLine {
+    border: solid 1px rgb(209,209,209);
+    width: 90%;
+    margin: 0 5%;
+}
+
+.contactListPerLetter {
+    padding: 0 3rem;
+}
+
+.contactSmallInfo {
+    list-style-type: none;
+    @include standard-flex(flex-start, center);
+    background-color: white;
+    margin: 2rem 0;
+    >.singleInitials {
+        padding: 1rem;
+        margin-right: 3rem;
+        border-radius: 50%;
+        color: white;
+        background-color: rgb(0, 110, 255);
+    }
+}
+
+.contactName {
+    font-size: 1.2rem;
+    font-family: 'Inter';
+}
+
+.contactMail {
+    text-decoration: none;
+}
