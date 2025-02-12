@@ -10,11 +10,11 @@
     <div class="contact-floating">
         <div class="nameIcon">
             <div class="initials-circle">
-                
-                <!-- @for (contact of contactsFromList; track $index) {
-            
-            <p>{{contact.initials}}</p>
-            } -->
+
+                @for (contact of contactsFromList; track $index) {
+
+                <p>{{contact.initials}}</p>
+                }
 
             </div>
             <div class="contactField">
@@ -23,14 +23,12 @@
             <p>{{contact.name}}</p>
             } -->
                 <div class="imagesForContact">
-                    <div (click)="editData (contactsFromList[0].id)" ><img src="../../../../assets/img/editIcon.png" alt="">
-                   
-                </div>
-                <p>Edit</p>
-                <div (click)="deleteData (contactsFromList[0].id)"> 
-                    <img src="../../../../assets/img/trash.png" alt="">
-                    <p>Delete</p>
-                </div>
+                    <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png"
+                            alt="">Edit
+                    </div>
+                    <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png"
+                            alt="">Delete
+                    </div>
                 </div>
             </div>
         </div>
