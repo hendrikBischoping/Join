@@ -28,6 +28,10 @@
   font: 400 14px/20px "Inter", sans-serif !important;
 }
 
+.mat-dialog-container {
+    border-radius: 16px !important;
+  }
+
 // Falls nötig, auch für den body:
 body {
     margin: 0;
@@ -94,3 +98,34 @@ $customBlue: #29abe2;
     background-color: aqua;
     @include standard-flex();
 }
+
+// @keyframes slideInRight {
+//     from {
+//       transform: translateX(100%);
+//       opacity: 0;
+//     }
+//     to {
+//       transform: translateX(0);
+//       opacity: 1;
+//     }
+//   }
+  
+//   @keyframes slideOutRight {
+//     from {
+//       transform: translateX(0);
+//       opacity: 1;
+//     }
+//     to {
+//       transform: translateX(100%);
+//       opacity: 0;
+//     }
+//   }
+  
+//   .custom-dialog-container {
+//     animation: slideInRight 0.4s ease-out forwards;
+//   }
+  
+//   .custom-dialog-container-exit {
+//     animation: slideOutRight 0.4s ease-in forwards;
+//   }
+  

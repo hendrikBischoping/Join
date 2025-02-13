@@ -23,7 +23,8 @@ export class ContactService {
 
   // Kontakt hinzufügen
   async addContact(contact: IContact) {
-    return await this.firebaseService.addToDB(this.collectionName, contact);
+    await this.firebaseService.addToDB(this.collectionName, contact);
+    // return await this.firebaseService.addToDB(this.collectionName, contact);
   }
 
   // Kontakt aktualisieren
@@ -33,6 +34,6 @@ export class ContactService {
 
   // Kontakt löschen
   async deleteContact(contactId: string) {
-    return await this.firebaseService.deleteUser(this.collectionName, contactId);
+    return await this.firebaseService.deleteDocument(this.collectionName, contactId);
   }
 }

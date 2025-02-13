@@ -4,4 +4,5 @@ export interface IContact {
     phone: number;
     initials?: string;
     id?: string;
+    isOpened?: boolean;
 }

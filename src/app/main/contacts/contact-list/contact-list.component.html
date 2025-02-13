@@ -1,11 +1,24 @@
 <section class="contacts">
-    <div class="contactsLeft">
-        <button>Add new contact <img src="./../../../assets/img/contacts/person_add.png" alt="person_add"></button>
-        <div class="contactList">
-            @for (contact of contactsFromList; track $index) {
-                <h3>{{ contact.name }}</h3>
-                <p>{{ contact.eMail }}</p>
-            }
-        </div>
+  <div class="contactsLeft">
+    <button (click)="simpleAddContact('Nicht Löschen', 'nicht@löschen.pls', 12454234, false)">
+      Add new contact <img src="./../../../assets/img/contacts/person_add.png" alt="person_add">
+    </button>
+    <div class="contactList">
+      @for (item of groupedContacts; track $index) {
+        <h2>{{ item.letter }}</h2> 
+        <div class="separationLine"></div>
+        <ul class="contactListPerLetter">
+          @for (contact of item.contacts; track $index) {
+            <li class="contactSmallInfo" (click)="openSingleContakt(contact)">
+              <div class="singleInitials">{{ contact.initials }}</div>
+              <div>
+                <p class="contactName">{{ contact.name }}</p>
+                <p class="contactMail">{{ contact.eMail }}</p>
+              </div>
+            </li>
+          }
+        </ul>
+      }
     </div>
+  </div>
 </section>
