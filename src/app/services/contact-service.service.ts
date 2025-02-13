@@ -23,7 +23,8 @@ export class ContactService {
 
   // Kontakt hinzufügen
   async addContact(contact: IContact) {
-    return await this.firebaseService.addToDB(this.collectionName, contact);
+    await this.firebaseService.addToDB(this.collectionName, contact);
+    // return await this.firebaseService.addToDB(this.collectionName, contact);
   }
 
   // Kontakt aktualisieren

@@ -57,10 +57,6 @@ export class FirebaseService {
   }
 
 
-  getColRef(colId: string) {
-    return collection(this.firestore, colId);
-  }
-
   setContactData(obj: any, id: string): IContact {
     const nameInitials = this.getInitials(obj.name)
     return {
@@ -79,13 +75,16 @@ export class FirebaseService {
     return initials;
   }
 
+  getColRef(colId: string) {
+    return collection(this.firestore, colId);
+  }
+
   getSingleDocRef(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId), docId);
+    return doc((this.getColRef(colId)), docId);
   }
 
   async getSingleDoc(colId: string, docId: string): Promise<IContact | ITask | null> {
-    const docRef = doc(this.firestore, colId, docId);
-    const docSnap = await getDoc(docRef);
+    const docSnap = await getDoc(this.getSingleDocRef(colId, docId));
 
     if (docSnap.exists()) {
       return docSnap.data() as IContact | ITask;
@@ -97,34 +96,27 @@ export class FirebaseService {
 
   async addToDB(colId: string, item: ITask | IContact) {
     try {
-      const docRef = await addDoc(this.getColRef(colId), item);
-      console.log("Document written with ID: ", docRef.id);
-      
-      await this.updateDocWithID(colId, docRef.id);
-  
-      return docRef.id;
+      await addDoc(this.getColRef(colId), item);
     } catch (err) {
       console.error("Error adding document: ", err);
-      return null;
     }
   }
 
-  async updateDocWithID(colId: string, docId: string) {
-    const docRef = doc(this.firestore, colId, docId);
+  // async updateDocWithID(colId: string, docId: string) {
+  //   const docRef = doc(this.firestore, colId, docId);
     
-    try {
-      await updateDoc(docRef, { id: docId }); 
-      console.log("Document updated with ID field");
-    } catch (err) {
-      console.error("Error updating document: ", err);
-    }
-  }
+  //   try {
+  //     await updateDoc(docRef, { id: docId }); 
+  //     console.log("Document updated with ID field");
+  //   } catch (err) {
+  //     console.error("Error updating document: ", err);
+  //   }
+  // }
 
   async updateDoc(colId:string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
-    const DocRef = doc(this.firestore, colId, docId);
 
     try {
-      await updateDoc(DocRef, updatedData);
+      await updateDoc(this.getSingleDocRef(colId, docId), updatedData);
       console.log(`Document ${docId} successfully updated.`);
     } catch (error) {
       console.error("Error updating user:", error);
