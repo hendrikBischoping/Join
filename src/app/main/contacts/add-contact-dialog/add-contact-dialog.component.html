@@ -1,0 +1,35 @@
+<main @slideInOut>
+    <section class="logo-section">
+        <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
+        <h2><span>Edit</span> contact</h2>
+    </section>
+    <section class="initials-section">
+        <div class="initials-circle">
+            {{contact.initials}}
+        </div>
+    </section>
+    <section class="edit-section">
+        <div class="close-container" (click)="dialogRef.close()">
+            <img src="./assets/img/icons/CloseIcon.png">
+        </div>
+        
+        <div class="forms">
+            <!-- <div class="input-container">
+                <input type="text" [(ngModel)]="contact.name" placeholder="Dein Text hier">
+                <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="contact.eMail" placeholder="Dein Text hier">
+                <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
+            </div>
+            <div class="input-container">
+                <input type="text" [(ngModel)]="contact.phone" placeholder="Dein Text hier">
+                <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
+            </div> -->
+        </div>
+        <div class="confirmation-buttons">
+            <button class="button-bright-bg" (click)="addContact()">Delete</button>
+        </div>
+    </section>
+
+</main>

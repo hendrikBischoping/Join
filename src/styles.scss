@@ -99,33 +99,33 @@ $customBlue: #29abe2;
     @include standard-flex();
 }
 
-// @keyframes slideInRight {
-//     from {
-//       transform: translateX(100%);
-//       opacity: 0;
-//     }
-//     to {
-//       transform: translateX(0);
-//       opacity: 1;
-//     }
-//   }
+@keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
   
-//   @keyframes slideOutRight {
-//     from {
-//       transform: translateX(0);
-//       opacity: 1;
-//     }
-//     to {
-//       transform: translateX(100%);
-//       opacity: 0;
-//     }
-//   }
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
   
-//   .custom-dialog-container {
-//     animation: slideInRight 0.4s ease-out forwards;
-//   }
+  .custom-dialog-container {
+    animation: slideInRight 0.4s ease-out forwards;
+  }
   
-//   .custom-dialog-container-exit {
-//     animation: slideOutRight 0.4s ease-in forwards;
-//   }
+  .custom-dialog-container-exit {
+    animation: slideOutRight 0.4s ease-in forwards;
+  }
   
