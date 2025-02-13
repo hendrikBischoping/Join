@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ContactService } from '../../../services/contact-service.service';
 import { IContact } from '../../../interfaces/icontact';
+import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions } from '@angular/router';
+import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -15,8 +17,9 @@ export class ContactListComponent {
   groupedContacts: {letter: string; contacts: IContact[]}[] = [];
   
   contactsFromList: IContact[] = [];  
+  readonly dialog = inject(MatDialog);
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef) {
     setTimeout(() => {
       this.groupContacts();
       // console.log(this.contactsFromList);
@@ -49,10 +52,18 @@ export class ContactListComponent {
     }));
   }
 
-  simpleAddContact(dName: string, dEmail: string, dPhone: number, dIsOpened: boolean) {
-    const dummy = {name: dName, eMail: dEmail, phone:dPhone, isOpened:dIsOpened};
-
-    this.contactService.addContact(dummy);
+  addContact() {
+    
+    const dialog = this.dialog.open(AddContactDialogComponent, {
+      panelClass: 'custom-dialog-container', 
+      width: '80%', 
+      position: { right: '10vw' }
+    });
+  
+    // Schließen-Animation nach Beenden hinzufügen
+    dialog.beforeClosed().subscribe(() => {
+      document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
+    });
   }
 
   openSingleContakt(contact: IContact){

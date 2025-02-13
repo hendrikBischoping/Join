@@ -35,8 +35,8 @@
 }
 
 .contactList {
-    max-height: 50vh;
-    overflow: scroll;
+    max-height: calc(100vh - 13rem);
+    overflow: auto;
     >h2 {
         text-transform: uppercase;
         padding: 1rem 4rem;
@@ -78,12 +78,15 @@
     @include standard-flex(flex-start, center);
     background-color: white;
     margin:  0;
-    >.singleInitials {
-        padding: 0.75rem;
-        margin: 1rem;
-        border-radius: 50%;
-        color: white;
-        background-color: rgb(0, 110, 255);
+    >.initials-circle {
+        width: 3.5rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        // padding: 0.75rem;
+        // margin: 1rem;
+        // border-radius: 50%;
+        // color: white;
+        // background-color: rgb(0, 110, 255);
     }
     &:hover {
         cursor: pointer;
