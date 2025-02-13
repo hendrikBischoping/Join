@@ -36,7 +36,7 @@
 
 .contactList {
     max-height: 50vh;
-    overflow: auto;
+    overflow: scroll;
     >h2 {
         text-transform: uppercase;
         padding: 1rem 4rem;
@@ -66,7 +66,7 @@
 .separationLine {
     border: solid 1px rgb(209,209,209);
     width: 90%;
-    margin: 0 5%;
+    margin: 0 4%;
 }
 
 .contactListPerLetter {
