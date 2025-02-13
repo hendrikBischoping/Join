@@ -11,29 +11,30 @@
             <div class="initials-circle">
 
                 <p>{{contactsFromList[0].initials}}</p>
-
+                
             </div>
             <div class="contactField">
-
+                
                 <div class="info">
                     <p>{{contactsFromList[0].name}}</p>
                 </div>
-             
+                
                 <div class="imagesForContact">
                     <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png"
-                            alt="">Edit
+                        alt="">Edit
                     </div>
                     <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png"
-                            alt="">Delete
+                        alt="">Delete
                     </div>
                 </div>
-
+                
             </div>
         </div>
-
+        
         <p>Contact Information</p>
-
+        
         <div>
+            <p>Name: {{openContact.openedContact[0].name}}</p> <!-- test für service -->
 
             <p>Email</p>
             <p class="email">{{contactsFromList[0].eMail}}</p>

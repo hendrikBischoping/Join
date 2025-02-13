@@ -3,6 +3,7 @@ import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-floating',
@@ -12,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
+  openContact = inject(OpenContactServiceService);
   contactsFromList: IContact[] = [
     {
       name: 'Hendrik Bischoping',
