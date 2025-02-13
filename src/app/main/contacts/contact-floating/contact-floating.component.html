@@ -1,5 +1,4 @@
-<p>contact-floating works!</p>
-<p>contact-floating.contact works!</p>
+
 <main>
 
     <div class="headline">
@@ -12,9 +11,7 @@
         <div class="nameIcon">
             <div class="initials-circle">
 
-              
-
-                <p>{{contactsFromList[0].initials}}</p>
+            <p>{{contactsFromList[0].initials}}</p>
                 
             </div>
             <div class="contactField">
@@ -22,6 +19,7 @@
                 <!-- @for (contact of contactsFromList; track $index) {
             <p>{{contact.name}}</p>
             } -->
+            
                 <div class="imagesForContact">
                     <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png"
                             alt="">Edit
