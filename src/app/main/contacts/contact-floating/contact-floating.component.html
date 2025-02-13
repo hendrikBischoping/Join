@@ -4,18 +4,18 @@
 
     <div class="headline">
         <h1>Contacts</h1>
-        <p>Better with a team</p>
+        <div class="line"></div>
+        <span>Better with a team</span>
     </div>
 
     <div class="contact-floating">
         <div class="nameIcon">
             <div class="initials-circle">
 
-                @for (contact of contactsFromList; track $index) {
+              
 
-                <p>{{contact.initials}}</p>
-                }
-
+                <p>{{contactsFromList[0].initials}}</p>
+                
             </div>
             <div class="contactField">
 
@@ -36,16 +36,14 @@
         <p>Contact Information</p>
 
         <div>
-
+            
             <p>Email</p>
-            @for (contact of contactsFromList; track $index) {
-            <p>{{contact.eMail}}</p>
-            }
+            <p class="email">{{contactsFromList[0].eMail}}</p>
+            
 
             <p>Phone</p>
-            @for (contact of contactsFromList; track $index) {
-            <p>{{contact.phone}}</p>
-            }
+            <p>{{contactsFromList[0].phone}}</p>
+          
         </div>
 
     </div>
