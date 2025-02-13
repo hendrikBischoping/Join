@@ -4,14 +4,15 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { ContactService } from '../../../services/contact-service.service';
 
 @Component({
   selector: 'app-edit-contact-dialog',
   standalone: true,
-  imports: [FormsModule, MatDialogModule, MatInputModule, MatFormFieldModule],
+  imports: [FormsModule, MatDialogModule, MatIconModule, MatInputModule, MatFormFieldModule],
   templateUrl: './edit-contact-dialog.component.html',
-  styleUrl: './edit-contact-dialog.component.scss'
+  styleUrl: './edit-contact-dialog.component.scss',
 })
 export class EditContactDialogComponent {
   contact: IContact;
