@@ -24,7 +24,7 @@ export class ContactFloatingComponent {
   constructor(
     private contactService: ContactService,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -43,6 +43,13 @@ export class ContactFloatingComponent {
 
     const dialog = this.dialog.open(EditContactDialogComponent, {
       data: { contact: { ...selectedContact } }, // Kopie des Objekts übergeben
+      panelClass: 'custom-dialog-container', // Klasse für Animation
+      width: '80%', // Stelle sicher, dass eine feste Breite gesetzt ist
+      position: { right: '10vw' }
+    });
+
+    dialog.beforeClosed().subscribe(() => {
+      document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
     });
 
     dialog.afterClosed().subscribe((result) => {

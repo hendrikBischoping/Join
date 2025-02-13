@@ -55,9 +55,9 @@ export class ContactListComponent {
   addContact() {
     
     const dialog = this.dialog.open(AddContactDialogComponent, {
-      panelClass: 'custom-dialog-container', // Klasse für Animation
-      width: '400px', // Stelle sicher, dass eine feste Breite gesetzt ist
-      position: { right: '0px' } // Startet den Dialog von rechts
+      panelClass: 'custom-dialog-container', 
+      width: '80%', 
+      position: { right: '10vw' }
     });
   
     // Schließen-Animation nach Beenden hinzufügen

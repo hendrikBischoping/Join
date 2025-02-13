@@ -10,19 +10,22 @@ import { ContactService } from '../../../services/contact-service.service';
 @Component({
   selector: 'app-add-contact-dialog',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, MatDialogModule, MatIconModule, MatInputModule, MatFormFieldModule],
   templateUrl: './add-contact-dialog.component.html',
   styleUrl: './add-contact-dialog.component.scss'
 })
 export class AddContactDialogComponent {
-  contact: IContact;
+  contact: IContact = 
+    {
+      name: '',
+      eMail: '',
+      phone: 0,
+    }
 
   constructor(
     private contactService: ContactService,
-    public dialogRef: MatDialogRef<AddContactDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { contact: IContact }
+    public dialogRef: MatDialogRef<AddContactDialogComponent>
   ) {
-    this.contact = data.contact;
   }
 
   async addContact() {
