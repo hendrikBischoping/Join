@@ -4,6 +4,7 @@ import { IContact } from '../../../interfaces/icontact';
 import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions } from '@angular/router';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
+import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -13,7 +14,7 @@ import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dia
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  
+  openContact = inject(OpenContactServiceService);
   groupedContacts: {letter: string; contacts: IContact[]}[] = [];
   
   contactsFromList: IContact[] = [];  
@@ -60,18 +61,17 @@ export class ContactListComponent {
       position: { right: '10vw' }
     });
   
-    // Schließen-Animation nach Beenden hinzufügen
     dialog.beforeClosed().subscribe(() => {
       document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
     });
   }
 
-  openSingleContakt(contact: IContact){
-    console.log(contact.id);
-    if (!contact.isOpened) {
-      console.log('closed');
-      contact.isOpened = true;
-    } else {console.log('open');
-      contact.isOpened = false;}
-  }
+  // openSingleContakt(contact: IContact){
+  //   console.log(contact.id);
+  //   if (!contact.isOpened) {
+  //     console.log('closed');
+  //     contact.isOpened = true;
+  //   } else {console.log('open');
+  //     contact.isOpened = false;}
+  // }
 }

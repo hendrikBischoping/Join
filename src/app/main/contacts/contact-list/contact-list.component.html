@@ -9,7 +9,7 @@
         <div class="separationLine"></div>
         <ul class="contactListPerLetter">
           @for (contact of item.contacts; track $index) {
-            <li class="contactSmallInfo" (click)="openSingleContakt(contact)">
+            <li class="contactSmallInfo" (click)="openContact.openSingleContact(contact)">
               <div class="initials-circle">{{ contact.initials }}</div>
               <div>
                 <p class="contactName">{{ contact.name }}</p>

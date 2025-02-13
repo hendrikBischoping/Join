@@ -39,7 +39,7 @@
     overflow: auto;
     >h2 {
         text-transform: uppercase;
-        padding: 1rem 4rem;
+        padding: 1rem 4.5rem;
         margin: 0;
     }
     &::-webkit-scrollbar {
@@ -66,7 +66,7 @@
 .separationLine {
     border: solid 1px rgb(209,209,209);
     width: 90%;
-    margin: 0 5%;
+    margin: 0 4%;
 }
 
 .contactListPerLetter {
@@ -80,8 +80,8 @@
     margin:  0;
     >.initials-circle {
         width: 3.5rem;
-        margin-right: 1rem;
-        margin-bottom: 1rem;
+        margin:  1rem 1rem 1rem 0;
+        font-size: 1.5rem;
         // padding: 0.75rem;
         // margin: 1rem;
         // border-radius: 50%;

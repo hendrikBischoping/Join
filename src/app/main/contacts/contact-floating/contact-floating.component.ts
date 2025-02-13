@@ -3,7 +3,7 @@ import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-// import { OpenContactServicesService}
+import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-floating',
@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
-  // openContact = inject(OpenContactServiceService);
+  openContact = inject(OpenContactServiceService);
   contactsFromList: IContact[] = [
     {
       name: 'Hendrik Bischoping',
@@ -44,9 +44,9 @@ export class ContactFloatingComponent {
     }
 
     const dialog = this.dialog.open(EditContactDialogComponent, {
-      data: { contact: { ...selectedContact } }, // Kopie des Objekts übergeben
-      panelClass: 'custom-dialog-container', // Klasse für Animation
-      width: '80%', // Stelle sicher, dass eine feste Breite gesetzt ist
+      data: { contact: { ...selectedContact } }, 
+      panelClass: 'custom-dialog-container', 
+      width: '80%', 
       position: { right: '10vw' }
     });
 

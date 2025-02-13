@@ -10,45 +10,45 @@
         <div class="nameIcon">
             <div class="initials-circle">
 
-                <p>{{contactsFromList[0].initials}}</p>
-                   <!-- {{opneContact.opneContact[0].initials}} -->
-
+                <p>{{openContact.openedContact[0].initials}}</p>
+                
+                
             </div>
             <div class="contactField">
-
+                
                 <div class="info">
-                    <p>{{contactsFromList[0].name}}</p>
-                    <!-- {{opneContact.opneContact[0].name}} -->
+                    <p> {{openContact.openedContact[0].name}}</p>
+                   
                 </div>
-             
+                
                 <div class="imagesForContact">
                     <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png"
-                            alt="">Edit
+                        alt="">Edit
                     </div>
                     <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png"
-                            alt="">Delete
+                        alt="">Delete
                     </div>
                 </div>
-
+                
             </div>
         </div>
-
+        
         <p>Contact Information</p>
-
+        
         <div>
+            <p>Name: {{openContact.openedContact[0].name}}</p> <!-- test für service -->
 
             <p>Email</p>
-            <p class="email">{{contactsFromList[0].eMail}}</p>
+            <p class="email"> {{openContact.openedContact[0].eMail}}</p>
 
 
             <p>Phone</p>
-            <p>{{contactsFromList[0].phone}}</p>
+            <p>     {{openContact.openedContact[0].phone}}</p>
 
         </div>
-        <!-- {{opneContact.opneContact[0].eMail}} -->
-        <!-- {{opneContact.opneContact[0].phone}} -->
-         <!-- {{opneContact.opneContact[0].id}} -->
-          <!-- {{opneContact.opneContact[0].initials}} -->
-           <!-- {{opneContact.opneContact[0].name}} -->
+      
+       
+         <!-- {{openContact.openedContact[0].id}} -->
+      
     </div>
 </main>

@@ -32,8 +32,6 @@ export class ContactsComponent {
     this.contactDatabase.getContacts().subscribe((contactList) => {
       this.contactData = contactList;
     });
-    console.log(this.contactData);
-    
   }
 
   editData(contactId?: string) {
