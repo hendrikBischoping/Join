@@ -3,7 +3,7 @@
         <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
         <h2>Add contact</h2>
         <span>Tasks are better with a team!</span>
-        <hr>
+        <div class="line"></div>
     </section>
 
 
@@ -18,56 +18,47 @@
         <div class="close-container" (click)="dialogRef.close()">
             <img src="./assets/img/icons/CloseIcon.png">
         </div>
-
+        @if (sendForm) {
+            <div class="confirmation">
+                <h2>Added Contact</h2>
+                window will close automatically
+            </div>
+        }@else {
         <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
             <div class="input-container">
-                <input #name="ngModel" [(ngModel)]="contact.name" type="text" id="name" name="name" placeholder="name" required>
+                <input #name="ngModel" [(ngModel)]="contact.name" type="text" id="name" name="name" placeholder="name"
+                    required>
                 <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
-                
+
             </div>
             @if (!name.valid && name.touched && !name.disabled) {
-                <span>Oops! Sieht so aus als würde dein Name fehlen</span>
+            <span>Oops! Sieht so aus als würde dein Name fehlen</span>
             }
             <div class="input-container">
-                <input #email="ngModel" [(ngModel)]="contact.eMail" type="email" id="email" name="email" placeholder="email" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                <input #email="ngModel" [(ngModel)]="contact.eMail" type="email" id="email" name="email"
+                    placeholder="email" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
                 <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
-                
+
             </div>
             @if (!email.valid && email.touched && !email.disabled) {
-                <span>Hoppla! Deine email wird benötigt</span>
+            <span>Hoppla! Deine email wird benötigt</span>
             }
             <div class="input-container">
-                <input #phone="ngModel" [(ngModel)]="contact.phone" type="number" id="phone" name="phone" placeholder="phone number" required>
+                <input #phone="ngModel" [(ngModel)]="contact.phone" type="number" id="phone" name="phone"
+                    placeholder="phone number" required>
                 <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
-                
-                
+
+
             </div>
             @if (!phone.valid && phone.touched && !phone.disabled) {
-                <span>Bitte eine gültigen Nachricht eintragen</span>
+            <span>Bitte eine gültigen Nachricht eintragen</span>
             }
-            <button class="site-button-dark-bg" type="submit" [disabled]="contactForm.invalid">Senden</button>
+            <div class="confirmation-buttons">
+                <button class="button-bright-bg" (click)="dialogRef.close()">Cancel</button>
+                <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Senden</button>
+            </div>
         </form>
-
+        }
     </section>
 
 </main>
-
-<!--         
-        <form class="forms">
-            <div class="input-container">
-                <input name="name" type="text" [(ngModel)]="contact.name" placeholder="Dein Text hier" required>
-                <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
-            </div>
-            <div class="input-container">
-                <input name="email" type="text" [(ngModel)]="contact.eMail" placeholder="Dein Text hier" required>
-                <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
-            </div>
-            <div class="input-container">
-                <input name="name" type="text" [(ngModel)]="contact.phone" placeholder="Dein Text hier" required>
-                <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
-            </div>
-
-        </form> -->
-        <!-- <div class="confirmation-buttons">
-            <button class="button-bright-bg" (click)="saveContact()">Delete</button>
-        </div> -->

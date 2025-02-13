@@ -16,12 +16,13 @@ import { NgForm } from '@angular/forms';
   styleUrl: './add-contact-dialog.component.scss'
 })
 export class AddContactDialogComponent {
-  contact: IContact = 
+  contact: IContact =
     {
       name: '',
       eMail: '',
       phone: 0,
     }
+  sendForm = false;
 
   constructor(
     private contactService: ContactService,
@@ -30,17 +31,25 @@ export class AddContactDialogComponent {
   }
 
   async onSubmit(form: NgForm) {
-    if (form.invalid) return; 
-  
+    if (form.invalid) return;
+
+    this.sendForm = true;
+
     const newContact: IContact = {
       name: form.value.name,
       eMail: form.value.email,
       phone: form.value.phone
     };
-  
+
     await this.contactService.addContact(newContact).then(() => {
-      this.dialogRef.close();
+      setTimeout(() => {
+        this.sendForm = false;
+        this.dialogRef.close();
+      }, 2000);
+      
     });
+
+
   }
 
 

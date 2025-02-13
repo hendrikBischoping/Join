@@ -13,9 +13,12 @@ main {
         height: 100%;
         @include standard-flex(center, start);
         flex-direction: column;
-        gap: 4rem;
+        gap: 2rem;
         padding-left: 2rem;
 
+        >img {
+            margin-bottom: 2rem;
+        }
         >h2 {
             font-size: 4vw;
             color: white;
@@ -23,12 +26,11 @@ main {
         >span {
             font-size: 1.5vw;
             color: white;
-            
+            margin: 0;
         }
-        >hr {
-            line-height: 1rem;
-            width: 3rem;
-            justify-self: start;
+        .line {
+            border-top: 5px solid #29abe2;
+            width: 20%;
         }
     }
 
@@ -53,8 +55,19 @@ main {
     .edit-section {
         width: 50%;
         height: 80%;
-        @include standard-flex(space-between);
+        @include standard-flex(start);
         flex-direction: column;
+        gap: 3rem;
+
+        .confirmation {
+            @include standard-flex();
+            flex-direction: column;
+            height: 100%;
+            >h2 {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+        }
 
         .close-container {
             cursor: pointer;
