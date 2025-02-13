@@ -1,0 +1,133 @@
+@use '../../../styles/mixins.scss' as *;
+
+
+main {
+    width: 80vw;
+    aspect-ratio: 1.9;
+
+    @include standard-flex();
+
+    .logo-section {
+        background-color: #2A3647;
+        width: 35%;
+        height: 100%;
+        @include standard-flex(center, start);
+        flex-direction: column;
+        gap: 4rem;
+        padding-left: 2rem;
+
+        >h2 {
+            font-size: 4vw;
+            color: white;
+        }
+        >span {
+            font-size: 1.5vw;
+            color: white;
+            
+        }
+        >hr {
+            line-height: 1rem;
+            width: 3rem;
+            justify-self: start;
+        }
+    }
+
+    .initials-section {
+        width: 15%;
+        height: 100%;
+        @include standard-flex();
+
+        >div {
+            width: 9rem;
+            aspect-ratio: 1;
+            background-color: rgba($color: #000000, $alpha: 0.1);
+            border-radius: 100%;
+            @include standard-flex();
+            >img {
+                width: 3rem;
+                aspect-ratio: 1;
+            }
+        }
+    }
+
+    .edit-section {
+        width: 50%;
+        height: 80%;
+        @include standard-flex(space-between);
+        flex-direction: column;
+
+        .close-container {
+            cursor: pointer;
+            width: 3rem;
+            aspect-ratio: 1;
+            margin-right: 4rem;
+            margin-bottom: 4rem;
+            align-self: flex-end;
+            outline: unset;
+            border: unset;
+            background-color: unset;
+            @include standard-flex();
+
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.1);
+                border-radius: 100%;
+            }
+
+            >img {
+                width: 1.5rem;
+            }
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            gap: 1rem;
+
+
+        }
+
+        >div {
+            width: 90%;
+        }
+
+        .forms {
+            @include standard-flex();
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+
+            .input-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                >input {
+                    width: 90%;
+                    padding: 1rem; 
+                    border: 1px solid rgba(0, 0, 0, 0.4);
+                    border-radius: 12px;
+                    font-family: 'Inter';
+                    font-size: 1.5rem;
+                    outline: none;
+
+                    &:focus {
+                        border-color: #29abe2;
+                    }
+                }
+            }
+
+
+
+            .icon {
+                position: absolute;
+                right: 5rem;
+                cursor: pointer;
+                color: gray;
+            }
+
+        }
+
+
+
+    }
+}

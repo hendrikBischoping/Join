@@ -42,9 +42,9 @@ export class ContactFloatingComponent {
     }
 
     const dialog = this.dialog.open(EditContactDialogComponent, {
-      data: { contact: { ...selectedContact } }, // Kopie des Objekts übergeben
-      panelClass: 'custom-dialog-container', // Klasse für Animation
-      width: '80%', // Stelle sicher, dass eine feste Breite gesetzt ist
+      data: { contact: { ...selectedContact } }, 
+      panelClass: 'custom-dialog-container', 
+      width: '80%', 
       position: { right: '10vw' }
     });
 

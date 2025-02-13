@@ -60,7 +60,6 @@ export class ContactListComponent {
       position: { right: '10vw' }
     });
   
-    // Schließen-Animation nach Beenden hinzufügen
     dialog.beforeClosed().subscribe(() => {
       document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
     });
