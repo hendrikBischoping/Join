@@ -32,15 +32,26 @@
     border-radius: 16px !important;
   }
 
+
+
 // Falls nötig, auch für den body:
 body {
     margin: 0;
   font: 400 16px/20px "Inter", sans-serif !important;
+
 }
+
 
 html,
 body {
     height: 100%;
+    @media (max-width: 800px) {
+      font-size: 12px;
+    }
+
+    @media (max-width: 550px) {
+      font-size: 8px;
+    }
     // font-family: 'Inter' !important;
 }
 
