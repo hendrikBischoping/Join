@@ -5,50 +5,58 @@
         <div class="line"></div>
         <span>Better with a team</span>
     </div>
+    @for (contact of contactsFromList; track $index) {
+    @if (contact.id === watchTarget) {
 
     <div class="contact-floating">
         <div class="nameIcon">
             <div class="initials-circle">
 
-                {{openContact.openedContact[0].initials}}
-                
-                
+                {{contact.initials}}
+                <!-- {{openContact.openedContact[0].initials}} -->
+
+
             </div>
             <div class="contactField">
-                
+
                 <div class="info">
-                    <p> {{openContact.openedContact[0].name}}</p>
-                   
+                    <p> {{contact.name}}</p>
+                    <!-- <p> {{openContact.openedContact[0].name}}</p> -->
+
                 </div>
-                
+
                 <div class="imagesForContact">
-                    <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png"
-                        alt="">Edit
+                    <!-- <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png" -->
+                    <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
                     </div>
-                    <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png"
-                        alt="">Delete
+                    <!-- <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png" -->
+                    <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
                     </div>
                 </div>
-                
+
             </div>
         </div>
-        
+
         <p>Contact Information</p>
-        
+
         <div class="data">
             <!-- <p>Name: {{openContact.openedContact[0].name}}</p> test für service -->
 
             <p>Email</p>
-            <p class="email"> {{openContact.openedContact[0].eMail}}</p>
+            <p class="email"> {{contact.eMail}}</p>
+            <!-- <p class="email"> {{openContact.openedContact[0].eMail}}</p> -->
 
 
             <p>Phone</p>
-             {{openContact.openedContact[0].phone}}
+            {{contact.phone}}
+            <!-- {{openContact.openedContact[0].phone}} -->
 
         </div>
-      
-       
-         <!-- {{openContact.openedContact[0].id}} -->
-      
+
+
+        <!-- {{openContact.openedContact[0].id}} -->
+
     </div>
+    }
+    }
 </main>
