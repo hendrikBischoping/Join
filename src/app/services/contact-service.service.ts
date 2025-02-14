@@ -15,6 +15,7 @@ export class ContactService {
   getContacts() {
     return this.firebaseService.contact$;
   }
+  
 
   // Einzelnen Kontakt abrufen
   getContactById(contactId: string) {

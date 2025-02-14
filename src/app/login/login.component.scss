@@ -1,0 +1,155 @@
+@import '../styles/mixins.scss';
+
+main {
+    width: 100%;
+    height: 100vh;
+    @include standard-flex(space-between);
+    flex-direction: column;
+    background-color: #F6f7f8;
+
+    >img {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+
+    }
+
+    .signup-button-container {
+        align-self: end;
+        margin-right: 10rem;
+        margin-top: 5rem;
+        @include standard-flex();
+        gap: 2rem;
+
+        >span {
+            font-size: 2rem;
+        }
+    }
+
+    .login-content {
+        width: 60%;
+        height: 60vh;
+        @include standard-flex();
+        flex-direction: column;
+        gap: 4rem;
+        background-color: #FFFFFF;
+        border-radius: 1rem;
+
+        .headline-container {
+            .line {
+                border-top: 5px solid #29abe2;
+                width: 100%;
+                margin-top: 2rem;
+            }
+        }
+
+        
+
+        >span {
+            font-size: 2rem;
+            color: red;
+        }
+
+        .login-buttons {
+            @include standard-flex();
+            gap: 3rem;
+
+            >button {
+                width: 12rem;
+                height: 5rem;
+
+            }
+        }
+    }
+
+
+    .signup-content {
+        width: 50%;
+        height: 80vh;
+        @include standard-flex();
+        flex-direction: column;
+        gap: 4rem;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+
+        .signup-head {
+            @include standard-flex(space-between);
+            width: 90%;
+            .back-arrow {
+                width: 3rem;
+                aspect-ratio: 1;
+                cursor: pointer;
+                @include standard-flex();
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    border-radius: 100%;
+                }
+                >img {
+                    width: 2rem;
+                    
+                }
+            }
+
+            >div {
+                min-width: 3rem;
+
+                >div {
+
+                    border-top: 5px solid #29abe2;
+                    width: 60%;
+                    margin-left: 2rem;
+                    margin-top: 2rem;
+
+                }
+            }
+        }
+
+        .privacy-check {
+            font-size: 1.5rem;
+
+            
+            >input {
+                width: 1.5rem;
+                height: 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .link-container {
+        @include standard-flex();
+        gap: 2rem;
+        margin-bottom: 4rem;
+
+        >a {
+            color: gray;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.input-container {
+    position: relative;
+    width: 90%;
+
+    >input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        font-family: 'Inter';
+        font-size: 2rem;
+        outline: none;
+
+        &:focus {
+            border-color: #29abe2;
+        }
+    }
+
+    >img {
+        position: absolute !important;
+        right: 1rem;
+        top: 1.25rem;
+        width: 1.5rem;
+    }
+}

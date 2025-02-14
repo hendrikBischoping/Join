@@ -11,7 +11,9 @@ export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
   unsubscribeContacts: () => void;
-  // contactList: IContact[] = [];
+  unsubscribeUsers: () => void;
+  UserList: any[] = [];
+
   private contactSubject = new BehaviorSubject<IContact[]>([]);
   contact$ = this.contactSubject.asObservable();
 
@@ -20,18 +22,21 @@ export class FirebaseService {
 
   constructor() {
     this.unsubscribeContacts = this.subContactList();
+    this.unsubscribeUsers = this.subUserList();
 
   }
 
 
 
-  // subContactList() {
-  //   return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
+  subUserList() {
+    return onSnapshot(this.getColRef("User"), (snapshot) => {
       
-  //     snapshot.forEach((doc) => {
-  //       this.contactList.push(this.setContactData(doc.data(), doc.id));
-  //     });
-  //   });
+      snapshot.forEach((doc) => {
+        this.UserList.push(this.setUserData(doc.data(), doc.id));
+      });
+    });
+  }
+
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
       const updatedContacts: IContact[] = [];
@@ -65,6 +70,14 @@ export class FirebaseService {
       phone: obj.phone || 111,
       initials: nameInitials || "",
       id: id || "",
+    }
+  }
+
+  setUserData(obj: any, id: string) {
+    return {
+      eMail: obj.eMail || "",
+      password: obj.password || "",
+      id: id || ""
     }
   }
 
@@ -132,6 +145,9 @@ export class FirebaseService {
   ngOnDestroy() {
     if(this.unsubscribeContacts) {
       this.unsubscribeContacts();
+    }
+    if(this.unsubscribeUsers) {
+      this.unsubscribeUsers();
     }
   }
 }

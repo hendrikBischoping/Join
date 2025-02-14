@@ -1,27 +1,32 @@
-<main>
-  <nav>
-    <img src="../assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
-    <ul>
-      <li routerLink="summary"><img src="./assets/img/icons/SummaryIcon.png" alt=""> Summary</li>
-      <li routerLink="board"><img src="./assets/img/icons/BoardIcon.png" alt=""> Board</li>
-      <li routerLink="add-task"><img src="./assets/img/icons/TaskIcon.png" alt=""> Add Task</li>
-      <li routerLink="contacts"><img src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
-    </ul>
-    <div>
-      <a href="">Privacy policy</a>
-      <a href="">Legal Notice</a>
-    </div>
-  </nav>
-  <section>
-    <div class="top-content">
-      <span>Kanban Project Management Tool</span>
+@if (authenticated) {
+  <main>
+    <nav>
+      <img src="../assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
+      <ul>
+        <li routerLink="summary"><img src="./assets/img/icons/SummaryIcon.png" alt=""> Summary</li>
+        <li routerLink="board"><img src="./assets/img/icons/BoardIcon.png" alt=""> Board</li>
+        <li routerLink="add-task"><img src="./assets/img/icons/TaskIcon.png" alt=""> Add Task</li>
+        <li routerLink="contacts"><img src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
+      </ul>
       <div>
-        <img src="./assets/img/icons/HelpIcon.png" alt="">
-        <div>HI</div>
+        <a href="">Privacy policy</a>
+        <a href="">Legal Notice</a>
       </div>
-    </div>
-    <div class="routing-content">
-      <router-outlet></router-outlet>
-    </div>
-  </section>
-</main>
+    </nav>
+    <section>
+      <div class="top-content">
+        <span>Kanban Project Management Tool</span>
+        <div>
+          <img src="./assets/img/icons/HelpIcon.png" alt="">
+          <div>HI</div>
+        </div>
+      </div>
+      <div class="routing-content">
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+  </main>
+
+} @else {
+  <app-login></app-login>
+}

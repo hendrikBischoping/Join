@@ -1,0 +1,89 @@
+<main>
+    <img src="../../assets/img/icons/joinLogoSmall.png" alt="">
+
+
+    @if (stateLogin) {
+    <div class="signup-button-container">
+        <span>Not a Join user?</span>
+        <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
+    </div>
+
+    <section class="login-content">
+        <div class="headline-container">
+            <h1>Log in</h1>
+            <div class="line"></div>
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.eMail" type="email" id="email" name="email" placeholder="email" required
+                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+            <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
+
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="password"
+                required>
+            <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
+
+        </div>
+        @if (!authSucceeded) {
+        <span>mail or password incorrect</span>
+        }
+
+        <div class="login-buttons">
+            <button class="button-dark-bg" (click)="logIn()">Log in</button>
+            <button class="button-bright-bg" (click)="successAuth()">Guest Log in</button>
+        </div>
+    </section>
+    }@else {
+
+    <div></div>
+    <section class="signup-content">
+        <div class="signup-head">
+            <div class="back-arrow" (click)="toggleSignUp()">
+                <img src="./assets/img/icons/LeftArrowIcon.png" alt="">
+            </div>
+            
+            <div>
+                <h1>Sign up</h1>
+                <div class="line"></div>
+            </div>
+            <div></div>
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.name" type="name" name="name" placeholder="name"
+                required>
+            <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="keyIcon">
+
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.eMail" type="email" id="email" name="email" placeholder="email" required
+                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+            <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
+
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="password"
+                required>
+            <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
+
+        </div>
+        <div class="input-container">
+            <input [(ngModel)]="user.secondPassword" type="password" id="password" name="password" placeholder="confirm password"
+                required>
+            <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
+
+        </div>
+        <div class="privacy-check">
+            <input type="checkbox" id="privacyPolicy" name="privacyPolicy" [(ngModel)]="privacyAccepted" required>
+            <label for="privacyPolicy">I accept the <a href="" (click)="scrollToTop()">privacy policy</a></label>
+        </div>
+        <button class="button-dark-bg" (click)="signUp()" [disabled]="!privacyAccepted">Sign up</button>
+    </section>
+    }
+    <div class="link-container">
+        <a href="">privacy policy</a>
+        <a href="">Legal Notice</a>
+    </div>
+
+
+</main>
