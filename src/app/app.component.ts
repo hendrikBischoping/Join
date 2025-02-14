@@ -13,13 +13,13 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'join';
-  authenticated = false;
+  authenticated = true;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.auth$.subscribe((authStatus) => {
-      this.authenticated = authStatus;
+      // this.authenticated = authStatus;
     })
   }
 
