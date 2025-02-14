@@ -61,17 +61,10 @@ export class ContactListComponent {
       position: { right: '10vw' }
     });
   
+    // Schließen-Animation nach Beenden hinzufügen
     dialog.beforeClosed().subscribe(() => {
       document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
     });
   }
 
-  // openSingleContakt(contact: IContact){
-  //   console.log(contact.id);
-  //   if (!contact.isOpened) {
-  //     console.log('closed');
-  //     contact.isOpened = true;
-  //   } else {console.log('open');
-  //     contact.isOpened = false;}
-  // }
 }
