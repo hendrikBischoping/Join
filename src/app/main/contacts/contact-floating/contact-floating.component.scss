@@ -8,7 +8,6 @@ main {
   flex-direction: column;
   gap: 2rem;
   .headline {
-    // height: 4.5rem;
     @include standard-flex(space-between, center);
     flex-direction: row;
     gap: 1rem;
@@ -18,8 +17,6 @@ main {
     p {
       font-size: 5px;
     }
-    // h1{font-weight: bold;}
-    // font-size: 5px;
     .line {
       border-left: 3px solid #29abe2;
       height: 3.5rem;
@@ -36,24 +33,13 @@ main {
       flex-direction: row;
       width: 16rem;
       gap: 4rem;
-
       .initials-circle {
-        // border: 1px solid white;
-        // font-size: 2rem;
-        // font-weight: bold;
-        // color: white;
-        // border-radius: 100%;
         width: 8rem !important ;
-        height: 5rem;
-      
-        // background-color: aqua;
-        // @include standard-flex();
       }
-      p{
+      p {
         font-weight: bold;
         @include standard-flex(space-between, center);
       }
-    
     }
     .contactField {
       @include standard-flex(space-between, start);
@@ -61,7 +47,8 @@ main {
       height: 8, 5rem;
       .info {
         @include standard-flex(space-between, start);
-        p{width: 10rem;
+        p {
+          width: 10rem;
           @include standard-flex(space-between, start);
         }
       }
@@ -70,7 +57,7 @@ main {
         @include standard-flex(space-between, start);
         flex-direction: row;
         > div {
-          @include standard-flex($jc:flex-start, $ai: flex-center);
+          @include standard-flex($jc: flex-start, $ai: flex-center);
           font-family: inter;
           width: 4rem;
           height: 2rem;
@@ -88,14 +75,14 @@ main {
         }
       }
     }
-    .data{
-      p{
-        font-weight: bold ;
+    .data {
+      p {
+        font-weight: bold;
       }
       .email {
         color: #29abe2;
+        cursor: pointer;
       }
-      
     }
   }
 }
