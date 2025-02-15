@@ -16,7 +16,7 @@ export class LoginComponent {
     password: "",
     secondPassword: ""
   };
-  stateLogin : boolean = false;
+  stateLogin : boolean = true;
   authSucceeded : boolean = true;
   privacyAccepted: boolean = false;
 

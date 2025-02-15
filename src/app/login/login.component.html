@@ -29,11 +29,18 @@
         <span>mail or password incorrect</span>
         }
 
+        
+
         <div class="login-buttons">
             <button class="button-dark-bg" (click)="logIn()">Log in</button>
             <button class="button-bright-bg" (click)="successAuth()">Guest Log in</button>
         </div>
     </section>
+
+    <div class="mobile-signup-button-container">
+        <span>Not a Join user?</span>
+        <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
+    </div>
     }@else {
 
     <div></div>
