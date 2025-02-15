@@ -2,12 +2,16 @@
 
 $headHeight: 7rem;
 $headBorderHeight: 6px;
+$navHeightMobile: 8vh;
 
 main {
     margin: 0;
     display: flex;
 
-
+    @media (max-width:800px) {
+        @include standard-flex();
+        flex-direction: column-reverse;
+    }
 
     >nav {
         width: 16%;
@@ -16,9 +20,18 @@ main {
         @include standard-flex(space-between, center);
         flex-direction: column;
 
+        @media (max-width:800px) {
+            width: 100%;
+            height: $navHeightMobile;
+        }
+
         >img {
             margin-top: 3rem;
             width: 8rem;
+
+            @media (max-width:800px) {
+                display: none;
+            }
         }
 
         >ul {
@@ -29,12 +42,27 @@ main {
             flex-direction: column;
             width: 100%;
 
+            @media (max-width:800px) {
+                width: 90%;
+                height: $navHeightMobile;
+                justify-content: space-between;
+                flex-direction: row;
+            }
+
             >li {
                 @include standard-flex(start);
                 cursor: pointer;
                 color: white;
-                height: 4rem;
+                height: $navHeightMobile;
                 padding-left: 2rem;
+
+                @media (max-width:800px) {
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    padding-left: 0;
+                    width: 20%;
+                }
 
                 &:hover {
                     background-color: #2A3D59;
@@ -43,6 +71,11 @@ main {
                 >img {
                     width: 2rem;
                     margin-right: 1rem;
+
+                    @media (max-width:800px) {
+                        width: 3rem;
+                        margin-right: 0;
+                    }
                 }
             }
         }
@@ -53,6 +86,10 @@ main {
             flex-direction: column;
             gap: 1rem;
             font-size: 1rem;
+
+            @media (max-width:800px) {
+                display: none;
+            }
 
 
             >a {
@@ -71,14 +108,35 @@ main {
     >section {
         flex: 1;
 
+        @media (max-width:800px) {
+            // @include standard-flex();
+            width: 100%;
+            flex: unset;
+            height: calc(100vh - $navHeightMobile);
+        }
+
         .top-content {
             @include standard-flex(space-between);
             height: $headHeight;
             border-bottom: $headBorderHeight solid rgba($color: #000000, $alpha: 0.2);
 
+            
+            img {
+                display: none;
+                width: 3rem;
+                margin-left: 2rem;
+
+                @media (max-width:800px) {
+                    display: block;
+                }
+            }
+            
             >span {
                 margin-left: 10rem;
                 font-size: 2rem;
+                @media (max-width:800px) {
+                    display: none;
+                }
             }
 
             >div {
@@ -91,6 +149,10 @@ main {
                     &:hover {
                         cursor: pointer;
                         background-color: rgba($color: #000000, $alpha: 0.1);
+                    }
+
+                    @media (max-width:800px) {
+                        display: none;
                     }
                 }
 
@@ -117,6 +179,10 @@ main {
         .routing-content {
             background-color: rgba($color: #000000, $alpha: 0.1);
             height: calc(100% - $headHeight - $headBorderHeight);
+
+            @media (max-width:800px) {
+                height: calc(100% - $headHeight - $headBorderHeight - $navHeightMobile);
+            }
         }
     }
 }
