@@ -7,10 +7,40 @@ main {
   @include standard-flex(space-between, start);
   flex-direction: column;
   gap: 2rem;
-  .headline {
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
+  .headline{
+    @include standard-flex(space-between, center);
+    img{display: none;}
+    @media (max-width: 930px) {
+           font-size: 12px;
+           img{display: flex};
+      @include standard-flex(space-between, flex-start);
+      flex-direction: row;
+      gap: 9rem;
+      // .line{display: none;}
+      // .lineI { display: flex;
+      //   border-top: 3px solid #29abe2;
+      //   width: 5.5rem;
+      // }
+      // img{
+      //   display:flex;}
+      
+    }
+  }
+
+
+  .headlineI {
     @include standard-flex(space-between, center);
     flex-direction: row;
     gap: 1rem;
+    img{
+      display: none;
+    }
+    .lineI{
+      display: none;
+    }
     span {
       font-size: 2rem;
     }
@@ -21,11 +51,24 @@ main {
       border-left: 3px solid #29abe2;
       height: 3.5rem;
     }
+    @media (max-width: 930px) {
+      font-size: 12px;
+      @include standard-flex(space-between, flex-start);
+      flex-direction: column;
+      .line{display: none;}
+      .lineI { display: flex;
+        border-top: 3px solid #29abe2;
+        width: 5.5rem;
+      }
+      img{
+        display:flex;}
+    }
+  
   }
   .contact-floating {
     @include standard-flex(space-between, start);
     flex-direction: column;
-    height: 14rem;
+    height: 40rem;
     gap: 1rem;
     .nameIcon {
       @include standard-flex(space-between, center);
@@ -36,10 +79,16 @@ main {
         width: 8rem !important;
         height: 8rem !important;
         font-size: 3.5rem !important;
+        @media(max-width: 1200px){
+          word-break: break-all;
+        }
       }
       p {
         font-weight:normal;
         @include standard-flex(space-between, center);
+      }
+      @media(max-width: 1200px){
+        p{ word-break: break-all;}
       }
     }
    
@@ -47,12 +96,18 @@ main {
       @include standard-flex(space-between, start);
       flex-direction: column;
       height: 8, 5rem;
+      
       .info {
         @include standard-flex(space-between, start);
+      
         p {
           width: 32rem;
           font-size: 3rem;
           @include standard-flex(space-between, start);
+          @media(may-width: 1200px){
+            word-break: break-all;
+          }
+         
         }
       }
       .imagesForContact {
@@ -60,6 +115,10 @@ main {
         height: 2.2rem;
         @include standard-flex(space-between, start);
         flex-direction: row;
+        @media (max-width:800px){
+            display: none;
+        }
+      
         > div {
           @include standard-flex($jc: flex-start, $ai: flex-center);
           font-family: inter;
@@ -70,6 +129,7 @@ main {
             cursor: pointer;
             color: rgb(0, 124, 238);
           }
+     
         }
         > div {
           @include standard-flex($jc: flex-start, $ai: center);
@@ -77,6 +137,7 @@ main {
           height: 2rem;
           gap: 0, 5rem;
         }
+     
       }
     }
     .data {
@@ -92,5 +153,11 @@ main {
         cursor: pointer;
       }
     }
+    .editForMobile{
+      height: 25rem;
+      width: 29rem;
+      @include standard-flex(flex-end, flex-end);
+    }
   }
+ 
 }
