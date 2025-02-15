@@ -44,7 +44,16 @@
             {{contact.phone}}
         </div>
         <div class="editForMobile">
-            <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+            <!-- <div>(click)="openMenu"</div> -->
+                        <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+            
+            <div class="editButtom">
+                <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
+                </div>
+                <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
+                </div>
+            </div>
+            
         </div>
     </div>
     }
