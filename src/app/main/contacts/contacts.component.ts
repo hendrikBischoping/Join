@@ -16,44 +16,10 @@ import { ContactService } from '../../services/contact-service.service';
   styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent {
-  contactData: IContact[] = [{
-    name: "",
-    eMail: "",
-    phone: 0,
-  }];
-  readonly dialog = inject(MatDialog);
+  selectedContactId: string = '';
 
-  constructor(private contactDatabase: ContactService, private cdRef: ChangeDetectorRef) { }
-
-  // ngOnInit(): void {
-  //     this.contactData = this.contactDatabase.getContacts();
-  // }
-  ngOnInit(): void {
-    this.contactDatabase.getContacts().subscribe((contactList) => {
-      this.contactData = contactList;
-    });
+  selectContact(id: string) {
+    this.selectedContactId = id;
   }
-
-  editData(contactId?: string) {
-
-    const selectedContact = this.contactData.find(contact => contact.id === contactId);
-    if (!selectedContact) {
-      console.error("Contact not found!");
-      return;
-    }
-
-    const dialog = this.dialog.open(EditContactDialogComponent, {
-      data: { contact: { ...selectedContact } }
-    });
-    
-
-    dialog.afterClosed().subscribe((result) => {
-      if (result) {
-        this.contactDatabase.updateContact(contactId!, result); 
-        this.cdRef.detectChanges(); 
-      }
-    });
-  }
-
 
 }

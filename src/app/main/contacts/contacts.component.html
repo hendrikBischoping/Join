@@ -1,8 +1,8 @@
 <main>
     <section class="list">
-        <app-contact-list></app-contact-list>
+        <app-contact-list (contactSelected)="selectContact($event)"></app-contact-list>
     </section>
     <section class="detailed">
-        <app-contact-floating></app-contact-floating>
+        <app-contact-floating [watchTarget]="selectedContactId"></app-contact-floating>
     </section>
 </main>

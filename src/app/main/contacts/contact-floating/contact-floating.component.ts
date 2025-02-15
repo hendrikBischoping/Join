@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, input } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-floating',
@@ -13,7 +12,8 @@ import { OpenContactServiceService } from '../../../services/open-contact-servic
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
-  openContact = inject(OpenContactServiceService);
+  // openContact = inject(OpenContactServiceService);
+  @Input() watchTarget: string = "";
   contactsFromList: IContact[] = [
     {
       name: 'Hendrik Bischoping',

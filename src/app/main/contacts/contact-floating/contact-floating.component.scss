@@ -12,7 +12,7 @@ main {
     flex-direction: row;
     gap: 1rem;
     span {
-      font-size: 0.5rem;
+      font-size: 2rem;
     }
     p {
       font-size: 5px;
@@ -27,20 +27,22 @@ main {
     flex-direction: column;
     height: 14rem;
     gap: 1rem;
-
     .nameIcon {
       @include standard-flex(space-between, center);
       flex-direction: row;
       width: 16rem;
-      gap: 4rem;
+      gap: 2rem;
       .initials-circle {
-        width: 8rem !important ;
+        width: 8rem !important;
+        height: 8rem !important;
+        font-size: 3.5rem !important;
       }
       p {
-        font-weight: bold;
+        font-weight:normal;
         @include standard-flex(space-between, center);
       }
     }
+   
     .contactField {
       @include standard-flex(space-between, start);
       flex-direction: column;
@@ -48,12 +50,14 @@ main {
       .info {
         @include standard-flex(space-between, start);
         p {
-          width: 10rem;
+          width: 32rem;
+          font-size: 3rem;
           @include standard-flex(space-between, start);
         }
       }
       .imagesForContact {
         width: 10rem;
+        height: 2.2rem;
         @include standard-flex(space-between, start);
         flex-direction: row;
         > div {
@@ -76,6 +80,10 @@ main {
       }
     }
     .data {
+      h3{
+        font-size: 1rem;
+        font-weight: bold;
+      }
       p {
         font-weight: bold;
       }

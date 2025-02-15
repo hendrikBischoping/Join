@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Output } from '@angular/core';
 import { ContactService } from '../../../services/contact-service.service';
 import { IContact } from '../../../interfaces/icontact';
 import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions } from '@angular/router';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
-import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,7 +13,8 @@ import { OpenContactServiceService } from '../../../services/open-contact-servic
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  openContact = inject(OpenContactServiceService);
+  // openContact = inject(OpenContactServiceService);
+  @Output() contactSelected = new EventEmitter<string>()
   groupedContacts: {letter: string; contacts: IContact[]}[] = [];
   
   contactsFromList: IContact[] = [];  
@@ -23,13 +23,14 @@ export class ContactListComponent {
   constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef) {
     setTimeout(() => {
       this.groupContacts();
-      // console.log(this.contactsFromList);
     }, 1000);
   }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contactsFromList = contactList;
+      this.groupContacts();
+      this.cdRef.detectChanges();
     });
     
 
@@ -66,12 +67,17 @@ export class ContactListComponent {
     });
   }
 
-  // openSingleContakt(contact: IContact){
-  //   console.log(contact.id);
-  //   if (!contact.isOpened) {
-  //     console.log('closed');
-  //     contact.isOpened = true;
-  //   } else {console.log('open');
-  //     contact.isOpened = false;}
-  // }
+  selectContact(contactId: string) {
+    this.contactSelected.emit(contactId);
+  }
+
 }
+
+// openSingleContakt(contact: IContact){
+//   console.log(contact.id);
+//   if (!contact.isOpened) {
+//     console.log('closed');
+//     contact.isOpened = true;
+//   } else {console.log('open');
+//     contact.isOpened = false;}
+// }
