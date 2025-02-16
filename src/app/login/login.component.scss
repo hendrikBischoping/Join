@@ -1,0 +1,222 @@
+@import '../styles/mixins.scss';
+
+main {
+    width: 100%;
+    height: 100vh;
+    @include standard-flex(space-between);
+    flex-direction: column;
+    background-color: #F6f7f8;
+
+    >img {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+        width: 10vh;
+
+        @media (max-width: 800px) {
+            position: static;
+            align-self: start;
+            top: 0;
+            left: 0;
+            margin-top: 2rem;
+            margin-left: 2rem;
+        }
+
+    }
+
+    .signup-button-container {
+        align-self: end;
+        margin-right: 10rem;
+        margin-top: 5rem;
+        @include standard-flex();
+        gap: 2rem;
+
+        @media (max-width: 800px) {
+            display: none;
+        }
+
+        >span {
+            font-size: 2rem;
+        }
+    }
+
+    .mobile-signup-button-container {
+        
+        gap: 2rem;
+        display: none;
+
+        @media (max-width: 800px) {
+            @include standard-flex();
+        }
+        >span {
+            font-size: 2rem;
+        }
+
+        >button {
+            @media (max-width: 800px) {
+                width: 8rem;
+                height: 4rem;
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    .login-content {
+        width: 50%;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        @include standard-flex();
+        flex-direction: column;
+        gap: 4rem;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+
+        @media (max-width: 800px) {
+            width: 90%;
+        }
+
+        .headline-container {
+            .line {
+                border-top: 5px solid #29abe2;
+                width: 100%;
+                margin-top: 2rem;
+            }
+        }
+
+        
+
+        >span {
+            font-size: 2rem;
+            color: red;
+        }
+
+        .login-buttons {
+            @include standard-flex();
+            gap: 3rem;
+
+            >button {
+                width: 12rem;
+                height: 5rem;
+
+                @media (max-width: 1150px) {
+                    width: 10rem;
+                    height: 5rem;
+                    font-size: 1.25rem;
+                }
+
+            }
+
+            
+        }
+    }
+
+
+    .signup-content {
+        width: 40%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        @include standard-flex();
+        flex-direction: column;
+        gap: 2rem;
+        background-color: #FFFFFF;
+        border-radius: 2rem;
+
+        @media (max-width: 1200px) {
+            width: 60%;
+
+        }
+
+        @media (max-width: 800px) {
+            width: 90%;
+
+        }
+
+        .signup-head {
+            @include standard-flex(space-between);
+            width: 90%;
+            .back-arrow {
+                width: 3rem;
+                aspect-ratio: 1;
+                cursor: pointer;
+                @include standard-flex();
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    border-radius: 100%;
+                }
+                >img {
+                    width: 2rem;
+                    
+                }
+            }
+
+            >div {
+                min-width: 3rem;
+
+                >div {
+
+                    border-top: 5px solid #29abe2;
+                    width: 60%;
+                    margin-left: 2rem;
+                    margin-top: 2rem;
+
+                }
+            }
+        }
+
+        .privacy-check {
+            font-size: 1.5rem;
+
+            
+            >input {
+                width: 1.5rem;
+                height: 1rem;
+                cursor: pointer;
+            }
+        }
+
+        >button {
+            @media (max-width: 800px) {
+                width: 10rem;
+    
+            }
+        }
+    }
+
+    .link-container {
+        @include standard-flex();
+        gap: 2rem;
+        margin-bottom: 4rem;
+
+        >a {
+            color: gray;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.input-container {
+    position: relative;
+    width: 80%;
+    margin-right: 1rem;
+
+    >input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        font-family: 'Inter';
+        font-size: 2rem;
+        outline: none;
+
+        &:focus {
+            border-color: #29abe2;
+        }
+    }
+
+    >img {
+        position: absolute !important;
+        right: 1rem;
+        top: 1.25rem;
+        width: 1.5rem;
+    }
+}

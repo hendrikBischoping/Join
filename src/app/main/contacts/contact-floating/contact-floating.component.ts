@@ -3,6 +3,7 @@ import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+// import { contactFloating}
 
 @Component({
   selector: 'app-contact-floating',
@@ -60,8 +61,20 @@ export class ContactFloatingComponent {
         this.cdRef.detectChanges();
       }
     });
-  }
+  };
+
   deleteData(contactId?: string) {
     this.contactService.deleteContact(contactId!);
-  }
+  };
+
+  // openmenu{} {
+  //   if (this.editForMible.style.display = 'none'){
+  //     this.editForMible.style.display === 'block';
+  //   } else {
+  //     this.editForMible.style.display = 'block';
+  //   }
+  // }
+  // toggleLike(contact-floating){
+  //   if (this.)
+  // }
 }

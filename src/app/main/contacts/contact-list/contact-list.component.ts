@@ -4,7 +4,6 @@ import { IContact } from '../../../interfaces/icontact';
 import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions } from '@angular/router';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
-import { OpenContactServiceService } from '../../../services/open-contact-service.service';
 
 @Component({
   selector: 'app-contact-list',

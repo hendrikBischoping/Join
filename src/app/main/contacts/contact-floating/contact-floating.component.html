@@ -1,9 +1,14 @@
 <main>
-
     <div class="headline">
-        <h1>Contacts</h1>
-        <div class="line"></div>
-        <span>Better with a team</span>
+        <div class="headlineI">
+            <h1>Contacts</h1>
+            <div class="line"></div>
+            <h2>Better with a team</h2>
+            <div class="lineI"></div>
+        </div>
+
+        <img src="../../../../assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="">
+
     </div>
     @for (contact of contactsFromList; track $index) {
     @if (contact.id === watchTarget) {
@@ -11,20 +16,12 @@
     <div class="contact-floating">
         <div class="nameIcon">
             <div class="initials-circle">
-
                 {{contact.initials}}
-                <!-- {{openContact.openedContact[0].initials}} -->
-
-
             </div>
             <div class="contactField">
-
                 <div class="info">
                     <p> {{contact.name}}</p>
-                    <!-- <p> {{openContact.openedContact[0].name}}</p> -->
-
                 </div>
-
                 <div class="imagesForContact">
                     <!-- <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png" -->
                     <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
@@ -33,29 +30,31 @@
                     <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
                     </div>
                 </div>
-
             </div>
         </div>
-
-        <p>Contact Information</p>
-
+        <h2>Contact Information</h2>
         <div class="data">
             <!-- <p>Name: {{openContact.openedContact[0].name}}</p> test für service -->
-
-            <p>Email</p>
-            <p class="email"> {{contact.eMail}}</p>
+            <h3>Email</h3>
+            <p class="email"><a href="mailto:">{{contact.eMail}}</a></p>
+            <!-- {{openContact.openedContact[0].eMail}}</p>
+            <p class="email"> {{contact.eMail}}</p> -->
             <!-- <p class="email"> {{openContact.openedContact[0].eMail}}</p> -->
-
-
-            <p>Phone</p>
+            <h3>Phone</h3>
             {{contact.phone}}
-            <!-- {{openContact.openedContact[0].phone}} -->
-
         </div>
-
-
-        <!-- {{openContact.openedContact[0].id}} -->
-
+        <div class="editForMobile">
+            <!-- <div>(click)="openMenu"</div> -->
+                        <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+            
+            <div class="editButtom">
+                <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
+                </div>
+                <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
+                </div>
+            </div>
+            
+        </div>
     </div>
     }
     }
