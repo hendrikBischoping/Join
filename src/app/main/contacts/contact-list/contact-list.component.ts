@@ -32,8 +32,8 @@ export class ContactListComponent {
       this.contactsFromList = contactList;
       this.groupContacts();
       this.cdRef.detectChanges();
+      this.assignBgForInitials(contactList);
     });
-    
 
   }
 
@@ -73,6 +73,21 @@ export class ContactListComponent {
     this.contactSelected.emit(contactId);
   }
 
-}
+  // assignBgForInitials(contactList: any){
+  //   for (let index = 0; index < contactList.length; index++) {
+  //     let bgIndex = contactList[index].name[1];
+  //     console.log(bgIndex);
+  //     return bgIndex;
+  //     // console.log(contactList[index].name);
+  //     // console.log(bgIndex);
+  //   }
+  // }
 
+  assignBgForInitials(contactList: any) {
+    const allInitials = document.querySelectorAll('div');
+    const initialsBg = 'red'; // <= Funktion zum Aufruf der Color einfügen (color = return-Wert)
+    allInitials.forEach((singleInitials) => {
+      singleInitials.style.setProperty('--initialsBg', initialsBg)
+    });
+  }
 }
