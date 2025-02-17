@@ -1,13 +1,19 @@
 <main>
     <section class="logo-section">
+        <div class="close-container-mobile" (click)="dialogRef.close()">
+            <img src="./assets/img/icons/CloseIconWhite.png">
+        </div>
         <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
-        <h2><span>Edit</span> contact</h2>
+        <h2>Edit contact</h2>
+        <div class="line"></div>
     </section>
+
     <section class="initials-section">
         <div class="initials-circle">
             {{contact.initials}}
         </div>
     </section>
+
     <section class="edit-section">
         <div class="close-container" (click)="dialogRef.close()">
             <img src="./assets/img/icons/CloseIcon.png">

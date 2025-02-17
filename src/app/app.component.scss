@@ -1,6 +1,6 @@
 @use './styles/mixins.scss' as *;
 
-$headHeight: 7rem;
+$headHeight: 8vh;
 $headBorderHeight: 6px;
 $navHeightMobile: 8vh;
 
@@ -29,6 +29,10 @@ main {
             margin-top: 3rem;
             width: 8rem;
 
+            @media (max-width:1150px) {
+                width: 6rem;
+            }
+
             @media (max-width:800px) {
                 display: none;
             }
@@ -39,8 +43,11 @@ main {
             padding: 0;
             margin: 0;
             display: flex;
+            padding-left: auto;
             flex-direction: column;
             width: 100%;
+
+            
 
             @media (max-width:800px) {
                 width: 90%;
@@ -56,12 +63,15 @@ main {
                 height: $navHeightMobile;
                 padding-left: 2rem;
 
+                @media (max-width:1150px) {
+                    padding-left: 0.5rem;
+                }
+
                 @media (max-width:800px) {
                     justify-content: center;
                     align-items: center;
                     flex-direction: column;
                     padding-left: 0;
-                    width: 20%;
                 }
 
                 &:hover {
@@ -71,6 +81,10 @@ main {
                 >img {
                     width: 2rem;
                     margin-right: 1rem;
+
+                    @media (max-width:1150px) {
+                        margin-right: 0.5rem;
+                    }
 
                     @media (max-width:800px) {
                         width: 3rem;
@@ -132,7 +146,7 @@ main {
             }
             
             >span {
-                margin-left: 10rem;
+                margin-left: 2rem;
                 font-size: 2rem;
                 @media (max-width:800px) {
                     display: none;
@@ -181,7 +195,7 @@ main {
             height: calc(100% - $headHeight - $headBorderHeight);
 
             @media (max-width:800px) {
-                height: calc(100% - $headHeight - $headBorderHeight - $navHeightMobile);
+                height: calc(100vh - $headHeight - $headBorderHeight - $navHeightMobile);
             }
         }
     }

@@ -1,18 +1,19 @@
 <main>
     <section class="logo-section">
+        <div class="close-container-mobile" (click)="dialogRef.close()">
+            <img src="./assets/img/icons/CloseIconWhite.png">
+        </div>
         <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
         <h2>Add contact</h2>
         <span>Tasks are better with a team!</span>
         <div class="line"></div>
     </section>
 
-
     <section class="initials-section">
         <div>
             <img src="./assets/img/icons/PersonIcon.png" alt="personIcon">
         </div>
     </section>
-
 
     <section class="edit-section">
         <div class="close-container" (click)="dialogRef.close()">
@@ -32,7 +33,7 @@
 
             </div>
             @if (!name.valid && name.touched && !name.disabled) {
-            <span>Oops! Sieht so aus als würde dein Name fehlen</span>
+            <span>missing name</span>
             }
             <div class="input-container">
                 <input #email="ngModel" [(ngModel)]="contact.eMail" type="email" id="email" name="email"
@@ -41,7 +42,7 @@
 
             </div>
             @if (!email.valid && email.touched && !email.disabled) {
-            <span>Hoppla! Deine email wird benötigt</span>
+            <span>missing email</span>
             }
             <div class="input-container">
                 <input #phone="ngModel" [(ngModel)]="contact.phone" type="number" id="phone" name="phone"
@@ -56,6 +57,9 @@
             <div class="confirmation-buttons">
                 <button class="button-bright-bg" (click)="dialogRef.close()">Cancel</button>
                 <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Senden</button>
+            </div>
+            <div class="confirmation-button-mobile">
+                <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Create contact</button>
             </div>
         </form>
         }
