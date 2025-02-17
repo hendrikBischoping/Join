@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase-service.service';
 import { BehaviorSubject } from 'rxjs';
+import { IUser } from '../interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,15 @@ export class AuthService {
     return this.firebaseService.UserList;
   }
 
+  async addUser(user: IUser) {
+    await this.firebaseService.addToDB(this.collectionName, user);
+  }
+
   checkAuth(mail: string, pw: string): boolean {
     const users = this.getUsers();
-    
+
     const isAuthenticated = users.some(user => user.eMail == mail && user.password == pw);
-    
+
     this.authSubject.next(isAuthenticated);
     return isAuthenticated;
   }
@@ -29,4 +34,6 @@ export class AuthService {
   forceAuth() {
     this.authSubject.next(true);
   }
+
+
 }

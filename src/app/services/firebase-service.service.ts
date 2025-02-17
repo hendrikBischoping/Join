@@ -3,6 +3,7 @@ import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, onSnapshot, upda
 import { BehaviorSubject } from 'rxjs';
 import { IContact } from '../interfaces/icontact';
 import { ITask } from '../interfaces/itask';
+import { IUser } from '../interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FirebaseService {
 
   unsubscribeContacts: () => void;
   unsubscribeUsers: () => void;
-  UserList: any[] = [];
+  UserList: IUser[] = [];
 
   private contactSubject = new BehaviorSubject<IContact[]>([]);
   contact$ = this.contactSubject.asObservable();
@@ -23,16 +24,17 @@ export class FirebaseService {
   constructor() {
     this.unsubscribeContacts = this.subContactList();
     this.unsubscribeUsers = this.subUserList();
-
   }
-
 
 
   subUserList() {
     return onSnapshot(this.getColRef("User"), (snapshot) => {
       
+      
       snapshot.forEach((doc) => {
-        this.UserList.push(this.setUserData(doc.data(), doc.id));
+        console.log(doc.data());
+        
+        this.UserList.push(this.setUserData(doc.data() as IUser, doc.id));
       });
     });
   }
@@ -63,29 +65,57 @@ export class FirebaseService {
 
 
   setContactData(obj: any, id: string): IContact {
-    const nameInitials = this.getInitials(obj.name)
+    const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
+    const nameInitials = this.getInitials(capitalizedName);
+    const initialsBgSelektor = this.getBgSelector(capitalizedName);
+  
     return {
-      name: obj.name || "",
+      name: capitalizedName,
       eMail: obj.eMail || "",
       phone: obj.phone || 111,
       initials: nameInitials || "",
+      styleSelector: initialsBgSelektor || "",
       id: id || "",
-    }
+    };
   }
 
-  setUserData(obj: any, id: string) {
+  setUserData(obj: IUser, id: string): IUser {
+    const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
+    const nameInitials = this.getInitials(capitalizedName);
     return {
+      name: capitalizedName,
       eMail: obj.eMail || "",
       password: obj.password || "",
-      id: id || ""
-    }
+      initials: nameInitials,
+      id: id || "",
+    };
   }
+  
+  capitalizeName(name: string): string {
+    return name
+      .toLowerCase()
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
 
   getInitials(name: string) {
     if (!name) return "";
     const words = name.trim().split(/\s+/); 
     const initials = words.map(word => word[0].toUpperCase()).join(""); 
     return initials;
+  }
+
+  getBgSelector(name: string) {
+    if (!name) return "";
+    if (!name[2]) {
+      const bgSelector = 'default';
+      return bgSelector;
+    } else {
+      const bgSelector = name[2].toLocaleLowerCase();
+      return bgSelector;
+    }    
   }
 
   getColRef(colId: string) {
@@ -107,7 +137,7 @@ export class FirebaseService {
     }
   }
 
-  async addToDB(colId: string, item: ITask | IContact) {
+  async addToDB(colId: string, item: ITask | IContact | IUser) {
     try {
       await addDoc(this.getColRef(colId), item);
     } catch (err) {

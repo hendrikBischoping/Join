@@ -5,4 +5,5 @@ export interface IContact {
     initials?: string;
     id?: string;
     isOpened?: boolean;
+    styleSelector?: string;
 }
