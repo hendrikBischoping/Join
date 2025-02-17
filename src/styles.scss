@@ -52,7 +52,6 @@ body {
     @media (max-width: 550px) {
       font-size: 8px;
     }
-    // font-family: 'Inter' !important;
 }
 
 h1 {
@@ -125,7 +124,6 @@ $customBlue: #29abe2;
     border-radius: 100%;
     width: 8rem;
     aspect-ratio: 1;
-    // background-color: aqua;
     background-color: var(--initialsBg);
     @include standard-flex();
 }
@@ -164,7 +162,7 @@ $customBlue: #29abe2;
   /** initials-circles: backgroundcolors*/
 
   .bg_a {
-    background-color: #FDFBE4;
+    background-color: #d6d4be;
   }
 
   .bg_b {
@@ -204,7 +202,7 @@ $customBlue: #29abe2;
   }
 
   .bg_k {
-    background-color: #E9E9E9;
+    background-color: #d6d6d6;
   }
 
   .bg_l {

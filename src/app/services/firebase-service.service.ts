@@ -64,11 +64,13 @@ export class FirebaseService {
 
   setContactData(obj: any, id: string): IContact {
     const nameInitials = this.getInitials(obj.name)
+    const initialsBgSelektor = this.getBgSelector(obj.name)
     return {
       name: obj.name || "",
       eMail: obj.eMail || "",
       phone: obj.phone || 111,
       initials: nameInitials || "",
+      styleSelector: initialsBgSelektor || "",
       id: id || "",
     }
   }
@@ -86,6 +88,17 @@ export class FirebaseService {
     const words = name.trim().split(/\s+/); 
     const initials = words.map(word => word[0].toUpperCase()).join(""); 
     return initials;
+  }
+
+  getBgSelector(name: string) {
+    if (!name) return "";
+    if (!name[2]) {
+      const bgSelector = 'default';
+      return bgSelector;
+    } else {
+      const bgSelector = name[2].toLocaleLowerCase();
+      return bgSelector;
+    }    
   }
 
   getColRef(colId: string) {
