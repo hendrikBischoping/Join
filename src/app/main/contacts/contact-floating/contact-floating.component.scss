@@ -13,12 +13,12 @@ main {
   .headline{
     @include standard-flex(space-between, center);
     img{display: none;}
-    @media (max-width: 930px) {
+    @media (max-width: 799px) {
            font-size: 12px;
            img{display: flex};
       @include standard-flex(space-between, flex-start);
       flex-direction: row;
-      gap: 9rem;
+      gap: 7rem;
       // .line{display: none;}
       // .lineI { display: flex;
       //   border-top: 3px solid #29abe2;
@@ -51,29 +51,36 @@ main {
       border-left: 3px solid #29abe2;
       height: 3.5rem;
     }
-    @media (max-width: 930px) {
-      font-size: 12px;
-      @include standard-flex(space-between, flex-start);
-      flex-direction: column;
-      .line{display: none;}
-      .lineI { display: flex;
-        border-top: 3px solid #29abe2;
-        width: 5.5rem;
+    @media (max-width: 987px) {
+      font-size: 10px;
+      h1{
+        font-size: 22px !important;
       }
-      img{
-        display:flex;}
+      // @include standard-flex(space-between, flex-start);
+      // flex-direction: column;
+      // .line{display: none;}
+      // .lineI { display: flex;
+      //   border-top: 3px solid #29abe2;
+      //   width: 5.5rem;
+      // }
+      // img{
+      //   display:flex;}
+    }
+    @media (max-width:915px) {
+      font-size: 14px;
     }
   
   }
   .contact-floating {
-    @include standard-flex(space-between, start);
+    @include standard-flex(start);
+    align-items: flex-start;
     flex-direction: column;
     height: 40rem;
     gap: 1rem;
     .nameIcon {
       @include standard-flex(space-between, center);
       flex-direction: row;
-      width: 16rem;
+      width: 100%;
       gap: 2rem;
       .initials-circle {
         width: 8rem !important;
@@ -99,18 +106,18 @@ main {
       
       .info {
         @include standard-flex(space-between, start);
-      
+    
         p {
           line-height: 80%;
           line-break: normal;
-       
-          font-size: 3rem;
-
+          font-size: 32px;
           @include standard-flex(space-between, start);
-          @media(max-width: 1200px){
-          
+          @media (max-width: 1210px){
+              font-size: 28px;
           }
-         
+          @media (max-width:993px){
+              font-size: 18px;
+          }
         }
       }
       .imagesForContact {
