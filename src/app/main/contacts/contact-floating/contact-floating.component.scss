@@ -1,24 +1,29 @@
 @use "../../../styles/mixins.scss" as *;
 
+
+
+
 main {
-  margin-top: 6.5rem;
+  margin-top: 
+  1.5rem;
   width: 100%;
   // height: 15rem;
-  @include standard-flex(space-between, start);
+  @include standard-flex(flex-start, start);
   flex-direction: column;
   gap: 2rem;
   @media (max-width: 800px) {
     font-size: 12px;
+    height:776px;
   }
   .headline{
     @include standard-flex(space-between, center);
     img{display: none;}
-    @media (max-width: 799px) {
+    @media (max-width: 800px) {
            font-size: 12px;
            img{display: flex};
       @include standard-flex(space-between, flex-start);
       flex-direction: row;
-      gap: 7rem;
+      gap: 9rem;
       // .line{display: none;}
       // .lineI { display: flex;
       //   border-top: 3px solid #29abe2;
@@ -54,20 +59,30 @@ main {
     @media (max-width: 987px) {
       font-size: 10px;
       h1{
+        margin: 0 0 2px;
+        font-size: 47px !important;
+        font-weight: bold;
+      }
+      h2 {
+        margin: 0 0 2px;
         font-size: 22px !important;
       }
-      // @include standard-flex(space-between, flex-start);
-      // flex-direction: column;
-      // .line{display: none;}
-      // .lineI { display: flex;
-      //   border-top: 3px solid #29abe2;
-      //   width: 5.5rem;
-      // }
-      // img{
-      //   display:flex;}
+    
     }
     @media (max-width:915px) {
       font-size: 14px;
+    }
+
+    @media (max-width: 799px){
+  @include standard-flex(space-between, flex-start);
+      flex-direction: column;
+      .line{display: none;}
+      .lineI { display: flex;
+        border-top: 3px solid #29abe2;
+        width: 5.5rem;
+      }
+      img{
+        display:flex;}
     }
   
   }
@@ -75,10 +90,14 @@ main {
     @include standard-flex(start);
     align-items: flex-start;
     flex-direction: column;
-    height: 40rem;
+    width: 100%;
+    position: relative;
     gap: 1rem;
+    @media(max-width:799px){
+      gap: 0.5rem;
+    }
     .nameIcon {
-      @include standard-flex(space-between, center);
+      @include standard-flex(flex-start, center);
       flex-direction: row;
       width: 100%;
       gap: 2rem;
@@ -88,6 +107,11 @@ main {
         font-size: 3.5rem !important;
         @media(max-width: 1200px){
           word-break: break-all;
+        }
+        @media(max-width: 799px) {
+          width: 5rem !important;
+          height: 5rem !important;
+          font-size: 2rem !important;
         }
       }
       p {
@@ -117,6 +141,12 @@ main {
           }
           @media (max-width:993px){
               font-size: 18px;
+          }
+          @media (max-width: 799px) {
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 80%;
+            line-break: normal;
           }
         }
       }
@@ -164,12 +194,21 @@ main {
       }
     }
     .editForMobile{
-      height: 25rem;
-      width: 29rem;
-      @include standard-flex(flex-end, flex-end);
+      bottom: 16px;
+      right:120px;
+      position: absolute;
       img{
-display: none;
-        cursor: pointer;
+        display: none;
+      }
+     
+      @include standard-flex(flex-end, flex-end);
+      @media(max-width:799px){
+        img{
+  
+          display: flex;
+          cursor: pointer;
+        }
+
       }
       .editButtom{
         @include standard-flex($jc: center, $ai: center);
@@ -190,6 +229,26 @@ display: none;
           }
       }
 
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .overlay-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      min-width: 300px;
     }
   }
  

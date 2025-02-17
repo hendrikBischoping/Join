@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
+ 
   // openContact = inject(OpenContactServiceService);
   @Input() watchTarget: string = "";
   contactsFromList: IContact[] = [
@@ -66,7 +67,9 @@ export class ContactFloatingComponent {
   deleteData(contactId?: string) {
     this.contactService.deleteContact(contactId!);
   };
+  showOverlay = false;
 
+  // isOpen = false;
   // openmenu{} {
   //   if (this.editForMible.style.display = 'none'){
   //     this.editForMible.style.display === 'block';
