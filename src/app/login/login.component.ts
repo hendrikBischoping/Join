@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { IUser } from '../interfaces/iuser';
 
 @Component({
   selector: 'app-login',
@@ -11,36 +12,59 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   user = {
-    name: "",
-    eMail: "",
-    password: "",
-    secondPassword: ""
+    name: '',
+    email: '',
+    phone: 0,
+    password: '',
+    secondPassword: ''
   };
-  stateLogin : boolean = true;
-  authSucceeded : boolean = true;
+  stateLogin: boolean = true;
+  authSucceeded: boolean = true;
   privacyAccepted: boolean = false;
+  registrationSuccess: boolean = false;
+  passwordMismatch: boolean = false;
 
-  constructor (private authService: AuthService) {
-
-  }
+  constructor(private authService: AuthService) { }
 
   toggleSignUp() {
     this.stateLogin = !this.stateLogin;
   }
 
-  signUp() {
-    console.log("hi");
-    
+  async onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    if (this.user.password !== this.user.secondPassword) {
+      this.passwordMismatch = true;
+      return;
+    }
+    this.passwordMismatch = false;
+
+    const newUser: IUser = {
+      name: this.user.name,
+      eMail: this.user.email,
+      password: this.user.password
+    };
+
+    await this.authService.addUser(newUser).then(() => {
+      this.registrationSuccess = true;
+      setTimeout(() => {
+        this.stateLogin = true;
+      }, 2000);
+
+    });
+
   }
 
   logIn() {
-    this.authSucceeded = this.authService.checkAuth(this.user.eMail, this.user.password);
+    this.authSucceeded = this.authService.checkAuth(this.user.email, this.user.password);
     if (!this.authSucceeded) {
       setTimeout(() => {
         this.authSucceeded = true;
       }, 1800);
     }
-    
+
   }
 
   successAuth() {

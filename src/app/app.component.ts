@@ -19,7 +19,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.authService.auth$.subscribe((authStatus) => {
-      // this.authenticated = authStatus;
+      this.authenticated = authStatus;
     })
   }
 

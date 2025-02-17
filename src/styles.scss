@@ -127,28 +127,6 @@ $customBlue: #29abe2;
     background-color: var(--initialsBg);
     @include standard-flex();
 }
-
-@keyframes slideInRight {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-  }
   
   .custom-dialog-container {
     animation: slideInRight 0.4s ease-out forwards;
