@@ -1,7 +1,7 @@
-import { Component, Inject, Input, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, SimpleChanges } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,7 @@ export class EditContactDialogComponent {
 
   editedContact!: IContact;
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef) {
     
   }
 
@@ -34,8 +34,13 @@ export class EditContactDialogComponent {
     this.close();
   }
 
-  async saveContactInfo() {
+  async saveContactInfo(ngForm: NgForm) {
     if (!this.editedContact.id) return;
+
+    if (!ngForm.valid) {
+      this.cdRef.detectChanges();
+      return
+    }
 
     await this.contactService.updateContact(this.editedContact.id, this.editedContact);
     this.close();

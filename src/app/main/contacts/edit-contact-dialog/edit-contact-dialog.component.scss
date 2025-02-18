@@ -178,7 +178,7 @@ main {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-top: 2rem;
 
             >button {
                 @media (max-width: 800px) {
@@ -199,6 +199,10 @@ main {
 
             @media (max-width: 800px) {
                 height: 100%;
+            }
+
+            >span {
+                color: red;
             }
 
             .input-container {

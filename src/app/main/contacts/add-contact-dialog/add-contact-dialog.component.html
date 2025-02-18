@@ -56,11 +56,11 @@
             <span>missing phone number</span>
             }
             <div class="confirmation-buttons">
-                <button class="button-bright-bg" (click)="close()">Cancel</button>
-                <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Senden</button>
+                <button class="button-bright-bg" type="button" (click)="close()">Cancel</button>
+                <button class="button-dark-bg" cdkFocusInitial type="submit" [disabled]="contactForm.invalid">Senden</button>
             </div>
             <div class="confirmation-button-mobile">
-                <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Create contact</button>
+                <button class="button-dark-bg" cdkFocusInitial type="submit" [disabled]="contactForm.invalid">Create contact</button>
             </div>
         </form>
         }
