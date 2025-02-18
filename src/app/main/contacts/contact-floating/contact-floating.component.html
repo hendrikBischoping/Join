@@ -7,7 +7,7 @@
             <div class="lineI"></div>
         </div>
 
-        <img src="./assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="">
+        <img class="goBack" (click)="toggleSlideList()" src="./assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="go back arrow">
 
     </div>
     @for (contact of contactsFromList; track $index) {
@@ -20,7 +20,7 @@
                 </div>
                 <div class="contactField">
                     <div class="info">
-                        <p> {{contact.name}}</p>
+                        <p class="contactName"> {{contact.name}}</p>
                     </div>
                     <div class="imagesForContact">
                         <!-- <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png" -->
@@ -41,11 +41,12 @@
                 <p class="email"> {{contact.eMail}}</p> -->
                 <!-- <p class="email"> {{openContact.openedContact[0].eMail}}</p> -->
                 <h3>Phone</h3>
-                {{contact.phone}}
+                <p class="phoneNumber">+49 {{contact.phone}}</p>
             </div>
-
+        </div>
+        <div class="mobileContent">
             <div class="editForMobile">
-                <img (click)="toggleEditMenu($event)" src="./assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+                <img class="editMedu" (click)="toggleEditMenu($event)" src="./assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
 
                 <div class="editButtom" [ngClass]="{ 'show': isEditMenuOpen }">
                     <div (click)="editData (contact.id)"><img src="./assets/img/editIcon.png" alt="">Edit
@@ -53,18 +54,6 @@
                     <div (click)="deleteData (contact.id)"> <img src="./assets/img/trash.png" alt="">Delete
                     </div>
                 </div>
-
-                <!-- <div class="editForMobile">
-                    <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
-            
-                    <div class="editButtom">
-                        <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
-                        </div>
-                        <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
-                        </div>
-                    </div>
-            
-                </div> -->
             </div>
         </div>
         }

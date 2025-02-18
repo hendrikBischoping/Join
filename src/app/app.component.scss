@@ -132,8 +132,7 @@ main {
         .top-content {
             @include standard-flex(space-between);
             height: $headHeight;
-            border-bottom: $headBorderHeight solid rgba($color: #000000, $alpha: 0.2);
-
+            border-bottom:  solid 4px rgb(202, 202, 202);
             
             img {
                 display: none;

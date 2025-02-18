@@ -14,4 +14,26 @@ main {
         width: calc(100% - $listWidth);
         height: 100%;
     }
+
+    .slideLeftList {
+        position: static;
+        left: 0%
+    }
+}
+
+@media (max-width: 800px) {
+    main {
+        position: relative;
+    }
+    .detailed {
+        position: absolute;
+        min-width: 100%;
+        left: 100%;
+        height: 100%;
+    }
+    .list {
+        position: absolute;
+        min-width: 100%;
+        left: -100%
+    }
 }

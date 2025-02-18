@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, EventEmitter, Output } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { OverlayService } from '../../../services/overlay.service';
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
+  @Output() slideListToggled = new EventEmitter<void>();
   @Input() watchTarget: string = "";
   contactsFromList: IContact[] = [
     {
@@ -78,5 +79,9 @@ export class ContactFloatingComponent {
     this.isEditMenuOpen = false;
     this.cdRef.detectChanges();
     this.contactService.deleteContact(contactId!);
-  };
+  }
+
+  toggleSlideList() {
+    this.slideListToggled.emit();
+  }
 }

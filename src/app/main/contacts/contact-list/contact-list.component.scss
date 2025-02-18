@@ -35,20 +35,11 @@
     }
     >.addContactSmall {
         display: none;
-        position: absolute;
-        right: 0.5rem;
-        bottom: 0.5rem;
-        min-width: 2rem;
-        max-width: 2rem;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        margin: 0;
-        padding: 0.25rem 1.5rem;
     }
 }
 
 .contactList {
-    max-height: calc(100vh - 22vh);
+    max-height: calc(100vh - 10.6rem);
     overflow: auto;
     >h2 {
         text-transform: uppercase;
@@ -124,14 +115,113 @@
     .contactListPerLetter {
         padding: 0 2rem;
     }
-}
-
-@media (max-width: 1000px) {
-    .contactListPerLetter {
-        padding: 0;
-        margin: 1rem auto;
+    .contactList {
+        >h2 {
+            padding: 1rem 4rem;
+        }
     }
 }
-@media (max-width: 1250px) {
 
+@media (max-width: 1150px) {
+    .contactListPerLetter {
+        padding: 0 1rem;
+        >.contactSmallInfo {
+            >.initials-circle {
+                min-width: 3rem;
+                max-width: 3rem;
+                font-size: 1.1rem;
+                margin: 0.75rem;
+            }
+        }
+    }
+    .contactList {
+        >h2 {
+            font-size: 1.5rem;
+            padding: 0.5rem 2.6rem;
+        }
+    }
+}
+
+@media (max-width: 955px) {
+    .contactsLeft {
+        >.addContactBig {
+            padding: 0.5rem 2rem;
+        }
+    }
+    .contactListPerLetter {
+        >.contactSmallInfo {
+            >.initials-circle {
+                min-width: 2.5rem;
+                max-width: 2.5rem;
+                font-size: 1rem;
+                margin: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .contactsLeft {
+        >.addContactBig {
+            padding: 0.5rem 1.5rem;
+        }
+    }
+    .contactListPerLetter {
+        >.contactSmallInfo {
+            >div>p {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .contacts {
+        width: 100%;
+        >.contactsLeft {
+            >.addContactBig {
+                display: none;
+            }
+            >.addContactSmall {
+                display: block;
+                position: absolute;
+                right: 4rem;
+                bottom: 4rem;
+                aspect-ratio: 1 / 1;
+                border-radius: 50%;
+                margin: 0;
+                padding: 2rem 2rem;
+                >img {
+                    height: 3rem;
+                    aspect-ratio: 1 / 1;
+                }
+            }
+        }
+    }
+    .contactList {
+        max-height: calc(100vh - 10.6rem - 11.2vh + 4.5rem);
+        overflow: auto;
+        >h2 {
+            font-size: 4rem;
+            padding: 2rem 8rem;
+        }
+    }
+    .contactListPerLetter {
+        >.contactSmallInfo {
+            padding: 1rem 4rem;
+            >.initials-circle {
+                min-width: 6rem;
+                max-width: 6rem;
+                margin: 1rem;
+                font-size: 2.5rem;
+            }
+            >div>.contactName {
+                font-size: 2rem;
+            }
+            >div>.contactMail {
+                font-size: 1.5rem;
+            }
+        }
+    }
+    
 }
