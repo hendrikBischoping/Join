@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,7 +10,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-add-contact-dialog',
   standalone: true,
-  imports: [FormsModule, MatDialogModule, MatIconModule, MatInputModule, MatFormFieldModule],
+  imports: [FormsModule,  MatIconModule, MatInputModule, MatFormFieldModule],
   templateUrl: './add-contact-dialog.component.html',
   styleUrl: './add-contact-dialog.component.scss'
 })
@@ -27,31 +26,32 @@ export class AddContactDialogComponent {
 
   constructor(
     private contactService: ContactService,
-    public dialogRef: MatDialogRef<AddContactDialogComponent>
+    public cdRef: ChangeDetectorRef
   ) {
   }
 
-  async onSubmit(form: NgForm) {
-    if (form.invalid) return;
 
+  async onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.cdRef.detectChanges();
+      return;
+    }
+    
     this.sendForm = true;
+    this.cdRef.detectChanges();
 
     const newContact: IContact = {
       name: form.value.name,
       eMail: form.value.email,
       phone: form.value.phone
     };
-
+    
     await this.contactService.addContact(newContact).then(() => {
       setTimeout(() => {
         this.sendForm = false;
-        this.dialogRef.close();
+        this.close();
       }, 2000);
       
     });
-
-
   }
-
-
 }

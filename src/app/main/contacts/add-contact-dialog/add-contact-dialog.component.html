@@ -26,11 +26,10 @@
                 <h2>Added Contact</h2>
                 window will close automatically
             </div>
-        }@else {
-        <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        } @else {
+        <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm) ">
             <div class="input-container">
-                <input #name="ngModel" [(ngModel)]="contact.name" type="text" id="name" name="name" placeholder="name"
-                    required>
+                <input #name="ngModel" [(ngModel)]="contact.name" (ngModelChange)="cdRef.detectChanges()" type="text" id="name" name="name" placeholder="name" required>
                 <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
 
             </div>
@@ -38,7 +37,7 @@
             <span>missing name</span>
             }
             <div class="input-container">
-                <input #email="ngModel" [(ngModel)]="contact.eMail" type="email" id="email" name="email"
+                <input #email="ngModel" [(ngModel)]="contact.eMail" (ngModelChange)="cdRef.detectChanges()" type="email" id="email" name="email"
                     placeholder="email" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
                 <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
 
@@ -47,7 +46,7 @@
             <span>missing or invalid email</span>
             }
             <div class="input-container">
-                <input #phone="ngModel" [(ngModel)]="contact.phone" type="number" id="phone" name="phone"
+                <input #phone="ngModel" [(ngModel)]="contact.phone" (ngModelChange)="cdRef.detectChanges()" type="number" id="phone" name="phone"
                     placeholder="phone number" required>
                 <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
 
@@ -57,7 +56,7 @@
             <span>missing phone number</span>
             }
             <div class="confirmation-buttons">
-                <button class="button-bright-bg" (click)="dialogRef.close()">Cancel</button>
+                <button class="button-bright-bg" (click)="close()">Cancel</button>
                 <button class="button-dark-bg" type="submit" [disabled]="contactForm.invalid">Senden</button>
             </div>
             <div class="confirmation-button-mobile">

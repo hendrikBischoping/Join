@@ -11,7 +11,7 @@
 
     <section class="initials-section">
         <div class="initials-circle">
-            {{contact.initials}}
+            {{editedContact.initials}}
         </div>
     </section>
 
@@ -23,15 +23,15 @@
         
         <div class="forms">
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.name" placeholder="Dein Text hier">
+                <input type="text" [(ngModel)]="editedContact.name" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
             </div>
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.eMail" placeholder="Dein Text hier">
+                <input type="text" [(ngModel)]="editedContact.eMail" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
             </div>
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.phone" placeholder="Dein Text hier">
+                <input type="text" [(ngModel)]="editedContact.phone" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
             </div>
         </div>

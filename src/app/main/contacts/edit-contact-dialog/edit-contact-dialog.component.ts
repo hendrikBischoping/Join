@@ -19,19 +19,14 @@ export class EditContactDialogComponent {
   @Input() contact!: IContact;
   @Input() close!: () => void;;
 
+  editedContact!: IContact;
+
   constructor(private contactService: ContactService) {
-    console.log(this.contact);
     
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit contact:', this.contact);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['contact']) {
-      console.log('ngOnChanges contact:', changes['contact'].currentValue);
-    }
+    this.editedContact = { ...this.contact };
   }
 
   deleteContact() {
@@ -39,7 +34,10 @@ export class EditContactDialogComponent {
     this.close();
   }
 
-  saveContactInfo():void {
+  async saveContactInfo() {
+    if (!this.editedContact.id) return;
+
+    await this.contactService.updateContact(this.editedContact.id, this.editedContact);
     this.close();
   }
 }
