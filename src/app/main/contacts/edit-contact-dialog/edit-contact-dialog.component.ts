@@ -35,8 +35,7 @@ export class EditContactDialogComponent {
   }
 
   async saveContactInfo(ngForm: NgForm) {
-    if (!this.editedContact.id) return;
-
+    if (!this.editedContact.id) {return};
     if (!ngForm.valid) {
       this.cdRef.detectChanges();
       return

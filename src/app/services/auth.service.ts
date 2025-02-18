@@ -6,10 +6,9 @@ import { IUser } from '../interfaces/iuser';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-
   private collectionName = 'User';
-
   constructor(private firebaseService: FirebaseService) { }
   private authSubject = new BehaviorSubject<boolean>(false);
   auth$ = this.authSubject.asObservable();
@@ -24,9 +23,7 @@ export class AuthService {
 
   checkAuth(mail: string, pw: string): boolean {
     const users = this.getUsers();
-
     const isAuthenticated = users.some(user => user.eMail == mail && user.password == pw);
-
     this.authSubject.next(isAuthenticated);
     return isAuthenticated;
   }
@@ -34,6 +31,4 @@ export class AuthService {
   forceAuth() {
     this.authSubject.next(true);
   }
-
-
 }

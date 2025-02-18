@@ -1,7 +1,6 @@
 <main>
     <section class="logo-section">
         <div class="close-container-mobile" (click)="close()">
-        <!-- <div class="close-container-mobile" (click)="dialogRef.close()"> -->
             <img src="./assets/img/icons/CloseIconWhite.png">
         </div>
         <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
@@ -18,7 +17,6 @@
 
     <section class="edit-section">
         <div class="close-container" (click)="close()">
-        <!-- <div class="close-container" (click)="dialogRef.close()"> -->
             <img src="./assets/img/icons/CloseIcon.png">
         </div>
         @if (sendForm) {
@@ -49,8 +47,6 @@
                 <input #phone="ngModel" [(ngModel)]="contact.phone" (ngModelChange)="cdRef.detectChanges()" type="number" id="phone" name="phone"
                     placeholder="phone number" required>
                 <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
-
-
             </div>
             @if (!phone.valid && phone.touched && !phone.disabled) {
             <span>missing phone number</span>
@@ -65,5 +61,4 @@
         </form>
         }
     </section>
-
 </main>

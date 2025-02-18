@@ -30,10 +30,19 @@ main {
         min-width: 100%;
         left: 100%;
         height: 100%;
+
+        
     }
     .list {
         position: absolute;
         min-width: 100%;
         left: -100%
     }
+}
+
+@media (max-width: 550px) {
+    .detailed {
+        height: calc(92vh - 6px - 8vh) !important;
+    }
+    
 }

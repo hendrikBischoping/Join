@@ -75,6 +75,7 @@ export class ContactFloatingComponent {
   
     this.overlayService.openEditContactOverlay(selectedContact);
   }
+  
   deleteData(contactId?: string) {
     this.isEditMenuOpen = false;
     this.cdRef.detectChanges();

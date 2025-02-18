@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from './firebase-service.service'; // Stelle sicher, dass der Pfad korrekt ist
+import { FirebaseService } from './firebase-service.service';
 import { IContact } from '../interfaces/icontact';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { IContact } from '../interfaces/icontact';
 })
 export class ContactService {
   
-  private collectionName = 'Contacts'; // Nur für Kontakte
+  private collectionName = 'Contacts'; 
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -25,7 +25,6 @@ export class ContactService {
   // Kontakt hinzufügen
   async addContact(contact: IContact) {
     await this.firebaseService.addToDB(this.collectionName, contact);
-    // return await this.firebaseService.addToDB(this.collectionName, contact);
   }
 
   // Kontakt aktualisieren

@@ -26,7 +26,6 @@ export class FirebaseService {
     this.unsubscribeUsers = this.subUserList();
   }
 
-
   subUserList() {
     return onSnapshot(this.getColRef("User"), (snapshot) => {
       snapshot.forEach((doc) => {
@@ -38,11 +37,9 @@ export class FirebaseService {
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
       const updatedContacts: IContact[] = [];
-      
       snapshot.forEach((doc) => {
         updatedContacts.push(this.setContactData(doc.data(), doc.id));
       });
-
       this.contactSubject.next(updatedContacts);
     });
   }
@@ -50,15 +47,12 @@ export class FirebaseService {
   subTaskList() {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
       const updatedTasks: ITask[] = [];
-
       snapshot.forEach((doc) => {
         updatedTasks.push(this.setContactData(doc.data(), doc.id));
       });
-
       this.taskSubject.next(updatedTasks);
     });
   }
-
 
   setContactData(obj: any, id: string): IContact {
     const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
@@ -94,7 +88,6 @@ export class FirebaseService {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
-
 
   getInitials(name: string) {
     if (!name) return "";
@@ -142,7 +135,6 @@ export class FirebaseService {
   }
 
   async updateDoc(colId:string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
-
     try {
       await updateDoc(this.getSingleDocRef(colId, docId), updatedData);
       console.log(`Document ${docId} successfully updated.`);

@@ -29,7 +29,7 @@ export class AddContactDialogComponent {
     public cdRef: ChangeDetectorRef
   ) {
   }
-
+  
 
   async onSubmit(form: NgForm) {
     if (form.invalid) {
