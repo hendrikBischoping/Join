@@ -1,19 +1,18 @@
-import { ChangeDetectorRef, Component, inject, Input, input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { ContactService } from '../../../services/contact-service.service';
-import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-// import { contactFloating}
+import { CommonModule } from '@angular/common';
+import { OverlayService } from '../../../services/overlay.service';
 
 @Component({
   selector: 'app-contact-floating',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './contact-floating.component.html',
   styleUrl: './contact-floating.component.scss',
 })
 export class ContactFloatingComponent {
-  // openContact = inject(OpenContactServiceService);
   @Input() watchTarget: string = "";
   contactsFromList: IContact[] = [
     {
@@ -23,10 +22,12 @@ export class ContactFloatingComponent {
     },
   ];
   readonly dialog = inject(MatDialog);
+  isEditMenuOpen: boolean = false;
 
   constructor(
     private contactService: ContactService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private overlayService: OverlayService
   ) { }
 
   ngOnInit() {
@@ -35,7 +36,34 @@ export class ContactFloatingComponent {
     });
   }
 
+  ngOnDestroy() {
+    document.removeEventListener('click', this.closeEditMenu);
+  }
+
+  toggleEditMenu(event: Event) {
+    event.stopPropagation();
+    this.isEditMenuOpen = !this.isEditMenuOpen;
+
+    if (this.isEditMenuOpen) {
+      document.addEventListener('click', this.closeEditMenu);
+    } else {
+      document.removeEventListener('click', this.closeEditMenu);
+    }
+  }
+
+  closeEditMenu = (event: Event) => {
+    const menu = document.querySelector('.editButtom');
+    if (menu && !menu.contains(event.target as Node)) {
+      this.isEditMenuOpen = false;
+      document.removeEventListener('click', this.closeEditMenu);
+      this.cdRef.detectChanges();
+    }
+  };
+
   editData(contactId?: string) {
+    this.isEditMenuOpen = false;
+    this.cdRef.detectChanges();
+  
     const selectedContact = this.contactsFromList.find(
       (contact) => contact.id === contactId
     );
@@ -43,38 +71,12 @@ export class ContactFloatingComponent {
       console.error('Contact not found!');
       return;
     }
-
-    const dialog = this.dialog.open(EditContactDialogComponent, {
-      data: { contact: { ...selectedContact } }, 
-      panelClass: 'custom-dialog-container', 
-      width: '80%', 
-      position: { right: '10vw' }
-    });
-
-    dialog.beforeClosed().subscribe(() => {
-      document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
-    });
-
-    dialog.afterClosed().subscribe((result) => {
-      if (result) {
-        this.contactService.updateContact(contactId!, result);
-        this.cdRef.detectChanges();
-      }
-    });
-  };
-
+  
+    this.overlayService.openEditContactOverlay(selectedContact);
+  }
   deleteData(contactId?: string) {
+    this.isEditMenuOpen = false;
+    this.cdRef.detectChanges();
     this.contactService.deleteContact(contactId!);
   };
-
-  // openmenu{} {
-  //   if (this.editForMible.style.display = 'none'){
-  //     this.editForMible.style.display === 'block';
-  //   } else {
-  //     this.editForMible.style.display = 'block';
-  //   }
-  // }
-  // toggleLike(contact-floating){
-  //   if (this.)
-  // }
 }

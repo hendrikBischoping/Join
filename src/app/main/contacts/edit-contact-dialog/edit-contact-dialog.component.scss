@@ -2,8 +2,7 @@
 
 
 main {
-    width: 80vw;
-    aspect-ratio: 1.9;
+    width: 100%;
 
     @include standard-flex();
 

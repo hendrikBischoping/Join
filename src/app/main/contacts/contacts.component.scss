@@ -7,10 +7,11 @@ main {
 
     .list {
         width: $listWidth;
-        height: calc(100vh - 7rem - 6px);
+        height: 100%;
     }
 
     .detailed {
         width: calc(100% - $listWidth);
+        height: 100%;
     }
 }

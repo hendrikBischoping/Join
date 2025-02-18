@@ -1,6 +1,7 @@
 <main>
     <section class="logo-section">
-        <div class="close-container-mobile" (click)="dialogRef.close()">
+        <div class="close-container-mobile" (click)="close()">
+        <!-- <div class="close-container-mobile" (click)="dialogRef.close()"> -->
             <img src="./assets/img/icons/CloseIconWhite.png">
         </div>
         <img class="dialog-logo" src="./assets/img/icons/joinLogoSmallWhite.png" alt="">
@@ -16,7 +17,8 @@
     </section>
 
     <section class="edit-section">
-        <div class="close-container" (click)="dialogRef.close()">
+        <div class="close-container" (click)="close()">
+        <!-- <div class="close-container" (click)="dialogRef.close()"> -->
             <img src="./assets/img/icons/CloseIcon.png">
         </div>
         @if (sendForm) {
@@ -42,7 +44,7 @@
 
             </div>
             @if (!email.valid && email.touched && !email.disabled) {
-            <span>missing email</span>
+            <span>missing or invalid email</span>
             }
             <div class="input-container">
                 <input #phone="ngModel" [(ngModel)]="contact.phone" type="number" id="phone" name="phone"
@@ -52,7 +54,7 @@
 
             </div>
             @if (!phone.valid && phone.touched && !phone.disabled) {
-            <span>Bitte eine gültigen Nachricht eintragen</span>
+            <span>missing phone number</span>
             }
             <div class="confirmation-buttons">
                 <button class="button-bright-bg" (click)="dialogRef.close()">Cancel</button>

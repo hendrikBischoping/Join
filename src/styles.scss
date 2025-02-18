@@ -26,6 +26,7 @@
 .mat-typography .mat-body-2,
 .mat-typography {
   font: 400 14px/20px "Inter", sans-serif !important;
+  letter-spacing: unset;
 }
 
 .mat-dialog-container {
@@ -45,6 +46,7 @@ body {
 html,
 body {
     height: 100%;
+    overflow-x: hidden;
     @media (max-width: 800px) {
       font-size: 12px;
     }
@@ -127,36 +129,72 @@ $customBlue: #29abe2;
     background-color: var(--initialsBg);
     @include standard-flex();
 }
+  
+/** Dialog Window */
 
-@keyframes slideInRight {
+.custom-overlay-container {
+  position: fixed;
+  top: 5vh;
+  left: 10%;
+  width: 80%;
+  height: 90vh;
+  // background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+
+  // Desktop: Overlay rechts einblenden
+  @media (min-width: 801px) {
+    justify-content: flex-end;
+    align-items: center;
+  }
+  // Mobile: Overlay von unten einblenden
+  @media (max-width: 800px) {
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
+
+// Die eingebettete Komponente
+.custom-overlay-container > * {
+  background: white;
+  border-radius: 1rem;
+  width: 80%;
+  height: 70vh;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+// Standard-Animation (Desktop: Slide von rechts)
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// Animation für Mobile
+@media (max-width: 800px) {
+  @keyframes slideIn {
     from {
-      transform: translateX(100%);
+      transform: translateY(100%);
       opacity: 0;
     }
     to {
-      transform: translateX(0);
+      transform: translateY(0);
       opacity: 1;
     }
   }
+}
+  // .custom-dialog-container {
+  //   animation: slideInRight 0.4s ease-out forwards;
+  // }
   
-  @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-  }
-  
-  .custom-dialog-container {
-    animation: slideInRight 0.4s ease-out forwards;
-  }
-  
-  .custom-dialog-container-exit {
-    animation: slideOutRight 0.4s ease-in forwards;
-  }
+  // .custom-dialog-container-exit {
+  //   animation: slideOutRight 0.4s ease-in forwards;
+  // }
   
 
   /** initials-circles: backgroundcolors*/

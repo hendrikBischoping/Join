@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input, SimpleChanges } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
@@ -15,21 +15,31 @@ import { ContactService } from '../../../services/contact-service.service';
   styleUrl: './edit-contact-dialog.component.scss',
 })
 export class EditContactDialogComponent {
-  contact: IContact;
 
-  constructor(
-    private contactService: ContactService,
-    public dialogRef: MatDialogRef<EditContactDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { contact: IContact }
-  ) {
-    this.contact = data.contact;
+  @Input() contact!: IContact;
+  @Input() close!: () => void;;
+
+  constructor(private contactService: ContactService) {
+    console.log(this.contact);
+    
   }
 
-  async deleteContact() {
+  ngOnInit(): void {
+    console.log('ngOnInit contact:', this.contact);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['contact']) {
+      console.log('ngOnChanges contact:', changes['contact'].currentValue);
+    }
+  }
+
+  deleteContact() {
     this.contactService.deleteContact(this.contact.id!);
+    this.close();
   }
 
-  async saveContactInfo() {
-    this.dialogRef.close(this.contact);
+  saveContactInfo():void {
+    this.close();
   }
 }
