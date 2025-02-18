@@ -9,6 +9,7 @@
 .contactsLeft {
     padding: 1rem 0 0 0;
     padding-right: 0.25rem;
+    position: relative;
     >button{
         margin: 1rem auto;
         padding: 0.5rem 3rem;
@@ -32,10 +33,22 @@
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
         }
     }
+    >.addContactSmall {
+        display: none;
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.5rem;
+        min-width: 2rem;
+        max-width: 2rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        margin: 0;
+        padding: 0.25rem 1.5rem;
+    }
 }
 
 .contactList {
-    max-height: calc(100vh - 13rem);
+    max-height: calc(100vh - 10.6rem);
     overflow: auto;
     >h2 {
         text-transform: uppercase;
@@ -77,9 +90,11 @@
     list-style-type: none;
     @include standard-flex(flex-start, center);
     background-color: white;
-    margin:  0;
+    margin:  0 auto;
+    min-width: fit-content;
     >.initials-circle {
-        width: 3.5rem;
+        min-width: 3.5rem;
+        max-width: 3.5rem;
         margin:  1rem;
         font-size: 1.5rem;
     }
@@ -102,4 +117,21 @@
 .contactMail {
     text-decoration: none;
     color: rgb(0,124,238);
+}
+
+/* responsive design**/
+@media (max-width: 1250px) {
+    .contactListPerLetter {
+        padding: 0 2rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .contactListPerLetter {
+        padding: 0;
+        margin: 1rem auto;
+    }
+}
+@media (max-width: 1250px) {
+
 }

@@ -3,6 +3,9 @@
     <button (click)="addContact()">
       Add new contact <img src="./../../../assets/img/contacts/person_add.png" alt="person_add">
     </button>
+    <button class="addContactSmall" (click)="addContact()">
+      <img src="./../../../assets/img/contacts/person_add.png" alt="person_add">
+    </button>
     <div class="contactList">
       @for (item of groupedContacts; track $index) {
         <h2>{{ item.letter }}</h2> 
