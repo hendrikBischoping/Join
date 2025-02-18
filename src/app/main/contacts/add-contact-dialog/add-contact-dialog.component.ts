@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IContact } from '../../../interfaces/icontact';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ export class AddContactDialogComponent {
       phone: 0,
     }
   sendForm = false;
+  @Input() close!: () => void;
 
   constructor(
     private contactService: ContactService,

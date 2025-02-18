@@ -29,11 +29,7 @@ export class FirebaseService {
 
   subUserList() {
     return onSnapshot(this.getColRef("User"), (snapshot) => {
-      
-      
       snapshot.forEach((doc) => {
-        console.log(doc.data());
-        
         this.UserList.push(this.setUserData(doc.data() as IUser, doc.id));
       });
     });
@@ -144,17 +140,6 @@ export class FirebaseService {
       console.error("Error adding document: ", err);
     }
   }
-
-  // async updateDocWithID(colId: string, docId: string) {
-  //   const docRef = doc(this.firestore, colId, docId);
-    
-  //   try {
-  //     await updateDoc(docRef, { id: docId }); 
-  //     console.log("Document updated with ID field");
-  //   } catch (err) {
-  //     console.error("Error updating document: ", err);
-  //   }
-  // }
 
   async updateDoc(colId:string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
 

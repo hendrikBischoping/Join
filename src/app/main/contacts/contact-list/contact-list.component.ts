@@ -4,6 +4,7 @@ import { IContact } from '../../../interfaces/icontact';
 import { MatDialog } from '@angular/material/dialog';
 import { IsActiveMatchOptions } from '@angular/router';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
+import { OverlayService } from '../../../services/overlay.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -20,7 +21,7 @@ export class ContactListComponent {
   contactsFromList: IContact[] = [];  
   readonly dialog = inject(MatDialog);
 
-  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef) {
+  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef, private overlayService: OverlayService) {
     setTimeout(() => {
       this.groupContacts();
     }, 1000);
@@ -53,18 +54,25 @@ export class ContactListComponent {
     }));
   }
 
-  addContact() {
+  // addContact() {
     
-    const dialog = this.dialog.open(AddContactDialogComponent, {
-      panelClass: 'custom-dialog-container', 
-      width: '80%', 
-      position: { right: '10vw' }
-    });
+  //   const dialog = this.dialog.open(AddContactDialogComponent, {
+  //     panelClass: 'custom-dialog-container', 
+  //     width: '80%', 
+  //     position: { right: '10vw' }
+  //   });
   
-    // Schließen-Animation nach Beenden hinzufügen
-    dialog.beforeClosed().subscribe(() => {
-      document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
-    });
+  //   // Schließen-Animation nach Beenden hinzufügen
+  //   dialog.beforeClosed().subscribe(() => {
+  //     document.querySelector('.mat-dialog-container')?.classList.add('custom-dialog-container-exit');
+  //   });
+  // }
+
+  addContact() {
+    // this.overlayService.openOverlay(AddContactDialogComponent, {
+    //   close: () => this.overlayService.closeOverlay()
+    // });
+    this.overlayService.openAddContactOverlay();
   }
 
   selectContact(contactId: string) {

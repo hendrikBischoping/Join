@@ -7,67 +7,67 @@
             <div class="lineI"></div>
         </div>
 
-        <img src="../../../../assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="">
+        <img src="./assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="">
 
     </div>
     @for (contact of contactsFromList; track $index) {
-    @if (contact.id === watchTarget) {
+        @if (contact.id === watchTarget) {
 
-    <div class="contact-floating">
-        <div class="nameIcon">
-            <div class="initials-circle bg_{{contact.styleSelector}}">
-                {{contact.initials}}
-            </div>
-            <div class="contactField">
-                <div class="info">
-                    <p> {{contact.name}}</p>
+        <div class="contact-floating">
+            <div class="nameIcon">
+                <div class="initials-circle bg_{{contact.styleSelector}}">
+                    {{contact.initials}}
                 </div>
-                <div class="imagesForContact">
-                    <!-- <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png" -->
-                    <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
+                <div class="contactField">
+                    <div class="info">
+                        <p> {{contact.name}}</p>
                     </div>
-                    <!-- <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png" -->
-                    <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
+                    <div class="imagesForContact">
+                        <!-- <div (click)="editData (contactsFromList[0].id)"><img src="../../../../assets/img/editIcon.png" -->
+                        <div (click)="editData (contact.id)"><img src="./assets/img/editIcon.png" alt="">Edit
+                        </div>
+                        <!-- <div (click)="deleteData (contactsFromList[0].id)"> <img src="../../../../assets/img/trash.png" -->
+                        <div (click)="deleteData (contact.id)"> <img src="./assets/img/trash.png" alt="">Delete
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <h2>Contact Information</h2>
-        <div class="data">
-            <!-- <p>Name: {{openContact.openedContact[0].name}}</p> test für service -->
-            <h3>Email</h3>
-            <p class="email"><a href="mailto:">{{contact.eMail}}</a></p>
-            <!-- {{openContact.openedContact[0].eMail}}</p>
-            <p class="email"> {{contact.eMail}}</p> -->
-            <!-- <p class="email"> {{openContact.openedContact[0].eMail}}</p> -->
-            <h3>Phone</h3>
-            {{contact.phone}}
-        </div>
-
-        <div class="editForMobile">
-            <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
-
-            <div class="editButtom">
-                <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
-                </div>
-                <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
                 </div>
             </div>
+            <h2>Contact Information</h2>
+            <div class="data">
+                <!-- <p>Name: {{openContact.openedContact[0].name}}</p> test für service -->
+                <h3>Email</h3>
+                <p class="email"><a href="mailto:">{{contact.eMail}}</a></p>
+                <!-- {{openContact.openedContact[0].eMail}}</p>
+                <p class="email"> {{contact.eMail}}</p> -->
+                <!-- <p class="email"> {{openContact.openedContact[0].eMail}}</p> -->
+                <h3>Phone</h3>
+                {{contact.phone}}
+            </div>
 
-            <!-- <div class="editForMobile">
-                <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
-        
-                <div class="editButtom">
-                    <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
+            <div class="editForMobile">
+                <img (click)="toggleEditMenu($event)" src="./assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+
+                <div class="editButtom" [ngClass]="{ 'show': isEditMenuOpen }">
+                    <div (click)="editData (contact.id)"><img src="./assets/img/editIcon.png" alt="">Edit
                     </div>
-                    <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
+                    <div (click)="deleteData (contact.id)"> <img src="./assets/img/trash.png" alt="">Delete
                     </div>
                 </div>
-        
-            </div> -->
+
+                <!-- <div class="editForMobile">
+                    <img src="../../../../assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+            
+                    <div class="editButtom">
+                        <div (click)="editData (contact.id)"><img src="../../../../assets/img/editIcon.png" alt="">Edit
+                        </div>
+                        <div (click)="deleteData (contact.id)"> <img src="../../../../assets/img/trash.png" alt="">Delete
+                        </div>
+                    </div>
+            
+                </div> -->
+            </div>
         </div>
-    </div>
-    }
+        }
     }
 
 </main>
