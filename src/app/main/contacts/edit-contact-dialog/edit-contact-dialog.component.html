@@ -11,7 +11,7 @@
 
     <section class="initials-section">
         <div class="initials-circle">
-            {{contact.initials}}
+            {{editedContact.initials}}
         </div>
     </section>
 
@@ -20,25 +20,35 @@
         <div class="close-container" (click)="close()">
             <img src="./assets/img/icons/CloseIcon.png">
         </div>
-        
-        <div class="forms">
+
+        <form class="forms" #contactForm="ngForm" (ngSubmit)="saveContactInfo(contactForm)">
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.name" placeholder="Dein Text hier">
+                <input type="text" #name="ngModel" name="name" [(ngModel)]="editedContact.name" required
+                    (ngModelChange)="cdRef.detectChanges()" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="personIcon">
             </div>
+            @if (!name.valid && name.touched && !name.disabled) {
+            <span>missing name</span>
+            }
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.eMail" placeholder="Dein Text hier">
+                <input type="text" #email="ngModel" name="email" [(ngModel)]="editedContact.eMail" required
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
             </div>
+            @if (!email.valid && email.touched && !email.disabled) {
+            <span>missing or invalid email</span>
+            }
             <div class="input-container">
-                <input type="text" [(ngModel)]="contact.phone" placeholder="Dein Text hier">
+                <input type="text" name="phone" [(ngModel)]="editedContact.phone" placeholder="Dein Text hier">
                 <img class="icon" src="./assets/img/icons/PhoneIcon.png" alt="phoneIcon">
             </div>
-        </div>
-        <div class="confirmation-buttons">
-            <button class="button-bright-bg" (click)="deleteContact()">Delete</button>
-            <button class="button-dark-bg" (click)="saveContactInfo()" cdkFocusInitial>Save</button>
-        </div>
+
+            <div class="confirmation-buttons">
+                <button type="button" class="button-bright-bg" (click)="deleteContact()">Delete</button>
+                <button type="submit" class="button-dark-bg" cdkFocusInitial>Save</button>
+            </div>
+        </form>
+        <div></div>
     </section>
 
 </main>
