@@ -1,22 +1,22 @@
 <section class="contacts">
-  <div class="contactsLeft">
-    <button class="addContactBig" (click)="addContact()">
+  <div class="contacts-left">
+    <button class="add-contact-big" (click)="addContact()">
       Add new contact <img src="./assets/img/contacts/person_add.png" alt="person_add">
     </button>
-    <button class="addContactSmall" (click)="addContact()">
+    <button class="add-contact-small" (click)="addContact()">
       <img src="./assets/img/contacts/person_add.png" alt="person_add">
     </button>
-    <div class="contactList">
+    <div class="contact-list">
       @for (item of groupedContacts; track $index) {
         <h2>{{ item.letter }}</h2> 
-        <div class="separationLine"></div>
-        <ul class="contactListPerLetter">
+        <div class="separation-line"></div>
+        <ul class="contact-list-per-letter">
           @for (contact of item.contacts; track $index) {
-            <li class="contactSmallInfo" (click)="selectContact(contact.id!)">
-              <div class="initials-circle bg_{{ contact.styleSelector }}">{{ contact.initials }}</div>
+            <li class="contact-small-info" tabindex="0" (click)="selectContact(contact.id!)">
+              <div class="initials-circle bg-{{ contact.styleSelector }}">{{ contact.initials }}</div>
               <div>
-                <p class="contactName">{{ contact.name }}</p>
-                <p class="contactMail">{{ contact.eMail }}</p>
+                <p class="contact-name">{{ contact.name }}</p>
+                <p class="contact-mail">{{ contact.eMail }}</p>
               </div>
             </li>
           }
