@@ -1,0 +1,49 @@
+@use "../../styles/mixins.scss" as *;
+@use "../../../styles.scss" as *;
+
+header {
+  @include standard-flex(space-between, center);
+  width: 100%;
+  h1 {
+    font-weight: bold;
+  }
+  .menu {
+    @include standard-flex(space-between, center);
+    .inputContainer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap:2.5rem;
+      input {
+        width: 90%;
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        font-family: "Inter";
+        font-size: 1.5rem;
+        outline: none;
+      }
+      img {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        cursor: pointer;
+      }
+    }
+    button {
+      @include standardButton();
+      background-color: $standardColor;
+      color: white;
+      width: 12.5rem;
+      gap:4px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $customBlue;
+        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2));
+      }
+    }
+  }
+}

@@ -1,28 +1,159 @@
 <main>
-    @for (task of tasks; track $index) {
-        <div (click)="openEditDialog(task.id)">
-
-            <h1>{{task.title}}</h1>
-            <p>{{task.description}}</p>
-    
-            <div class="contact-icons">
-                @for (taskContact of task.contacts; track $index) {
-                    @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                            <div class="initials-circle bg-{{contact.styleSelector}}">
-                                {{contact.initials}}
-                            </div>
-                        }
-                    }
-                }
+    <header>
+        <h1>Board</h1>
+        <div class="menu">
+            <div class="inputContainer">
+                <input type="Find Task">
+                <img src="../../../assets/img/Board/search.png" alt="">
             </div>
-    
-            @for (subtask of task.subtasks; track $index) {
-                <p>{{subtask}}</p>
+            @for (task of tasks; track $index) {
+            <button (click)="openEditDialog(task.id)">Add task +</button>
             }
         </div>
-    }
-    
+    </header>
+    <div>
+        @for (task of tasks; track $index) {
+        <div>
+            <div>
+                <div>
+                    <h2>{{task.title}}</h2>
+                    <div (click)="openEditDialog(task.id)" img src="../../../assets/img/Board/addTask.png">
+
+                    </div>
+
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>
+
+                    <div class="contact-icons">
+                        @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        }
+                        }
+                        }
+                    </div>
+
+                    @for (subtask of task.subtasks; track $index) {
+                    <p>{{subtask}}</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <div>
+
+                    <h2>{{task.title}}</h2>
+                    <div (click)="openEditDialog(task.id)" img src="../../../assets/img/Board/addTask.png">
+
+
+                    </div>
+
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>
+
+                    <div class="contact-icons">
+                        @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        }
+                        }
+                        }
+                    </div>
+
+                    @for (subtask of task.subtasks; track $index) {
+                    <p>{{subtask}}</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <div>
+
+                    <h2>{{task.title}}</h2>
+                    <div (click)="openEditDialog(task.id)" img src="../../../assets/img/Board/addTask.png">
+
+
+                    </div>
+
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>
+
+                    <div class="contact-icons">
+                        @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        }
+                        }
+                        }
+                    </div>
+
+                    @for (subtask of task.subtasks; track $index) {
+                    <p>{{subtask}}</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <div>
+
+
+                    <h2>{{task.title}}</h2>
+                    <div (click)="openEditDialog(task.id)" img src="../../../assets/img/Board/addTask.png">
+
+                    </div>
+
+                    <h2>{{task.title}}</h2>
+                    <p>{{task.description}}</p>
+
+                    <div class="contact-icons">
+                        @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        }
+                        }
+                        }
+                    </div>
+
+                    @for (subtask of task.subtasks; track $index) {
+                    <p>{{subtask}}</p>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- @for (task of tasks; track $index) {
+    <div (click)="openEditDialog(task.id)">
+
+        <h2>{{task.title}}</h2>
+        <p>{{task.description}}</p>
+
+        <div class="contact-icons">
+            @for (taskContact of task.contacts; track $index) {
+            @for (contact of contacts; track $index) {
+            @if (taskContact == contact.id) {
+            <div class="initials-circle bg-{{contact.styleSelector}}">
+                {{contact.initials}}
+            </div>
+            }
+            }
+            }
+        </div>
+
+        @for (subtask of task.subtasks; track $index) {
+        <p>{{subtask}}</p>
+        }
+    </div>
+    } -->
+
 </main>
-
-
