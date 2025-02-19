@@ -2,22 +2,22 @@
 @use './app/styles/mixins.scss' as *;
 
 @font-face {
-    font-display: swap;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('./assets/fonts/inter-v18-latin-regular.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/inter-v18-latin-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* inter-700 - latin */
 @font-face {
-    font-display: swap;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    src: url('./assets/fonts/inter-v18-latin-700.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./assets/fonts/inter-v18-latin-700.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 .mat-body,
@@ -30,14 +30,14 @@
 }
 
 .mat-dialog-container {
-    border-radius: 16px !important;
-  }
+  border-radius: 16px !important;
+}
 
 
 
 // Falls nötig, auch für den body:
 body {
-    margin: 0;
+  margin: 0;
   font: 400 16px/20px "Inter", sans-serif !important;
 
 }
@@ -45,28 +45,30 @@ body {
 
 html,
 body {
-    height: 100%;
-    overflow-x: hidden;
-    @media (max-width: 800px) {
-      font-size: 12px;
-    }
+  height: 100%;
+  overflow-x: hidden;
 
-    @media (max-width: 550px) {
-      font-size: 8px;
-    }
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 8px;
+  }
 }
 
 h1 {
-    font-size: 4rem !important;
-    margin: 0;
+  font-size: 4rem !important;
+  margin: 0;
 }
+
 h2 {
-    font-size: 2.5rem;
-    margin: 0;
+  font-size: 2.5rem;
+  margin: 0;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 a {
@@ -74,8 +76,8 @@ a {
   text-decoration: none;
 
   &:hover {
-      cursor: pointer;
-      text-decoration: underline;
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 
@@ -84,82 +86,82 @@ $customBlue: #29abe2;
 
 
 @mixin standardButton() {
-    width: 4em;
-    aspect-ratio: 2;
-    border: 1px solid $standardColor;
-    border-radius: 12px;
-    font-size: 1.75rem
+  width: 4em;
+  aspect-ratio: 2;
+  border: 1px solid $standardColor;
+  border-radius: 12px;
+  font-size: 1.75rem
 }
 
 .button-bright-bg {
-    @include standardButton();
+  @include standardButton();
 
-    &:hover {
-        cursor: pointer;
-        border-color: $customBlue;
-        color: $customBlue;
-        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
-    }
+  &:hover {
+    cursor: pointer;
+    border-color: $customBlue;
+    color: $customBlue;
+    filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
+  }
 }
 
 .button-dark-bg {
-    @include standardButton();
-    background-color: $standardColor;
-    color: white;
+  @include standardButton();
+  background-color: $standardColor;
+  color: white;
 
-    &:hover {
-        cursor: pointer;
-        background-color: $customBlue;
-        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
-    }
+  &:hover {
+    cursor: pointer;
+    background-color: $customBlue;
+    filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2))
+  }
 }
 
 .dialog-logo {
-    width: 4rem;
-    aspect-ratio: 0.9;
+  width: 4rem;
+  aspect-ratio: 0.9;
 }
 
 .initials-circle {
-    border: 1px solid white;
-    font-size: 2rem;
-    color: white;
-    border-radius: 100%;
-    width: 8rem;
-    aspect-ratio: 1;
-    background-color: var(--initialsBg);
-    @include standard-flex();
+  border: 1px solid white;
+  font-size: 2rem;
+  color: white;
+  border-radius: 100%;
+  width: 8rem;
+  aspect-ratio: 1;
+  background-color: var(--initialsBg);
+  @include standard-flex();
 }
-  
+
 /** Dialog Window */
 
 .custom-overlay-container {
   position: fixed;
-  top: 5vh;
-  left: 10%;
-  width: 80%;
-  height: 90vh;
-  // background: rgba(0,0,0,0.5);
+  top: 3vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   z-index: 1000;
   display: flex;
 
-  // Desktop: Overlay rechts einblenden
   @media (min-width: 801px) {
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
-  // Mobile: Overlay von unten einblenden
+
   @media (max-width: 800px) {
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
+    top: 0;
   }
 }
 
-// Die eingebettete Komponente
-.custom-overlay-container > * {
+.custom-overlay-container>* {
   background: white;
-  border-radius: 1rem;
-  width: 80%;
-  height: 70vh;
+  border-radius: 2rem;
+  width: 85%;
+  height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.5s ease-out forwards;
 }
 
@@ -169,6 +171,7 @@ $customBlue: #29abe2;
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -182,139 +185,141 @@ $customBlue: #29abe2;
       transform: translateY(100%);
       opacity: 0;
     }
+
     to {
       transform: translateY(0);
       opacity: 1;
     }
   }
 }
-  // .custom-dialog-container {
-  //   animation: slideInRight 0.4s ease-out forwards;
-  // }
-  
-  // .custom-dialog-container-exit {
-  //   animation: slideOutRight 0.4s ease-in forwards;
-  // }
-  
 
-  /** initials-circles: backgroundcolors*/
+// .custom-dialog-container {
+//   animation: slideInRight 0.4s ease-out forwards;
+// }
 
-  .bg_a {
-    background-color: #d6d4be;
-  }
+// .custom-dialog-container-exit {
+//   animation: slideOutRight 0.4s ease-in forwards;
+// }
 
-  .bg_b {
-    background-color: #FA9E21;
-  }
 
-  .bg_c {
-    background-color: #F58D80;
-  }
+/** initials-circles: backgroundcolors*/
 
-  .bg_d {
-    background-color: #ED3094;
-  }
+.bg_a {
+  background-color: #d6d4be;
+}
 
-  .bg_e {
-    background-color: #498FCA;
-  }
+.bg_b {
+  background-color: #FA9E21;
+}
 
-  .bg_f {
-    background-color: #8C76B7;
-  }
+.bg_c {
+  background-color: #F58D80;
+}
 
-  .bg_g {
-    background-color: #159876;
-  }
+.bg_d {
+  background-color: #ED3094;
+}
 
-  .bg_h {
-    background-color: #1F5730;
-  }
+.bg_e {
+  background-color: #498FCA;
+}
 
-  .bg_i {
-    background-color: #C4986B;
-  }
+.bg_f {
+  background-color: #8C76B7;
+}
 
-  .bg_j {
-    background-color: #C4986B;
-  }
+.bg_g {
+  background-color: #159876;
+}
 
-  .bg_k {
-    background-color: #d6d6d6;
-  }
+.bg_h {
+  background-color: #1F5730;
+}
 
-  .bg_l {
-    background-color: #FCDD08;
-  }
+.bg_i {
+  background-color: #C4986B;
+}
 
-  .bg_m {
-    background-color: #EB4225;
-  }
+.bg_j {
+  background-color: #C4986B;
+}
 
-  .bg_n {
-    background-color: #F6A7C6;
-  }
+.bg_k {
+  background-color: #d6d6d6;
+}
 
-  .bg_o {
-    background-color: #9E3391;
-  }
+.bg_l {
+  background-color: #FCDD08;
+}
 
-  .bg_p {
-    background-color: #29398E;
-  }
+.bg_m {
+  background-color: #EB4225;
+}
 
-  .bg_q {
-    background-color: #A6DDE0;
-  }
+.bg_n {
+  background-color: #F6A7C6;
+}
 
-  .bg_r {
-    background-color: #77C265;
-  }
+.bg_o {
+  background-color: #9E3391;
+}
 
-  .bg_s {
-    background-color: #96CA41;
-  }
+.bg_p {
+  background-color: #29398E;
+}
 
-  .bg_t {
-    background-color: #966F46;
-  }
+.bg_q {
+  background-color: #A6DDE0;
+}
 
-  .bg_u {
-    background-color: #808185;
-  }
+.bg_r {
+  background-color: #77C265;
+}
 
-  .bg_v {
-    background-color: #EC8A27;
-  }
+.bg_s {
+  background-color: #96CA41;
+}
 
-  .bg_w {
-    background-color: #A51D33;
-  }
+.bg_t {
+  background-color: #966F46;
+}
 
-  .bg_x {
-    background-color: #A51D33;
-  }
+.bg_u {
+  background-color: #808185;
+}
 
-  .bg_y {
-    background-color: #70164A;
-  }
+.bg_v {
+  background-color: #EC8A27;
+}
 
-  .bg_z {
-    background-color: #5178BD;
-  }
+.bg_w {
+  background-color: #A51D33;
+}
 
-  .bg_ä {
-    background-color: #10AEAD;
-  }
+.bg_x {
+  background-color: #A51D33;
+}
 
-  .bg_ö {
-    background-color: #3F9B46;
-  }
+.bg_y {
+  background-color: #70164A;
+}
 
-  .bg_ü {
-    background-color: #D5E4A9;
-  }
+.bg_z {
+  background-color: #5178BD;
+}
 
-  .bg_default {
-    background-color: #b17d1d;
-  }
+.bg_ä {
+  background-color: #10AEAD;
+}
+
+.bg_ö {
+  background-color: #3F9B46;
+}
+
+.bg_ü {
+  background-color: #D5E4A9;
+}
+
+.bg_default {
+  background-color: #b17d1d;
+}
