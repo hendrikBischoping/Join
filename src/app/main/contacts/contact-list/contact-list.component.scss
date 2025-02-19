@@ -95,9 +95,11 @@
         background-image: linear-gradient(rgb(249,249,249), rgb(241,241,241));
         border-radius: 1rem;
     }
-    &:focus {
+    &:focus-within{
         background-color: rgb(42,54,71);
+        color: white;
         border-radius: 1rem;
+        cursor: pointer;
     }
 }
 
