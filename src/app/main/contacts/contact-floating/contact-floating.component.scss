@@ -11,17 +11,17 @@ main {
     height: 100%;
   }
 
-  .headline {
+  .headline-content {
     @include standard-flex(space-between, center);
     width: 100%;
     margin-top: 2rem;
-    .goBack {
+    .go-back {
       display: none;
     }
 
     @media (max-width: 800px) {
       font-size: 12px;
-      .goBack {
+      .go-back {
         display: block;
         &:hover {
           cursor: pointer;
@@ -32,14 +32,14 @@ main {
     }
   }
 
-  .headlineI {
+  .headline {
     @include standard-flex(space-between, center);
     flex-direction: row;
     gap: 1rem;
     img {
       display: none;
     }
-    .lineI {
+    .second-line {
       display: none;
     }
     span {
@@ -48,7 +48,7 @@ main {
     p {
       font-size: 5px;
     }
-    .line {
+    .first-line {
       border-left: 3px solid #29abe2;
       height: 3.5rem;
     }
@@ -70,10 +70,10 @@ main {
     @media (max-width: 799px) {
       @include standard-flex(space-between, flex-start);
       flex-direction: column;
-      .line {
+      .first-line {
         display: none;
       }
-      .lineI {
+      .second-line {
         display: flex;
         border-top: 3px solid #29abe2;
         width: 12rem;
@@ -94,7 +94,7 @@ main {
       gap: 0.5rem;
     }
 
-    .nameIcon {
+    .name-icon {
       @include standard-flex(flex-start, center);
       flex-direction: row;
       width: 100%;
@@ -129,12 +129,12 @@ main {
       }
     }
 
-    .contactField {
+    .contact-field {
       @include standard-flex(space-between, start);
       flex-direction: column;
       .info {
         @include standard-flex(space-between, start);
-        .contactName {
+        .contact-name {
           margin: 0;
           line-height: 80%;
           line-break: normal;
@@ -155,7 +155,7 @@ main {
         }
       }
 
-      .imagesForContact {
+      .images-for-contact {
         width: 10rem;
         height: 2.2rem;
         @include standard-flex(space-between, start);
@@ -218,16 +218,16 @@ main {
   }
 }
 
-.mobileContent {
+.mobile-content {
   background-color: aqua;
   width: 100%;
-  .editForMobile {
-    > .editMedu {
+  .edit-for-mobile {
+    > .edit-menu {
       display: none;
     }
     @include standard-flex(flex-end, flex-end);
     @media (max-width: 799px) {
-      .editMedu {
+      .edit-menu {
         bottom: 3px;
         position: absolute;
         display: flex;
@@ -241,7 +241,7 @@ main {
 }
 
 @media (max-width: 799px) {
-  .editMedu {
+  .edit-menu {
     position: absolute;
     display: block;
     cursor: pointer;
@@ -250,7 +250,7 @@ main {
   }
 }
 
-.editButtom {
+.edit-buttom {
   position: absolute;
   bottom: 4px;
   right: -12rem;

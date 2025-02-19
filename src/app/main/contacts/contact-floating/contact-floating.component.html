@@ -1,28 +1,28 @@
 <main>
-    <div class="headline">
-        <div class="headlineI">
+    <div class="headline-content">
+        <div class="headline">
             <h1>Contacts</h1>
-            <div class="line"></div>
+            <div class="first-line"></div>
             <h2>Better with a team</h2>
-            <div class="lineI"></div>
+            <div class="second-line"></div>
         </div>
 
-        <img class="goBack" (click)="toggleSlideList()" src="./assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="go back arrow">
+        <img class="go-back" (click)="toggleSlideList()" src="./assets/img/contacts/contact-mobile/arrowLeftLine.png" alt="go back arrow">
 
     </div>
     @for (contact of contactsFromList; track $index) {
         @if (contact.id === watchTarget) {
 
         <div class="contact-floating">
-            <div class="nameIcon">
-                <div class="initials-circle bg_{{contact.styleSelector}}">
+            <div class="name-icon">
+                <div class="initials-circle bg-{{contact.styleSelector}}">
                     {{contact.initials}}
                 </div>
-                <div class="contactField">
+                <div class="contact-field">
                     <div class="info">
-                        <p class="contactName"> {{contact.name}}</p>
+                        <p class="contact-name"> {{contact.name}}</p>
                     </div>
-                    <div class="imagesForContact">
+                    <div class="images-for-contact">
                         <div (click)="editData (contact.id)"><img src="./assets/img/editIcon.png" alt="">Edit
                         </div>
                         <div (click)="deleteData (contact.id)"> <img src="./assets/img/trash.png" alt="">Delete
@@ -35,14 +35,14 @@
                 <h3>Email</h3>
                 <p class="email"><a href="mailto:{{contact.eMail}}">{{contact.eMail}}</a></p>
                 <h3>Phone</h3>
-                <p class="phoneNumber">+49 {{contact.phone}}</p>
+                <p class="phone-number">+49 {{contact.phone}}</p>
             </div>
         </div>
-        <div class="mobileContent">
-            <div class="editForMobile">
-                <img class="editMedu" (click)="toggleEditMenu($event)" src="./assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
+        <div class="mobile-content">
+            <div class="edit-for-mobile">
+                <img class="edit-menu" (click)="toggleEditMenu($event)" src="./assets/img/contacts/contact-mobile/menuContactOptions.png" alt="">
 
-                <div class="editButtom" [ngClass]="{ 'show': isEditMenuOpen }">
+                <div class="edit-buttom" [ngClass]="{ 'show': isEditMenuOpen }">
                     <div (click)="editData (contact.id)"><img src="./assets/img/editIcon.png" alt="">Edit
                     </div>
                     <div (click)="deleteData (contact.id)"> <img src="./assets/img/trash.png" alt="">Delete
