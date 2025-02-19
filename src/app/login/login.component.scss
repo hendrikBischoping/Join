@@ -8,22 +8,34 @@ main {
     flex-direction: column;
     background-color: #F6f7f8;
     position: relative;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out;
+
+    
 
     >img {
         position: absolute;
+        width: 10vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(4); 
+        transition: all 1s ease-in-out;
+        z-index: 5;
+    }
+
+    .moveLogo {
         top: 4rem;
         left: 4rem;
-        width: 10vh;
+        transform: scale(1);
+    }
+
+    .dummy {
+        display: none;
+        height: 10vh;
 
         @media (max-width: 800px) {
-            position: static;
-            align-self: start;
-            top: 0;
-            left: 0;
-            margin-top: 2rem;
-            margin-left: 2rem;
+            display: block;
         }
-
     }
 
     .signup-button-container {
@@ -43,13 +55,14 @@ main {
     }
 
     .mobile-signup-button-container {
-        
+
         gap: 2rem;
         display: none;
 
         @media (max-width: 800px) {
             @include standard-flex();
         }
+
         >span {
             font-size: 2rem;
         }
@@ -85,7 +98,7 @@ main {
             }
         }
 
-        
+
 
         >span {
             font-size: 2rem;
@@ -108,7 +121,7 @@ main {
 
             }
 
-            
+
         }
     }
 
@@ -136,18 +149,21 @@ main {
         .signup-head {
             @include standard-flex(space-between);
             width: 90%;
+
             .back-arrow {
                 width: 3rem;
                 aspect-ratio: 1;
                 cursor: pointer;
                 @include standard-flex();
+
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.1);
                     border-radius: 100%;
                 }
+
                 >img {
                     width: 2rem;
-                    
+
                 }
             }
 
@@ -172,36 +188,37 @@ main {
 
             @media (max-width: 800px) {
                 margin-bottom: 5rem;
-                
+
             }
+
             .error-message {
                 color: red;
             }
-    
+
             .success-message {
                 color: green;
             }
-    
+
             .privacy-check {
                 font-size: 1.5rem;
-    
-                
+
+
                 >input {
                     width: 1.5rem;
                     height: 1rem;
                     cursor: pointer;
                 }
             }
-    
+
             >button {
                 @media (max-width: 800px) {
                     width: 10rem;
-        
+
                 }
             }
         }
 
-        
+
     }
 
     .link-container {
@@ -241,4 +258,8 @@ main {
         top: 1.25rem;
         width: 1.5rem;
     }
+}
+
+.visible {
+    opacity: 1;
 }

@@ -1,5 +1,6 @@
-<main>
-    <img src="./assets/img/icons/joinLogoSmall.png" alt="">
+<main [ngClass]="{'visible': isVisible}">
+    <img [ngClass]="{ 'moveLogo': logoTransition}" src="./assets/img/icons/joinLogoSmall.png" alt="">
+    <div class="dummy"></div>
     @if (stateLogin) {
     <div class="signup-button-container">
         <span>Not a Join user?</span>
