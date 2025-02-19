@@ -8,5 +8,26 @@ import { Component } from '@angular/core';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-
+  placeholderListContacts = [
+    {
+      name: 'Andreas',
+      initials: 'AW',
+    },
+    {
+      name: 'Sascha',
+      initials: 'ST',
+    },
+    {
+      name: 'Hendrik',
+      initials: 'HB',
+    },
+  ];
+  placeholderListCategories = [
+    {
+      category: 'Technical Task'
+    },
+    {
+      category: 'User Story'
+    },
+  ]
 }
