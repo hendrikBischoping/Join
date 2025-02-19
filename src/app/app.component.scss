@@ -4,6 +4,11 @@ $headHeight: 8vh;
 $headBorderHeight: 6px;
 $navHeightMobile: 8vh;
 
+.joinContent {
+    max-width: 1440px;
+    margin: auto;
+}
+
 main {
     margin: 0;
     display: flex;

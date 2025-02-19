@@ -2,10 +2,12 @@
 
 main {
     width: 100%;
+    max-width: 1440px;
     height: 100vh;
     @include standard-flex(space-between);
     flex-direction: column;
     background-color: #F6f7f8;
+    position: relative;
 
     >img {
         position: absolute;
