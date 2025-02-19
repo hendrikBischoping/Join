@@ -19,7 +19,7 @@ export class AddContactDialogComponent {
     {
       name: '',
       eMail: '',
-      phone: 0,
+      phone: '',
     }
   sendForm = false;
   @Input() close!: () => void;
@@ -33,6 +33,7 @@ export class AddContactDialogComponent {
 
   async onSubmit(form: NgForm) {
     if (form.invalid) {
+      form.form.markAllAsTouched();
       this.cdRef.detectChanges();
       return;
     }

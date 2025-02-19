@@ -2,18 +2,18 @@
 
 
 main {
-    width: 80vw;
-    aspect-ratio: 1.9;
+    // width: 80vw;
+    // aspect-ratio: 1.9;
     @include standard-flex();
 
     @media (max-width: 1300px) {
-        aspect-ratio: 1.5;
-        width: 90%;
+        // aspect-ratio: 1.5;
+        // width: 90%;
     }
 
     @media (max-width: 800px) {
-        width: 100%;
-        height: calc(100vh - 16vh);
+        // width: 100%;
+        // height: calc(100vh - 16vh);
         aspect-ratio: unset;
         flex-direction: column;
         position: relative;
@@ -261,10 +261,11 @@ main {
                         width: 90%;
                         padding: 0.5rem;
                         margin-left: 2rem;
+                        margin-right: 2rem;
                     }
 
                     @media (max-width: 550px) {
-                        height: 2rem;
+                        height: 4rem;
                     }
 
                     &:focus {
@@ -278,6 +279,10 @@ main {
                 top: 50%;
                 right: 10%;
                 cursor: pointer;
+
+                @media (max-width: 550px) {
+                    top: 40%;
+                }
             }
 
         }
