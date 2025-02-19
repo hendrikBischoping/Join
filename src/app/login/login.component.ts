@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { IUser } from '../interfaces/iuser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -23,8 +24,18 @@ export class LoginComponent {
   privacyAccepted: boolean = false;
   registrationSuccess: boolean = false;
   passwordMismatch: boolean = false;
+  logoTransition: boolean = false;
+  isVisible: boolean = false;
 
   constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.logoTransition = true;
+      this.isVisible = true;
+    }, 100);
+    
+  }
 
   toggleSignUp() {
     this.stateLogin = !this.stateLogin;
