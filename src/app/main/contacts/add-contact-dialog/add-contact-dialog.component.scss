@@ -1,25 +1,14 @@
 @use '../../../styles/mixins.scss' as *;
 
-
 main {
-    // width: 80vw;
-    // aspect-ratio: 1.9;
     @include standard-flex();
 
-    @media (max-width: 1300px) {
-        // aspect-ratio: 1.5;
-        // width: 90%;
-    }
-
     @media (max-width: 800px) {
-        // width: 100%;
-        // height: calc(100vh - 16vh);
         aspect-ratio: unset;
         flex-direction: column;
         position: relative;
     }
-
-
+    
     .logo-section {
         position: relative;
         background-color: #2A3647;

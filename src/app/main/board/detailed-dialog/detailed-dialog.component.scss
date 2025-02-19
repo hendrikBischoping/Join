@@ -1,0 +1,79 @@
+@use '../../../styles/mixins.scss' as *;
+
+main {
+    width: 30%;
+    height: 90%;
+    overflow: auto;
+    @include standard-flex(start, start);
+    flex-direction: column;
+    gap: 2rem;
+
+    .top {
+        @include standard-flex();
+        width: 100%;
+        margin-top: 2rem;
+        gap: 60%;
+
+        .story-container {
+            @include standard-flex();
+            color: white;
+            background-color: #1fd7c1;
+            width: 8rem;
+            height: 2.5rem;
+            font-size: 1.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .user-story-bg {
+            background-color: #0038FF;
+        }
+
+        .close-container {
+            cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            @include standard-flex();
+
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.1);
+                border-radius: 100%;
+            }
+        }
+    }
+
+    .prio-container {
+        @include standard-flex();
+    }
+
+    >ul {
+        >div {
+            @include standard-flex(start);
+            margin: 0.5rem;
+            >div {
+                margin-right: 1rem;
+                font-size: 1rem;
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+    }
+
+
+    .edit-container {
+        @include standard-flex();
+        gap: 1rem;
+        align-self: end;
+        margin-right: 2rem;
+        >div {
+            @include standard-flex();
+            &:hover {
+                cursor: pointer;
+                color: rgb(0, 124, 238);
+              }
+        }
+    }
+}
+
+.ml-2 {
+    margin-left: 2rem;
+}
