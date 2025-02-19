@@ -3,6 +3,7 @@ import { ITask } from '../../interfaces/itask';
 import { TaskDataService } from '../../services/task-data.service';
 import { ContactService } from '../../services/contact-service.service';
 import { IContact } from '../../interfaces/icontact';
+import { OverlayService } from '../../services/overlay.service';
 
 @Component({
   selector: 'app-board',
@@ -25,7 +26,7 @@ export class BoardComponent {
   }];
   contacts!: IContact[];
 
-  constructor(private taskDataService: TaskDataService, private contactService: ContactService) {
+  constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
 
   }
 
@@ -36,5 +37,9 @@ export class BoardComponent {
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
     });
+  }
+
+  openEditDialog(id:string) {
+    this.overlayService.openEditTaskOverlay(id);
   }
 }

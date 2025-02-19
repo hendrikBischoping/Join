@@ -29,6 +29,10 @@ export class OverlayService {
     this.overlayComponentRef.changeDetectorRef.detectChanges();
   }
 
+  openEditTaskOverlay(id: string): void {
+
+  }
+
   openAddContactOverlay(): void {
     const container = document.createElement('div');
     container.classList.add('custom-overlay-container');
