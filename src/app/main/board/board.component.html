@@ -1,1 +1,25 @@
-<p>board works!</p>
+<main>
+    @for (task of tasks; track $index) {
+    
+        <h1>{{task.title}}</h1>
+        <p>{{task.description}}</p>
+
+        <div class="contact-icons">
+            @for (taskContact of task.contacts; track $index) {
+                @for (contact of contacts; track $index) {
+                    @if (taskContact == contact.id) {
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                    }
+                }
+            }
+        </div>
+
+        @for (subtask of task.subtasks; track $index) {
+            <p>{{subtask}}</p>
+        }
+    }
+
+</main>
+

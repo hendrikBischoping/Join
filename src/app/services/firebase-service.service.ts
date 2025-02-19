@@ -13,6 +13,7 @@ export class FirebaseService {
 
   unsubscribeContacts: () => void;
   unsubscribeUsers: () => void;
+  unsubscribeTasks: () => void;
   UserList: IUser[] = [];
 
   private contactSubject = new BehaviorSubject<IContact[]>([]);
@@ -24,6 +25,7 @@ export class FirebaseService {
   constructor() {
     this.unsubscribeContacts = this.subContactList();
     this.unsubscribeUsers = this.subUserList();
+    this.unsubscribeTasks = this. subTaskList();
   }
 
   subUserList() {
@@ -39,6 +41,7 @@ export class FirebaseService {
       const updatedContacts: IContact[] = [];
       snapshot.forEach((doc) => {
         updatedContacts.push(this.setContactData(doc.data(), doc.id));
+
       });
       this.contactSubject.next(updatedContacts);
     });
@@ -48,7 +51,9 @@ export class FirebaseService {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
       const updatedTasks: ITask[] = [];
       snapshot.forEach((doc) => {
-        updatedTasks.push(this.setContactData(doc.data(), doc.id));
+        console.log(doc.data());
+        
+        updatedTasks.push(this.setTaskData(doc.data() as ITask, doc.id));
       });
       this.taskSubject.next(updatedTasks);
     });
@@ -58,7 +63,7 @@ export class FirebaseService {
     const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
     const nameInitials = this.getInitials(capitalizedName);
     const initialsBgSelektor = this.getBgSelector(capitalizedName);
-  
+
     return {
       name: capitalizedName,
       eMail: obj.eMail || "",
@@ -80,7 +85,21 @@ export class FirebaseService {
       id: id || "",
     };
   }
-  
+
+  setTaskData(obj: ITask, id: string): ITask {
+    return {
+      title: obj.title || "Unknown title",
+      description: obj.description || "",
+      contacts: obj.contacts || [],
+      date: obj.date || 0,
+      priority: obj.priority || "mid",
+      category: obj.category || "",
+      subtasks: obj.subtasks || [],
+      status: obj.status || "todo",
+      id: id || "",
+    };
+  }
+
   capitalizeName(name: string): string {
     return name
       .toLowerCase()
@@ -91,8 +110,8 @@ export class FirebaseService {
 
   getInitials(name: string) {
     if (!name) return "";
-    const words = name.trim().split(/\s+/); 
-    const initials = words.map(word => word[0].toUpperCase()).join(""); 
+    const words = name.trim().split(/\s+/);
+    const initials = words.map(word => word[0].toUpperCase()).join("");
     return initials;
   }
 
@@ -104,7 +123,7 @@ export class FirebaseService {
     } else {
       const bgSelector = name[2].toLocaleLowerCase();
       return bgSelector;
-    }    
+    }
   }
 
   getColRef(colId: string) {
@@ -134,7 +153,7 @@ export class FirebaseService {
     }
   }
 
-  async updateDoc(colId:string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
+  async updateDoc(colId: string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
     try {
       await updateDoc(this.getSingleDocRef(colId, docId), updatedData);
       console.log(`Document ${docId} successfully updated.`);
@@ -143,17 +162,17 @@ export class FirebaseService {
     }
   }
 
-  async deleteDocument(colId: string, docId:string) {
+  async deleteDocument(colId: string, docId: string) {
     await deleteDoc(this.getSingleDocRef(colId, docId)).catch(
       (err) => (console.log(err))
     );
   }
 
   ngOnDestroy() {
-    if(this.unsubscribeContacts) {
+    if (this.unsubscribeContacts) {
       this.unsubscribeContacts();
     }
-    if(this.unsubscribeUsers) {
+    if (this.unsubscribeUsers) {
       this.unsubscribeUsers();
     }
   }
