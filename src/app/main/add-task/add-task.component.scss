@@ -1,0 +1,56 @@
+@import '../../styles/mixins.scss';
+@import '../../../styles.scss';
+
+.add-task {
+    padding: 6rem 6rem 3rem 4rem;
+    font-family: 'inter';
+    .left-side {
+        margin-right: 2rem;
+        align-self: start;
+    }
+    .separation-line {
+        border: solid 1px rgb(212, 212, 212);
+        height: 25rem;
+    }
+    .right-side {
+        margin-left: 2rem;
+        align-self: start;
+    }
+    >h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0 0 4rem 0;
+    }
+    p {
+        font-size: 1.2rem;
+        margin: 2rem 0 0.5rem 0;
+    }
+    input, select, textarea {
+        border: solid 1px rgb(212, 212, 212);
+        border-radius: 0.5rem;
+        padding: 0 1rem;
+        min-width: 25rem;
+        height: 2rem;
+    }
+    select {
+        min-width: 27rem;
+        max-width: 25rem;
+    }
+    textarea {
+        min-height: 6rem;
+        padding: 0.25rem 1rem;
+        max-width: 25rem;
+    }
+    button {
+        min-width: calc(10rem / 3);
+    }
+    .required {
+        font-size: 1rem;
+    }
+    .red-star {
+        color: red;
+    }
+    .task-inputs {
+        @include standard-flex(space-between, center)
+    }
+}

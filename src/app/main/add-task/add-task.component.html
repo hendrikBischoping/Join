@@ -8,11 +8,11 @@
             </div>
             <div>
                 <p>Description</p>
-                <textarea name="task-description" id="task-description"></textarea>
+                <textarea name="task-description" id="task-description" placeholder="Enter a Description"></textarea>
             </div>
             <div>
                 <p>Assigned to</p>
-                <select name="contacts-to-assign" id="contacts-to-assign">
+                <select name="contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
                     @for (item of placeholderListContacts; track $index) {
                         <option value="{{ item.name }}">{{ item.name }}</option>
                     }
@@ -32,13 +32,13 @@
             </div>
             <div class="choose-priority">
                 <p>Prio</p>
-                <button>Urgent <img src="" alt="urgent"></button>
-                <button>Medium <img src="" alt="medium"></button>
-                <button>Low <img src="" alt="low"></button>
+                <button>Urgent <img src="../../../assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
+                <button>Medium <img src="../../../assets/img/add-task/medium-inactive.png" alt="medium"></button>
+                <button>Low <img src="../../../assets/img/add-task/low-inactive.png" alt="low"></button>
             </div>
             <div class="category">
                 <p>Category<span class="red-star">*</span></p>
-                <select name="task-category" id="task-category">
+                <select name="task-category" id="task-category" placeholder="Select task category">
                     @for (item of placeholderListCategories; track $index) {
                         <li>{{ item.category }}</li>
                     }
@@ -46,20 +46,21 @@
             </div>
             <div class="subtasks">
                 <div class="subtask-input">
-                    <input type="text">
+                    <p>Subtask</p>
+                    <input type="text" placeholder="add new subtask">
                     <div class="clear-or-accept">
-                        <img src="" alt="">
-                        <img src="" alt="">
+                        <img src="../../../assets/img/add-task/clear.png" alt="clear">
+                        <img src="../../../assets/img/add-task/done.png" alt="done">
                     </div>
                     <ul class="subtask-list"></ul>
-                    <p class="required-info-mobile"><span class="red-star">*</span>This field is required</p>
+                    <p class="required required-info-mobile"><span class="red-star">*</span>This field is required</p>
                 </div>
             </div>
         </div>
-        <p></p>
-        <div class="clear-or-create-buttons">
-            <button>Clear <span class="">×</span></button>
-            <button>Create Task <img src="" alt="check"></button>
-        </div>
+    </div>
+    <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+    <div class="clear-or-create-buttons">
+        <button>Clear <span class="">×</span></button>
+        <button>Create Task <img src="../../../assets/img/add-task/done.png" alt="check"></button>
     </div>
 </section>
