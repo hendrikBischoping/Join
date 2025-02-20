@@ -6,7 +6,7 @@ export interface ISubtask {
 export interface ITask {
     title: string,
     description?: string,
-    contacts?: string[],
+    contacts: string[],
     date: number,
     priority: string,
     category: string,

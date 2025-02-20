@@ -4,7 +4,7 @@ main {
     position: relative;
     width: 38rem;
     height: 90%;
-    overflow: auto;
+    // overflow: auto;
     @include standard-flex(start, start);
     flex-direction: column;
     gap: 1rem;
@@ -64,6 +64,7 @@ main {
         >div {
             @include standard-flex(start);
             margin: 0.5rem;
+
             >div {
                 margin-right: 1rem;
                 font-size: 1rem;
@@ -82,12 +83,14 @@ main {
         gap: 1rem;
         align-self: end;
         margin-right: 2rem;
+
         .interaction-button {
             @include standard-flex();
+
             &:hover {
                 cursor: pointer;
                 color: rgb(0, 124, 238);
-              }
+            }
         }
 
         .line {
@@ -97,10 +100,60 @@ main {
     }
 
     .edit-content {
+        width: 100%;
+        max-height: 75vh;
+        @include standard-flex();
+        flex-direction: column;
+        overflow: auto;
+
+        >div {
+            width: calc(80%);
+            margin-right: 2rem;
+        }
+
+        p {
+            margin: 1rem 0;
+
+            font-size: 1.5rem
+        }
+
+        input, textarea {
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            font-family: 'Inter';
+            font-size: 1.5rem;
+            outline: none;
+            cursor: pointer;
+
+            &:focus {
+                border: 1px solid blue;
+            }
+        }
+
+        .choose-priority {
+            >div {
+                @include standard-flex(space-between);
+                width: 100%;
+
+                >button {
+                    width: 30%;
+                    height: 2rem;
+                    border: 0px transparent rgba($color: #000000, $alpha: 0.1);
+                    border-radius: 6px;
+                    outline: unset;
+                    margin-left: 1rem;
+                    @include standard-flex();
+                    gap: 1rem;
+                    cursor: pointer;
+                }
+            }
+        }
 
         .assignment-container {
             .assigned-list {
                 @include standard-flex();
+
                 .initials-circle {
                     margin-right: 1rem;
                     width: 3rem;
@@ -108,7 +161,7 @@ main {
                     font-size: 1.5rem;
                 }
             }
-            
+
         }
     }
 
@@ -125,3 +178,63 @@ main {
     margin-left: 2rem;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+
+    
+
+    >label {
+        display: block;
+        padding: 5px;
+        cursor: pointer;
+        @include standard-flex(space-between);
+
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+        }
+
+        .initials-circle {
+            width: 2rem;
+            height: 2rem;
+            font-size: 1rem;
+        }
+    }
+
+}
+
+
+.no-results {
+    color: gray;
+    font-size: 14px;
+    text-align: center;
+}
+
+.assigned-list {
+    display: flex;
+    margin-top: 10px;
+}
+
+.full-width {
+    width: 100%;
+}

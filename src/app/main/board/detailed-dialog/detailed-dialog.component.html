@@ -20,16 +20,16 @@
         Assigned to:
 
         @for (assignedContact of task.contacts; track $index) {
-        @for (contact of contacts; track $index) {
-        @if (assignedContact == contact.id) {
-        <div class="ml-2">
-            <div class="initials-circle bg-{{contact.styleSelector}}">
-                {{contact.initials}}
-            </div>
-            <span>{{contact.name}}</span>
-        </div>
-        }
-        }
+            @for (contact of contacts; track $index) {
+                @if (assignedContact == contact.id) {
+                <div class="ml-2">
+                    <div class="initials-circle bg-{{contact.styleSelector}}">
+                        {{contact.initials}}
+                    </div>
+                    <span>{{contact.name}}</span>
+                </div>
+                }
+            }
         }
 
     </ul>
@@ -61,28 +61,52 @@
     <section class="edit-content">
         <div>
             <p>Title</p>
-            <input [(ngModel)]="task.title" type="text" id="title" name="title" placeholder="title" required>
+            <input class="full-width" [(ngModel)]="task.title" type="text" id="title" name="title" placeholder="title" required>
             <!-- <input [(ngModel)]="task.title" (ngModelChange)="cdRef.detectChanges()" type="text" id="name" name="name" placeholder="name" required> -->
         </div>
         <div>
             <p>Description</p>
-            <textarea [(ngModel)]="task.description" name="task-description" id="task-description"
+            <textarea class="full-width" [(ngModel)]="task.description" name="task-description" id="task-description"
                 placeholder="Enter a Description"></textarea>
         </div>
         <div class="due-date">
             <p>Due date</p>
-            <input type="date" name="date" id="date">
+            <input class="full-width" type="date" name="date" id="date">
         </div>
         <div class="choose-priority">
             <p>Priority</p>
-            <button>Urgent <img src="./assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
-            <button>Medium <img src="./assets/img/add-task/medium-inactive.png" alt="medium"></button>
-            <button>Low <img src="./assets/img/add-task/low-inactive.png" alt="low"></button>
+            <div class="full-width">
+                <button>Urgent <img src="./assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
+                <button>Medium <img src="./assets/img/add-task/medium-inactive.png" alt="medium"></button>
+                <button>Low <img src="./assets/img/add-task/low-inactive.png" alt="low"></button>
+            </div>
         </div>
 
         <div class="assignment-container">
             <p>Assigned to</p>
+            <div class="dropdown">
+                <input type="text" (input)="filterContacts($event)" (focus)="openDropdown()" (blur)="closeDropdown()"
+                    placeholder="Search contacts..." [(ngModel)]="searchTerm" class="dropdown-input full-width">
+                @if (dropdownOpen) {
 
+                <div class="dropdown-content">
+                    @for (contact of filteredContacts; track $index) {
+                        <label>
+                            <div class="initials-circle bg-{{contact.styleSelector}}">
+                                {{contact.initials}}
+                            </div>
+                            {{ contact.name }}
+                            <input type="checkbox" [checked]="task.contacts.includes(contact.id!)"
+                                (change)="toggleContactAssignment(contact.id!)">
+                            
+                        </label>
+                        @if (filteredContacts.length == 0) {
+                            <p class="no-result">No contacts found</p>
+                        }
+                    }
+                </div>
+                }
+            </div>
             <div class="assigned-list">
                 @for (taskContact of task.contacts; track $index) {
                     @for (contact of contacts; track $index) {
@@ -96,29 +120,10 @@
                     }
                 }
             </div>
-
-
-            <!-- <div class="selection-container">
-
-                        @if (taskContact != contact.id) {
-                        <div class="initials-circle">{{contact.initials}}</div>
-                        }
-                    </div> -->
-
-            <!-- <select name="contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
-                    @for (item of contacts; track $index) {
-                        <option value="{{ item.name }}">{{ item.name }}</option>
-                    }
-                </select>
-                <ul>
-                    @for (item of contacts; track $index) {
-
-                        <li>{{ item.initials }}</li>
-                    }
-                </ul> -->
         </div>
     </section>
-    <button class="button-dark-bg">OK<img src="./assets/img/icons/checkIcon.png" alt=""></button>
+    <button class="button-dark-bg" (click)="editTask(true)">OK<img src="./assets/img/icons/checkIcon.png"
+            alt=""></button>
 
     }
 </main>
