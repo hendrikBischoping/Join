@@ -4,11 +4,12 @@ import { IContact } from '../../../interfaces/icontact';
 import { TaskDataService } from '../../../services/task-data.service';
 import { ContactService } from '../../../services/contact-service.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-detailed-dialog',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './detailed-dialog.component.html',
   styleUrl: './detailed-dialog.component.scss'
 })
@@ -34,10 +35,10 @@ export class DetailedDialogComponent {
     contacts!: IContact[];
 
     isUserStory = false;
-    editView = false;
+    editView = true;
     prioImagePath = "";
   
-    constructor(private taskDataService: TaskDataService, private contactService: ContactService, public dcRef: ChangeDetectorRef) {
+    constructor(private taskDataService: TaskDataService, private contactService: ContactService, public cdRef: ChangeDetectorRef) {
   
     }
   
@@ -53,7 +54,7 @@ export class DetailedDialogComponent {
         });
       });
       this.initTask();
-      this.dcRef.detectChanges();
+      this.cdRef.detectChanges();
       console.log(this.task);
       
     }
@@ -84,7 +85,7 @@ export class DetailedDialogComponent {
 
     toggleEditMode() {
       this.editView = !this.editView;
-      this.dcRef.detectChanges();
+      this.cdRef.detectChanges();
     }
 
 }

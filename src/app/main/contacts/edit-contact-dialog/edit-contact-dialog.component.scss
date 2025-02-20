@@ -2,19 +2,14 @@
 
 
 main {
-    // width: 100%;
 
     @include standard-flex();
 
     @media (max-width: 1300px) {
-        // aspect-ratio: 1.5;
-        // width: 90%;
         min-height: 50vh;
     }
 
     @media (max-width: 800px) {
-        // width: 100%;
-        // height: calc(100vh - 16vh);
         aspect-ratio: unset;
         flex-direction: column;
         position: relative;

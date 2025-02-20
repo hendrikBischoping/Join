@@ -1,66 +1,124 @@
 <main>
     @if (!editView) {
 
-        <div class="top">
-            <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
-            <div class="close-container" (click)="close()">
-                <img src="./assets/img/icons/CloseIcon.png">
+    <div class="top">
+        <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
+        <div class="close-container" (click)="close()">
+            <img src="./assets/img/icons/CloseIcon.png">
+        </div>
+    </div>
+
+    <h1 class="ml-2">{{task.title}}</h1>
+    <p class="ml-2">{{task.description}}</p>
+    <p class="ml-2">Due date: {{task.date}}</p>
+    <div class="prio-container ml-2">
+        <span>Priority: </span>
+        <span>{{task.priority}}</span>
+        <img src="{{prioImagePath}}" alt="{{task.priority}} icon">
+    </div>
+    <ul>
+        Assigned to:
+
+        @for (assignedContact of task.contacts; track $index) {
+        @for (contact of contacts; track $index) {
+        @if (assignedContact == contact.id) {
+        <div class="ml-2">
+            <div class="initials-circle bg-{{contact.styleSelector}}">
+                {{contact.initials}}
             </div>
+            <span>{{contact.name}}</span>
         </div>
-    
-        <h1 class="ml-2">{{task.title}}</h1>
-        <p class="ml-2">{{task.description}}</p>
-        <p class="ml-2">Due date: {{task.date}}</p>
-        <div class="prio-container ml-2">
-            <span>Priority: </span>
-            <span>{{task.priority}}</span>
-            <img src="{{prioImagePath}}" alt="{{task.priority}} icon">
+        }
+        }
+        }
+
+    </ul>
+
+    <ul>
+        Subtask:
+
+        @for (subtask of task.subtasks; track $index) {
+        <div>
+
+            <input type="checkbox" [checked]="subtask.subtaskDone">
+            {{subtask.subtaskName}}
         </div>
-        <ul>
-            Assigned to:
-    
-            @for (assignedContact of task.contacts; track $index) {
-                @for (contact of contacts; track $index) {
-                    @if (assignedContact == contact.id) {
-                        <div class="ml-2">
-                            <div class="initials-circle bg-{{contact.styleSelector}}">
-                                {{contact.initials}}
-                            </div>
-                            <span>{{contact.name}}</span>
+        }
+    </ul>
+
+    <div class="interaction-container">
+        <div class="interaction-button" (click)="deleteTask()"> <img src="./assets/img/trash.png" alt="">Delete</div>
+        <div class="line"></div>
+        <div class="interaction-button" (click)="toggleEditMode()"><img src="./assets/img/editIcon.png" alt="">Edit
+        </div>
+    </div>
+    } @else {
+    <div class="top">
+        <div class="close-container" (click)="close()">
+            <img src="./assets/img/icons/CloseIcon.png">
+        </div>
+    </div>
+    <section class="edit-content">
+        <div>
+            <p>Title</p>
+            <input [(ngModel)]="task.title" type="text" id="title" name="title" placeholder="title" required>
+            <!-- <input [(ngModel)]="task.title" (ngModelChange)="cdRef.detectChanges()" type="text" id="name" name="name" placeholder="name" required> -->
+        </div>
+        <div>
+            <p>Description</p>
+            <textarea [(ngModel)]="task.description" name="task-description" id="task-description"
+                placeholder="Enter a Description"></textarea>
+        </div>
+        <div class="due-date">
+            <p>Due date</p>
+            <input type="date" name="date" id="date">
+        </div>
+        <div class="choose-priority">
+            <p>Priority</p>
+            <button>Urgent <img src="./assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
+            <button>Medium <img src="./assets/img/add-task/medium-inactive.png" alt="medium"></button>
+            <button>Low <img src="./assets/img/add-task/low-inactive.png" alt="low"></button>
+        </div>
+
+        <div class="assignment-container">
+            <p>Assigned to</p>
+
+            <div class="assigned-list">
+                @for (taskContact of task.contacts; track $index) {
+                    @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
                         </div>
+
+                        }
                     }
                 }
-            }
-    
-        </ul>
-    
-        <ul>
-            Subtask:
-    
-            @for (subtask of task.subtasks; track $index) {
-                <div>
-
-                    <input type="checkbox" [checked]="subtask.subtaskDone">
-                    {{subtask.subtaskName}}
-                </div>
-            }
-        </ul>
-    
-        <div class="interaction-container">
-            <div class="interaction-button" (click)="deleteTask()"> <img src="./assets/img/trash.png" alt="">Delete</div>
-            <div class="line"></div>
-            <div class="interaction-button" (click)="toggleEditMode()"><img src="./assets/img/editIcon.png" alt="">Edit</div>
-        </div>
-    } @else {
-        <div class="top">
-            <div class="close-container" (click)="close()">
-                <img src="./assets/img/icons/CloseIcon.png">
             </div>
-        </div>
-        <section class="edit-content">
 
-        </section>
-        <button class="button-dark-bg">OK<img src="./assets/img/icons/checkIcon.png" alt=""></button>
-        
+
+            <!-- <div class="selection-container">
+
+                        @if (taskContact != contact.id) {
+                        <div class="initials-circle">{{contact.initials}}</div>
+                        }
+                    </div> -->
+
+            <!-- <select name="contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
+                    @for (item of contacts; track $index) {
+                        <option value="{{ item.name }}">{{ item.name }}</option>
+                    }
+                </select>
+                <ul>
+                    @for (item of contacts; track $index) {
+
+                        <li>{{ item.initials }}</li>
+                    }
+                </ul> -->
+        </div>
+    </section>
+    <button class="button-dark-bg">OK<img src="./assets/img/icons/checkIcon.png" alt=""></button>
+
     }
 </main>

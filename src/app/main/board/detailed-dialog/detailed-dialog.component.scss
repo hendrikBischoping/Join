@@ -98,6 +98,18 @@ main {
 
     .edit-content {
 
+        .assignment-container {
+            .assigned-list {
+                @include standard-flex();
+                .initials-circle {
+                    margin-right: 1rem;
+                    width: 3rem;
+                    height: 3rem;
+                    font-size: 1.5rem;
+                }
+            }
+            
+        }
     }
 
     .button-dark-bg {
@@ -112,3 +124,4 @@ main {
 .ml-2 {
     margin-left: 2rem;
 }
+

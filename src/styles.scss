@@ -90,8 +90,7 @@ $customBlue: #29abe2;
 
 
 @mixin standardButton() {
-  width: 4em;
-  aspect-ratio: 2;
+  padding: 0.5rem 1rem;
   border: 1px solid $standardColor;
   border-radius: 12px;
   font-size: 1.75rem
