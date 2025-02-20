@@ -1,48 +1,66 @@
 <main>
-    <div class="top">
-        <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
-        <div class="close-container" (click)="close()">
-            <img src="./assets/img/icons/CloseIcon.png">
+    @if (!editView) {
+
+        <div class="top">
+            <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
+            <div class="close-container" (click)="close()">
+                <img src="./assets/img/icons/CloseIcon.png">
+            </div>
         </div>
-    </div>
-
-    <h1 class="ml-2">{{task.title}}</h1>
-    <p class="ml-2">{{task.description}}</p>
-    <p class="ml-2">Due date: {{task.date}}</p>
-    <div class="prio-container ml-2">
-        <span>Priority: </span>
-        <span>{{task.priority}}</span>
-        <img src="{{prioImagePath}}" alt="{{task.priority}} icon">
-    </div>
-    <ul>
-        Assigned to:
-
-        @for (assignedContact of task.contacts; track $index) {
-            @for (contact of contacts; track $index) {
-                @if (assignedContact == contact.id) {
-                    <div class="ml-2">
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
+    
+        <h1 class="ml-2">{{task.title}}</h1>
+        <p class="ml-2">{{task.description}}</p>
+        <p class="ml-2">Due date: {{task.date}}</p>
+        <div class="prio-container ml-2">
+            <span>Priority: </span>
+            <span>{{task.priority}}</span>
+            <img src="{{prioImagePath}}" alt="{{task.priority}} icon">
+        </div>
+        <ul>
+            Assigned to:
+    
+            @for (assignedContact of task.contacts; track $index) {
+                @for (contact of contacts; track $index) {
+                    @if (assignedContact == contact.id) {
+                        <div class="ml-2">
+                            <div class="initials-circle bg-{{contact.styleSelector}}">
+                                {{contact.initials}}
+                            </div>
+                            <span>{{contact.name}}</span>
                         </div>
-                        <span>{{contact.name}}</span>
-                    </div>
+                    }
                 }
             }
-        }
+    
+        </ul>
+    
+        <ul>
+            Subtask:
+    
+            @for (subtask of task.subtasks; track $index) {
+                <div>
 
-    </ul>
+                    <input type="checkbox" [checked]="subtask.subtaskDone">
+                    {{subtask.subtaskName}}
+                </div>
+            }
+        </ul>
+    
+        <div class="interaction-container">
+            <div class="interaction-button" (click)="deleteTask()"> <img src="./assets/img/trash.png" alt="">Delete</div>
+            <div class="line"></div>
+            <div class="interaction-button" (click)="toggleEditMode()"><img src="./assets/img/editIcon.png" alt="">Edit</div>
+        </div>
+    } @else {
+        <div class="top">
+            <div class="close-container" (click)="close()">
+                <img src="./assets/img/icons/CloseIcon.png">
+            </div>
+        </div>
+        <section class="edit-content">
 
-    <ul>
-        Subtask:
-
-        @for (item of task.subtasks; track $index) {
-            {{item}}
-        }
-    </ul>
-
-    <div class="edit-container">
-        <div (click)="editTask()"><img src="./assets/img/editIcon.png" alt="">Edit</div>
-        <div (click)="deleteTask()"> <img src="./assets/img/trash.png" alt="">Delete</div>
-    </div>
-
+        </section>
+        <button class="button-dark-bg">OK<img src="./assets/img/icons/checkIcon.png" alt=""></button>
+        
+    }
 </main>

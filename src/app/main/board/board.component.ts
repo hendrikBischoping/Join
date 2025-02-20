@@ -20,7 +20,7 @@ export class BoardComponent {
     date: 0,
     priority: "mid",
     category: "Userstory",
-    subtasks: ["Do Nothing", "turn around"],
+    subtasks: [],
     status: "todo",
     id: ""
   }];

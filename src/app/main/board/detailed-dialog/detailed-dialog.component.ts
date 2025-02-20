@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ITask } from '../../../interfaces/itask';
 import { IContact } from '../../../interfaces/icontact';
 import { TaskDataService } from '../../../services/task-data.service';
@@ -23,16 +23,21 @@ export class DetailedDialogComponent {
       date: 0,
       priority: "mid",
       category: "Userstory",
-      subtasks: ["Do Nothing", "turn around"],
+      subtasks: [{
+        subtaskName: "",
+        subtaskDone: false,
+      }
+    ],
       status: "todo",
       id: ""
     };
     contacts!: IContact[];
 
     isUserStory = false;
+    editView = false;
     prioImagePath = "";
   
-    constructor(private taskDataService: TaskDataService, private contactService: ContactService) {
+    constructor(private taskDataService: TaskDataService, private contactService: ContactService, public dcRef: ChangeDetectorRef) {
   
     }
   
@@ -48,6 +53,9 @@ export class DetailedDialogComponent {
         });
       });
       this.initTask();
+      this.dcRef.detectChanges();
+      console.log(this.task);
+      
     }
 
     initTask() {
@@ -72,6 +80,11 @@ export class DetailedDialogComponent {
 
     deleteTask() {
       
+    }
+
+    toggleEditMode() {
+      this.editView = !this.editView;
+      this.dcRef.detectChanges();
     }
 
 }

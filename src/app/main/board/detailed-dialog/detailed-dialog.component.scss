@@ -1,24 +1,36 @@
 @use '../../../styles/mixins.scss' as *;
 
 main {
-    width: 30%;
+    position: relative;
+    width: 38rem;
     height: 90%;
     overflow: auto;
     @include standard-flex(start, start);
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+
+    h1 {
+        margin-top: 5rem;
+        line-height: 5rem;
+        font-size: 5rem;
+        font-weight: 700;
+    }
 
     .top {
+        position: relative;
         @include standard-flex();
         width: 100%;
         margin-top: 2rem;
         gap: 60%;
 
         .story-container {
+            position: absolute;
+            top: 0;
+            left: 1rem;
             @include standard-flex();
             color: white;
             background-color: #1fd7c1;
-            width: 8rem;
+            width: 9rem;
             height: 2.5rem;
             font-size: 1.5rem;
             border-radius: 0.5rem;
@@ -29,6 +41,9 @@ main {
         }
 
         .close-container {
+            position: absolute;
+            top: 0;
+            right: 2rem;
             cursor: pointer;
             width: 2rem;
             height: 2rem;
@@ -59,18 +74,38 @@ main {
     }
 
 
-    .edit-container {
+    .interaction-container {
+        position: absolute;
+        bottom: 2rem;
+        right: 1rem;
         @include standard-flex();
         gap: 1rem;
         align-self: end;
         margin-right: 2rem;
-        >div {
+        .interaction-button {
             @include standard-flex();
             &:hover {
                 cursor: pointer;
                 color: rgb(0, 124, 238);
               }
         }
+
+        .line {
+            height: 2rem;
+            border: solid 1px rgba($color: #000000, $alpha: 0.2);
+        }
+    }
+
+    .edit-content {
+
+    }
+
+    .button-dark-bg {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        @include standard-flex();
+        gap: 0.5rem;
     }
 }
 

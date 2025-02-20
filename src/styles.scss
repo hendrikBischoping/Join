@@ -22,8 +22,12 @@
 
 .mat-body,
 .mat-body-2,
+.mat-headline-5,
+.mat-h1,
+.mat-typography .mat-h1,
 .mat-typography .mat-body,
 .mat-typography .mat-body-2,
+.mat-typography .mat-headline-5
 .mat-typography {
   font: 400 14px/20px "Inter", sans-serif !important;
   letter-spacing: unset;
@@ -323,9 +327,5 @@ $customBlue: #29abe2;
   .bg-default {
     background-color: #b17d1d;
   }
-
-  /** Task category background */
-
-  
 
  
