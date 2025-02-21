@@ -14,7 +14,8 @@
             </div>
             <div>
                 <p>Assigned to</p>
-                <select [(ngModel)]="task.contacts" name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
+                <!-- <select [(ngModel)]="task.contacts" name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign"> -->
+                <select name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
                     @for (item of placeholderListContacts; track $index) {
                         <option value="{{ item.name }}">{{ item.name }}</option>
                     }

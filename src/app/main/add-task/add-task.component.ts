@@ -43,7 +43,7 @@ export class AddTaskComponent {
   {
     title: 'Testtitel',
     description: 'Test 2',
-    contacts: ['8W3sjYScAi0V0h38A6Hj', '8e1QzZ3rKZod5ovZ2Tpi'],
+    contacts: [""],
     date: '10.10.2020',
     priority: 'Medium',
     category: 'User Story',
@@ -89,17 +89,19 @@ export class AddTaskComponent {
   //   id: this.task.id,
   // }
   
-  this.task.contacts =  ['8W3sjYScAi0V0h38A6Hj', '8e1QzZ3rKZod5ovZ2Tpi'],
+  this.task.contacts!.push('8W3sjYScAi0V0h38A6Hj');
+  this.task.contacts!.push('8e1QzZ3rKZod5ovZ2Tpi');
   this.task.subtasks = [
     {subtaskName: 'Board fertigstellen', subtaskDone: false},
     {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
   ];
   
   await this.taskDataService.addTask(this.task).then(() => {
+    console.log("abruf", this.task);
+    
     this.taskAdded = false;
     form.resetForm();
   })
-  console.log(this.task);
   
 }
 }
