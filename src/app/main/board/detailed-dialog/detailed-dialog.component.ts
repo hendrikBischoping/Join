@@ -82,7 +82,7 @@ export class DetailedDialogComponent {
     if (this.task.category == "User Story") {
       this.isUserStory = true;
     }
-    this.prioImagePath = this.getPrioImagePath();
+    this.prioImagePath = this.getPrioImagePath(this.task.priority, true);
   }
 
   filterContacts(event: any) {
@@ -93,13 +93,21 @@ export class DetailedDialogComponent {
     this.cdRef.detectChanges();
   }
 
-  getPrioImagePath(): string {
-    switch (this.task.priority) {
-      case "low": return "./assets/img/icons/TaskLowIcon.png";
-      case "mid": return "./assets/img/icons/TaskMediumIcon.png";
-      case "high": return "./assets/img/icons/TaskHighIcon.png";
-    }
-    return "";
+  getPrioImagePath(prio: string, forceInactive = false): string {
+    if (forceInactive) {
+      return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+    } else
+    return this.previewTask.priority === prio
+      ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
+      : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+  }
+
+  changePriority(prio: string) {
+    this.previewTask.priority = prio;
+  }
+
+  isPriorityActive(prio: string): boolean {
+    return this.previewTask.priority === prio;
   }
 
   editTask(inEditMode = false) {

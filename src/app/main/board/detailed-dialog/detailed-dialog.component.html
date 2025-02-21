@@ -14,7 +14,7 @@
     <div class="prio-container ml-2">
         <span>Priority: </span>
         <span>{{task.priority}}</span>
-        <img src="{{prioImagePath}}" alt="{{task.priority}} icon">
+        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
     </div>
     <ul>
         Assigned to:
@@ -74,10 +74,27 @@
         </div>
         <div class="choose-priority">
             <p>Priority</p>
-            <div class="full-width">
-                <button>Urgent <img src="./assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
-                <button>Medium <img src="./assets/img/add-task/medium-inactive.png" alt="medium"></button>
-                <button>Low <img src="./assets/img/add-task/low-inactive.png" alt="low"></button>
+            <div class="prio-buttons full-width">
+                <button 
+            (click)="changePriority('Urgent')" 
+            [class.active]="isPriorityActive('Urgent')">
+            Urgent
+            <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
+        </button>
+
+        <button 
+            (click)="changePriority('Medium')" 
+            [class.active]="isPriorityActive('Medium')">
+            Medium
+            <img [src]="getPrioImagePath('Medium')" alt="Medium">
+        </button>
+
+        <button 
+            (click)="changePriority('Low')" 
+            [class.active]="isPriorityActive('Low')">
+            Low
+            <img [src]="getPrioImagePath('Low')" alt="Low">
+        </button>
             </div>
         </div>
 

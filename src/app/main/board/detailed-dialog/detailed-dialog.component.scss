@@ -130,25 +130,6 @@ main {
             }
         }
 
-        .choose-priority {
-            >div {
-                @include standard-flex(space-between);
-                width: 100%;
-
-                >button {
-                    width: 30%;
-                    height: 2rem;
-                    border: 0px transparent rgba($color: #000000, $alpha: 0.1);
-                    border-radius: 6px;
-                    outline: unset;
-                    margin-left: 1rem;
-                    @include standard-flex();
-                    gap: 1rem;
-                    cursor: pointer;
-                }
-            }
-        }
-
         .assignment-container {
             .assigned-list {
                 @include standard-flex();
@@ -222,6 +203,44 @@ main {
 
 }
 
+.prio-buttons {
+    @include standard-flex(space-between);
+    width: 100%;
+    
+
+    >button {
+        width: 30%;
+        height: 2.5rem;
+        // border: 1px transparent rgba($color: #000000, $alpha: 0.1);
+        border-radius: 6px;
+        outline: unset;
+        margin-left: 1rem;
+        font-size: 1.5rem;
+        @include standard-flex();
+        gap: 1rem;
+
+        &:hover{
+            cursor: pointer;
+            filter: drop-shadow(2px 4px 4px rgba($color: #000000, $alpha: 0.4))
+        }
+
+        &.active {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            &:nth-child(1) {
+                background-color: #FF3D00;
+            }
+            &:nth-child(2) {
+                background-color: #FFA800;
+            }
+            &:nth-child(3) {
+                background-color: #7AE229;
+            }
+        }
+        
+    }
+
+
+}
 
 .no-results {
     color: gray;
