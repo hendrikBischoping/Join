@@ -18,7 +18,7 @@ export class BoardComponent {
     title: "Unknown",
     description: "No task found",
     contacts: ["Andi","Hendrik"],
-    date: 0,
+    date: '0',
     priority: "mid",
     category: "Userstory",
     subtasks: [],

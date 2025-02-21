@@ -24,6 +24,8 @@ export class TaskDataService {
   
     // Tasks hinzufügen
     async addTask(task: ITask) {
+      console.log(task);
+      
       await this.firebaseService.addToDB(this.collectionName, task);
     }
   

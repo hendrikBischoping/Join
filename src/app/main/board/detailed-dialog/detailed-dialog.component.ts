@@ -23,14 +23,15 @@ export class DetailedDialogComponent {
   task: ITask = {
     title: "Unknown",
     description: "No task found",
-    contacts: [],
-    date: 0,
+    contacts: ["Andi", "Hendrik"],
+    date: '0',
     priority: "mid",
     category: "Userstory",
     subtasks: [{
       subtaskName: "",
       subtaskDone: false,
-    }],
+    }
+    ],
     status: "todo",
     id: ""
   };
@@ -38,14 +39,14 @@ export class DetailedDialogComponent {
     title: "",
     description: "",
     contacts: [],
-    date: 0,
+    date: '0',
     priority: "mid",
     category: "",
     subtasks: [],
     status: "",
     id: ""
   };
-  contacts: IContact[] = [];
+  contacts!: IContact[];
 
   isUserStory = false;
   editView = false;
@@ -96,9 +97,9 @@ export class DetailedDialogComponent {
     if (forceInactive) {
       return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
     } else
-    return this.previewTask.priority === prio
-      ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
-      : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+      return this.previewTask.priority === prio
+        ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
+        : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
   }
 
   changePriority(prio: string) {
@@ -120,7 +121,7 @@ export class DetailedDialogComponent {
 
   editTask(inEditMode = false) {
     console.log(this.task);
-    
+
     if (inEditMode) {
       Object.assign(this.task, this.previewTask);
       this.toggleEditMode();
@@ -130,7 +131,7 @@ export class DetailedDialogComponent {
   }
 
   deleteTask() {
-
+    this.taskDataService.deleteTask(this.currentTaskId);
   }
 
   toggleEditMode() {
@@ -148,7 +149,7 @@ export class DetailedDialogComponent {
   openDropdown(event: Event) {
     event.stopPropagation();
     this.dropdownOpen = true;
-    this.cdRef.detectChanges(); 
+    this.cdRef.detectChanges();
   }
 
   closeDropdown() {
@@ -164,9 +165,35 @@ export class DetailedDialogComponent {
   toggleContactAssignment(contactId: string) {
     const index = this.previewTask.contacts!.indexOf(contactId);
     if (index === -1) {
-      this.previewTask.contacts!.push(contactId); 
+      this.previewTask.contacts!.push(contactId);
     } else {
       this.previewTask.contacts!.splice(index, 1);
     }
+  }
+
+
+  addTask() {
+    let dummyTask: ITask = {
+      title: "hi",
+      description: "hiii",
+      contacts: ['8W3sjYScAi0V0h38A6Hj', 'F1MwDsY7KkELB99H4WP2'],
+      date: '000000',
+      priority: "mid",
+      category: "User Story",
+      subtasks: [
+        {
+          subtaskName: "mach sachen",
+          subtaskDone: false
+        },
+        {
+          subtaskName: "turn arount",
+          subtaskDone: true
+        },
+
+      ],
+      status: "todo",
+      id: ""
+    };
+    this.taskDataService.addTask(dummyTask)
   }
 }

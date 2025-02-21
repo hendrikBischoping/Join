@@ -89,7 +89,7 @@ export class FirebaseService {
       title: obj.title || "Unknown title",
       description: obj.description || "",
       contacts: obj.contacts || [],
-      date: obj.date || 0,
+      date: obj.date || '0',
       priority: obj.priority || "mid",
       category: obj.category || "",
       subtasks: obj.subtasks || [],
