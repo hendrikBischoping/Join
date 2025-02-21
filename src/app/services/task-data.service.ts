@@ -18,22 +18,22 @@ export class TaskDataService {
     
   
     // Einzelnen Tasks abrufen
-    getTaskById(contactId: string) {
-      return this.firebaseService.getSingleDoc(this.collectionName, contactId);
+    getTaskById(taskId: string) {
+      return this.firebaseService.getSingleDoc(this.collectionName, taskId);
     }
   
     // Tasks hinzufügen
-    async addTask(contact: ITask) {
-      await this.firebaseService.addToDB(this.collectionName, contact);
+    async addTask(task: ITask) {
+      await this.firebaseService.addToDB(this.collectionName, task);
     }
   
     // Tasks aktualisieren
-    async updateTask(contactId: string, updatedData: Partial<ITask>) {
-      return await this.firebaseService.updateDoc(this.collectionName, contactId, updatedData);
+    async updateTask(taskId: string, updatedData: Partial<ITask>) {
+      return await this.firebaseService.updateDoc(this.collectionName, taskId, updatedData);
     }
   
     // Tasks löschen
-    async deleteTask(contactId: string) {
-      return await this.firebaseService.deleteDocument(this.collectionName, contactId);
+    async deleteTask(taskId: string) {
+      return await this.firebaseService.deleteDocument(this.collectionName, taskId);
     }
 }

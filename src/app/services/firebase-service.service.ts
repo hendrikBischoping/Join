@@ -51,8 +51,6 @@ export class FirebaseService {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
       const updatedTasks: ITask[] = [];
       snapshot.forEach((doc) => {
-        console.log(doc.data());
-        
         updatedTasks.push(this.setTaskData(doc.data() as ITask, doc.id));
       });
       this.taskSubject.next(updatedTasks);

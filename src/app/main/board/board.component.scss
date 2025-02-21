@@ -2,19 +2,21 @@
 @use "../../../styles.scss" as *;
 
 header {
-  @include standard-flex(space-between, center);
+  @include standard-flex(space-around, center);
   width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
   h1 {
     font-weight: bold;
   }
   .menu {
     @include standard-flex(space-between, center);
-    .inputContainer {
+    .input-container {
       position: relative;
       display: flex;
       align-items: center;
       width: 100%;
-      gap:2.5rem;
+
       input {
         width: 90%;
         padding: 1rem;
@@ -25,11 +27,18 @@ header {
         font-size: 1.5rem;
         outline: none;
       }
-      img {
-        position: absolute;
-        top: 50%;
-        right: 10%;
-        cursor: pointer;
+      .border {
+        width: 4rem;
+        height: 3rem;
+        @include standard-flex(space-between, center);
+        border-left: 3px solid #29abe2;
+            //  position: absolute;
+        img {        
+          top: 50%;
+          right: 10%;
+          cursor: pointer;
+        }
+
       }
     }
     button {
@@ -37,13 +46,43 @@ header {
       background-color: $standardColor;
       color: white;
       width: 12.5rem;
-      gap:4px;
+      gap: 4px;
 
       &:hover {
         cursor: pointer;
         background-color: $customBlue;
         filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2));
       }
+    }
+  }
+}
+.collection {
+  @include standard-flex(space-around, center);
+  width: 100%;
+  height: auto;
+  gap: 2rem;
+  .head-collection {
+    @include standard-flex(space-between, center);
+    padding-bottom: 2rem;
+    h2 {
+      font-weight: bold;
+    }
+    img{
+      cursor:pointer;
+    }
+  }
+  .info-task{
+    @include standard-flex(center, center);
+    flex-direction: column;
+    background-color: white;
+    border-radius: 3rem;
+    .contact-icons{
+      @include standard-flex(center, center);
+      .initials-circle{
+        width: 3rem;
+        height: 3rem;
+      }
+
     }
   }
 }
