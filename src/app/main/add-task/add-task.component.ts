@@ -41,17 +41,17 @@ export class AddTaskComponent {
 
   task: ITask =
   {
-    title: '',
-    description: '',
+    title: 'Testtitel',
+    description: 'Test 2',
     contacts: ['8W3sjYScAi0V0h38A6Hj', '8e1QzZ3rKZod5ovZ2Tpi'],
-    date: '',
+    date: '10.10.2020',
     priority: 'Medium',
-    category: '',
+    category: 'User Story',
     subtasks: [
       {subtaskName: 'Board fertigstellen', subtaskDone: false},
       {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
     ],
-    status: '',
+    status: 'todo',
     id: '',
   }
 
@@ -77,24 +77,29 @@ export class AddTaskComponent {
      }
     this.taskAdded = true;
     
-  const newTask: ITask = {
-    title: this.task.title,
-    description: this.task.description,
-    contacts: this.task.contacts,
-    date: this.task.date,
-    priority: 'Medium',
-    category: this.task.category,
-    subtasks: this.task.subtasks,
-    status: 'To do',
-    id: this.task.id,
-  }
+  // const newTask: ITask = {
+  //   title: this.task.title,
+  //   description: this.task.description,
+  //   contacts: this.task.contacts,
+  //   date: this.task.date,
+  //   priority: 'Medium',
+  //   category: this.task.category,
+  //   subtasks: this.task.subtasks,
+  //   status: 'To do',
+  //   id: this.task.id,
+  // }
   
-  await this.taskDataService.addTask(newTask).then(() => {
-    setTimeout(() => {
-      this.taskAdded = false;
-      form.resetForm();
-    }, 2000);
+  this.task.contacts =  ['8W3sjYScAi0V0h38A6Hj', '8e1QzZ3rKZod5ovZ2Tpi'],
+  this.task.subtasks = [
+    {subtaskName: 'Board fertigstellen', subtaskDone: false},
+    {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
+  ];
+  
+  await this.taskDataService.addTask(this.task).then(() => {
+    this.taskAdded = false;
+    form.resetForm();
   })
-
-  }
+  console.log(this.task);
+  
+}
 }
