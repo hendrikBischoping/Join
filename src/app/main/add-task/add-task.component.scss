@@ -51,6 +51,6 @@
         color: red;
     }
     .task-inputs {
-        @include standard-flex(space-between, center)
+        @include standard-flex(space-around, center)
     }
 }

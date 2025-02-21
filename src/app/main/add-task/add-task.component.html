@@ -1,18 +1,20 @@
 <section class="add-task">
     <h1>Add Task</h1>
+    <form (ngSubmit)="submitTask(addTaskForm)" #addTaskForm="ngForm">
+        
     <div class="task-inputs">
         <div class="left-side">
             <div>
                 <p class="title">Title<span class="red-star">*</span></p>
-                <input type="text" class="single-input" placeholder="Enter a title">
+                <input [(ngModel)]="task.title" name="task-title" type="text" class="single-input" placeholder="Enter a title" required>
             </div>
             <div>
                 <p>Description</p>
-                <textarea name="task-description" id="task-description" placeholder="Enter a Description"></textarea>
+                <textarea [(ngModel)]="task.description" name="task-description" id="task-description" placeholder="Enter a Description"></textarea>
             </div>
             <div>
                 <p>Assigned to</p>
-                <select name="contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
+                <select [(ngModel)]="task.contacts" name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
                     @for (item of placeholderListContacts; track $index) {
                         <option value="{{ item.name }}">{{ item.name }}</option>
                     }
@@ -28,19 +30,20 @@
         <div class="right-side">
             <div class="due-date">
                 <p>Due date<span class="red-star">*</span></p>
-                <input type="date" name="date" id="date">
+                <input type="date"  [(ngModel)]="task.date" name="date" id="date" required>
+                
             </div>
             <div class="choose-priority">
                 <p>Prio</p>
-                <button>Urgent <img src="../../../assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
-                <button>Medium <img src="../../../assets/img/add-task/medium-inactive.png" alt="medium"></button>
-                <button>Low <img src="../../../assets/img/add-task/low-inactive.png" alt="low"></button>
+                <button type="button" (click)="setPriority('prioUrgent')">Urgent <img src="../../../assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
+                <button type="button" (click)="setPriority('prioMedium')">Medium <img src="../../../assets/img/add-task/medium-inactive.png" alt="medium"></button>
+                <button type="button" (click)="setPriority('prioLow')">Low <img src="../../../assets/img/add-task/low-inactive.png" alt="low"></button>
             </div>
             <div class="category">
                 <p>Category<span class="red-star">*</span></p>
-                <select name="task-category" id="task-category" placeholder="Select task category">
-                    @for (item of placeholderListCategories; track $index) {
-                        <li>{{ item.category }}</li>
+                <select [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category" required>
+                    @for (item of taskCategories; track $index) {
+                        <option>{{ item.category }}</option>
                     }
                 </select>
             </div>
@@ -60,7 +63,8 @@
     </div>
     <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
     <div class="clear-or-create-buttons">
-        <button>Clear <span class="">×</span></button>
-        <button>Create Task <img src="../../../assets/img/add-task/done.png" alt="check"></button>
+        <button type="button">Clear <span class="">×</span></button>
+        <button type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/done.png" alt="check"></button>
     </div>
+    </form>
 </section>
