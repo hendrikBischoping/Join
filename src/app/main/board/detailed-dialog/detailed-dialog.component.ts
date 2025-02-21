@@ -48,7 +48,7 @@ export class DetailedDialogComponent {
   contacts: IContact[] = [];
 
   isUserStory = false;
-  editView = true;
+  editView = false;
   prioImagePath = "";
   dropdownOpen = false;
   searchTerm: string = "";
@@ -82,7 +82,6 @@ export class DetailedDialogComponent {
     if (this.task.category == "User Story") {
       this.isUserStory = true;
     }
-    this.prioImagePath = this.getPrioImagePath(this.task.priority, true);
   }
 
   filterContacts(event: any) {
@@ -110,7 +109,18 @@ export class DetailedDialogComponent {
     return this.previewTask.priority === prio;
   }
 
+  changeSubtaskStatus(name: string) {
+    this.task.subtasks!.forEach(element => {
+      if (element.subtaskName == name) {
+        element.subtaskDone = !element.subtaskDone;
+      }
+    });
+    this.editTask();
+  }
+
   editTask(inEditMode = false) {
+    console.log(this.task);
+    
     if (inEditMode) {
       Object.assign(this.task, this.previewTask);
       this.toggleEditMode();

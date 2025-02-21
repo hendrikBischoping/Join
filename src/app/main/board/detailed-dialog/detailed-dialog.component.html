@@ -13,8 +13,11 @@
     <p class="ml-2">Due date: {{task.date}}</p>
     <div class="prio-container ml-2">
         <span>Priority: </span>
-        <span>{{task.priority}}</span>
-        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+        <div>
+            <span>{{task.priority}}</span>
+            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+        </div>
+            
     </div>
     <ul>
         Assigned to:
@@ -40,7 +43,7 @@
         @for (subtask of task.subtasks; track $index) {
         <div>
 
-            <input type="checkbox" [checked]="subtask.subtaskDone">
+            <input type="checkbox" (click)="editTask()" [checked]="subtask.subtaskDone">
             {{subtask.subtaskName}}
         </div>
         }
@@ -135,6 +138,15 @@
                 }
             </div>
         </div>
+        <ul>
+            Subtask:
+            <p>
+                <input type="text">
+            </p>
+            @for (subtask of task.subtasks; track $index) {
+                <li>{{subtask.subtaskName}}</li>
+            }
+        </ul>
     </section>
     <button class="button-dark-bg" (click)="editTask(true)">OK<img src="./assets/img/icons/checkIcon.png"
             alt=""></button>
