@@ -61,12 +61,11 @@
     <section class="edit-content">
         <div>
             <p>Title</p>
-            <input class="full-width" [(ngModel)]="task.title" type="text" id="title" name="title" placeholder="title" required>
-            <!-- <input [(ngModel)]="task.title" (ngModelChange)="cdRef.detectChanges()" type="text" id="name" name="name" placeholder="name" required> -->
+            <input class="full-width" [(ngModel)]="previewTask.title" type="text" id="title" name="title" placeholder="title" required>
         </div>
         <div>
             <p>Description</p>
-            <textarea class="full-width" [(ngModel)]="task.description" name="task-description" id="task-description"
+            <textarea class="full-width" [(ngModel)]="previewTask.description" name="task-description" id="task-description"
                 placeholder="Enter a Description"></textarea>
         </div>
         <div class="due-date">
@@ -85,8 +84,7 @@
         <div class="assignment-container">
             <p>Assigned to</p>
             <div class="dropdown">
-                <input type="text" (input)="filterContacts($event)" (focus)="openDropdown()" (blur)="closeDropdown()"
-                    placeholder="Search contacts..." [(ngModel)]="searchTerm" class="dropdown-input full-width">
+                <input type="text" (input)="filterContacts($event)" (click)="openDropdown($event)" placeholder="Search contacts..." [(ngModel)]="searchTerm" class="dropdown-input">
                 @if (dropdownOpen) {
 
                 <div class="dropdown-content">
@@ -96,8 +94,7 @@
                                 {{contact.initials}}
                             </div>
                             {{ contact.name }}
-                            <input type="checkbox" [checked]="task.contacts.includes(contact.id!)"
-                                (change)="toggleContactAssignment(contact.id!)">
+                            <input type="checkbox" [checked]="previewTask.contacts.includes(contact.id!)" (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
                             
                         </label>
                         @if (filteredContacts.length == 0) {
@@ -108,7 +105,7 @@
                 }
             </div>
             <div class="assigned-list">
-                @for (taskContact of task.contacts; track $index) {
+                @for (taskContact of previewTask.contacts; track $index) {
                     @for (contact of contacts; track $index) {
                         @if (taskContact == contact.id) {
 

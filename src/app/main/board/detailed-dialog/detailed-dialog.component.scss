@@ -3,7 +3,6 @@
 main {
     position: relative;
     width: 38rem;
-    height: 90%;
     // overflow: auto;
     @include standard-flex(start, start);
     flex-direction: column;
@@ -101,8 +100,8 @@ main {
 
     .edit-content {
         width: 100%;
-        max-height: 75vh;
-        @include standard-flex();
+        height: 80vh;
+        @include standard-flex(start);
         flex-direction: column;
         overflow: auto;
 
