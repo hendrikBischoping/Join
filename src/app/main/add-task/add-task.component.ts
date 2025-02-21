@@ -43,11 +43,14 @@ export class AddTaskComponent {
   {
     title: '',
     description: '',
-    contacts: [],
+    contacts: ['8W3sjYScAi0V0h38A6Hj', '8e1QzZ3rKZod5ovZ2Tpi'],
     date: '',
-    priority: '',
+    priority: 'Medium',
     category: '',
-    subtasks: [],
+    subtasks: [
+      {subtaskName: 'Board fertigstellen', subtaskDone: false},
+      {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
+    ],
     status: '',
     id: '',
   }
@@ -59,15 +62,12 @@ export class AddTaskComponent {
     this.prioUrgent = false;
     this.prioMedium = false;
     this.prioLow = false;
-    this[priority] = true;  
-    console.log(this.task.category);    
+    this[priority] = true; 
     return this[priority] = true;
   }
 
   getDate() {
-    let dateData: string = this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : ''; 
-    //this.saveDateTestArray.push(newDate)
-    // console.log(dateData);      
+    let dateData: string = this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : '';      
     return dateData;
   }
 
@@ -80,16 +80,15 @@ export class AddTaskComponent {
   const newTask: ITask = {
     title: this.task.title,
     description: this.task.description,
-    // contacts: form.value.contacts,
     contacts: this.task.contacts,
     date: this.task.date,
-    priority: 'medium',
+    priority: 'Medium',
     category: this.task.category,
     subtasks: this.task.subtasks,
-    status: 'open',
+    status: 'To do',
     id: this.task.id,
   }
-  console.log(newTask);
+  
   await this.taskDataService.addTask(newTask).then(() => {
     setTimeout(() => {
       this.taskAdded = false;
