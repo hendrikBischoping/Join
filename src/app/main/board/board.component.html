@@ -3,162 +3,82 @@
         <h1>Board</h1>
         <div class="menu">
             <div class="input-container">
-                <input type="Find Task"  >
+                <input type="Find Task">
                 <div class="border">
-                <img src="../../../assets/img/Board/search.png" alt="">
+                    <img src="../../../assets/img/Board/search.png" alt="">
                 </div>
             </div>
-            @for (task of tasks; track $index) {
-            <button (click)="openEditDialog(task.id)">Add task +</button>
-            }
+            <!-- <button (click)="openEditDialog(task.id)">Add task +</button> -->
         </div>
     </header>
-    <div >
-        @for (task of tasks; track $index) {
-        <div  class="collection">
-            <div>
-                <div class="head-collection">
-                    <h2>To do</h2>
-                    <div (click)="openEditDialog(task.id)">
-                        <img src="../../../assets/img/Board/addTask.png" alt=""> 
-                    </div>                     
-                </div>
-                    <div class="info-task">
-                    <!-- <h3>{{task.title}}</h3> -->                  
-                    <h2>{{task.title}}</h2>
-                    <p>{{task.description}}</p>
+    <div class="collection">
+        <div class="to-Do-collection">
+            <h2>To do</h2>
+            @for (task of tasks; track $index) {
+            @if (task.status == "todo") {
 
-                    <div class="contact-icons">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                    </div>
+            <!-- <div (click)="openEditDialog(task.id)">
+                <img src="../../../assets/img/Board/addTask.png" alt="">
+            </div> -->
 
-                    @for (subtask of task.subtasks; track $index) {
-                    <p>{{subtask}}</p>
-                    }
-                </div>
-            </div>
-            <div>
-                <div class="head-collection">
-                    <h2>In progress</h2> 
-                    <div (click)="openEditDialog(task.id)">
-                        <img src="../../../assets/img/Board/addTask.png" alt=""> 
-                    </div>    
-                </div>
-                <div>                    
-                    <!-- <h3>{{task.title}}</h3> -->
-                  
-                    <h2>{{task.title}}</h2>
-                    <p>{{task.description}}</p>
-                    <div class="contact-icons">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                    </div>
-                    @for (subtask of task.subtasks; track $index) {
-                    <p>{{subtask}}</p>
-                    }
-                </div>
-            </div>
-            <div>
+            <div>hier kommt diene Task hin
                 <div>
-                    <div class="head-collection">
-                        <h2>Await feedback</h2> 
-                        <div (click)="openEditDialog(task.id)">
-                            <img src="../../../assets/img/Board/addTask.png" alt=""> 
-                        </div>    
- 
-                    </div>
-             
-
-                    <!-- <h3>{{task.title}}</h3> -->
-           
-
-                    <h2>{{task.title}}</h2>
-                    <p>{{task.description}}</p>
-
-                    <div class="contact-icons">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                    </div>
-
-                    @for (subtask of task.subtasks; track $index) {
-                    <p>{{subtask}}</p>
-                    }
+                    {{task.category}}
                 </div>
-            </div>
-            <div>
                 <div>
-                    <div class="head-collection">
-                        <h2>Done </h2>                       
-                    </div>
-                    <!-- <h3>{{task.title}}</h3> -->
-                    <h2>{{task.title}}</h2>
-                    <p>{{task.description}}</p>
-
-                    <div class="contact-icons">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                    </div>
-
+                    {{task.title}}
+                    {{task.description}}
+                </div>
+                <div>
                     @for (subtask of task.subtasks; track $index) {
-                    <p>{{subtask}}</p>
+                    {{subtask.subtaskDone}}
+                    {{subtask.subtaskName}}
+                    <!-- {{task.date}} -->
+                    <!-- {{task.subtasks}} -->
+                    <!-- {{task.id}} -->
                     }
                 </div>
+                <div>
+                    {{task.contacts}}
+                    {{task.priority}}
+                </div>
             </div>
-        </div>
-        }
-    </div>
 
-    <!-- @for (task of tasks; track $index) {
-    <div (click)="openEditDialog(task.id)">
-
-        <h2>{{task.title}}</h2>
-        <p>{{task.description}}</p>
-
-        <div class="contact-icons">
-            @for (taskContact of task.contacts; track $index) {
-            @for (contact of contacts; track $index) {
-            @if (taskContact == contact.id) {
-            <div class="initials-circle bg-{{contact.styleSelector}}">
-                {{contact.initials}}
-            </div>
             }
-            }
+
+
+            <!-- <div (click)="openEditDialog(task.id)">
+    <img src="../../../assets/img/Board/addTask.png" alt="">
+</div>
+            <div class="info-task">
+                <!-- <h3>{{task.title}}</h3> -->
+            <!-- <h2>{{task.title}}</h2>
+                <p>{{task.description}}</p>
+                
+                <div class="contact-icons">
+                    @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                            @if (taskContact == contact.id) {
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}
+                    </div>
+                    }
+                    }
+                    }
+                </div>
+                @for (subtask of task.subtasks; track $index) {
+                    <p>{{subtask}}</p>
+                    }
+                </div> --> -->
             }
         </div>
+        <div class="in-proggress-collection">
 
-        @for (subtask of task.subtasks; track $index) {
-        <p>{{subtask}}</p>
-        }
+            <h2>In Progress</h2>
+            @for (task of tasks; track $index) {
+            <div>hier kommt diene Task hin</div>
+            }
+        </div>
     </div>
-    } -->
 
 </main>

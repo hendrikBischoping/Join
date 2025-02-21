@@ -61,7 +61,7 @@ header {
   width: 100%;
   height: auto;
   gap: 2rem;
-  .head-collection {
+  .to-Do-collection {
     @include standard-flex(space-between, center);
     padding-bottom: 2rem;
     h2 {
@@ -70,19 +70,18 @@ header {
     img{
       cursor:pointer;
     }
-  }
   .info-task{
-    @include standard-flex(center, center);
-    flex-direction: column;
-    background-color: white;
-    border-radius: 3rem;
-    .contact-icons{
       @include standard-flex(center, center);
-      .initials-circle{
-        width: 3rem;
-        height: 3rem;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 3rem;
+      .contact-icons{
+        @include standard-flex(center, center);
+        .initials-circle{
+          width: 3rem;
+          height: 3rem;
+        }
       }
-
     }
   }
 }
