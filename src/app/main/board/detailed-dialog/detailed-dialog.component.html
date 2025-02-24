@@ -1,53 +1,53 @@
 <main>
     @if (!editView) {
 
-    <div class="top">
+    <div class="close-container" (click)="close()">
+        <img src="./assets/img/icons/CloseIcon.png">
+    </div>
+    
+    <section class="main-content">
         <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
-        <div class="close-container" (click)="close()">
-            <img src="./assets/img/icons/CloseIcon.png">
-        </div>
-    </div>
-
-    <h1 class="ml-2">{{task.title}}</h1>
-    <p class="ml-2">{{task.description}}</p>
-    <p class="ml-2">Due date: {{task.date}}</p>
-    <div class="prio-container ml-2">
-        <span>Priority: </span>
-        <div>
-            <span>{{task.priority}}</span>
-            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
-        </div>
-
-    </div>
-    <ul>
-        Assigned to:
-
-        @for (assignedContact of task.contacts; track $index) {
-        @for (contact of contacts; track $index) {
-        @if (assignedContact == contact.id) {
-        <div class="ml-2">
-            <div class="initials-circle bg-{{contact.styleSelector}}">
-                {{contact.initials}}
+        <h1 class="ml-2">{{task.title}}</h1>
+        <p class="ml-2">{{task.description}}</p>
+        <p class="ml-2">Due date: {{task.date}}</p>
+        <div class="prio-container ml-2">
+            <span>Priority: </span>
+            <div>
+                <span>{{task.priority}}</span>
+                <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
             </div>
-            <span>{{contact.name}}</span>
+
         </div>
-        }
-        }
-        }
+        <ul>
+            Assigned to:
 
-    </ul>
+            @for (assignedContact of task.contacts; track $index) {
+            @for (contact of contacts; track $index) {
+            @if (assignedContact == contact.id) {
+            <div class="ml-2">
+                <div class="initials-circle bg-{{contact.styleSelector}}">
+                    {{contact.initials}}
+                </div>
+                <span>{{contact.name}}</span>
+            </div>
+            }
+            }
+            }
 
-    <ul>
-        Subtask:
+        </ul>
 
-        @for (subtask of task.subtasks; track $index) {
-        <div>
+        <ul>
+            Subtask:
 
-            <input type="checkbox" (click)="editTask()" [checked]="subtask.subtaskDone">
-            {{subtask.subtaskName}}
-        </div>
-        }
-    </ul>
+            @for (subtask of task.subtasks; track $index) {
+            <div>
+
+                <input type="checkbox" (click)="editTask()" [checked]="subtask.subtaskDone">
+                {{subtask.subtaskName}}
+            </div>
+            }
+        </ul>
+    </section>
 
     <div class="interaction-container">
         <div class="interaction-button" (click)="deleteTask()"> <img src="./assets/img/trash.png" alt="">Delete</div>
@@ -135,21 +135,55 @@
                 }
             </div>
         </div>
-        <ul>
-            Subtask:
-            <p>
-                <input type="text">
-            </p>
-            @for (subtask of task.subtasks; track $index) {
-            <li>{{subtask.subtaskName}}</li>
+        <div class="subtask-container">
+            <p>Subtasks</p>
+            <div class="input-container">
+                <input class="full-width" type="text" placeholder="Add new subtask" [(ngModel)]="subtaskTerm"
+                    (ngModelChange)="this.cdRef.detectChanges();">
+                <img (click)="addSubtask()" class="icon" src="../../../../assets/img/icons/AddIcon.png"
+                    alt="Add Subtask Icon">
+
+            </div>
+        </div>
+        <ul class="subtask-list-container">
+            @for (subtask of previewTask.subtasks; track $index) {
+            <div>
+                @if (editingSubtasks.get(subtask.subtaskName)) {
+                <div class="subtask-edit-input-container">
+                    <input [(ngModel)]="subtask.subtaskName" class="subtask-edit-input">
+                    <div class="subtask-icon-container">
+                        <img (click)="saveSubtaskEdit(subtask.subtaskName, subtask.subtaskName)"
+                            src="./assets/img/icons/checkIconBlack.png" alt="Save">
+                        <div class="line"></div>
+                        <img (click)="cancelSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/CloseIcon.png"
+                            alt="Cancel">
+                    </div>
+                </div>
+                <!-- {{subtask.subtaskName}} -->
+                } @else {
+                <!-- Standard-Anzeige -->
+                <span>{{subtask.subtaskName}}</span>
+
+                <div class="subtask-icon-container">
+                    <!-- Edit-Icon -->
+                    <img (click)="startEditingSubtask(subtask.subtaskName)" src="./assets/img/editIcon.png" alt="Edit">
+
+                    <div class="line"></div>
+
+                    <!-- Löschen-Icon -->
+                    <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png" alt="Delete">
+                </div>
+                }
+                <!-- <div>
+                        <img src="../../../../assets/img/editIcon.png" alt="">
+                        <div class="line"></div>
+                        <img (click)="deleteSubTask(subtask.subtaskName)" src="../../../../assets/img/trash.png" alt="">
+                    </div> -->
+            </div>
             }
         </ul>
     </section>
     <button class="button-dark-bg" (click)="editTask(true)">OK<img src="./assets/img/icons/checkIcon.png"
             alt=""></button>
-
-    <button class="button-dark-bg" (click)="addTask()">Add<img src="./assets/img/icons/checkIcon.png"
-            alt=""></button>
-
     }
 </main>
