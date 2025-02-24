@@ -1,8 +1,11 @@
 import { isDataSource } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ITask } from '../../interfaces/itask'; 
 import { TaskDataService } from '../../services/task-data.service';
+import { IContact } from '../../interfaces/icontact';
+
+import { ContactService } from '../../services/contact-service.service';
 
 @Component({
   selector: 'app-add-task',
@@ -53,10 +56,27 @@ export class AddTaskComponent {
     ],
     status: 'todo',
     id: '',
-  }
+  };
+  contacts!: IContact[];
+  contactsFromList: IContact[] = [];  
+  sortedContacts: IContact[] = [];  
 
   taskAdded = false;
-  constructor(private taskDataService: TaskDataService,) {};
+  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
+
+  ngOnInit() {
+    this.contactService.getContacts().subscribe((contactList) => {
+      this.contactsFromList = contactList;
+      this.sortedContacts = this.sortContacts();
+      console.log(this.sortedContacts)
+      this.cdRef.detectChanges();
+    });
+  }
+
+  sortContacts() {
+    const sortedContacts = this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
+    return sortedContacts;
+  }
 
   setPriority(priority: 'prioUrgent' | 'prioMedium' | 'prioLow') {
     this.prioUrgent = false;
@@ -97,7 +117,7 @@ export class AddTaskComponent {
   ];
   
   await this.taskDataService.addTask(this.task).then(() => {
-    console.log("abruf", this.task);
+    console.log("abruf", this.task.contacts);
     
     this.taskAdded = false;
     form.resetForm();
