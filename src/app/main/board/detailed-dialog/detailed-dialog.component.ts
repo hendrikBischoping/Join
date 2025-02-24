@@ -47,13 +47,16 @@ export class DetailedDialogComponent {
     id: ""
   };
   contacts!: IContact[];
+  filteredContacts: IContact[] = [];
+
+  editingSubtasks = new Map<string, boolean>();
 
   isUserStory = false;
-  editView = false;
+  editView = true;
   prioImagePath = "";
   dropdownOpen = false;
   searchTerm: string = "";
-  filteredContacts: IContact[] = [];
+  subtaskTerm: string = "";
 
 
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, public cdRef: ChangeDetectorRef) {
@@ -171,29 +174,35 @@ export class DetailedDialogComponent {
     }
   }
 
+  addSubtask() {
+    if (this.subtaskTerm == "") {
+      return;
+    }
 
-  addTask() {
-    let dummyTask: ITask = {
-      title: "hi",
-      description: "hiii",
-      contacts: ['8W3sjYScAi0V0h38A6Hj', 'F1MwDsY7KkELB99H4WP2'],
-      date: '000000',
-      priority: "mid",
-      category: "User Story",
-      subtasks: [
-        {
-          subtaskName: "mach sachen",
-          subtaskDone: false
-        },
-        {
-          subtaskName: "turn arount",
-          subtaskDone: true
-        },
+    this.previewTask.subtasks?.push({ subtaskName: this.subtaskTerm, subtaskDone: false });
+    this.subtaskTerm = "";
+    this.cdRef.detectChanges();
+  }
 
-      ],
-      status: "todo",
-      id: ""
-    };
-    this.taskDataService.addTask(dummyTask)
+  startEditingSubtask(subtaskName: string) {
+    this.editingSubtasks.set(subtaskName, true);
+  }
+
+  saveSubtaskEdit(oldName: string, newName: string) {
+    const subtask = this.previewTask.subtasks?.find(s => s.subtaskName === oldName);
+    if (subtask) {
+      subtask.subtaskName = newName;
+    }
+    this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
+    this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird
+  }
+
+  cancelSubtaskEdit(subtaskName: string) {
+    this.editingSubtasks.delete(subtaskName);
+  }
+
+  deleteSubTask(name: string) {
+    this.previewTask.subtasks = this.previewTask.subtasks?.filter(subtask => subtask.subtaskName != name);
+    this.cdRef.detectChanges();
   }
 }

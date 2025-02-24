@@ -32,13 +32,12 @@ header {
         height: 3rem;
         @include standard-flex(space-between, center);
         border-left: 3px solid #29abe2;
-            //  position: absolute;
-        img {        
+        //  position: absolute;
+        img {
           top: 50%;
           right: 10%;
           cursor: pointer;
         }
-
       }
     }
     button {
@@ -61,23 +60,99 @@ header {
   width: 100%;
   height: auto;
   gap: 2rem;
-  .to-Do-collection {
+ 
+  .to-do-collection {
     @include standard-flex(space-between, center);
+    flex-direction: column;
     padding-bottom: 2rem;
+    width: 25%;
+    height: auto;
+    margin-bottom: 2rem;
+    & :hover{
+      cursor: pointer;
+    }
+    h2 {
+      width: 9rem;
+  ;
+      font-weight: bold;
+    }
+    img {
+      cursor: pointer;
+    }
+    .add-task {
+      @include standard-flex(space-between, center);
+      width: 100%;
+      margin-bottom: 2rem;
+     
+    }
+    .info-task {
+      @include standard-flex(flex-start, flex-start);
+      flex-direction: column;
+      background-color: white;
+      border-radius: 0.5rem;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 2rem;
+     
+    
+
+      .category {
+        width: 8rem;
+        @include standard-flex(flex-start, flex-start);
+        background-color: blue;
+        color: white;
+        border-radius: 0.5rem;
+        text-align: start;
+        padding: 4px 1rem 4px 1rem;
+        border-bottom: 4rem;
+      }
+      .description {
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+      }
+
+      .progress {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      .contacts-for-tag {
+        @include standard-flex(space-around, center);
+        width: 100%;
+        .initials-circle {
+          @include standard-flex(space-between, center);
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+      .contact-icons {
+        @include standard-flex(center, center);
+        .initials-circle {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+    }
+  }
+  .in-proggress-collection {
+    @include standard-flex(space-between, center);
+    flex-direction: column;
+    padding-bottom: 2rem;
+    width: 25%;
     h2 {
       font-weight: bold;
     }
-    img{
-      cursor:pointer;
+    img {
+      cursor: pointer;
     }
-  .info-task{
+    .info-task {
       @include standard-flex(center, center);
       flex-direction: column;
       background-color: white;
       border-radius: 3rem;
-      .contact-icons{
+      .contact-icons {
         @include standard-flex(center, center);
-        .initials-circle{
+        .initials-circle {
+          @include standard-flex(center, center);
           width: 3rem;
           height: 3rem;
         }

@@ -1,6 +1,7 @@
 export interface ISubtask {
     subtaskName: string;
     subtaskDone: boolean;
+    editing?: boolean;
   }
 
 export interface ITask {
