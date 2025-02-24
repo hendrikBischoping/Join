@@ -4,12 +4,18 @@ import { TaskDataService } from '../../services/task-data.service';
 import { ContactService } from '../../services/contact-service.service';
 import { IContact } from '../../interfaces/icontact';
 import { OverlayService } from '../../services/overlay.service';
-// import {  CdkDragDrop,CdkDrag,CdkDropList,CdkDropListGroup,moveItemInArray,transferArrayItem,} 
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [],
+  imports: [CdkDropList, CdkDrag],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -43,4 +49,23 @@ export class BoardComponent {
   openEditDialog(id:string) {
     this.overlayService.openEditTaskOverlay(id);
   }
+
+  todo = ['To do'];
+  done = [];
+  inProgress = [''];
+  awaitFeedback = [];
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
 }
+
