@@ -45,6 +45,17 @@ export class BoardComponent {
       this.tasks = taskList;
     });
   }
+  previewTask: ITask = {
+    title: "",
+    description: "",
+    contacts: [],
+    date: '0',
+    priority: "mid",
+    category: "",
+    subtasks: [],
+    status: "",
+    id: ""
+  };
 
   openEditDialog(id:string) {
     this.overlayService.openEditTaskOverlay(id);
@@ -66,6 +77,21 @@ export class BoardComponent {
         event.currentIndex,
       );
     }
+  }
+  getPrioImagePath(prio: string, forceInactive = false): string {
+    if (forceInactive) {
+      return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+    } else
+      return this.previewTask.priority === prio
+        ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
+        : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+  }
+
+  changePriority(prio: string) {
+    this.previewTask.priority = prio;
+  }
+  isPriorityActive(prio: string): boolean {
+    return this.previewTask.priority === prio;
   }
 }
 

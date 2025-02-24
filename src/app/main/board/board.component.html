@@ -8,14 +8,15 @@
                     <img src="../../../assets/img/Board/search.png" alt="">
                 </div>
             </div>
-            <!-- <button (click)="openEditDialog(task.id)">Add task +</button> -->
+            @for (task of tasks; track $index) {<button (click)="openEditDialog(task.id)">Add task +</button>}
+            
         </div>
     </header>
     <div class="collection">    
        
         <div class="to-do-collection">
-            <h2>To do</h2>
             <div class="add-task" >
+            <h2>To do</h2>
                 <img src="../../../assets/img/Board/addTask.png" alt="">
             </div>
             @for (task of tasks; track $index) {
@@ -41,16 +42,20 @@
                         @for (contact of contacts; track $index) {
                             @if (taskContact == contact.id) {
                                 <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}                            
+                                    {{contact.initials}}  
                                 </div>
                             }
                         }
                     }
+                    <div class="prioprie">
+                        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+
+                    </div>
                     
                     <!-- <div class=" .initials-circle">{{task.contact.id}}</div> -->
 
-
-                        {{task.priority}}
+<!-- 
+                        {{task.priority}} -->
                     
                 </div>
             </div>
