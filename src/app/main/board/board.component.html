@@ -8,7 +8,7 @@
                     <img src="../../../assets/img/Board/search.png" alt="">
                 </div>
             </div>
-            @for (task of tasks; track $index) {<button (click)="openEditDialog(task.id)">Add task +</button>}
+            <button (click)="openAddTaskDialog()">Add task +</button>
             
         </div>
     </header>
@@ -63,7 +63,153 @@
         }
         </div>
 
-        <div class="in-proggress-collection">
+
+        <div class="to-do-collection">
+            <div class="add-task" >
+            <h2>In progress</h2>
+                <img src="../../../assets/img/Board/addTask.png" alt="">
+            </div>
+            @for (task of tasks; track $index) {
+                @if (task.status == "todo") {
+            <div class="info-task" (click)="openEditDialog(task.id)">
+
+                <div class="category">
+                    {{task.category}}
+                </div>
+                <div class="description">
+                    <h3>{{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                </div>
+                <div class="progress">
+                    @for (subtask of task.subtasks; track $index) {
+                    {{subtask.subtaskDone}}
+                    {{subtask.subtaskName}}
+                    }
+                </div>
+                
+                <div class="contacts-for-tag">
+                    @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                            @if (taskContact == contact.id) {
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}  
+                                </div>
+                            }
+                        }
+                    }
+                    <div class="prioprie">
+                        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+
+                    </div>
+                    
+                    <!-- <div class=" .initials-circle">{{task.contact.id}}</div> -->
+
+<!-- 
+                        {{task.priority}} -->
+                    
+                </div>
+            </div>
+        }
+        }
+        </div>
+        <div class="to-do-collection">
+            <div class="add-task" >
+            <h2>Await feedback</h2>
+                <img src="../../../assets/img/Board/addTask.png" alt="">
+            </div>
+            @for (task of tasks; track $index) {
+                @if (task.status == "todo") {
+            <div class="info-task" (click)="openEditDialog(task.id)">
+
+                <div class="category">
+                    {{task.category}}
+                </div>
+                <div class="description">
+                    <h3>{{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                </div>
+                <div class="progress">
+                    @for (subtask of task.subtasks; track $index) {
+                    {{subtask.subtaskDone}}
+                    {{subtask.subtaskName}}
+                    }
+                </div>
+                
+                <div class="contacts-for-tag">
+                    @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                            @if (taskContact == contact.id) {
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}  
+                                </div>
+                            }
+                        }
+                    }
+                    <div class="prioprie">
+                        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+
+                    </div>
+                    
+                    <!-- <div class=" .initials-circle">{{task.contact.id}}</div> -->
+
+<!-- 
+                        {{task.priority}} -->
+                    
+                </div>
+            </div>
+        }
+        }
+        </div>
+        <div class="to-do-collection">
+            <div class="add-task" >
+            <h2>Done</h2>
+                <img src="../../../assets/img/Board/addTask.png" alt="">
+            </div>
+            @for (task of tasks; track $index) {
+                @if (task.status == "todo") {
+            <div class="info-task" (click)="openEditDialog(task.id)">
+
+                <div class="category">
+                    {{task.category}}
+                </div>
+                <div class="description">
+                    <h3>{{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                </div>
+                <div class="progress">
+                    @for (subtask of task.subtasks; track $index) {
+                    {{subtask.subtaskDone}}
+                    {{subtask.subtaskName}}
+                    }
+                </div>
+                
+                <div class="contacts-for-tag">
+                    @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                            @if (taskContact == contact.id) {
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}  
+                                </div>
+                            }
+                        }
+                    }
+                    <div class="prioprie">
+                        <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+
+                    </div>
+                    
+                    <!-- <div class=" .initials-circle">{{task.contact.id}}</div> -->
+
+<!-- 
+                        {{task.priority}} -->
+                    
+                </div>
+            </div>
+        }
+        }
+        </div>
+
+        <!-- <div class="in-proggress-collection">
             
             <h2>In Progress</h2>
             @for (task of tasks; track $index) {
@@ -92,7 +238,7 @@
                 </div>
             </div>
             }
-        </div>
+        </div> -->
 
  
     </div>

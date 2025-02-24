@@ -59,7 +59,7 @@ header {
   @include standard-flex(space-around, center);
   width: 100%;
   height: auto;
-  gap: 2rem;
+  gap: 3rem;
  
   .to-do-collection {
     @include standard-flex(space-between, center);
@@ -72,7 +72,7 @@ header {
       cursor: pointer;
     }
     h2 {
-      width: 9rem;
+      width: 19rem;
   ;
       font-weight: bold;
     }
@@ -116,13 +116,17 @@ header {
         padding-bottom: 3rem;
       }
       .contacts-for-tag {
-        @include standard-flex(space-around, center);
+        @include standard-flex(center);
         width: 100%;
         .initials-circle {
-          @include standard-flex(space-between, center);
           width: 3rem;
           height: 3rem;
         }
+        .prioprie{
+          display: flex;
+          justify-content: flex-end;
+        }
+
       }
       .contact-icons {
         @include standard-flex(center, center);
