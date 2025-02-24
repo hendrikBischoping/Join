@@ -93,5 +93,9 @@ export class BoardComponent {
   isPriorityActive(prio: string): boolean {
     return this.previewTask.priority === prio;
   }
+
+  openAddTaskDialog () {
+    
+  }
 }
 

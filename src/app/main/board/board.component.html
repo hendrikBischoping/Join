@@ -8,7 +8,7 @@
                     <img src="../../../assets/img/Board/search.png" alt="">
                 </div>
             </div>
-            @for (task of tasks; track $index) {<button (click)="openEditDialog(task.id)">Add task +</button>}
+            <button (click)="openAddTaskDialog()">Add task +</button>
             
         </div>
     </header>
