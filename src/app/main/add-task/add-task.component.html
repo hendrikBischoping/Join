@@ -1,123 +1,136 @@
 <section class="add-task">
     <h1>Add Task</h1>
     <form (ngSubmit)="submitTask(addTaskForm)" #addTaskForm="ngForm">
-        
-    <div class="task-inputs">
-        <div class="left-side">
-            <div>
-                <p class="title">Title<span class="red-star">*</span></p>
-                <input [(ngModel)]="task.title" name="task-title" type="text" class="single-input" placeholder="Enter a title" required>
-            </div>
-            <div>
-                <p>Description</p>
-                <textarea [(ngModel)]="task.description" name="task-description" id="task-description" placeholder="Enter a Description"></textarea>
-            </div>
-            <!-- <div>
-                <p>Assigned to</p>
-                <select name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
-                    @for (contact of sortedContacts; track $index) {
-                            <option value="{{ contact.name }}">{{ contact.name }}</option>
-                    }
-                    
-                </select>
-                <ul>
-                    @for (item of sortedContacts; track $index) {
-                        <li>{{ item.name }}</li>
-                    }
-                </ul>
-            </div> -->
-        <div class="assignment-container">
-            <p>Assigned to</p>
-            <div class="dropdown">
-                <input type="text" (input)="filterContacts($event)" (click)="openDropdown($event)"
-                    placeholder="Search contacts..." [(ngModel)]="searchTerm" class="dropdown-input">
-                @if (dropdownOpen) {
 
-                <div class="dropdown-content">
-                    @for (contact of filteredContacts; track $index) {
-                    <label>
+        <div class="task-inputs">
+            <div class="left-side">
+                <div>
+                    <p class="title">Title<span class="red-star">*</span></p>
+                    <input [(ngModel)]="task.title" name="task-title" type="text" class="single-input"
+                        placeholder="Enter a title" required>
+                </div>
+                <div>
+                    <p>Description</p>
+                    <textarea [(ngModel)]="task.description" name="task-description" id="task-description"
+                        placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="assignment-container">
+                    <p>Assigned to</p>
+                    <div class="dropdown">
+                        <input type="text" name="assigned-contacts" (input)="filterContacts($event)"
+                            (click)="openDropdown($event)" placeholder="Search contacts..." [(ngModel)]="searchTerm"
+                            class="dropdown-input">
+                        @if (dropdownOpen) {
+
+                        <div class="dropdown-content">
+                            @for (contact of filteredContacts; track $index) {
+                            <label>
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}
+                                </div>
+                                {{ contact.name }}
+                                <input type="checkbox" [checked]="task.contacts!.includes(contact.id!)"
+                                    (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
+
+                            </label>
+                            @if (filteredContacts.length == 0) {
+                            <p class="no-result">No contacts found</p>
+                            }
+                            }
+                        </div>
+                        }
+                    </div>
+                    <div class="assigned-list">
+                        @for (taskContact of task.contacts; track $index) {
+                        @for (contact of contacts; track $index) {
+                        @if (taskContact == contact.id) {
+
                         <div class="initials-circle bg-{{contact.styleSelector}}">
                             {{contact.initials}}
                         </div>
-                        {{ contact.name }}
-                        <input type="checkbox" [checked]="previewTask.contacts!.includes(contact.id!)"
-                            (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
 
-                    </label>
-                    @if (filteredContacts.length == 0) {
-                    <p class="no-result">No contacts found</p>
-                    }
-                    }
-                </div>
-                }
-            </div>
-            <div class="assigned-list">
-                @for (taskContact of previewTask.contacts; track $index) {
-                @for (contact of contacts; track $index) {
-                @if (taskContact == contact.id) {
-
-                <div class="initials-circle bg-{{contact.styleSelector}}">
-                    {{contact.initials}}
-                </div>
-
-                }
-                }
-                }
-            </div>
-        </div>
-        </div>
-        <div class="separation-line"></div>
-        <div class="right-side">
-            <div class="due-date">
-                <p>Due date<span class="red-star">*</span></p>
-                <input type="date"  [(ngModel)]="task.date" name="date" id="date" required>
-                
-            </div>
-        <div class="choose-priority">
-            <p>Priority</p>
-            <div class="prio-buttons full-width">
-                <button (click)="changePriority('Urgent')" [class.active]="isPriorityActive('Urgent')">
-                    Urgent
-                    <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
-                </button>
-
-                <button (click)="changePriority('Medium')" [class.active]="isPriorityActive('Medium')">
-                    Medium
-                    <img [src]="getPrioImagePath('Medium')" alt="Medium">
-                </button>
-
-                <button (click)="changePriority('Low')" [class.active]="isPriorityActive('Low')">
-                    Low
-                    <img [src]="getPrioImagePath('Low')" alt="Low">
-                </button>
-            </div>
-        </div>
-            <div class="category">
-                <p>Category<span class="red-star">*</span></p>
-                <select [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category" required>
-                    @for (item of taskCategories; track $index) {
-                        <option>{{ item.category }}</option>
-                    }
-                </select>
-            </div>
-            <div class="subtasks">
-                <div class="subtask-input">
-                    <p>Subtask</p>
-                    <input type="text" placeholder="add new subtask">
-                    <div class="clear-or-accept">
-                        <img src="../../../assets/img/add-task/clear.png" alt="clear">
-                        <img src="../../../assets/img/add-task/done.png" alt="done">
+                        }
+                        }
+                        }
                     </div>
-                    <ul class="subtask-list"></ul>
-                    <p class="required required-info-mobile"><span class="red-star">*</span>This field is required</p>
                 </div>
             </div>
+            <div class="separation-line"></div>
+            <div class="right-side">
+                <div class="due-date">
+                    <p>Due date<span class="red-star">*</span></p>
+                    <input type="date" [(ngModel)]="task.date" name="date" id="date" required>
+
+                </div>
+                <div class="choose-priority">
+                    <p>Priority</p>
+                    <div class="prio-buttons full-width">
+                        <button type="button" (click)="changePriority('Urgent')"
+                            [class.active]="isPriorityActive('Urgent')"
+                            [class.active-background]="isPriorityActive('Urgent')">
+                            Urgent
+                            <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
+                        </button>
+
+                        <button type="button" (click)="changePriority('Medium')"
+                            [class.active]="isPriorityActive('Medium')"
+                            [class.active-background]="isPriorityActive('Medium')">
+                            Medium
+                            <img [src]="getPrioImagePath('Medium')" alt="Medium">
+                        </button>
+
+                        <button type="button" (click)="changePriority('Low')"
+                        [class.active]="isPriorityActive('Low')"
+                        [class.active-background]="isPriorityActive('Low')">
+                            Low
+                            <img [src]="getPrioImagePath('Low')" alt="Low">
+                        </button>
+                    </div>
+                </div>
+                <div class="category">
+                    <p>Category<span class="red-star">*</span></p>
+                    <select [(ngModel)]="task.category" name="task-category" id="task-category"
+                        placeholder="Select task category" required>
+                        @for (item of taskCategories; track $index) {
+                        <option>{{ item.category }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="subtasks">
+                    <div class="subtask-input">
+                        <p>Subtask</p>
+                        <div class="input-container">
+                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text"
+                                placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
+
+                            @if (newSubtaskName.trim() === '') {
+                            <img src="../../../assets/img/add-task/add.png" alt="add">
+                            } @else {
+                            <img (click)="clearSubtask()" class="clear-btn" src="../../../assets/img/add-task/clear.png"
+                                alt="clear">
+                            <div class="vertical-line"></div>
+                            <img (click)="addSubtask()" src="../../../assets/img/add-task/done.png" alt="done">
+                            }
+                        </div>
+                        <div class="subtask-list">
+                            <ul>
+                                @for (subtask of testSubtaskList; track $index) {
+                                <li class="single-subtask">{{ subtask }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
+            </div>
         </div>
-    </div>
-    <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
-    <div class="clear-or-create-buttons">
-        <button type="button">Clear <span class="">×</span></button>
-        <button type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/done.png" alt="check"></button>
-    </div>
+        <div class="lowest-section">
+            <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+            <div class="clear-or-create-buttons">
+                <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
+                <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
+                        alt="check"></button>
+            </div>
+        </div>
     </form>
 </section>

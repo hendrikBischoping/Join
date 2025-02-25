@@ -1,6 +1,10 @@
 @import '../../styles/mixins.scss';
 @import '../../../styles.scss';
 
+.d-none {
+    display: none;
+}
+
 .add-task {
     padding: 6rem 6rem 3rem 4rem;
     font-family: 'inter';
@@ -28,8 +32,8 @@
     input, select, textarea {
         border: solid 1px rgb(212, 212, 212);
         border-radius: 0.5rem;
-        padding: 0 1rem;
-        min-width: 25rem;
+        padding: 0 0.5rem;
+        min-width: 26rem;
         height: 2rem;
     }
     select {
@@ -56,16 +60,30 @@
 
     input,
     textarea {
-        padding: 1rem;
+        padding: 0.5rem;
         border: 1px solid rgba(0, 0, 0, 0.4);
         border-radius: 12px;
         font-family: 'Inter';
-        font-size: 1.5rem;
+        font-size: 1rem;
         outline: none;
         cursor: text;
 
         &:focus {
-            border: 1px solid blue;
+            border: 1px solid rgb(93,190,231);
+        }
+    }
+
+    #task-category {
+        height: 3rem;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        font-family: 'Inter';
+        font-size: 1rem;
+        outline: none;
+        cursor: text;
+
+        &:focus {
+            border: 1px solid rgb(93,190,231);
         }
     }
 
@@ -76,10 +94,10 @@
     }
     
     .dropdown-input {
-        width: 100%;
+        width: 26rem;
         padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 0.5rem;
         cursor: text !important;
     }
     
@@ -113,4 +131,112 @@
             }
         }
     }    
+
+    .active-background {
+        background-color: rgb(255,168,0);
+    }
+
+    .choose-priority {
+        >.prio-buttons {
+            @include standard-flex(space-between, center);
+            >button {
+                width: 30%;
+                height: 3.5rem;
+                border: none;
+                border-radius: 0.5rem;
+                box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+    .input-container {
+        position: relative;
+        width: 250px;
+    }
+
+    .input-container {
+        img {
+            position: absolute;
+            right: -11rem;
+            top: 54%;
+            transform: translateY(-50%);
+            border: none;
+            color: white;
+            background-color: #00000000;
+            cursor: pointer;
+            border-radius: 5px;
+            &:hover {
+                background-color: rgb(229,229,229);
+                border-radius: 50%;
+            }
+        }
+        .vertical-line {
+            position: absolute;
+            right: -9.375rem;
+            top: 54%;
+            transform: translateY(-50%);
+            min-height: 1.2rem;
+            width: 1px;
+            margin: 0 2px;
+            background-color: rgb(212, 212, 212);
+        }
+        .clear-btn {
+            right: -9rem;
+        }
+    }
+    .subtask-list ul {
+        .single-subtask {
+            position: relative;
+            padding: 0.25rem;
+            &:hover {
+                background-color: rgb(186, 185, 185);
+                border-radius: 0.4rem;
+            }
+        }
+    }
+
+    .lowest-section {
+        @include standard-flex(space-between, center);
+        .clear-or-create-buttons {
+            gap: 1rem;
+            @include standard-flex(center, center);
+            >button {
+                @include standard-flex(center, center);
+                gap: 0.5rem;
+                width: fit-content;
+                height: 3.5rem;
+                border: solid 2px rgba(93, 190, 231, 0);;
+                border-radius: 0.5rem;
+                box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+                    color: rgb(93,190,231);
+                    border: solid 2px rgb(93,190,231);;
+                }
+                >.close-x {
+                    font-family: 'inter';
+                    font-size: 1.7rem;
+                }
+            }
+            >.create-btn {
+                color: white;
+                background-color: rgb(42,54,71);
+                transition: background-color 0.25s;
+                &:hover {
+                    color: white;
+                    background-color: rgb(93,190,231);
+                }
+            }
+        }
+    }
 }

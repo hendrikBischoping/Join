@@ -16,21 +16,6 @@ import { ContactService } from '../../services/contact-service.service';
 })
 export class AddTaskComponent {
   @Input() currentTaskId = "";
-  
-  placeholderListContacts = [
-    {
-      name: 'Andreas',
-      initials: 'AW',
-    },
-    {
-      name: 'Sascha',
-      initials: 'ST',
-    },
-    {
-      name: 'Hendrik',
-      initials: 'HB',
-    },
-  ];
 
   taskCategories: { category: string }[] = [
     { category: 'Technical Task' },
@@ -39,45 +24,33 @@ export class AddTaskComponent {
 
   saveDateTestArray: string[] = [];
 
-  prioUrgent = false;
-  prioMedium = true;
-  prioLow = false;
-
   task: ITask =
   {
-    title: 'Testtitel',
-    description: 'Test 2',
+    title: '',
+    description: '',
     contacts: [""],
     date: '10.10.2020',
     priority: 'Medium',
     category: 'User Story',
-    subtasks: [
-      {subtaskName: 'Board fertigstellen', subtaskDone: false},
-      {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
-    ],
+    subtasks: [{
+      subtaskName: '',
+      subtaskDone: false
+    },
+  ],
     status: 'todo',
     id: '',
   };
   contacts!: IContact[];
   contactsFromList: IContact[] = [];  
   sortedContacts: IContact[] = [];  
-  previewTask: ITask = {
-    title: "",
-    description: "",
-    contacts: [],
-    date: '0',
-    priority: "mid",
-    category: "",
-    subtasks: [],
-    status: "",
-    id: ""
-  };
+  newSubtaskName: string = '';
   filteredContacts: IContact[] = [];
   dropdownOpen = false;
   searchTerm: string = "";
   taskAdded = false;
   isUserStory = false;
-  constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
+  subtaskTerm: string = "";
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -85,15 +58,6 @@ export class AddTaskComponent {
       this.filteredContacts = [...this.contacts];
       this.cdRef.detectChanges();
     });
-    this.taskDataService.getTasks().subscribe((taskList) => {
-      taskList.forEach(element => {
-        if (this.currentTaskId == element.id) {
-          this.task = element;
-          this.previewTask = JSON.parse(JSON.stringify(this.task));
-        }
-      });
-    });
-    this.initTask();
 
   }
 
@@ -134,11 +98,11 @@ export class AddTaskComponent {
   }
 
   toggleContactAssignment(contactId: string) {
-    const index = this.previewTask.contacts!.indexOf(contactId);
+    const index = this.task.contacts!.indexOf(contactId);
     if (index === -1) {
-      this.previewTask.contacts!.push(contactId);
+      this.task.contacts!.push(contactId);
     } else {
-      this.previewTask.contacts!.splice(index, 1);
+      this.task.contacts!.splice(index, 1);
     }
   }
 
@@ -146,17 +110,17 @@ export class AddTaskComponent {
     if (forceInactive) {
       return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
     } else
-      return this.previewTask.priority === prio
+      return this.task.priority === prio
         ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
         : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
   }
 
   changePriority(prio: string) {
-    this.previewTask.priority = prio;
+    this.task.priority = prio;       
   }
 
   isPriorityActive(prio: string): boolean {
-    return this.previewTask.priority === prio;
+    return this.task.priority === prio;
   }
 
   getDate() {
@@ -164,17 +128,34 @@ export class AddTaskComponent {
     return dateData;
   }
 
+  testSubtaskList: string[] = [];
+
+  addSubtask() {
+    if (this.newSubtaskName == "") {
+      return;
+    }
+
+    this.testSubtaskList.push(this.newSubtaskName)
+    this.newSubtaskName = "";
+    console.log(this.testSubtaskList);
+    return
+  }
+
+  clearSubtask() {
+    this.newSubtaskName = "";
+  }
+
+  clearForm() {
+    location.reload();
+  }
+
   async submitTask(form: NgForm) {
       if (form.valid && form.submitted) {
         this.getDate();
      }
     this.taskAdded = true;
-  
-  this.task.contacts!.push('8W3sjYScAi0V0h38A6Hj');
-  this.task.contacts!.push('8e1QzZ3rKZod5ovZ2Tpi');
   this.task.subtasks = [
-    {subtaskName: 'Board fertigstellen', subtaskDone: false},
-    {subtaskName: 'Add-Task fertigstellen', subtaskDone: true}
+    {subtaskName:  this.newSubtaskName, subtaskDone: false},
   ];
   
   await this.taskDataService.addTask(this.task).then(() => {
