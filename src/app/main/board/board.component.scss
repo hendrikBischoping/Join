@@ -57,11 +57,11 @@ header {
 }
 .collection {
   @include standard-flex(space-around, center);
-  width: 100%;
+  // width: 100%;
   height: auto;
   gap: 3rem;
  
-  .to-do-collection {
+  .single-collection {
     @include standard-flex(space-between, center);
     flex-direction: column;
     padding-bottom: 2rem;
@@ -72,8 +72,6 @@ header {
       cursor: pointer;
     }
     h2 {
-      width: 19rem;
-  ;
       font-weight: bold;
     }
     img {
@@ -81,7 +79,7 @@ header {
     }
     .add-task {
       @include standard-flex(space-between, center);
-      width: 100%;
+      // width: 100%;
       margin-bottom: 2rem;
      
     }
@@ -90,7 +88,7 @@ header {
       flex-direction: column;
       background-color: white;
       border-radius: 0.5rem;
-      width: 100%;
+      // width: 100%;
       padding: 1rem;
       margin-bottom: 2rem;
      
@@ -109,6 +107,8 @@ header {
       .description {
         padding-top: 3rem;
         padding-bottom: 1rem;
+        line-height: 80%;
+        line-break: normal;
       }
 
       .progress {
@@ -117,14 +117,14 @@ header {
       }
       .contacts-for-tag {
         @include standard-flex(center);
-        width: 100%;
+        // width: 100%;
         .initials-circle {
           width: 3rem;
           height: 3rem;
         }
         .prioprie{
           display: flex;
-          justify-content: flex-end;
+          // justify-content: flex-end;
         }
 
       }
@@ -153,6 +153,9 @@ header {
       flex-direction: column;
       background-color: white;
       border-radius: 3rem;
+      overflow: auto;
+      line-height: 80%;
+        line-break: normal;
       .contact-icons {
         @include standard-flex(center, center);
         .initials-circle {
@@ -163,4 +166,11 @@ header {
       }
     }
   }
+}
+
+
+.drop-area {
+  min-height: 50vh;
+  min-width: 10%;
+  // background-color: #1fd7c1;
 }

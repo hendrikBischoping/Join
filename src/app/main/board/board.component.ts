@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ITask } from '../../interfaces/itask';
 import { TaskDataService } from '../../services/task-data.service';
 import { ContactService } from '../../services/contact-service.service';
@@ -6,16 +6,18 @@ import { IContact } from '../../interfaces/icontact';
 import { OverlayService } from '../../services/overlay.service';
 import {
   CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
   CdkDrag,
   CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { FirebaseService } from '../../services/firebase-service.service';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -36,6 +38,7 @@ export class BoardComponent {
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
 
   }
+  data = inject(FirebaseService)
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -61,12 +64,7 @@ export class BoardComponent {
     this.overlayService.openEditTaskOverlay(id);
   }
 
-  todo = ['To do'];
-  done = [];
-  inProgress = [''];
-  awaitFeedback = [];
-
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -74,10 +72,33 @@ export class BoardComponent {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
+
+      const currentTask = event.container.data[event.currentIndex];
+
+      // console.log("Task ID ", currentTask.id);
+      // console.log("Old status ", currentTask.status);
+      // console.log("New status ", event.container.id);
+
+      // Update the status of the task in the database (Parameter: taskId, newStatus)
+      this.data.updateTaskStatus(currentTask.id!, event.container.id);
+      
     }
   }
+
+  // drop(event: CdkDragDrop<string[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  //   } else {
+  //     transferArrayItem(
+  //       event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex,
+  //     );
+  //   }
+  // }
   getPrioImagePath(prio: string, forceInactive = false): string {
     if (forceInactive) {
       return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
