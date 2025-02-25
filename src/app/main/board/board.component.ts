@@ -34,6 +34,40 @@ export class BoardComponent {
     id: ""
   }];
   contacts!: IContact[];
+  
+  task: ITask = {
+    title: "Unknown",
+    description: "No task found",
+    contacts: ["Andi", "Hendrik"],
+    date: '0',
+    priority: "mid",
+    category: "Userstory",
+    subtasks: [{
+      subtaskName: "",
+      subtaskDone: false,
+    }
+    ],
+    status: "todo",
+    id: ""
+  };
+  previewTask: ITask = {
+    title: "",
+    description: "",
+    contacts: [],
+    date: '0',
+    priority: "mid",
+    category: "",
+    subtasks: [],
+    status: "",
+    id: ""
+  };
+
+  isUserStory = false;
+  initTask() {
+    if (this.task.category == "User Story") {
+      this.isUserStory = true;
+    }
+  }
 
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
 
@@ -48,17 +82,7 @@ export class BoardComponent {
       this.tasks = taskList;
     });
   }
-  previewTask: ITask = {
-    title: "",
-    description: "",
-    contacts: [],
-    date: '0',
-    priority: "mid",
-    category: "",
-    subtasks: [],
-    status: "",
-    id: ""
-  };
+ 
 
   openEditDialog(id:string) {
     this.overlayService.openEditTaskOverlay(id);
