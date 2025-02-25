@@ -22,10 +22,16 @@ export class FirebaseService {
   private taskSubject = new BehaviorSubject<ITask[]>([]);
   task$ = this.taskSubject.asObservable();
 
+  todo: ITask[] = [];
+  inProgress: ITask[] = [];
+  awaitFeedback: ITask[] = [];
+  done: ITask[] = [];
+
   constructor() {
     this.unsubscribeContacts = this.subContactList();
     this.unsubscribeUsers = this.subUserList();
-    this.unsubscribeTasks = this. subTaskList();
+    this.unsubscribeTasks = this.subTaskList();
+
   }
 
   subUserList() {
@@ -49,12 +55,38 @@ export class FirebaseService {
 
   subTaskList() {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
       const updatedTasks: ITask[] = [];
       snapshot.forEach((doc) => {
         updatedTasks.push(this.setTaskData(doc.data() as ITask, doc.id));
+        const task = this.setTaskData(doc.data() as ITask, doc.id);
+        this.categorizeTask(task);
       });
       this.taskSubject.next(updatedTasks);
     });
+  }
+
+  categorizeTask(task: ITask) {
+    if (task.status === 'todo') {
+      this.todo.push(task);
+    } else if (task.status === 'inProgress') {
+      this.inProgress.push(task);
+    } else if (task.status === 'awaitFeedback') {
+      this.awaitFeedback.push(task);
+    } else if (task.status === 'done') {
+      this.done.push(task);
+    }
+  }
+
+  async updateTaskStatus(taskId: string, newStatus: string) {
+    const taskDocRef = doc(this.firestore, `Tasks/${taskId}`);
+    await updateDoc(taskDocRef, { status: newStatus })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   setContactData(obj: any, id: string): IContact {

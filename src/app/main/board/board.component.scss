@@ -61,7 +61,7 @@ header {
   height: auto;
   gap: 3rem;
  
-  .to-do-collection {
+  .single-collection {
     @include standard-flex(space-between, center);
     flex-direction: column;
     padding-bottom: 2rem;
@@ -166,4 +166,11 @@ header {
       }
     }
   }
+}
+
+
+.drop-area {
+  min-height: 50vh;
+  min-width: 10%;
+  // background-color: #1fd7c1;
 }
