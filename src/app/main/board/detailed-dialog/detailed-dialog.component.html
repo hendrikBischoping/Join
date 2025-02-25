@@ -22,21 +22,21 @@
             Assigned to:
 
             @for (assignedContact of task.contacts; track $index) {
-            @for (contact of contacts; track $index) {
-            @if (assignedContact == contact.id) {
-            <div class="ml-2">
-                <div class="initials-circle bg-{{contact.styleSelector}}">
-                    {{contact.initials}}
-                </div>
-                <span>{{contact.name}}</span>
-            </div>
-            }
-            }
+                @for (contact of contacts; track $index) {
+                    @if (assignedContact == contact.id) {
+                    <div class="ml-2">
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        <span>{{contact.name}}</span>
+                    </div>
+                    }
+                }
             }
 
         </ul>
 
-        <ul>
+        <ul class="checklist">
             Subtask:
 
             @for (subtask of task.subtasks; track $index) {
@@ -74,7 +74,7 @@
         </div>
         <div class="due-date">
             <p>Due date</p>
-            <input class="full-width" type="date" name="date" id="date">
+            <input class="full-width" [(ngModel)]="previewTask.date" type="date" name="date" id="date">
         </div>
         <div class="choose-priority">
             <p>Priority</p>

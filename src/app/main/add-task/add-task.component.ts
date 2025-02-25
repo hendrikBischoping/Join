@@ -1,5 +1,5 @@
 import { isDataSource } from '@angular/cdk/collections';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, HostListener, Input } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ITask } from '../../interfaces/itask'; 
 import { TaskDataService } from '../../services/task-data.service';
@@ -15,6 +15,7 @@ import { ContactService } from '../../services/contact-service.service';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
+  @Input() currentTaskId = "";
   
   placeholderListContacts = [
     {
@@ -60,30 +61,102 @@ export class AddTaskComponent {
   contacts!: IContact[];
   contactsFromList: IContact[] = [];  
   sortedContacts: IContact[] = [];  
-
+  previewTask: ITask = {
+    title: "",
+    description: "",
+    contacts: [],
+    date: '0',
+    priority: "mid",
+    category: "",
+    subtasks: [],
+    status: "",
+    id: ""
+  };
+  filteredContacts: IContact[] = [];
+  dropdownOpen = false;
+  searchTerm: string = "";
   taskAdded = false;
+  isUserStory = false;
   constructor(private contactService: ContactService, private cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
-      this.contactsFromList = contactList;
-      this.sortedContacts = this.sortContacts();
-      console.log(this.sortedContacts)
+      this.contacts = contactList;
+      this.filteredContacts = [...this.contacts];
       this.cdRef.detectChanges();
     });
+    this.taskDataService.getTasks().subscribe((taskList) => {
+      taskList.forEach(element => {
+        if (this.currentTaskId == element.id) {
+          this.task = element;
+          this.previewTask = JSON.parse(JSON.stringify(this.task));
+        }
+      });
+    });
+    this.initTask();
+
   }
 
-  sortContacts() {
-    const sortedContacts = this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
-    return sortedContacts;
+  filterContacts(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.filteredContacts = this.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(query)
+    );
+    this.cdRef.detectChanges();
+  }  
+  
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    if (!this.isClickInsideDropdown(event)) {
+      this.closeDropdown();
+    }
+  }
+  closeDropdown() {
+    this.dropdownOpen = false;
+    this.cdRef.detectChanges();
   }
 
-  setPriority(priority: 'prioUrgent' | 'prioMedium' | 'prioLow') {
-    this.prioUrgent = false;
-    this.prioMedium = false;
-    this.prioLow = false;
-    this[priority] = true; 
-    return this[priority] = true;
+  isClickInsideDropdown(event: Event): boolean {
+    const dropdownContainer = document.querySelector(".assignment-container");
+    return dropdownContainer?.contains(event.target as Node) ?? false;
+  }
+  
+  openDropdown(event: Event) {
+    event.stopPropagation();
+    this.dropdownOpen = true;
+    this.cdRef.detectChanges();
+  }
+
+  initTask() {
+    if (this.task.category == "User Story") {
+      this.isUserStory = true;
+    }
+  }
+
+  toggleContactAssignment(contactId: string) {
+    const index = this.previewTask.contacts!.indexOf(contactId);
+    if (index === -1) {
+      this.previewTask.contacts!.push(contactId);
+    } else {
+      this.previewTask.contacts!.splice(index, 1);
+    }
+  }
+
+  getPrioImagePath(prio: string, forceInactive = false): string {
+    if (forceInactive) {
+      return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+    } else
+      return this.previewTask.priority === prio
+        ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
+        : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
+  }
+
+  changePriority(prio: string) {
+    this.previewTask.priority = prio;
+  }
+
+  isPriorityActive(prio: string): boolean {
+    return this.previewTask.priority === prio;
   }
 
   getDate() {
@@ -96,18 +169,6 @@ export class AddTaskComponent {
         this.getDate();
      }
     this.taskAdded = true;
-    
-  // const newTask: ITask = {
-  //   title: this.task.title,
-  //   description: this.task.description,
-  //   contacts: this.task.contacts,
-  //   date: this.task.date,
-  //   priority: 'Medium',
-  //   category: this.task.category,
-  //   subtasks: this.task.subtasks,
-  //   status: 'To do',
-  //   id: this.task.id,
-  // }
   
   this.task.contacts!.push('8W3sjYScAi0V0h38A6Hj');
   this.task.contacts!.push('8e1QzZ3rKZod5ovZ2Tpi');

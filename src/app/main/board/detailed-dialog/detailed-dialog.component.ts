@@ -52,12 +52,11 @@ export class DetailedDialogComponent {
   editingSubtasks = new Map<string, boolean>();
 
   isUserStory = false;
-  editView = true;
+  editView = false;
   prioImagePath = "";
   dropdownOpen = false;
   searchTerm: string = "";
   subtaskTerm: string = "";
-
 
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, public cdRef: ChangeDetectorRef) {
 
@@ -135,6 +134,7 @@ export class DetailedDialogComponent {
 
   deleteTask() {
     this.taskDataService.deleteTask(this.currentTaskId);
+    this.close();
   }
 
   toggleEditMode() {

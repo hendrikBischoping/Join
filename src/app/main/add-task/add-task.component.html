@@ -12,9 +12,8 @@
                 <p>Description</p>
                 <textarea [(ngModel)]="task.description" name="task-description" id="task-description" placeholder="Enter a Description"></textarea>
             </div>
-            <div>
+            <!-- <div>
                 <p>Assigned to</p>
-                <!-- <select [(ngModel)]="task.contacts" name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign"> -->
                 <select name="task-contacts-to-assign" id="contacts-to-assign" placeholder="Select contacts to assign">
                     @for (contact of sortedContacts; track $index) {
                             <option value="{{ contact.name }}">{{ contact.name }}</option>
@@ -26,7 +25,46 @@
                         <li>{{ item.name }}</li>
                     }
                 </ul>
+            </div> -->
+        <div class="assignment-container">
+            <p>Assigned to</p>
+            <div class="dropdown">
+                <input type="text" (input)="filterContacts($event)" (click)="openDropdown($event)"
+                    placeholder="Search contacts..." [(ngModel)]="searchTerm" class="dropdown-input">
+                @if (dropdownOpen) {
+
+                <div class="dropdown-content">
+                    @for (contact of filteredContacts; track $index) {
+                    <label>
+                        <div class="initials-circle bg-{{contact.styleSelector}}">
+                            {{contact.initials}}
+                        </div>
+                        {{ contact.name }}
+                        <input type="checkbox" [checked]="previewTask.contacts!.includes(contact.id!)"
+                            (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
+
+                    </label>
+                    @if (filteredContacts.length == 0) {
+                    <p class="no-result">No contacts found</p>
+                    }
+                    }
+                </div>
+                }
             </div>
+            <div class="assigned-list">
+                @for (taskContact of previewTask.contacts; track $index) {
+                @for (contact of contacts; track $index) {
+                @if (taskContact == contact.id) {
+
+                <div class="initials-circle bg-{{contact.styleSelector}}">
+                    {{contact.initials}}
+                </div>
+
+                }
+                }
+                }
+            </div>
+        </div>
         </div>
         <div class="separation-line"></div>
         <div class="right-side">
@@ -35,12 +73,25 @@
                 <input type="date"  [(ngModel)]="task.date" name="date" id="date" required>
                 
             </div>
-            <div class="choose-priority">
-                <p>Prio</p>
-                <button type="button" (click)="setPriority('prioUrgent')">Urgent <img src="../../../assets/img/add-task/urgent-inactive.png" alt="urgent"></button>
-                <button type="button" (click)="setPriority('prioMedium')">Medium <img src="../../../assets/img/add-task/medium-inactive.png" alt="medium"></button>
-                <button type="button" (click)="setPriority('prioLow')">Low <img src="../../../assets/img/add-task/low-inactive.png" alt="low"></button>
+        <div class="choose-priority">
+            <p>Priority</p>
+            <div class="prio-buttons full-width">
+                <button (click)="changePriority('Urgent')" [class.active]="isPriorityActive('Urgent')">
+                    Urgent
+                    <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
+                </button>
+
+                <button (click)="changePriority('Medium')" [class.active]="isPriorityActive('Medium')">
+                    Medium
+                    <img [src]="getPrioImagePath('Medium')" alt="Medium">
+                </button>
+
+                <button (click)="changePriority('Low')" [class.active]="isPriorityActive('Low')">
+                    Low
+                    <img [src]="getPrioImagePath('Low')" alt="Low">
+                </button>
             </div>
+        </div>
             <div class="category">
                 <p>Category<span class="red-star">*</span></p>
                 <select [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category" required>
