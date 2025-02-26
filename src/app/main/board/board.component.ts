@@ -13,11 +13,12 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../../services/firebase-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CdkDropListGroup],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup,CommonModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -31,42 +32,17 @@ export class BoardComponent {
     category: "Userstory",
     subtasks: [],
     status: "todo",
-    id: ""
+    id: "",
+    isUserStory: false
+
   }];
   contacts!: IContact[];
   
-  task: ITask = {
-    title: "Unknown",
-    description: "No task found",
-    contacts: ["Andi", "Hendrik"],
-    date: '0',
-    priority: "mid",
-    category: "Userstory",
-    subtasks: [{
-      subtaskName: "",
-      subtaskDone: false,
-    }
-    ],
-    status: "todo",
-    id: ""
-  };
-  previewTask: ITask = {
-    title: "",
-    description: "",
-    contacts: [],
-    date: '0',
-    priority: "mid",
-    category: "",
-    subtasks: [],
-    status: "",
-    id: ""
-  };
+ 
 
-  isUserStory = false;
+ 
   initTask() {
-    if (this.task.category == "User Story") {
-      this.isUserStory = true;
-    }
+   
   }
 
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
@@ -80,7 +56,18 @@ export class BoardComponent {
     });
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
+      
+      
+      this.tasks.forEach(task => {
+        if (task.category == "User Story") {
+          task.isUserStory = true;
+          // console.log(task.isUserStory);
+          
+        }
+      });
+     
     });
+    console.log(this.tasks);
   }
  
 
@@ -123,20 +110,20 @@ export class BoardComponent {
   //     );
   //   }
   // }
-  getPrioImagePath(prio: string, forceInactive = false): string {
+  getPrioImagePath(task:ITask, prio: string, forceInactive = false): string {
     if (forceInactive) {
       return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
     } else
-      return this.previewTask.priority === prio
+      return task.priority === prio
         ? `./assets/img/add-task/${prio.toLowerCase()}-active.png`
         : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
   }
 
-  changePriority(prio: string) {
-    this.previewTask.priority = prio;
+  changePriority(task:ITask, prio: string) {
+    task.priority = prio;
   }
-  isPriorityActive(prio: string): boolean {
-    return this.previewTask.priority === prio;
+  isPriorityActive(task:ITask, prio: string): boolean {
+    return task.priority === prio;
   }
 
   openAddTaskDialog () {

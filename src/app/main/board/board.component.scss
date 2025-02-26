@@ -88,13 +88,11 @@ header {
       width: 18rem;
       margin-bottom: 2rem;
     }
-    .no-task{
+    .no-task {
       background-image: url(../../../assets/img/Board/TodoNo.png);
       background-size: 100%;
       width: 15rem;
       height: 3.1rem;
-
-    
     }
     .info-task {
       @include standard-flex(flex-start, flex-start);
@@ -102,7 +100,7 @@ header {
       background-color: white;
       border-radius: 0.5rem;
       line-height: 80%;
-    line-break: normal;
+      line-break: normal;
       // width: 100%;
       padding: 1rem;
       margin-bottom: 2rem;
@@ -110,12 +108,15 @@ header {
       .category {
         width: 8rem;
         @include standard-flex(flex-start, flex-start);
-        background-color: blue;
+        background-color: #1fd7c1;
         color: white;
         border-radius: 0.5rem;
         text-align: start;
         padding: 4px 1rem 4px 1rem;
         border-bottom: 4rem;
+      }
+      .user-story-bg {
+        background-color: #0038ff !important;
       }
       .description {
         padding-top: 0.5rem;
@@ -146,9 +147,9 @@ header {
           left: 0rem;
           width: 3rem;
           height: 3rem;
-          @for $i from 1 through 10{
-            &:nth-child(#{$i}){
-              left: #{($i - 1)*2}rem;
+          @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+              left: #{($i - 1) * 2}rem;
             }
           }
 
@@ -203,20 +204,20 @@ header {
 // }
 
 .drop-area {
-
-  
   min-height: 50vh;
   min-width: 10%;
+  background-image: url(../../../assets/img/Board/TodoNo.png);
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  width: 100%;
+
   // background-color: #1fd7c1;
 }
 .cdk-drag-preview {
-  
-
   box-sizing: border-box;
   border-radius: 25px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 .cdk-drag-placeholder {
   opacity: 0;

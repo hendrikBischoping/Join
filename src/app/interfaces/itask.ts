@@ -13,5 +13,7 @@ export interface ITask {
     category: string,
     subtasks?: ISubtask[],
     status: string,
-    id: string
+    id: string,
+    isUserStory?: boolean
+    
 }

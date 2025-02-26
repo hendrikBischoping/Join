@@ -17,16 +17,13 @@
                 <h2>To do</h2>
                 <img src="../../../assets/img/Board/addTask.png" alt="">
             </div>
-            <div class="no-task">            
-            </div>
+            
             <div id="todo" cdkDropList [cdkDropListData]="data.todo" class="drop-area"
                 (cdkDropListDropped)="drop($event)">
                 @for (task of data.todo; track $index) {
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
                     <div class="category">
-                        <!-- {{task.category}} -->
-
-                        <!-- <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div> -->
+                        <div class="story-container" [ngClass]="{'user-story-bg':task.isUserStory}">{{task.category}}</div>
                     </div>
                     <div class="description">
                         <h3>{{task.title}}</h3>
@@ -50,7 +47,7 @@
                         }
                         }
                         <div class="prioprie">
-                            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>
                     </div>
                 </div>
@@ -69,7 +66,7 @@
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
 
                     <div class="category">
-                        {{task.category}}
+                        <div class="story-container" [ngClass]="{'user-story-bg':task.isUserStory}">{{task.category}}</div>
                     </div>
                     <div class="description">
                         <h3>{{task.title}}</h3>
@@ -93,7 +90,7 @@
                         }
                         }
                         <div class="prioprie">
-                            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>
                     </div>
                 </div>
@@ -112,7 +109,7 @@
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
 
                     <div class="category">
-                        {{task.category}}
+                        <div class="story-container" [ngClass]="{'user-story-bg':task.isUserStory}">{{task.category}}</div>
                     </div>
                     <div class="description">
                         <h3>{{task.title}}</h3>
@@ -136,7 +133,7 @@
                         }
                         }
                         <div class="prioprie">
-                            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>
                     </div>
                 </div>
@@ -155,7 +152,7 @@
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
 
                     <div class="category">
-                        {{task.category}}
+                        <div class="story-container" [ngClass]="{'user-story-bg':task.isUserStory}">{{task.category}}</div>
                     </div>
                     <div class="description">
                         <h3>{{task.title}}</h3>
@@ -178,7 +175,7 @@
                         }
                         }
                         <div class="prioprie">
-                            <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
+                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>
                     </div>
                 </div>
