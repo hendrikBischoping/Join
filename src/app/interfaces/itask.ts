@@ -14,6 +14,4 @@ export interface ITask {
     subtasks?: ISubtask[],
     status: string,
     id: string,
-    isUserStory?: boolean
-    
 }

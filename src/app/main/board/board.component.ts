@@ -32,9 +32,7 @@ export class BoardComponent {
     category: "Userstory",
     subtasks: [],
     status: "todo",
-    id: "",
-    isUserStory: false
-
+    id: ""
   }];
   contacts!: IContact[];
   
@@ -56,20 +54,12 @@ export class BoardComponent {
     });
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
-      
-      
-      this.tasks.forEach(task => {
-        if (task.category == "User Story") {
-          task.isUserStory = true;
-          // console.log(task.isUserStory);
-          
-        }
-      });
-     
     });
-    console.log(this.tasks);
   }
  
+  checkCategory(task: ITask) {
+    return task.category == "User Story" ?  true : false;
+  }
 
   openEditDialog(id:string) {
     this.overlayService.openEditTaskOverlay(id);
