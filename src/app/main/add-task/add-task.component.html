@@ -25,10 +25,12 @@
                         <div class="dropdown-content">
                             @for (contact of filteredContacts; track $index) {
                             <label>
-                                <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}
+                                <div class="contact-names">
+                                    <div class="initials-circle bg-{{contact.styleSelector}}">
+                                        {{contact.initials}}
+                                    </div>
+                                    <p>{{ contact.name }}</p>
                                 </div>
-                                {{ contact.name }}
                                 <input type="checkbox" [checked]="task.contacts!.includes(contact.id!)"
                                     (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
 
@@ -92,7 +94,7 @@
                     <select [(ngModel)]="task.category" name="task-category" id="task-category"
                         placeholder="Select task category" required>
                         @for (item of taskCategories; track $index) {
-                        <option>{{ item.category }}</option>
+                        <option>{{ item.category }}</option>s
                         }
                     </select>
                 </div>
@@ -102,8 +104,7 @@
                         <div class="input-container">
                             <input [(ngModel)]="newSubtaskName" name="subtask" type="text"
                                 placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
-
-                            @if (newSubtaskName.trim() === '') {
+                            @if (newSubtaskName === '') {
                             <img src="../../../assets/img/add-task/add.png" alt="add">
                             } @else {
                             <img (click)="clearSubtask()" class="clear-btn" src="../../../assets/img/add-task/clear.png"
@@ -114,8 +115,8 @@
                         </div>
                         <div class="subtask-list">
                             <ul>
-                                @for (subtask of testSubtaskList; track $index) {
-                                <li class="single-subtask">{{ subtask }}</li>
+                                @for (subtask of task.subtasks; track $index) {
+                                <li class="single-subtask">{{ subtask.subtaskName }}</li>
                                 }
                             </ul>
                         </div>

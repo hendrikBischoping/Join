@@ -32,11 +32,7 @@ export class AddTaskComponent {
     date: '10.10.2020',
     priority: 'Medium',
     category: 'User Story',
-    subtasks: [{
-      subtaskName: '',
-      subtaskDone: false
-    },
-  ],
+    subtasks: [],
     status: 'todo',
     id: '',
   };
@@ -128,16 +124,16 @@ export class AddTaskComponent {
     return dateData;
   }
 
-  testSubtaskList: string[] = [];
+  // testSubtaskList: string[] = [];
 
   addSubtask() {
     if (this.newSubtaskName == "") {
       return;
     }
 
-    this.testSubtaskList.push(this.newSubtaskName)
+    this.task.subtasks?.push({ subtaskName: this.newSubtaskName, subtaskDone: false });
     this.newSubtaskName = "";
-    console.log(this.testSubtaskList);
+    // console.log(this.testSubtaskList);
     return
   }
 
@@ -154,9 +150,6 @@ export class AddTaskComponent {
         this.getDate();
      }
     this.taskAdded = true;
-  this.task.subtasks = [
-    {subtaskName:  this.newSubtaskName, subtaskDone: false},
-  ];
   
   await this.taskDataService.addTask(this.task).then(() => {
     console.log("abruf", this.task.contacts);
