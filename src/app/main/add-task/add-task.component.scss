@@ -8,52 +8,66 @@
 .add-task {
     padding: 6rem 6rem 3rem 4rem;
     font-family: 'inter';
+
     .left-side {
         margin-right: 2rem;
         align-self: start;
     }
+
     .separation-line {
         border: solid 1px rgb(212, 212, 212);
         height: 25rem;
     }
+
     .right-side {
         margin-left: 2rem;
         align-self: start;
     }
+
     >h1 {
         font-size: 3rem;
         font-weight: 700;
         margin: 0 0 4rem 0;
     }
+
     p {
         font-size: 1.2rem;
         margin: 2rem 0 0.5rem 0;
     }
-    input, select, textarea {
+
+    input,
+    select,
+    textarea {
         border: solid 1px rgb(212, 212, 212);
         border-radius: 0.5rem;
         padding: 0 0.5rem;
         min-width: 26rem;
         height: 2rem;
     }
+
     select {
         min-width: 27rem;
         max-width: 25rem;
     }
+
     textarea {
         min-height: 6rem;
         padding: 0.25rem 1rem;
         max-width: 25rem;
     }
+
     button {
         min-width: calc(10rem / 3);
     }
+
     .required {
         font-size: 1rem;
     }
+
     .red-star {
         color: red;
     }
+
     .task-inputs {
         @include standard-flex(space-around, center)
     }
@@ -69,7 +83,7 @@
         cursor: text;
 
         &:focus {
-            border: 1px solid rgb(93,190,231);
+            border: 1px solid rgb(93, 190, 231);
         }
     }
 
@@ -83,7 +97,7 @@
         cursor: text;
 
         &:focus {
-            border: 1px solid rgb(93,190,231);
+            border: 1px solid rgb(93, 190, 231);
         }
     }
 
@@ -92,7 +106,7 @@
         display: inline-block;
         width: 100%;
     }
-    
+
     .dropdown-input {
         width: 26rem;
         padding: 10px;
@@ -100,7 +114,7 @@
         border-radius: 0.5rem;
         cursor: text !important;
     }
-    
+
     .dropdown-content {
         position: absolute;
         background-color: white;
@@ -112,45 +126,52 @@
         border: 1px solid #ddd;
         max-height: 200px;
         overflow-y: auto;
-    
-    
-    
+
+
+
         >label {
             @include standard-flex(space-between, center);
             cursor: pointer;
             padding: 5px;
             position: relative;
             overflow-x: hidden;
+
             &:hover {
                 background-color: rgba($color: #000000, $alpha: 0.1);
             }
+
             >.contact-names {
                 @include standard-flex(center, center);
                 min-width: fit-content;
-                gap: 1rem
-                ;
+                gap: 1rem;
+
                 >.initials-circle {
                     width: 2rem;
                     height: 2rem;
                     font-size: 1rem;
                 }
+
                 >p {
                     padding: 0;
                     margin: auto;
                 }
             }
+
             >input {
                 cursor: pointer;
                 position: absolute;
                 right: -12rem;
             }
         }
-    }    
+    }
 
     .assigned-list {
         @include standard-flex(flex-start, center);
         flex-wrap: wrap;
         width: 27rem;
+        margin-top: 4px;
+        margin-left: 4px;
+
         >.initials-circle {
             font-size: 1.2rem;
             margin: 0.25rem;
@@ -159,18 +180,20 @@
     }
 
     .active-background {
-        background-color: rgb(255,168,0);
+        background-color: rgb(255, 168, 0);
     }
 
     .choose-priority {
         >.prio-buttons {
             @include standard-flex(space-between, center);
+
             >button {
                 width: 30%;
                 height: 3.5rem;
                 border: none;
                 border-radius: 0.5rem;
                 box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+
                 &:hover {
                     cursor: pointer;
                     box-shadow: 0 0.25rem 0.25rem r1830gba(0, 0, 0, 0.25);
@@ -200,11 +223,13 @@
             background-color: #00000000;
             cursor: pointer;
             border-radius: 5px;
+
             &:hover {
-                background-color: rgb(229,229,229);
+                background-color: rgb(229, 229, 229);
                 border-radius: 50%;
             }
         }
+
         .vertical-line {
             position: absolute;
             right: -9.375rem;
@@ -215,71 +240,124 @@
             margin: 0 2px;
             background-color: rgb(212, 212, 212);
         }
+
         .clear-btn {
             right: -9rem;
         }
     }
+
     .subtask-list ul {
         .single-subtask {
+            @include standard-flex(flex-start, center);
+            height: 1rem;
             position: relative;
-            padding: 0.25rem;
+            padding: 0.5rem;
+            padding-left: 1.5rem;
+            left: -2.5rem;
             &:hover {
+                @include standard-flex(space-between, center);
                 background-color: rgb(186, 185, 185);
-                border-radius: 0.4rem;
+                border-radius: 0.5rem;
+
+                .subtask-icon-container {
+                    @include standard-flex(flex-start, center);
+                    gap: 0.25rem;
+
+                    >img:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            >.bullet-point {
+                position: absolute;
+                left: 0.5rem;
             }
         }
     }
 
+    .subtask-edit-input-container {
+        position: relative;
+        .subtask-icon-container {
+            position: absolute;
+            top: 0.3rem;
+            right: 1rem;
+        }
+
+        .subtask-edit-input {
+            padding: 0;
+            height: 1.4rem;
+        }
+    }
+    
+        .subtask-icon-container {
+            display: none;
+        }
+
+
+
     .lowest-section {
         @include standard-flex(space-between, center);
+
         .clear-or-create-buttons {
             gap: 1rem;
             @include standard-flex(center, center);
+
             >button {
                 @include standard-flex(center, center);
                 gap: 0.5rem;
                 width: fit-content;
                 height: 3.5rem;
-                border: solid 2px rgba(93, 190, 231, 0);;
+                border: solid 2px rgba(93, 190, 231, 0);
+                ;
                 border-radius: 0.5rem;
                 box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+
                 &:hover {
                     cursor: pointer;
                     box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
-                    color: rgb(93,190,231);
-                    border: solid 2px rgb(93,190,231);;
+                    color: rgb(93, 190, 231);
+                    border: solid 2px rgb(93, 190, 231);
+                    ;
                 }
+
                 >.close-x {
                     font-family: 'inter';
                     font-size: 1.7rem;
                 }
             }
+
             >.create-btn {
                 color: white;
-                background-color: rgb(42,54,71);
+                background-color: rgb(42, 54, 71);
                 transition: background-color 0.25s;
+
                 &:hover {
                     color: white;
-                    background-color: rgb(93,190,231);
+                    background-color: rgb(93, 190, 231);
                 }
             }
         }
     }
 
     @media (max-width: 1200px) {
+
         input,
         textarea {
             min-width: 20rem;
         }
+
         .add-task {
             min-width: 20rem;
         }
+
         .dropdown-input {
             width: 18rem;
         }
+
         #task-category {
             min-width: 21rem;
         }
+
         .input-container {
             img {
                 right: -5rem;

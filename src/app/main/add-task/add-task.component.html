@@ -104,20 +104,51 @@
                         <div class="input-container">
                             <input [(ngModel)]="newSubtaskName" name="subtask" type="text"
                                 placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
-                            @if (newSubtaskName === '') {
-                            <img src="../../../assets/img/add-task/add.png" alt="add">
-                            } @else {
-                            <img (click)="clearSubtask()" class="clear-btn" src="../../../assets/img/add-task/clear.png"
-                                alt="clear">
-                            <div class="vertical-line"></div>
-                            <img (click)="addSubtask()" src="../../../assets/img/add-task/done.png" alt="done">
+                            @if (newSubtaskName !== '') {
+                            <img (click)="addSubtask()" src="../../../assets/img/add-task/add.png" alt="add">
                             }
                         </div>
                         <div class="subtask-list">
                             <ul>
+                                <!-- @for (subtask of task.subtasks; track $index) {
+                                <li class="single-subtask">{{ subtask.subtaskName }} </li>
+                                } -->
                                 @for (subtask of task.subtasks; track $index) {
-                                <li class="single-subtask">{{ subtask.subtaskName }}</li>
-                                }
+                                    <div class="single-subtask">
+                                        <span class="bullet-point">● </span>
+                                        @if (editingSubtasks.get(subtask.subtaskName)) {
+                                            <div class="subtask-edit-input-container">
+                                            <input [(ngModel)]="subtask.subtaskName" class="subtask-edit-input">
+                                            <div class="subtask-icon-container">
+                                                <img (click)="saveSubtaskEdit(subtask.subtaskName, subtask.subtaskName)"
+                                                    src="./assets/img/icons/checkIconBlack.png" alt="Save">
+                                                <div class="line"></div>
+                                                <img (click)="cancelSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/CloseIcon.png"
+                                                    alt="Cancel">
+                                            </div>
+                                        </div>
+                                        <!-- {{subtask.subtaskName}} -->
+                                        } @else {
+                                        <!-- Standard-Anzeige -->
+                                        <span>{{subtask.subtaskName}}</span>
+                        
+                                        <div class="subtask-icon-container">
+                                            <!-- Edit-Icon -->
+                                            <img (click)="startEditingSubtask(subtask.subtaskName)" src="./assets/img/editIcon.png" alt="Edit">
+                        
+                                            <div class="line"></div>
+                        
+                                            <!-- Löschen-Icon -->
+                                            <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png" alt="Delete">
+                                        </div>
+                                        }
+                                        <!-- <div>
+                                                <img src="../../../../assets/img/editIcon.png" alt="">
+                                                <div class="line"></div>
+                                                <img (click)="deleteSubTask(subtask.subtaskName)" src="../../../../assets/img/trash.png" alt="">
+                                            </div> -->
+                                    </div>
+                                    }
                             </ul>
                         </div>
                     </div>

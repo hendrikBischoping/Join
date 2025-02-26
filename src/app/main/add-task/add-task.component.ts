@@ -23,7 +23,7 @@ export class AddTaskComponent {
   ];
 
   saveDateTestArray: string[] = [];
-
+  editingSubtasks = new Map<string, boolean>();
   task: ITask =
   {
     title: '',
@@ -124,17 +124,35 @@ export class AddTaskComponent {
     return dateData;
   }
 
-  // testSubtaskList: string[] = [];
-
   addSubtask() {
     if (this.newSubtaskName == "") {
       return;
     }
-
     this.task.subtasks?.push({ subtaskName: this.newSubtaskName, subtaskDone: false });
     this.newSubtaskName = "";
-    // console.log(this.testSubtaskList);
     return
+  }
+
+  startEditingSubtask(subtaskName: string) {
+    this.editingSubtasks.set(subtaskName, true);
+  }
+
+  saveSubtaskEdit(oldName: string, newName: string) {
+    const subtask = this.task.subtasks?.find(s => s.subtaskName === oldName);
+    if (subtask) {
+      subtask.subtaskName = newName;
+    }
+    this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
+    this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird
+  }
+
+  cancelSubtaskEdit(subtaskName: string) {
+    this.editingSubtasks.delete(subtaskName);
+  }
+
+  deleteSubTask(name: string) {
+    this.task.subtasks = this.task.subtasks?.filter(subtask => subtask.subtaskName != name);
+    this.cdRef.detectChanges();
   }
 
   clearSubtask() {
