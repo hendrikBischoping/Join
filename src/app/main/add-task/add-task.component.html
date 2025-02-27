@@ -1,5 +1,8 @@
 <section class="add-task">
     <h1>Add Task</h1>
+    @if (isOverlay) {
+        <div class="close-btn-overlay" (click)="close()" ><img src="../../../assets/img/icons/CloseIcon.png" alt="close-btn"></div>
+    }
     <form (ngSubmit)="submitTask(addTaskForm)" #addTaskForm="ngForm">
 
         <div class="task-inputs">
