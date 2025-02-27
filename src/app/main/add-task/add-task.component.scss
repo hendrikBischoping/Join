@@ -29,6 +29,15 @@
         align-self: start;
     }
 
+    .title-section, .due-date {
+        position: relative;
+        .required-error {
+            position: absolute;
+            left: 0;
+            top: 5rem;
+        }
+    }
+
     .separation-line {
         border: solid 1px rgb(212, 212, 212);
         height: 25rem;

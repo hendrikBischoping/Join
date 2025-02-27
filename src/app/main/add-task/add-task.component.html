@@ -7,11 +7,11 @@
 
         <div class="task-inputs">
             <div class="left-side">
-                <div>
+                <div class="title-section">
                     <p class="title">Title<span class="red-star">*</span></p>
                     <input #title="ngModel" [(ngModel)]="task.title" name="task-title" type="text" class="single-input" placeholder="Enter a title" required>
                     @if (!title.valid && title.touched) {
-                        <span class="red-star"> Please enter a title!</span>
+                        <span class="red-star required-error"> Please enter a title!</span>
                     }
                 </div>
                 <div>
@@ -68,7 +68,7 @@
                     <p>Due date<span class="red-star">*</span></p>
                     <input type="date" #date="ngModel" [(ngModel)]="task.date" name="date" id="date" required>
                     @if (!date.valid && date.touched) {
-                        <span class="red-star"> Please choose a date!</span>
+                        <span class="red-star required-error"> Please choose a date!</span>
                     }
                 </div>
                 <div class="choose-priority">
