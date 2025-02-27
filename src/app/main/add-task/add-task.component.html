@@ -94,13 +94,10 @@
                     </div>
                 </div>
                 <div class="category">
-                    <p>Category<span class="red-star">*</span></p>
-                    <select #category="ngModel" [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category" required>
-                        @if (!category.valid && category.touched) {
-                            <span class="red-star"> Please choose a category!</span>
-                        }
+                    <p>Category</p>
+                    <select [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category">
                         @for (item of taskCategories; track $index) {
-                        <option>{{ item.category }}</option>s
+                        <option>{{ item.category }}</option>
                         }
                     </select>
                 </div>
@@ -166,7 +163,7 @@
             <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
             <div class="clear-or-create-buttons">
                 <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
-                @if (title.valid && date.touched && date.valid && category.touched && category.valid) {
+                @if (title.valid && date.touched && date.valid) {
                     <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
                     alt="check"></button>
                 } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"

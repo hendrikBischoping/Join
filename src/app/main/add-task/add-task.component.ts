@@ -15,7 +15,9 @@ import { ContactService } from '../../services/contact-service.service';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-  @Input() currentTaskId = "";
+  @Input() isOverlay = false;
+  @Input() predefinedStatus = "todo";
+  @Input() close!: () => void;
 
   taskCategories: { category: string }[] = [
     { category: 'Technical Task' },
@@ -33,7 +35,7 @@ export class AddTaskComponent {
     priority: 'Medium',
     category: 'User Story',
     subtasks: [],
-    status: 'todo',
+    status: this.predefinedStatus,
     id: '',
   };
   contacts!: IContact[];
@@ -168,6 +170,7 @@ export class AddTaskComponent {
         this.getDate();
      }
     this.taskAdded = true;
+    this.task.status = this.predefinedStatus;
   
   await this.taskDataService.addTask(this.task).then(() => {
     console.log("abruf", this.task.contacts);
