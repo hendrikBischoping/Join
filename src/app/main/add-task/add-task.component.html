@@ -6,8 +6,10 @@
             <div class="left-side">
                 <div>
                     <p class="title">Title<span class="red-star">*</span></p>
-                    <input [(ngModel)]="task.title" name="task-title" type="text" class="single-input"
-                        placeholder="Enter a title" required>
+                    <input #title="ngModel" [(ngModel)]="task.title" name="task-title" type="text" class="single-input" placeholder="Enter a title" required>
+                    @if (!title.valid && title.touched) {
+                        <span class="red-star"> Please enter a title!</span>
+                    }
                 </div>
                 <div>
                     <p>Description</p>
@@ -61,8 +63,10 @@
             <div class="right-side">
                 <div class="due-date">
                     <p>Due date<span class="red-star">*</span></p>
-                    <input type="date" [(ngModel)]="task.date" name="date" id="date" required>
-
+                    <input type="date" #date="ngModel" [(ngModel)]="task.date" name="date" id="date" required>
+                    @if (!date.valid && date.touched) {
+                        <span class="red-star"> Please choose a date!</span>
+                    }
                 </div>
                 <div class="choose-priority">
                     <p>Priority</p>
@@ -91,8 +95,10 @@
                 </div>
                 <div class="category">
                     <p>Category<span class="red-star">*</span></p>
-                    <select [(ngModel)]="task.category" name="task-category" id="task-category"
-                        placeholder="Select task category" required>
+                    <select #category="ngModel" [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category" required>
+                        @if (!category.valid && category.touched) {
+                            <span class="red-star"> Please choose a category!</span>
+                        }
                         @for (item of taskCategories; track $index) {
                         <option>{{ item.category }}</option>s
                         }
@@ -160,8 +166,11 @@
             <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
             <div class="clear-or-create-buttons">
                 <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
-                <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
-                        alt="check"></button>
+                @if (title.valid && date.touched && date.valid && category.touched && category.valid) {
+                    <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
+                    alt="check"></button>
+                } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"
+                    alt="check"></button>}
             </div>
         </div>
     </form>
