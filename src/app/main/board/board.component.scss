@@ -6,11 +6,14 @@ header {
   width: 100%;
   padding-top: 6rem;
   padding-bottom: 6rem;
+
   h1 {
     font-weight: bold;
   }
+
   .menu {
     @include standard-flex(space-between, center);
+
     .input-container {
       position: relative;
       display: flex;
@@ -26,6 +29,7 @@ header {
         font-size: 1.5rem;
         outline: none;
       }
+
       .border {
         width: 4rem;
         height: 2.5rem;
@@ -33,6 +37,7 @@ header {
         border-left: 3px solid #29abe2;
         right: 0px;
         position: absolute;
+
         //  position: absolute;
         img {
           top: 50%;
@@ -41,6 +46,7 @@ header {
         }
       }
     }
+
     button {
       @include standardButton();
       padding: 0.4rem 1rem;
@@ -57,6 +63,7 @@ header {
     }
   }
 }
+
 .collection {
   @include standard-flex(flex-start, center);
   align-items: flex-start;
@@ -73,27 +80,33 @@ header {
     width: 100%;
     height: auto;
     margin-bottom: 2rem;
+
     & :hover {
       cursor: pointer;
     }
+
     h2 {
       font-weight: bold;
       font-size: 0.8rem;
     }
+
     img {
       cursor: pointer;
     }
+
     .add-task {
       @include standard-flex(space-between, center);
       width: 18rem;
       margin-bottom: 2rem;
     }
+
     .no-task {
       background-image: url(../../../assets/img/Board/TodoNo.png);
       background-size: 100%;
       width: 15rem;
       height: 3.1rem;
     }
+
     .info-task {
       @include standard-flex(flex-start, flex-start);
       flex-direction: column;
@@ -115,17 +128,21 @@ header {
         padding: 4px 1rem 4px 1rem;
         border-bottom: 4rem;
       }
+
       .user-story-bg {
         background-color: #0038ff !important;
       }
+
       .description {
         padding-top: 0.5rem;
         padding-bottom: 1rem;
         line-height: 80%;
         line-break: normal;
+
         h3 {
           font-weight: bold;
         }
+
         p {
           text-overflow: ellipsis;
           color: #979191;
@@ -134,19 +151,39 @@ header {
       }
 
       .progress {
-        padding-top: 3rem;
+        width: 100%;
         padding-bottom: 3rem;
+        @include standard-flex(space-between);
+        gap: 10px;
       }
+
+      .progress-bar {
+        width: 55%;
+        height: 0.5rem;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: #4589FF;
+        // transition: width 0.3s ease-in-out;
+      }
+
       .contacts-for-tag {
         @include standard-flex(space-between, center);
         width: 100%;
         position: relative;
+
         .initials-circle {
           position: absolute;
           bottom: 0rem;
           left: 0rem;
           width: 3rem;
           height: 3rem;
+
           @for $i from 1 through 10 {
             &:nth-child(#{$i}) {
               left: #{($i - 1) * 2}rem;
@@ -157,22 +194,26 @@ header {
           //   left: 1rem;
           // }
         }
+
         .prioprie {
           width: 100%;
           @include standard-flex(flex-end, flex-end);
         }
       }
+
       .contact-icons {
         @include standard-flex(center, center);
         width: 3rem;
         height: 3rem;
       }
     }
+
     .about {
       @include standard-flex(center, center);
     }
   }
 }
+
 // .in-proggress-collection {
 //   @include standard-flex(space-between, center);
 //   flex-direction: column;
@@ -213,12 +254,14 @@ header {
 
   // background-color: #1fd7c1;
 }
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 25px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
+
 .cdk-drag-placeholder {
   opacity: 0;
 }
