@@ -14,11 +14,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../../services/firebase-service.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CdkDropListGroup,CommonModule],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup,CommonModule, FormsModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -36,6 +37,8 @@ export class BoardComponent {
   }];
   contacts!: IContact[];
   boardRows = ["todo","inProgress", "awaitFeedback", "done"]
+  data = inject(FirebaseService)
+  searchQuery = "";
  
 
  
@@ -46,7 +49,6 @@ export class BoardComponent {
   constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
 
   }
-  data = inject(FirebaseService)
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -55,6 +57,12 @@ export class BoardComponent {
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
     });
+  }
+
+  getFilteredTasks(status: string): ITask[] {
+    return this.getRowData(status).filter(task =>
+      task.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 
   getRowData(status: string) : ITask[] {

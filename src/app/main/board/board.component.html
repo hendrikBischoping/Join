@@ -3,7 +3,7 @@
         <h1>Board</h1>
         <div class="menu">
             <div class="input-container">
-                <input type="Find Task">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Find Task">
                 <div class="border">
                     <img src="./assets/img/Board/search.png" alt="">
                 </div>
@@ -24,7 +24,7 @@
 
             <div id="{{rowId}}" cdkDropList [cdkDropListData]="getRowData(rowId)" class="drop-area"
                 (cdkDropListDropped)="drop($event)">
-                @for (task of getRowData(rowId); track $index) {
+                @for (task of getFilteredTasks(rowId); track $index) {
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
                     <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
                         <div class="story-container">{{task.category}}</div>
