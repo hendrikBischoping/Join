@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, Input } from '@angular/core';
-import { ITask } from '../../../interfaces/itask';
+import { ISubtask, ITask } from '../../../interfaces/itask';
 import { IContact } from '../../../interfaces/icontact';
 import { TaskDataService } from '../../../services/task-data.service';
 import { ContactService } from '../../../services/contact-service.service';
@@ -110,6 +110,12 @@ export class DetailedDialogComponent {
 
   isPriorityActive(prio: string): boolean {
     return this.previewTask.priority === prio;
+  }
+
+  toggleSubtaskDone(subtask: ISubtask) {
+    subtask.subtaskDone = !subtask.subtaskDone;
+    this.taskDataService.updateTask(this.currentTaskId, this.task);
+    this.cdRef.detectChanges();
   }
 
   changeSubtaskStatus(name: string) {

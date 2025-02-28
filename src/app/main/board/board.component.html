@@ -7,7 +7,7 @@
         </div>
         <div class="menu">
             <div class="input-container">
-                <input type="Find Task">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Find Task">
                 <div class="border">
                     <img src="./assets/img/Board/search.png" alt="">
                 </div>
@@ -15,201 +15,20 @@
             <button (click)="openAddTaskDialog()">Add task +</button>
         </div>
     </header>
-    <div class="collection-for-responsiv">
-        
-        <div class="task-to-do-in-progress">
-            <div cdkDropListGroup class="collection">
-                <div class="single-collection">
-                    <div class="add-task">
-                        <h2>To do</h2>
-                        <img src="./assets/img/Board/addTask.png" alt="">
-                    </div>
-    
-                    <div id="todo" cdkDropList [cdkDropListData]="data.todo" class="drop-area"
-                        (cdkDropListDropped)="drop($event)">
-                        @for (task of data.todo; track $index) {
-                        <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-                            <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                                <div class="story-container">{{task.category}}</div>
-                            </div>
-                            <div class="description">
-                                <h3>{{task.title}}</h3>
-                                <p>{{task.description}}</p>
-                            </div>
-                            <div class="progress">
-                                @for (subtask of task.subtasks; track $index) {
-                                {{subtask.subtaskDone}}
-                                {{subtask.subtaskName}}
-                                }
-                            </div>
-    
-                            <div class="contacts-for-tag">
-                                @for (taskContact of task.contacts; track $index) {
-                                @for (contact of contacts; track $index) {
-                                @if (taskContact == contact.id) {
-                                <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}
-                                </div>
-                                }
-                                }
-                                }
-                                <div class="prioprie">
-                                    <img src="{{getPrioImagePath(task,task.priority, true)}}"
-                                        alt="{{task.priority}} icon">
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </div>
-    
-                <div class="single-collection">
-                    <div class="add-task">
-                        <h2>In Progress</h2>
-                        <img src="./assets/img/Board/addTask.png" alt="">
-                    </div>
-                    <div id="inProgress" cdkDropList [cdkDropListData]="data.inProgress" class="drop-area"
-                        (cdkDropListDropped)="drop($event)">
-                        @for (task of data.inProgress; track $index) {
-                        <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-    
-                            <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                                <div class="story-container">{{task.category}}</div>
-                            </div>
-                            <div class="description">
-                                <h3>{{task.title}}</h3>
-                                <p>{{task.description}}</p>
-                            </div>
-                            <div class="progress">
-                                @for (subtask of task.subtasks; track $index) {
-                                {{subtask.subtaskDone}}
-                                {{subtask.subtaskName}}
-                                }
-                            </div>
-    
-                            <div class="contacts-for-tag">
-                                @for (taskContact of task.contacts; track $index) {
-                                @for (contact of contacts; track $index) {
-                                @if (taskContact == contact.id) {
-                                <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}
-                                </div>
-                                }
-                                }
-                                }
-                                <div class="prioprie">
-                                    <img src="{{getPrioImagePath(task,task.priority, true)}}"
-                                        alt="{{task.priority}} icon">
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="task-await-feedback-done">
-            <div cdkDropListGroup class="collection">
-                <div class="single-collection">
-                    <div class="add-task">
-                        <h2>Await Feedback</h2>
-                        <img src="./assets/img/Board/addTask.png" alt="">
-                    </div>
-                    <div id="awaitFeedback" cdkDropList [cdkDropListData]="data.awaitFeedback" class="drop-area"
-                        (cdkDropListDropped)="drop($event)">
-                        @for (task of data.awaitFeedback; track $index) {
-                        <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-
-                            <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                                <div class="story-container">{{task.category}}</div>
-                            </div>
-                            <div class="description">
-                                <h3>{{task.title}}</h3>
-                                <p>{{task.description}}</p>
-                            </div>
-                            <div class="progress">
-                                @for (subtask of task.subtasks; track $index) {
-                                {{subtask.subtaskDone}}
-                                {{subtask.subtaskName}}
-                                }
-                            </div>
-
-                            <div class="contacts-for-tag">
-                                @for (taskContact of task.contacts; track $index) {
-                                @for (contact of contacts; track $index) {
-                                @if (taskContact == contact.id) {
-                                <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}
-                                </div>
-                                }
-                                }
-                                }
-                                <div class="prioprie">
-                                    <img src="{{getPrioImagePath(task,task.priority, true)}}"
-                                        alt="{{task.priority}} icon">
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="single-collection">
-                    <div class="add-task">
-                        <h2>Done</h2>
-                        <img src="./assets/img/Board/addTask.png" alt="">
-                    </div>
-                    <div id="done" cdkDropList [cdkDropListData]="data.done" class="drop-area"
-                        (cdkDropListDropped)="drop($event)">
-                        @for (task of data.done; track $index) {
-                        <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-
-                            <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                                <div class="story-container">{{task.category}}</div>
-                            </div>
-                            <div class="description">
-                                <h3>{{task.title}}</h3>
-                                <p>{{task.description}}</p>
-                            </div>
-                            <div class="progress">
-                                @for (subtask of task.subtasks; track $index) {
-                                {{subtask.subtaskDone}}
-                                {{subtask.subtaskName}}
-                                }
-                            </div>
-                            <div class="contacts-for-tag">
-                                @for (taskContact of task.contacts; track $index) {
-                                @for (contact of contacts; track $index) {
-                                @if (taskContact == contact.id) {
-                                <div class="initials-circle bg-{{contact.styleSelector}}">
-                                    {{contact.initials}}
-                                </div>
-                                }
-                                }
-                                }
-                                <div class="prioprie">
-                                    <img src="{{getPrioImagePath(task,task.priority, true)}}"
-                                        alt="{{task.priority}} icon">
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div cdkDropListGroup class="collection">
+
+        @for (rowId of boardRows; track $index) {
+
+
         <div class="single-collection">
             <div class="add-task">
-                <h2>To do</h2>
-                <img src="./assets/img/Board/addTask.png" alt="">
+                <h2>{{getRowName(rowId)}}</h2>
+                <img (click)="openAddTaskDialog(rowId)" src="./assets/img/Board/addTask.png" alt="">
             </div>
 
-            <div id="todo" cdkDropList [cdkDropListData]="data.todo" class="drop-area"
+            <div id="{{rowId}}" cdkDropList [cdkDropListData]="getRowData(rowId)" class="drop-area"
                 (cdkDropListDropped)="drop($event)">
-                @for (task of data.todo; track $index) {
+                @for (task of getFilteredTasks(rowId); track $index) {
                 <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
                     <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
                         <div class="story-container">{{task.category}}</div>
@@ -218,12 +37,16 @@
                         <h3>{{task.title}}</h3>
                         <p>{{task.description}}</p>
                     </div>
-                    <div class="progress">
-                        @for (subtask of task.subtasks; track $index) {
-                        {{subtask.subtaskDone}}
-                        {{subtask.subtaskName}}
-                        }
-                    </div>
+                    @if (task.subtasks!.length >= 1) {
+                        <div class="progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" [style.width.%]="getProgress(task)"></div>
+                            </div>
+                            <span>{{getDoneSubtask(task)}}/{{task.subtasks!.length}} Subtasks</span>
+                        </div>
+                    }@else {
+                        <div class="progress"></div>
+                    }
 
                     <div class="contacts-for-tag">
                         @for (taskContact of task.contacts; track $index) {
@@ -243,134 +66,8 @@
                 }
             </div>
         </div>
+        }
 
-        <div class="single-collection">
-            <div class="add-task">
-                <h2>In Progress</h2>
-                <img src="./assets/img/Board/addTask.png" alt="">
-            </div>
-            <div id="inProgress" cdkDropList [cdkDropListData]="data.inProgress" class="drop-area"
-                (cdkDropListDropped)="drop($event)">
-                @for (task of data.inProgress; track $index) {
-                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-
-                    <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                        <div class="story-container">{{task.category}}</div>
-                    </div>
-                    <div class="description">
-                        <h3>{{task.title}}</h3>
-                        <p>{{task.description}}</p>
-                    </div>
-                    <div class="progress">
-                        @for (subtask of task.subtasks; track $index) {
-                        {{subtask.subtaskDone}}
-                        {{subtask.subtaskName}}
-                        }
-                    </div>
-
-                    <div class="contacts-for-tag">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                        <div class="prioprie">
-                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
-                        </div>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
-
-        <div class="single-collection">
-            <div class="add-task">
-                <h2>Await Feedback</h2>
-                <img src="./assets/img/Board/addTask.png" alt="">
-            </div>
-            <div id="awaitFeedback" cdkDropList [cdkDropListData]="data.awaitFeedback" class="drop-area"
-                (cdkDropListDropped)="drop($event)">
-                @for (task of data.awaitFeedback; track $index) {
-                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-
-                    <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                        <div class="story-container">{{task.category}}</div>
-                    </div>
-                    <div class="description">
-                        <h3>{{task.title}}</h3>
-                        <p>{{task.description}}</p>
-                    </div>
-                    <div class="progress">
-                        @for (subtask of task.subtasks; track $index) {
-                        {{subtask.subtaskDone}}
-                        {{subtask.subtaskName}}
-                        }
-                    </div>
-
-                    <div class="contacts-for-tag">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                        <div class="prioprie">
-                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
-                        </div>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
-
-        <div class="single-collection">
-            <div class="add-task">
-                <h2>Done</h2>
-                <img src="./assets/img/Board/addTask.png" alt="">
-            </div>
-            <div id="done" cdkDropList [cdkDropListData]="data.done" class="drop-area"
-                (cdkDropListDropped)="drop($event)">
-                @for (task of data.done; track $index) {
-                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
-
-                    <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
-                        <div class="story-container">{{task.category}}</div>
-                    </div>
-                    <div class="description">
-                        <h3>{{task.title}}</h3>
-                        <p>{{task.description}}</p>
-                    </div>
-                    <div class="progress">
-                        @for (subtask of task.subtasks; track $index) {
-                        {{subtask.subtaskDone}}
-                        {{subtask.subtaskName}}
-                        }
-                    </div>
-                    <div class="contacts-for-tag">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-                        }
-                        }
-                        }
-                        <div class="prioprie">
-                            <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
-                        </div>
-                    </div>
-                </div>
-                }
-            </div>
-        </div>
     </div>
     <!-- <div cdkDropListGroup class="collection-for-responsiv">
         <div class="single-collection">

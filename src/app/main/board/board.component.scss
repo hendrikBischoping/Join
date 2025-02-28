@@ -6,63 +6,14 @@ header {
   width: 100%;
   padding-top: 6rem;
   padding-bottom: 6rem;
+
   h1 {
     font-weight: bold;
-    @media (max-width:800px) {
-      display: none;
-    }
-  }
-  @media (max-width: 800px) {
-    @include standard-flex(space-around, center);
-    gap: 3rem;
-    width: 100%;
-
-  }
-  @media (max-width: 929px){
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-  @media (max-width:910px){
-      width: 70%;
   }
 
-  .resposniv-for-h {
-    display: none;
-    @media (max-width: 800px) {
-      @include standard-flex(space-between, flex-start);
-      width: 100%;
-      gap: 2rem;
-      span{
-        font-size: 4rem;
-      }
-    }
-  }
-  button {
-    @include standardButton();
-    padding: 0.4rem 1rem;
-    background-color: $standardColor;
-    color: white;
-    width: 14rem;
-    gap: 4px;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $customBlue;
-      filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2));
-    }
-    @media (max-width: 800px) {
-      @include standard-flex(center, center);
-      font-size: 2rem;
-      height: 2.5rem;
-      width: 2.5rem;
-    }
-  }
-  @media (max-width: 800px) {
-    @include standard-flex(center, flex-start);
-    flex-direction: column;
-  }
   .menu {
     @include standard-flex(space-between, center);
+
     .input-container {
       position: relative;
       display: flex;
@@ -82,6 +33,7 @@ header {
         font-size: 1.5rem;
         outline: none;
       }
+
       .border {
         width: 4rem;
         height: 2.5rem;
@@ -89,6 +41,7 @@ header {
         border-left: 3px solid #29abe2;
         right: 0px;
         position: absolute;
+
         //  position: absolute;
         img {
           top: 50%;
@@ -97,6 +50,7 @@ header {
         }
       }
     }
+
     button {
       @include standardButton();
       padding: 0.4rem 1rem;
@@ -116,6 +70,7 @@ header {
     }
   }
 }
+
 .collection {
   @include standard-flex(flex-start, center);
   align-items: flex-start;
@@ -149,18 +104,20 @@ header {
     width: 100%;
     height: auto;
     margin-bottom: 2rem;
-    max-height: calc(100vh - 10.6rem);
-    overflow: auto;
+
     & :hover {
       cursor: pointer;
     }
+
     h2 {
       font-weight: bold;
       font-size: 0.8rem;
     }
+
     img {
       cursor: pointer;
     }
+
     .add-task {
       @include standard-flex(space-between, center);
       width: 90%;
@@ -171,12 +128,14 @@ header {
         width: 60%;
       }
     }
+
     .no-task {
       background-image: url(../../../assets/img/Board/TodoNo.png);
       background-size: 100%;
       width: 15rem;
       height: 3.1rem;
     }
+
     .info-task {
       @include standard-flex(flex-start, flex-start);
       flex-direction: column;
@@ -207,17 +166,21 @@ header {
         padding: 4px 1rem 4px 1rem;
         border-bottom: 4rem;
       }
+
       .user-story-bg {
         background-color: #0038ff !important;
       }
+
       .description {
         padding-top: 0.5rem;
         padding-bottom: 1rem;
         line-height: 80%;
         line-break: normal;
+
         h3 {
           font-weight: bold;
         }
+
         p {
           text-overflow: ellipsis;
           color: #979191;
@@ -229,18 +192,32 @@ header {
       }
 
       .progress {
-        padding-top: 3rem;
+        width: 100%;
         padding-bottom: 3rem;
-        @media (max-width: 981px) {
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
-          font-size: 0.6rem;
-        }
+        @include standard-flex(space-between);
+        gap: 10px;
       }
+
+      .progress-bar {
+        width: 55%;
+        height: 0.5rem;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: #4589FF;
+        // transition: width 0.3s ease-in-out;
+      }
+
       .contacts-for-tag {
         @include standard-flex(space-between, center);
         width: 100%;
         position: relative;
+
         .initials-circle {
           position: absolute;
           bottom: 0rem;
@@ -268,55 +245,26 @@ header {
           //   left: 1rem;
           // }
         }
+
         .prioprie {
           width: 100%;
           @include standard-flex(flex-end, flex-end);
         }
       }
+
       .contact-icons {
         @include standard-flex(center, center);
         width: 3rem;
         height: 3rem;
       }
     }
+
     .about {
       @include standard-flex(center, center);
     }
   }
 }
-.collection-for-responsiv {
-  display: none;
-  @media (max-width: 929px) {
-    @include standard-flex(center, center);
-    flex-direction: column;
-    .task-to-do-in-progress{
-      width: 100%;
-    }
-      .single-collection{
-        max-height: calc(60vh - 10.6rem);
-        overflow: auto;
-        width: 80%;
-        .add-task{
-         h2{
-          color:#151b23;
-          text-decoration: underline;
-         }
-         width: 60%;
-        }
-      }
-    p{
-      font-size: 3rem;
-    }
-    .task-await-feedback-done{
-      width: 100%;
-    }
-  }
-  @media (max-width: 800px){
-    max-height: calc(100vh - 10.6rem);
-    overflow: auto;
-    width: 80%;
-  }
-}
+
 // .in-proggress-collection {
 //   @include standard-flex(space-between, center);
 //   flex-direction: column;
@@ -357,12 +305,14 @@ header {
 
   // background-color: #1fd7c1;
 }
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 25px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
+
 .cdk-drag-placeholder {
   opacity: 0;
 }
