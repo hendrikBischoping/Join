@@ -22,7 +22,8 @@ export class AddTaskComponent {
   today: string = new Date().toISOString().split("T")[0];
   selectedDate: string | null = null;
 
-  editingSubtasks = new Map<string, boolean>();
+  editingSubtasks = new Map<string, string>();
+  // editingSubtasks = new Map<string, boolean>();
   filteredContacts: IContact[] = [];
   contactsFromList: IContact[] = [];  
   saveDateTestArray: string[] = [];
@@ -139,22 +140,26 @@ export class AddTaskComponent {
   }
 
   startEditingSubtask(subtaskName: string) {
-    this.editingSubtasks.set(subtaskName, true);
+    this.editingSubtasks.set(subtaskName, subtaskName); // Originalname in Map speichern
   }
-
+  
+  updateEditingSubtask(subtaskName: string, newValue: string) {
+    this.editingSubtasks.set(subtaskName, newValue); // Temporären Wert aktualisieren
+  }
+  
   saveSubtaskEdit(oldName: string) {
     const subtask = this.task.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
-      subtask.subtaskName = oldName;
+      subtask.subtaskName = this.editingSubtasks.get(oldName) || oldName; // Speichern der Änderung
     }
-    this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
-    this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird
+    this.editingSubtasks.delete(oldName); // Entfernen aus Map (Bearbeitungsmodus beenden)
+    this.cdRef.detectChanges();
   }
-
+  
   cancelSubtaskEdit(subtaskName: string) {
-    this.editingSubtasks.delete(subtaskName);
+    this.editingSubtasks.delete(subtaskName); // Abbrechen, Änderungen verwerfen
   }
-
+ 
   deleteSubTask(name: string) {
     this.task.subtasks = this.task.subtasks?.filter(subtask => subtask.subtaskName != name);
     this.cdRef.detectChanges();
