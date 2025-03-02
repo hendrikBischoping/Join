@@ -1,11 +1,9 @@
-import { isDataSource } from '@angular/cdk/collections';
 import { Component, ChangeDetectorRef, HostListener, Input } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { ITask } from '../../interfaces/itask'; 
-import { TaskDataService } from '../../services/task-data.service';
-import { IContact } from '../../interfaces/icontact';
-
 import { ContactService } from '../../services/contact-service.service';
+import { TaskDataService } from '../../services/task-data.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { IContact } from '../../interfaces/icontact';
+import { ITask } from '../../interfaces/itask'; 
 
 @Component({
   selector: 'app-add-task',
@@ -14,18 +12,28 @@ import { ContactService } from '../../services/contact-service.service';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
+
 export class AddTaskComponent {
-  @Input() isOverlay = false;
   @Input() predefinedStatus = "todo";
   @Input() close!: () => void;
+  @Input() isOverlay = false;
 
-  taskCategories: { category: string }[] = [
-    { category: 'Technical Task' },
-    { category: 'User Story' }
-  ];
 
-  saveDateTestArray: string[] = [];
+  today: string = new Date().toISOString().split("T")[0];
+  selectedDate: string | null = null;
+
   editingSubtasks = new Map<string, boolean>();
+  filteredContacts: IContact[] = [];
+  contactsFromList: IContact[] = [];  
+  saveDateTestArray: string[] = [];
+  sortedContacts: IContact[] = [];  
+  newSubtaskName: string = '';
+  subtaskTerm: string = "";
+  searchTerm: string = "";
+  contacts!: IContact[];
+  dropdownOpen = false;
+  isUserStory = false;
+  taskAdded = false;
   task: ITask =
   {
     title: '',
@@ -38,18 +46,13 @@ export class AddTaskComponent {
     status: this.predefinedStatus,
     id: '',
   };
-  contacts!: IContact[];
-  contactsFromList: IContact[] = [];  
-  sortedContacts: IContact[] = [];  
-  newSubtaskName: string = '';
-  filteredContacts: IContact[] = [];
-  dropdownOpen = false;
-  searchTerm: string = "";
-  taskAdded = false;
-  isUserStory = false;
-  subtaskTerm: string = "";
-  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
 
+  taskCategories: { category: string }[] = [
+    { category: 'Technical Task' },
+    { category: 'User Story' }
+  ];
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
+  
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contacts = contactList;
@@ -132,17 +135,17 @@ export class AddTaskComponent {
     }
     this.task.subtasks?.push({ subtaskName: this.newSubtaskName, subtaskDone: false });
     this.newSubtaskName = "";
-    return
+    this.cdRef.detectChanges();
   }
 
   startEditingSubtask(subtaskName: string) {
     this.editingSubtasks.set(subtaskName, true);
   }
 
-  saveSubtaskEdit(oldName: string, newName: string) {
+  saveSubtaskEdit(oldName: string) {
     const subtask = this.task.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
-      subtask.subtaskName = newName;
+      subtask.subtaskName = oldName;
     }
     this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
     this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird
