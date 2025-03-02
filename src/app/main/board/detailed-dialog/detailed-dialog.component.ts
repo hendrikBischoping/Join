@@ -184,7 +184,7 @@ export class DetailedDialogComponent {
     if (this.subtaskTerm == "") {
       return;
     }
-
+ 
     this.previewTask.subtasks?.push({ subtaskName: this.subtaskTerm, subtaskDone: false });
     this.subtaskTerm = "";
     this.cdRef.detectChanges();
@@ -194,10 +194,10 @@ export class DetailedDialogComponent {
     this.editingSubtasks.set(subtaskName, true);
   }
 
-  saveSubtaskEdit(oldName: string, newName: string) {
+  saveSubtaskEdit(oldName: string) {
     const subtask = this.previewTask.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
-      subtask.subtaskName = newName;
+      subtask.subtaskName = oldName;
     }
     this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
     this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird

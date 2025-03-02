@@ -36,7 +36,7 @@
                                     </div>
                                     <p>{{ contact.name }}</p>
                                 </div>
-                                <input type="checkbox" [checked]="task.contacts!.includes(contact.id!)"
+                                <input type="checkbox" name="checkbox" [checked]="task.contacts!.includes(contact.id!)"
                                     (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
 
                             </label>
@@ -66,7 +66,7 @@
             <div class="right-side">
                 <div class="due-date">
                     <p>Due date<span class="red-star">*</span></p>
-                    <input type="date" #date="ngModel" [(ngModel)]="task.date" name="date" id="date" required>
+                    <input type="date" #date="ngModel"[attr.min]="today" [(ngModel)]="task.date" name="date" id="date" required>
                     @if (!date.valid && date.touched) {
                         <span class="red-star required-error"> Please choose a date!</span>
                     }
@@ -116,43 +116,31 @@
                         </div>
                         <div class="subtask-list">
                             <ul>
-                                <!-- @for (subtask of task.subtasks; track $index) {
-                                <li class="single-subtask">{{ subtask.subtaskName }} </li>
-                                } -->
                                 @for (subtask of task.subtasks; track $index) {
                                     <div class="single-subtask">
                                         <span class="bullet-point">● </span>
-                                        @if (editingSubtasks.get(subtask.subtaskName)) {
+                                        @if (editingSubtasks.has(subtask.subtaskName)) {
                                             <div class="subtask-edit-input-container">
-                                            <input [(ngModel)]="subtask.subtaskName" class="subtask-edit-input">
-                                            <div class="subtask-icon-container">
-                                                <img (click)="saveSubtaskEdit(subtask.subtaskName, subtask.subtaskName)"
-                                                    src="./assets/img/icons/checkIconBlack.png" alt="Save">
+                                              <input 
+                                                [ngModel]="editingSubtasks.get(subtask.subtaskName)" 
+                                                (ngModelChange)="updateEditingSubtask(subtask.subtaskName, $event)" 
+                                                name="subtask-edit" 
+                                                class="subtask-edit-input"
+                                              >
+                                              <div class="subtask-icon-container">
+                                                <img (click)="saveSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/checkIconBlack.png" alt="Save">
                                                 <div class="line"></div>
-                                                <img (click)="cancelSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/CloseIcon.png"
-                                                    alt="Cancel">
+                                                <img (click)="cancelSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/CloseIcon.png" alt="Cancel">
+                                              </div>
                                             </div>
-                                        </div>
-                                        <!-- {{subtask.subtaskName}} -->
-                                        } @else {
-                                        <!-- Standard-Anzeige -->
-                                        <span>{{subtask.subtaskName}}</span>
-                        
-                                        <div class="subtask-icon-container">
-                                            <!-- Edit-Icon -->
-                                            <img (click)="startEditingSubtask(subtask.subtaskName)" src="./assets/img/editIcon.png" alt="Edit">
-                        
-                                            <div class="line"></div>
-                        
-                                            <!-- Löschen-Icon -->
-                                            <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png" alt="Delete">
-                                        </div>
-                                        }
-                                        <!-- <div>
-                                                <img src="../../../../assets/img/editIcon.png" alt="">
-                                                <div class="line"></div>
-                                                <img (click)="deleteSubTask(subtask.subtaskName)" src="../../../../assets/img/trash.png" alt="">
-                                            </div> -->
+                                          } @else {
+                                            <span>{{ subtask.subtaskName }}</span>
+                                            <div class="subtask-icon-container">
+                                              <img (click)="startEditingSubtask(subtask.subtaskName)" src="./assets/img/editIcon.png" alt="Edit">
+                                              <div class="line"></div>
+                                              <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png" alt="Delete">
+                                            </div>
+                                          }
                                     </div>
                                     }
                             </ul>
