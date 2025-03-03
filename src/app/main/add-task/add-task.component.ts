@@ -129,7 +129,10 @@ export class AddTaskComponent {
     return dateData;
   }
 
-  addSubtask() {
+  addSubtask(event?: Event) {
+    if (event) {
+      event.preventDefault(); // Verhindert das Standardverhalten von Enter in Formularen
+    }
     if (this.newSubtaskName == "") {
       return;
     }
@@ -183,9 +186,10 @@ export class AddTaskComponent {
     this.taskAdded = true;
     this.task.status = this.predefinedStatus;
     await this.taskDataService.addTask(this.task).then(() => {
-      console.log("abruf", this.task.contacts);
       this.taskAdded = false;
       form.resetForm();
+      this.task.contacts = [];
+      this.task.subtasks = [];
     })
   }
 }

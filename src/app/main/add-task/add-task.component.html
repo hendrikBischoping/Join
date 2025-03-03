@@ -108,7 +108,7 @@
                     <div class="subtask-input">
                         <p>Subtask</p>
                         <div class="input-container">
-                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text" (keydown.enter)="addSubtask()"
+                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text" (keydown.enter)="addSubtask($event)"
                                 placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
                             @if (newSubtaskName !== '') {
                             <img (click)="addSubtask()" src="./assets/img/add-task/add.png" alt="add">

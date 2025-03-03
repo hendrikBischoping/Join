@@ -9,7 +9,7 @@
     padding: 6rem 10rem;
     font-family: 'inter';
     position: relative;
-    max-width: 1920px;
+    max-width: 1600px;
 
     .close-btn-overlay {
         position: absolute;
@@ -281,6 +281,9 @@
     }
 
     .subtask-list ul {
+        height: 3rem;
+        overflow: auto;
+        margin-bottom: 0;
         .single-subtask {
             @include standard-flex(flex-start, center);
             height: 1rem;
