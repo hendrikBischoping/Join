@@ -4,11 +4,12 @@ import { TaskDataService } from '../../services/task-data.service';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IContact } from '../../interfaces/icontact';
 import { ITask } from '../../interfaces/itask';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })

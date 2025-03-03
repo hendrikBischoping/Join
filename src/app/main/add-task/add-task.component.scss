@@ -5,11 +5,16 @@
     display: none;
 }
 
+
+
 .add-task {
     padding: 6rem 10rem;
     font-family: 'inter';
     position: relative;
-    max-width: 1920px;
+
+    >form {
+        position: relative;
+    }
 
     .close-btn-overlay {
         position: absolute;
@@ -333,7 +338,7 @@
 
 
 
-    .lowest-section, .lowest-section-overlay {
+    .lowest-section {
         @include standard-flex(space-between, center);
         margin-top: 6rem;
 
@@ -392,6 +397,60 @@
         }
     }
 }
+.clear-or-create-buttons {
+    gap: 1rem;
+    @include standard-flex(center, center);
+
+    >button {
+        @include standard-flex(center, center);
+        padding: 1rem;
+        gap: 0.5rem;
+        width: fit-content;
+        height: 3.5rem;
+        border: solid 2px rgba(93, 190, 231, 0);
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            cursor: pointer;
+            color: rgb(93, 190, 231);
+            border: solid 2px rgb(93, 190, 231);
+            ;
+        }
+
+        >.close-x {
+            font-family: 'inter';
+            font-size: 1.7rem;
+        }
+    }
+
+    >.create-btn {
+        color: white;
+        background-color: rgb(42, 54, 71);
+        transition: background-color 0.25s;
+        font-weight: 700;
+
+        &:hover {
+            color: white;
+            background-color: rgb(93, 190, 231);
+        }
+    }
+
+    >.btn-disabled {
+        background-color: rgb(176, 176, 176);
+        text-decoration: line-through;
+
+        &:hover {
+            color: white;
+            background-color: rgb(176, 176, 176);
+            border: solid 2px rgba(93, 190, 231, 0);
+            box-shadow: 0 rgba(0, 0, 0, 0.25);
+            cursor: default;
+        }
+    }
+}
+
 
 @media (max-width: 1550px) {
     .add-task {
@@ -564,15 +623,8 @@
             }
         }
 
-        .lowest-section-overlay {
-            position: absolute;
-            height: 10rem;
-            bottom: -19rem;
-        }
-
 
         .left-side, .right-side {
-            // min-width: 45rem;
             padding: 0;
             margin-right: 0;
             margin: 0;
@@ -611,10 +663,6 @@
                     right: 1rem;
                 }
             }
-        }
-
-        .right-side {
-            margin-bottom: 8rem;
         }
     }
 
@@ -685,4 +733,10 @@
             bottom: 0;
         }
     }
+}
+
+
+.task-overlay{
+    max-width: 1200px !important;
+    max-height: 70vh!important;
 }
