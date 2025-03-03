@@ -205,10 +205,10 @@ header {
   .single-collection {
     @include standard-flex(space-between, flex-start);
     flex-direction: column;
-    padding-bottom: 2rem;
+    // padding-bottom: 2rem;
     width: 100%;
     height: auto;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
 
     & :hover {
       cursor: pointer;
