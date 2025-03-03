@@ -21,7 +21,7 @@ header {
       @include standard-flex(space-between, center);
       width: 93%;
       .responsiv-add {
-        margin-right: 26rem;
+        margin-right: 20rem;
         @media (max-width: 800px) {
           margin-right: 4rem;
         }
@@ -65,7 +65,7 @@ header {
         font-size: 1.5rem;
         outline: none;
         @media (max-width: 973px) {
-          width: 60%;
+          width: 63%;
           font-size: 1rem;
           &:hover {
             cursor: pointer;
@@ -99,7 +99,7 @@ header {
           height: 1.5rem;
         }
         @media (max-width: 938px) {
-          width: 28rem;
+          width: 23rem;
         }
         @media (max-width: 800px) {
           width: 4rem;
@@ -207,7 +207,7 @@ header {
         }
         img {
           position: relative;
-          margin-right: 24rem;
+          margin-right: 18rem;
         }
       }
       @media (max-width: 800px) {
@@ -249,7 +249,7 @@ header {
         width: 60%;
       }
       @media (max-width: 800px) {
-        width: 100%;
+        width: 50%;
       }
 
       .category {
@@ -454,12 +454,17 @@ header {
 // }
 
 .drop-area {
+  min-height: 20vh;
   max-height: 50%;
   min-width: 10%;
   background-image: url(../../../assets/img/Board/TodoNo.png);
   background-repeat: no-repeat;
   background-position: 50% 0;
   width: 100%;
+  @media (max-width: 915px){
+    min-height: unset;
+    max-height: unset;
+  }
 
   // background-color: #1fd7c1;
 }
