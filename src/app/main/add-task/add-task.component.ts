@@ -23,7 +23,6 @@ export class AddTaskComponent {
   selectedDate: string | null = null;
 
   editingSubtasks = new Map<string, string>();
-  // editingSubtasks = new Map<string, boolean>();
   filteredContacts: IContact[] = [];
   contactsFromList: IContact[] = [];  
   saveDateTestArray: string[] = [];

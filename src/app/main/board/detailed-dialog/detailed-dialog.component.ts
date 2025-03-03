@@ -48,7 +48,7 @@ export class DetailedDialogComponent {
   };
   contacts!: IContact[];
   filteredContacts: IContact[] = [];
-
+  today: string = new Date().toISOString().split("T")[0];
   editingSubtasks = new Map<string, boolean>();
 
   isUserStory = false;
