@@ -420,6 +420,12 @@
                 right: -5rem;
             }
         }
+        .subtask-edit-input-container {
+            .subtask-edit-input {
+                max-width: 100%;
+                min-width: 100%;
+            }
+        }
 
         .dropdown-content {
             label input {
@@ -511,7 +517,13 @@
 
         .input-container {
             img {
-                right: -5rem;
+                right: -1rem;
+            }
+        }
+        .subtask-list {
+            ul .single-subtask {
+                min-width: fit-content;
+                padding-right: 1rem;
             }
         }
     }
@@ -519,11 +531,17 @@
 
 @media (max-width: 800px) {
     .add-task {
-        padding: 8rem;
+        padding: 10vw;
         max-height: calc(100% - 20vh - 1px);
         overflow-y: scroll;
         .required-info-mobile {
             display: block;
+        }
+
+        .single-subtask {
+            >span {
+                font-size: 1rem;
+            }
         }
 
         .lowest-section {
@@ -568,15 +586,28 @@
                 min-width: 100%;
             }
 
+            .subtask-edit-input-container {
+                width: 100%;
+            }
+
+            .subtask-icon-container img {
+                height: 1.4rem;
+                aspect-ratio: 1 / 1;
+            }
+
             .input-container {
-                min-width: 100%;
+                width: 100%;
                 >input {
                     min-width: 97.6%;
                 }
                 img {
-                    right: -5rem;
+                    right: 1rem;
                 }
             }
+        }
+
+        .right-side {
+            margin-bottom: 8rem;
         }
     }
 
@@ -586,6 +617,55 @@
 
         .separation-line {
             display: none;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .add-task{
+        .right-side {
+            margin-bottom: 0rem;
+            .subtask-edit-input-container {
+                display: flex;
+                align-items: center;
+                .intpu {
+                    height: 1rem;
+                }
+    }
+        }
+
+        .lowest-section {
+            bottom: 9rem;
+            .clear-or-create-buttons {
+                margin: 0;
+                button img {
+                    height: 1.8rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .add-task{
+        .input-container {
+            max-width: 100%;
+            >input {
+                min-width: 97.6%;
+            }
+            img {
+                right: 1rem;
+            }
+        }
+        .lowest-section {
+            justify-content: center;
+            bottom: 9rem;
+            .clear-or-create-buttons {
+                margin: 0;
+                button {
+                    font-size: 1.2rem;
+                }
+            }
         }
     }
 }
