@@ -1,14 +1,14 @@
 import { Component, ChangeDetectorRef, HostListener, Input } from '@angular/core';
 import { ContactService } from '../../services/contact-service.service';
 import { TaskDataService } from '../../services/task-data.service';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IContact } from '../../interfaces/icontact';
-import { ITask } from '../../interfaces/itask'; 
+import { ITask } from '../../interfaces/itask';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -24,9 +24,9 @@ export class AddTaskComponent {
 
   editingSubtasks = new Map<string, string>();
   filteredContacts: IContact[] = [];
-  contactsFromList: IContact[] = [];  
+  contactsFromList: IContact[] = [];
   saveDateTestArray: string[] = [];
-  sortedContacts: IContact[] = [];  
+  sortedContacts: IContact[] = [];
   newSubtaskName: string = '';
   subtaskTerm: string = "";
   searchTerm: string = "";
@@ -35,24 +35,24 @@ export class AddTaskComponent {
   isUserStory = false;
   taskAdded = false;
   task: ITask =
-  {
-    title: '',
-    description: '',
-    contacts: [""],
-    date: '10.10.2020',
-    priority: 'Medium',
-    category: 'User Story',
-    subtasks: [],
-    status: this.predefinedStatus,
-    id: '',
-  };
+    {
+      title: '',
+      description: '',
+      contacts: [""],
+      date: '10.10.2020',
+      priority: 'Medium',
+      category: 'User Story',
+      subtasks: [],
+      status: this.predefinedStatus,
+      id: '',
+    };
 
   taskCategories: { category: string }[] = [
     { category: 'Technical Task' },
     { category: 'User Story' }
   ];
-  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) {};
-  
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) { };
+
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contacts = contactList;
@@ -68,8 +68,8 @@ export class AddTaskComponent {
       contact.name.toLowerCase().includes(query)
     );
     this.cdRef.detectChanges();
-  }  
-  
+  }
+
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (!this.isClickInsideDropdown(event)) {
@@ -85,7 +85,7 @@ export class AddTaskComponent {
     const dropdownContainer = document.querySelector(".assignment-container");
     return dropdownContainer?.contains(event.target as Node) ?? false;
   }
-  
+
   openDropdown(event: Event) {
     event.stopPropagation();
     this.dropdownOpen = true;
@@ -117,7 +117,7 @@ export class AddTaskComponent {
   }
 
   changePriority(prio: string) {
-    this.task.priority = prio;       
+    this.task.priority = prio;
   }
 
   isPriorityActive(prio: string): boolean {
@@ -125,7 +125,7 @@ export class AddTaskComponent {
   }
 
   getDate() {
-    let dateData: string = this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : '';      
+    let dateData: string = this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : '';
     return dateData;
   }
 
@@ -141,24 +141,28 @@ export class AddTaskComponent {
   startEditingSubtask(subtaskName: string) {
     this.editingSubtasks.set(subtaskName, subtaskName); // Originalname in Map speichern
   }
-  
+
   updateEditingSubtask(subtaskName: string, newValue: string) {
     this.editingSubtasks.set(subtaskName, newValue); // Temporären Wert aktualisieren
   }
-  
-  saveSubtaskEdit(oldName: string) {
+
+  saveSubtaskEdit(oldName: string, event?: Event) {
+    if (event) {
+      event.preventDefault(); // Verhindert das Standardverhalten von Enter in Formularen
+    }
     const subtask = this.task.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
       subtask.subtaskName = this.editingSubtasks.get(oldName) || oldName; // Speichern der Änderung
     }
     this.editingSubtasks.delete(oldName); // Entfernen aus Map (Bearbeitungsmodus beenden)
     this.cdRef.detectChanges();
+    (event?.target as HTMLInputElement)?.blur();
   }
-  
+
   cancelSubtaskEdit(subtaskName: string) {
     this.editingSubtasks.delete(subtaskName); // Abbrechen, Änderungen verwerfen
   }
- 
+
   deleteSubTask(name: string) {
     this.task.subtasks = this.task.subtasks?.filter(subtask => subtask.subtaskName != name);
     this.cdRef.detectChanges();
@@ -173,18 +177,15 @@ export class AddTaskComponent {
   }
 
   async submitTask(form: NgForm) {
-      if (form.valid && form.submitted) {
-        this.getDate();
-     }
+    if (form.valid && form.submitted) {
+      this.getDate();
+    }
     this.taskAdded = true;
     this.task.status = this.predefinedStatus;
-  
-  await this.taskDataService.addTask(this.task).then(() => {
-    console.log("abruf", this.task.contacts);
-    
-    this.taskAdded = false;
-    form.resetForm();
-  })
-  
-}
+    await this.taskDataService.addTask(this.task).then(() => {
+      console.log("abruf", this.task.contacts);
+      this.taskAdded = false;
+      form.resetForm();
+    })
+  }
 }
