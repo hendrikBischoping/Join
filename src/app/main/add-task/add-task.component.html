@@ -150,16 +150,30 @@
                 <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
             </div>
         </div>
-        <div class="lowest-section">
-            <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
-            <div class="clear-or-create-buttons">
-                <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
-                @if (title.valid && date.touched && date.valid) {
-                    <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
-                    alt="check"></button>
-                } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"
-                    alt="check"></button>}
+        @if (isOverlay) {
+            <div class="lowest-section-overlay">
+                <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+                <div class="clear-or-create-buttons">
+                    <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
+                    @if (title.valid && date.touched && date.valid) {
+                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
+                        alt="check"></button>
+                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"
+                        alt="check"></button>}
+                </div>
             </div>
-        </div>
+        } @else {
+            <div class="lowest-section">
+                <!-- <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p> -->
+                <div class="clear-or-create-buttons">
+                    <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
+                    @if (title.valid && date.touched && date.valid) {
+                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
+                        alt="check"></button>
+                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"
+                        alt="check"></button>}
+                </div>
+            </div>
+        }
     </form>
 </section>

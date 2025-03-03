@@ -332,7 +332,7 @@
 
 
 
-    .lowest-section {
+    .lowest-section, .lowest-section-overlay {
         @include standard-flex(space-between, center);
         margin-top: 6rem;
 
@@ -544,7 +544,7 @@
             }
         }
 
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             justify-content: flex-end;
             margin-top: 0;
             padding: 0 8rem;
@@ -561,6 +561,12 @@
             .required-info-normal {
                 display: none;
             }
+        }
+
+        .lowest-section-overlay {
+            position: absolute;
+            height: 10rem;
+            bottom: -19rem;
         }
 
 
@@ -634,7 +640,7 @@
     }
         }
 
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             bottom: 9rem;
             .clear-or-create-buttons {
                 margin: 0;
@@ -642,6 +648,12 @@
                     height: 1.8rem;
                 }
             }
+        }
+
+        .lowest-section-overlay {
+            position: absolute;
+            height: 10rem;
+            bottom: -19rem;
         }
     }
 }
@@ -657,7 +669,7 @@
                 right: 1rem;
             }
         }
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             justify-content: center;
             bottom: 9rem;
             .clear-or-create-buttons {
@@ -666,6 +678,10 @@
                     font-size: 1.2rem;
                 }
             }
+        }
+
+        .lowest-section-overlay {
+            bottom: 0;
         }
     }
 }
