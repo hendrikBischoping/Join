@@ -124,11 +124,6 @@ header {
           cursor: pointer;
         }
 
-        // @media (max-width: 973px) {
-        //   width: 9rem;
-        //   height: 1.5rem;
-        // }
-
         @media (max-width: 973px) {
          right: 4rem;
         }
@@ -206,10 +201,8 @@ header {
   .single-collection {
     @include standard-flex(space-between, flex-start);
     flex-direction: column;
-    // padding-bottom: 2rem;
     width: 100%;
     height: auto;
-    // margin-bottom: 2rem;
 
     & :hover {
       cursor: pointer;
@@ -217,7 +210,11 @@ header {
 
     h2 {
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 1.5rem;
+
+      @media (max-width: 1300px) {
+        font-size: 0.8rem;
+      }
     }
 
     img {
@@ -228,22 +225,6 @@ header {
       @include standard-flex(space-between, center);
       width: 90%;
       margin-bottom: 2rem;
-
-      // @media (max-width: 911px) {
-      //   h2 {
-      //     font-size: 0.6rem;
-      //   }
-      // }
-      // @media (max-width: 938px) {
-      //   h2 {
-      //     font-size: 2.5rem;
-      //     margin: 0;
-      //   }
-      //   img {
-      //     position: relative;
-      //     margin-right: 18rem;
-      //   }
-      // }
       @media (max-width: 800px) {
         h2 {
           font-size: 2.5rem;
@@ -272,6 +253,7 @@ header {
         min-width: 15rem;
       }
 
+
       .category {
 
         @include standard-flex(flex-start, flex-start);
@@ -299,14 +281,6 @@ header {
           }
         }
       }
-
-      // .technical-task-bg {
-      //   @media (max-width: 981px) {
-      //     .story-container {
-      //       font-size: 0.6rem;
-      //     }
-      //   }
-      // }
 
       .description {
         padding-top: 0.5rem;
@@ -485,8 +459,7 @@ header {
   color: white;
   background-color: white;
   border-radius: 25px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
