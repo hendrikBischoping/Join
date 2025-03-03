@@ -6,6 +6,7 @@ header {
   width: 100%;
   padding-top: 6rem;
   padding-bottom: 6rem;
+
   .resposniv-for-h {
     display: none;
   }
@@ -17,11 +18,14 @@ header {
     gap: 3rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+
     .resposniv-for-h {
       @include standard-flex(space-between, center);
       width: 93%;
+
       .responsiv-add {
-        margin-right: 20rem;
+        // margin-right: 20rem;
+
         @media (max-width: 800px) {
           margin-right: 4rem;
         }
@@ -34,8 +38,10 @@ header {
       }
     }
   }
+
   h1 {
     font-weight: bold;
+
     @media (max-width: 938px) {
       display: none;
     }
@@ -43,14 +49,17 @@ header {
 
   .menu {
     @include standard-flex(space-between, center);
+
     @media (max-width: 938px) {
       width: 92%;
     }
+
     .input-container {
       position: relative;
       display: flex;
       align-items: center;
       width: 100%;
+
       @media (max-width: 800px) {
         position: absolute;
         width: 87%;
@@ -64,16 +73,20 @@ header {
         font-family: "Inter";
         font-size: 1.5rem;
         outline: none;
+
         @media (max-width: 973px) {
           width: 63%;
           font-size: 1rem;
+
           &:hover {
             cursor: pointer;
           }
         }
+
         @media (max-width: 800px) {
           width: 100%;
           font-size: 1.5rem;
+
           &:hover {
             cursor: pointer;
           }
@@ -88,19 +101,21 @@ header {
         right: 0px;
         position: absolute;
 
-        //  position: absolute;
         img {
           top: 50%;
           right: 10%;
           cursor: pointer;
         }
-        @media (max-width: 973px) {
-          width: 9rem;
-          height: 1.5rem;
-        }
-        @media (max-width: 938px) {
-          width: 23rem;
-        }
+
+        // @media (max-width: 973px) {
+        //   width: 9rem;
+        //   height: 1.5rem;
+        // }
+
+        // @media (max-width: 938px) {
+        //   width: 23rem;
+        // }
+
         @media (max-width: 800px) {
           width: 4rem;
           height: 1.8rem;
@@ -121,11 +136,12 @@ header {
         background-color: $customBlue;
         filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.2));
       }
+
       @media (max-width: 973px) {
-        // padding: 0.2rem 0.5rem;
         margin-right: 3rem;
         font-size: 1rem;
       }
+
       @media (max-width: 938px) {
         display: none;
       }
@@ -136,7 +152,6 @@ header {
 .collection {
   @include standard-flex(flex-start, center);
   align-items: flex-start;
-  // width: 100%;
   height: auto;
   gap: 1rem;
   margin-left: 2rem;
@@ -144,26 +159,23 @@ header {
 
   max-height: calc(100vh - 10.6rem);
   overflow: auto;
+
   @media (max-width: 1039px) {
     gap: 0.3rem;
     margin-left: 1rem;
     margin-right: 1rem;
   }
+
   @media (max-width: 981px) {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
-  // @media (max-width: 938px) {
-  //   @include standard-flex(flex-start, center);
-  //   flex-direction: column;
-  // }
+
   @media (max-width: 938px) {
     @include standard-flex(flex-start, flex-start);
     flex-direction: column;
     width: 100%;
     max-height: calc(74vh - 10.6rem);
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
   }
 
   .single-collection {
@@ -192,44 +204,32 @@ header {
       width: 90%;
       margin-bottom: 2rem;
 
-      @media (max-width: 911px) {
-        h2 {
-          font-size: 0.6rem;
-        }
-      }
-      @media (max-width: 938px) {
-        // @include standard-flex(space-between, center);
-        // flex-direction: row;
-        // width: 100%;
-        h2 {
-          font-size: 2.5rem;
-          margin: 0;
-        }
-        img {
-          position: relative;
-          margin-right: 18rem;
-        }
-      }
+      // @media (max-width: 911px) {
+      //   h2 {
+      //     font-size: 0.6rem;
+      //   }
+      // }
+      // @media (max-width: 938px) {
+      //   h2 {
+      //     font-size: 2.5rem;
+      //     margin: 0;
+      //   }
+      //   img {
+      //     position: relative;
+      //     margin-right: 18rem;
+      //   }
+      // }
       @media (max-width: 800px) {
-        // @include standard-flex(space-between, center);
-        // flex-direction: row;
-        // width: 100%;
         h2 {
           font-size: 2.5rem;
           margin: 0;
         }
+
         img {
           position: relative;
           margin-right: 2rem;
         }
       }
-    }
-
-    .no-task {
-      background-image: url(../../../assets/img/Board/TodoNo.png);
-      background-size: 100%;
-      width: 15rem;
-      height: 3.1rem;
     }
 
     .info-task {
@@ -239,21 +239,16 @@ header {
       border-radius: 0.5rem;
       line-height: 80%;
       line-break: normal;
-      // width: 100%;
       padding: 1rem;
       margin-bottom: 2rem;
-      @media (max-width: 925px) {
-        width: 80%;
-      }
-      @media (max-width: 873px) {
-        width: 60%;
-      }
-      @media (max-width: 800px) {
-        width: 50%;
+
+      @media (max-width: 938px) {
+        width: 15rem;
+        min-width: 15rem;
       }
 
       .category {
-       
+
         @include standard-flex(flex-start, flex-start);
         background-color: #1fd7c1;
         color: white;
@@ -265,25 +260,28 @@ header {
 
       .user-story-bg {
         background-color: #0038ff !important;
+
         @media (max-width: 981px) {
           .story-container {
             font-size: 0.6rem;
-           
+
           }
         }
+
         .story-container {
           @media (max-width: 800px) {
             font-size: 1rem;
           }
         }
       }
-      .technical-task-bg {
-        @media (max-width: 981px) {
-          .story-container {
-            font-size: 0.6rem;
-          }
-        }
-      }
+
+      // .technical-task-bg {
+      //   @media (max-width: 981px) {
+      //     .story-container {
+      //       font-size: 0.6rem;
+      //     }
+      //   }
+      // }
 
       .description {
         padding-top: 0.5rem;
@@ -293,12 +291,15 @@ header {
 
         h3 {
           font-weight: bold;
+
           @media (max-width: 981px) {
             font-size: 0.7rem;
           }
+
           @media (max-width: 800px) {
             font-size: 1rem;
           }
+
           @media (max-width: 550px) {
             font-size: 1.5rem;
           }
@@ -308,12 +309,15 @@ header {
           text-overflow: ellipsis;
           color: #979191;
           font-size: 1rem;
+
           @media (max-width: 981px) {
             font-size: 0.7rem;
           }
+
           @media (max-width: 800px) {
             font-size: 1rem;
           }
+
           @media (max-width: 550px) {
             font-size: 1.5rem;
           }
@@ -325,21 +329,27 @@ header {
         padding-bottom: 3rem;
         @include standard-flex(space-between);
         gap: 10px;
+
         span {
           font-size: 1rem;
+
           @media (max-width: 1439px) {
             font-size: 0.6rem;
           }
+
           @media (max-width: 973px) {
             font-size: 0.5rem;
           }
+
           @media (max-width: 800px) {
             font-size: 1rem;
           }
+
           @media (max-width: 550px) {
             font-size: 1.5rem;
           }
         }
+
         .progress-bar {
           @media (max-width: 973px) {
             width: 40%;
@@ -359,7 +369,6 @@ header {
       .progress-fill {
         height: 100%;
         background-color: #4589ff;
-        // transition: width 0.3s ease-in-out;
       }
 
       .contacts-for-tag {
@@ -379,20 +388,18 @@ header {
               left: #{($i - 1) * 2}rem;
             }
           }
+
           @media (max-width: 1275px) {
             width: 2rem;
             height: 2rem;
             font-size: 1rem;
+
             @for $i from 1 through 10 {
               &:nth-child(#{$i}) {
                 left: #{($i - 1) * 1.5}rem;
               }
             }
           }
-
-          // &:nth-child(1) {
-          //   left: 1rem;
-          // }
         }
 
         .prioprie {
@@ -411,72 +418,43 @@ header {
     .about {
       @include standard-flex(center, center);
     }
+
     @media (max-width: 938px) {
       .cdk-drop-list {
         display: flex;
         overflow: auto;
-        white-space: nowrap;
         gap: 1rem;
       }
-
-      // .drop-area {
-      //   display: flex;
-      //   overflow: auto;
-      //   white-space: nowrap;
-      //   gap: 1rem;
-      // }
     }
   }
 }
 
-// .in-proggress-collection {
-//   @include standard-flex(space-between, center);
-//   flex-direction: column;
-//   padding-bottom: 2rem;
-//   width: 25%;
-//   h2 {
-//     font-weight: bold;
-//   }
-//   img {
-//     cursor: pointer;
-//   }
-//   .info-task {
-//     @include standard-flex(center, center);
-//     flex-direction: column;
-//     background-color: white;
-//     border-radius: 3rem;
-//     overflow: auto;
-//     line-height: 80%;
-//     line-break: normal;
-//     .contact-icons {
-//       @include standard-flex(center, center);
-//       .initials-circle {
-//         @include standard-flex(center, center);
-//         width: 3rem;
-//         height: 3rem;
-//       }
-//     }
-//   }
-// }
-
 .drop-area {
-  min-height: 20vh;
+  min-height: 10vh;
   max-height: 50%;
   min-width: 10%;
+  width: 100%;
+
+  @media (max-width: 915px) {
+    max-height: unset;
+  }
+}
+
+.no-task {
   background-image: url(../../../assets/img/Board/TodoNo.png);
   background-repeat: no-repeat;
   background-position: 50% 0;
-  width: 100%;
-  @media (max-width: 915px){
-    min-height: unset;
-    max-height: unset;
-  }
+}
 
-  // background-color: #1fd7c1;
+.highlight {
+  border: 2px dashed #007bff !important;
+  transition: border 0.2s ease-in-out;
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
+  color: white;
+  background-color: white;
   border-radius: 25px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
@@ -496,10 +474,4 @@ header {
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-@media (max-width: 936px) {
-  // nav{
-
-  // }
 }

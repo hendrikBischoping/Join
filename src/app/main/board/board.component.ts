@@ -39,16 +39,10 @@ export class BoardComponent {
   boardRows = ["todo","inProgress", "awaitFeedback", "done"]
   data = inject(FirebaseService)
   searchQuery = "";
- 
+  highlightedColumn: string | null = null; 
+  isDragging = false;
 
- 
-  initTask() {
-   
-  }
-
-  constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {
-
-  }
+  constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {}
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -100,7 +94,15 @@ export class BoardComponent {
     return task.category == "User Story" ?  true : false;
   }
 
-  
+  onDragEntered(columnId: string) {
+    console.log("hover", columnId);
+    
+    this.highlightedColumn = columnId;
+  }
+
+  onDragExited() {
+    this.highlightedColumn = null;
+  }
 
   drop(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
@@ -116,6 +118,7 @@ export class BoardComponent {
       const currentTask = event.container.data[event.currentIndex];
       this.data.updateTaskStatus(currentTask.id!, event.container.id);
     }
+    this.highlightedColumn = null;
   }
 
   getPrioImagePath(task:ITask, prio: string, forceInactive = false): string {
@@ -130,6 +133,7 @@ export class BoardComponent {
   changePriority(task:ITask, prio: string) {
     task.priority = prio;
   }
+
   isPriorityActive(task:ITask, prio: string): boolean {
     return task.priority === prio;
   }
