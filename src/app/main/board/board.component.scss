@@ -177,10 +177,11 @@ header {
 .collection {
   @include standard-flex(flex-start, center);
   align-items: flex-start;
-  height: auto;
+  height: fit-content;
   gap: 1rem;
   margin-left: 2rem;
   padding-right: 2rem;
+  padding-bottom: 2rem;
   max-height: calc(100vh - 10.6rem);
   overflow: auto;
 
@@ -403,6 +404,7 @@ header {
         position: relative;
 
         .initials-circle {
+          position: absolute;
           p {margin-top: 2px;}
           bottom: 0rem;
           left: 0rem;
@@ -457,12 +459,13 @@ header {
 
 .drop-area {
   min-height: 10vh;
-  max-height: 50%;
   min-width: 10%;
   width: 100%;
+  margin-bottom: 8rem;
 
   @media (max-width: 915px) {
     max-height: unset;
+    margin-bottom: 0rem;
   }
 }
 
