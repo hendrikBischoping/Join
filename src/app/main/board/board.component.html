@@ -56,7 +56,7 @@
                         @for (contact of contacts; track $index) {
                         @if (taskContact == contact.id) {
                         <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
+                            <p>{{contact.initials}}</p>
                         </div>
                         }
                         }

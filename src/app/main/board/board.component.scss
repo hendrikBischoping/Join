@@ -312,6 +312,7 @@ header {
         padding-bottom: 1rem;
         line-height: 80%;
         line-break: normal;
+        flex: 1;
 
         h3 {
           font-weight: bold;
@@ -333,6 +334,7 @@ header {
           text-overflow: ellipsis;
           color: #979191;
           font-size: 1rem;
+          flex: 1;
 
           @media (max-width: 981px) {
             font-size: 0.7rem;
@@ -401,7 +403,7 @@ header {
         position: relative;
 
         .initials-circle {
-          position: absolute;
+          p {margin-top: 2px;}
           bottom: 0rem;
           left: 0rem;
           width: 3rem;
