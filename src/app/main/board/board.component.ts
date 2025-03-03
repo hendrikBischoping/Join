@@ -61,7 +61,8 @@ export class BoardComponent {
 
   getFilteredTasks(status: string): ITask[] {
     return this.getRowData(status).filter(task =>
-      task.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      task.description?.toLocaleLowerCase().includes(this.searchQuery.toLocaleLowerCase())
     );
   }
 
