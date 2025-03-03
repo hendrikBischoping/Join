@@ -11,6 +11,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
   transferArrayItem,
+  DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../../services/firebase-service.service';
 import { CommonModule } from '@angular/common';

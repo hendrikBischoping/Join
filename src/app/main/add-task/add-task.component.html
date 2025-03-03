@@ -1,4 +1,4 @@
-<section class="add-task">
+<section class="add-task" [ngClass]="{'task-overlay':isOverlay}">
     <h1>Add Task</h1>
     @if (isOverlay) {
         <div class="close-btn-overlay" (click)="close()" ><img src="./assets/img/icons/CloseIcon.png" alt="close-btn"></div>
@@ -148,11 +148,7 @@
                     </div>
                 </div>
                 <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
-            </div>
-        </div>
-        @if (isOverlay) {
-            <div class="lowest-section-overlay">
-                <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+                @if (isOverlay) {
                 <div class="clear-or-create-buttons">
                     <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
                     @if (title.valid && date.touched && date.valid) {
@@ -161,8 +157,10 @@
                     } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="./assets/img/add-task/check.png"
                         alt="check"></button>}
                 </div>
+                }
             </div>
-        } @else {
+        </div>
+        @if (!isOverlay) {
             <div class="lowest-section">
                 <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
                 <div class="clear-or-create-buttons">
