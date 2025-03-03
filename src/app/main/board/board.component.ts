@@ -95,8 +95,6 @@ export class BoardComponent {
   }
 
   onDragEntered(columnId: string) {
-    console.log("hover", columnId);
-    
     this.highlightedColumn = columnId;
   }
 
