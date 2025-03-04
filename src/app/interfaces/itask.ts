@@ -14,4 +14,5 @@ export interface ITask {
     subtasks?: ISubtask[],
     status: string,
     id: string,
+    parsedDate?: Date | null;
 }
