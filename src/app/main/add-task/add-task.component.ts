@@ -176,8 +176,11 @@ export class AddTaskComponent {
     this.newSubtaskName = "";
   }
 
-  clearForm() {
-    location.reload();
+  clearForm(form: NgForm) {
+    form.resetForm();
+    this.task.contacts = [];
+    this.task.subtasks = [];
+    this.changePriority('Medium')
   }
 
   async submitTask(form: NgForm) {

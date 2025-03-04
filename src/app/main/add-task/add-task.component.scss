@@ -346,7 +346,6 @@
 
     .lowest-section {
         @include standard-flex(space-between, center);
-        // margin-top: 6rem;
 
         .clear-or-create-buttons {
             gap: 1rem;
