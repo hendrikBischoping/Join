@@ -1,2 +1,75 @@
-<p>summary works!</p>
-<p>jan hat eine summary gemacht!</p>
+<main>
+    <div class="headline">
+        <h1>Join 360</h1>
+        <div class="line"></div>
+        <span> Key metrics at a Glance</span>
+    </div>
+    <section>
+        <div class="info-bubbles-container">
+            <div class="upper-bubbles">
+                <div class="single-bubble-top">
+                    <div class="icon-bg">
+                        <img src="./assets/img/icons/editIconWhite.png" alt="">
+                    </div>
+                    <div class="count">
+                        <span class="bottom-count-line">{{firebaseService.todo.length}}</span>
+                        <span>To-do</span>
+                    </div>
+                </div>
+                <div class="single-bubble-top">
+                    <div class="icon-bg">
+                        <img src="./assets/img/icons/CheckIconWhite.png" alt="">
+                    </div>
+                    <div class="count">
+                        <span class="bottom-count-line">{{firebaseService.done.length}}</span>
+                        <span>Done</span>
+                    </div>
+                </div>
+            </div>
+            <div class="single-bubble-mid">
+                <div class="left-inside-bubble">
+                        <div class="icon-bg" [ngClass]="getUpcomingTaskPrioClass()">
+                            <img src="./assets/img/add-task/medium-active.png" alt="">
+                        </div>
+                    
+                    
+                    <div class="count">
+                        <span class="bottom-count-line">1</span>
+                        <span>{{getUpcomingTaskPrio()}}</span>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="date-container">
+                    <span class="date">{{getDateOfUpcomingTask()}}</span>
+                    <span>Upcoming Deadline</span>
+                </div>
+            </div>
+            <div class="lower-bubbles">
+                <div class="single-bubble-bottom">
+                    <div class="count">
+                        <span class="bottom-count-line">{{tasks.length}}</span>
+                        <span>Task in Board</span>    
+                    </div>
+                </div>
+                <div class="single-bubble-bottom">
+                    <div class="count">
+                        <span class="bottom-count-line">{{firebaseService.inProgress.length}}</span>
+                        <span >Task in Progress</span>    
+                    </div>
+                </div>
+                <div class="single-bubble-bottom">
+                    <div class="count">
+                        <span class="bottom-count-line">{{firebaseService.awaitFeedback.length}}</span>
+                        <span>Awaiting Feedback</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="greeting-container">
+            <span>{{getWelcomeMessage()}}</span>
+            @if (!isGuest) {
+                <span class="username">{{currentUser}}</span>
+            }
+        </div>
+    </section>
+</main>
