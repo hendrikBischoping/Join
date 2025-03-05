@@ -7,16 +7,18 @@
     <section>
         <div class="info-bubbles-container">
             <div class="upper-bubbles">
-                <div class="single-bubble-top">
-                    <div class="icon-bg">
-                        <img src="./assets/img/icons/editIconWhite.png" alt="">
-                    </div>
-                    <div class="count">
-                        <span class="bottom-count-line">{{firebaseService.todo.length}}</span>
-                        <span>To-do</span>
-                    </div>
+
+                <div class="single-bubble-top" routerLink="/board">
+                        <div class="icon-bg">
+                            <img src="./assets/img/icons/editIconWhite.png" alt="">
+                        </div>
+                        <div class="count">
+                            <span class="bottom-count-line">{{firebaseService.todo.length}}</span>
+                            <span>To-do</span>
+                        </div>
                 </div>
-                <div class="single-bubble-top">
+
+                <div class="single-bubble-top" routerLink="/board">
                     <div class="icon-bg">
                         <img src="./assets/img/icons/CheckIconWhite.png" alt="">
                     </div>
@@ -26,13 +28,11 @@
                     </div>
                 </div>
             </div>
-            <div class="single-bubble-mid">
+            <div class="single-bubble-mid" routerLink="/board">
                 <div class="left-inside-bubble">
-                        <div class="icon-bg" [ngClass]="getUpcomingTaskPrioClass()">
-                            <img src="./assets/img/add-task/medium-active.png" alt="">
-                        </div>
-                    
-                    
+                    <div class="icon-bg" [ngClass]="getUpcomingTaskPrioClass()">
+                        <img src={{getUpcomingTaskPrioIcon()}} alt="">
+                    </div>
                     <div class="count">
                         <span class="bottom-count-line">1</span>
                         <span>{{getUpcomingTaskPrio()}}</span>
@@ -45,19 +45,19 @@
                 </div>
             </div>
             <div class="lower-bubbles">
-                <div class="single-bubble-bottom">
+                <div class="single-bubble-bottom" routerLink="/board">
                     <div class="count">
                         <span class="bottom-count-line">{{tasks.length}}</span>
-                        <span>Task in Board</span>    
+                        <span>Task in Board</span>
                     </div>
                 </div>
-                <div class="single-bubble-bottom">
+                <div class="single-bubble-bottom" routerLink="/board">
                     <div class="count">
                         <span class="bottom-count-line">{{firebaseService.inProgress.length}}</span>
-                        <span >Task in Progress</span>    
+                        <span>Task in Progress</span>
                     </div>
                 </div>
-                <div class="single-bubble-bottom">
+                <div class="single-bubble-bottom" routerLink="/board">
                     <div class="count">
                         <span class="bottom-count-line">{{firebaseService.awaitFeedback.length}}</span>
                         <span>Awaiting Feedback</span>
@@ -68,7 +68,7 @@
         <div class="greeting-container">
             <span>{{getWelcomeMessage()}}</span>
             @if (!isGuest) {
-                <span class="username">{{currentUser}}</span>
+            <span class="username">{{currentUser}}</span>
             }
         </div>
     </section>

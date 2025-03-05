@@ -263,6 +263,9 @@ header {
         text-align: start;
         padding: 4px 1rem 4px 1rem;
         border-bottom: 4rem;
+        @media (max-width: 550px){
+          font-size: 1rem;
+        }
       }
 
       .user-story-bg {
@@ -271,13 +274,14 @@ header {
         @media (max-width: 981px) {
           .story-container {
             font-size: 0.6rem;
-
+            
           }
         }
 
         .story-container {
           @media (max-width: 800px) {
             font-size: 1rem;
+
           }
         }
       }
@@ -376,6 +380,12 @@ header {
         @include standard-flex(space-between, center);
         width: 100%;
         position: relative;
+        line-height: 80%;
+        line-break: normal;
+        .for-circle{
+          width: 75px;
+          height: 75px;
+        }
 
         .initials-circle {
           position: absolute;
@@ -384,6 +394,8 @@ header {
           left: 0rem;
           width: 3rem;
           height: 3rem;
+          line-height: 80%;
+          line-break: normal;
 
           @for $i from 1 through 10 {
             &:nth-child(#{$i}) {

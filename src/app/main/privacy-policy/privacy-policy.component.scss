@@ -1,0 +1,7 @@
+@use "../../styles/mixins.scss" as *;
+@use "../../../styles.scss" as *;
+
+main{
+    @include standard-flex(center,flex-start);
+    flex-direction: column;
+}
