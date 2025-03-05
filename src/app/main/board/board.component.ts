@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CdkDropListGroup,CommonModule, FormsModule],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup, CommonModule, FormsModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -28,7 +28,7 @@ export class BoardComponent {
   tasks: ITask[] = [{
     title: "Unknown",
     description: "No task found",
-    contacts: ["Andi","Hendrik"],
+    contacts: ["Andi", "Hendrik"],
     date: '0',
     priority: "mid",
     category: "Userstory",
@@ -37,13 +37,13 @@ export class BoardComponent {
     id: ""
   }];
   contacts!: IContact[];
-  boardRows = ["todo","inProgress", "awaitFeedback", "done"]
+  boardRows = ["todo", "inProgress", "awaitFeedback", "done"]
   data = inject(FirebaseService)
   searchQuery = "";
-  highlightedColumn: string | null = null; 
+  highlightedColumn: string | null = null;
   isDragging = false;
 
-  constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) {}
+  constructor(private taskDataService: TaskDataService, private contactService: ContactService, private overlayService: OverlayService) { }
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -52,6 +52,23 @@ export class BoardComponent {
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
     });
+    
+  }
+
+  getRowData(status: string): ITask[] {
+    let tasks: ITask[];
+    switch (status) {
+      case "todo": tasks = this.data.todo; break;
+      case "inProgress": tasks = this.data.inProgress; break;
+      case "awaitFeedback": tasks = this.data.awaitFeedback; break;
+      case "done": tasks = this.data.done; break;
+      default: tasks = this.tasks;
+    }
+
+    return tasks.map(task => ({
+      ...task,
+      contacts: task.contacts?.filter(contact => contact?.trim() !== '') || []
+    }));
   }
 
   getFilteredTasks(status: string): ITask[] {
@@ -61,17 +78,17 @@ export class BoardComponent {
     );
   }
 
-  getRowData(status: string) : ITask[] {
-    switch (status) {
-      case "todo": return this.data.todo;
-      case "inProgress": return this.data.inProgress;
-      case "awaitFeedback": return this.data.awaitFeedback;
-      case "done": return this.data.done;
-      default: return this.tasks;
-    }
-  }
+  // getRowData(status: string) : ITask[] {
+  //   switch (status) {
+  //     case "todo": return this.data.todo;
+  //     case "inProgress": return this.data.inProgress;
+  //     case "awaitFeedback": return this.data.awaitFeedback;
+  //     case "done": return this.data.done;
+  //     default: return this.tasks;
+  //   }
+  // }
 
-  getRowName (status: string) : string {
+  getRowName(status: string): string {
     switch (status) {
       case "todo": return "To Do";
       case "inProgress": return "In Progress";
@@ -89,10 +106,10 @@ export class BoardComponent {
   getProgress(task: ITask): number {
     const doneSubtasks = this.getDoneSubtask(task);
     return (doneSubtasks / task.subtasks!.length) * 100; // Berechnet Prozentwert
-}
- 
+  }
+
   checkCategory(task: ITask) {
-    return task.category == "User Story" ?  true : false;
+    return task.category == "User Story" ? true : false;
   }
 
   onDragEntered(columnId: string) {
@@ -120,7 +137,7 @@ export class BoardComponent {
     this.highlightedColumn = null;
   }
 
-  getPrioImagePath(task:ITask, prio: string, forceInactive = false): string {
+  getPrioImagePath(task: ITask, prio: string, forceInactive = false): string {
     if (forceInactive) {
       return `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
     } else
@@ -129,19 +146,19 @@ export class BoardComponent {
         : `./assets/img/add-task/${prio.toLowerCase()}-inactive.png`;
   }
 
-  changePriority(task:ITask, prio: string) {
+  changePriority(task: ITask, prio: string) {
     task.priority = prio;
   }
 
-  isPriorityActive(task:ITask, prio: string): boolean {
+  isPriorityActive(task: ITask, prio: string): boolean {
     return task.priority === prio;
   }
 
-  openEditDialog(id:string) {
+  openEditDialog(id: string) {
     this.overlayService.openEditTaskOverlay(id);
   }
 
-  openAddTaskDialog (status = "todo") {
+  openAddTaskDialog(status = "todo") {
     this.overlayService.openAddTaskOverlay(status);
   }
 }

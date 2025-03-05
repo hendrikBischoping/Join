@@ -51,15 +51,24 @@
                     <div class="contacts-for-tag">
                         <div class="for-circle">
                             @for (taskContact of task.contacts; track $index) {
-                            @for (contact of contacts; track $index) {
-                            @if (taskContact == contact.id) {
-                            <div class="initials-circle bg-{{contact.styleSelector}}">
-                                <p>{{contact.initials}}</p>
-                            </div>
+                                @if ($index < 5) {
+                                    @for (contact of contacts; track null) {
+                                        @if (taskContact == contact.id) {
+                                            <div class="initials-circle bg-{{contact.styleSelector}}">
+                                                <p>{{contact.initials}}</p>
+                                            </div>
+                                        }
+                                    }
+                                }
                             }
-                            }
+                            
+                            @if (task.contacts!.length > 5) {
+                               <span class="plus-count">
+                                +{{task.contacts!.length - 5}}
+                               </span>
                             }
                         </div>
+                        
                         <div class="prioprie">
                             <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>

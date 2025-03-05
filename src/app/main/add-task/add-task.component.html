@@ -1,7 +1,7 @@
 <section class="add-task" [ngClass]="{'task-overlay':isOverlay}">
     <h1>Add Task</h1>
     @if (isOverlay) {
-        <div class="close-btn-overlay" (click)="close()" ><img src="./assets/img/icons/CloseIcon.png" alt="close-btn"></div>
+    <div class="close-btn-overlay" (click)="close()"><img src="./assets/img/icons/CloseIcon.png" alt="close-btn"></div>
     }
     <form (ngSubmit)="submitTask(addTaskForm)" #addTaskForm="ngForm">
 
@@ -9,9 +9,10 @@
             <div class="left-side">
                 <div class="title-section">
                     <p class="title">Title<span class="red-star">*</span></p>
-                    <input #title="ngModel" [(ngModel)]="task.title" name="task-title" type="text" class="single-input" placeholder="Enter a title" required>
+                    <input #title="ngModel" [(ngModel)]="task.title" name="task-title" type="text" class="single-input"
+                        placeholder="Enter a title" required>
                     @if (!title.valid && title.touched) {
-                        <span class="red-star required-error"> Please enter a title!</span>
+                    <span class="red-star required-error"> Please enter a title!</span>
                     }
                 </div>
                 <div>
@@ -48,137 +49,145 @@
                         }
                     </div>
                     <div class="assigned-list">
+
                         @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-
+                            {{logme("task",taskContact)}}
+                            @if ($index < 5) { 
+                                @for (contact of contacts; track $index) { 
+                                    @if (taskContact==contact.id) {
+                                    <div class="initials-circle bg-{{contact.styleSelector}}">
+                                        {{contact.initials}}
+                                    </div>
+                                }
+                            }
                         }
-                        }
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="separation-line"></div>
-            <div class="right-side">
-                <div class="due-date">
-                    <p>Due date<span class="red-star">*</span></p>
-                    <input type="date" #date="ngModel"[attr.min]="today" [(ngModel)]="task.date" name="date" id="date" required>
-                    @if (!date.valid && date.touched) {
-                        <span class="red-star required-error"> Please choose a date!</span>
+                    }
+                    @if (task.contacts!.length >= 6) {
+                        + {{task.contacts!.length - 5}}
                     }
                 </div>
-                <div class="choose-priority">
-                    <p>Priority</p>
-                    <div class="prio-buttons full-width">
-                        <button type="button" (click)="changePriority('Urgent')"
-                            [class.active]="isPriorityActive('Urgent')"
-                            [class.active-background]="isPriorityActive('Urgent')">
-                            Urgent
-                            <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
-                        </button>
-
-                        <button type="button" (click)="changePriority('Medium')"
-                            [class.active]="isPriorityActive('Medium')"
-                            [class.active-background]="isPriorityActive('Medium')">
-                            Medium
-                            <img [src]="getPrioImagePath('Medium')" alt="Medium">
-                        </button>
-
-                        <button type="button" (click)="changePriority('Low')"
-                        [class.active]="isPriorityActive('Low')"
-                        [class.active-background]="isPriorityActive('Low')">
-                            Low
-                            <img [src]="getPrioImagePath('Low')" alt="Low">
-                        </button>
-                    </div>
-                </div>
-                <div class="category">
-                    <p>Category</p>
-                    <select [(ngModel)]="task.category" name="task-category" id="task-category" placeholder="Select task category">
-                        @for (item of taskCategories; track $index) {
-                        <option>{{ item.category }}</option>
-                        }
-                    </select>
-                </div>
-                <div class="subtasks">
-                    <div class="subtask-input">
-                        <p>Subtask</p>
-                        <div class="input-container">
-                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text" (keydown.enter)="addSubtask($event)"
-                                placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
-                            @if (newSubtaskName !== '') {
-                            <img (click)="addSubtask()" src="./assets/img/add-task/add.png" alt="add">
-                            }
-                        </div>
-                        <div class="subtask-list">
-                            <ul>
-                                @for (subtask of task.subtasks; track $index) {
-                                    <div class="single-subtask">
-                                        <span class="bullet-point">● </span>
-                                        @if (editingSubtasks.has(subtask.subtaskName)) {
-                                            <div class="subtask-edit-input-container">
-                                              <input 
-                                                [ngModel]="editingSubtasks.get(subtask.subtaskName)" 
-                                                (ngModelChange)="updateEditingSubtask(subtask.subtaskName, $event)" 
-                                                name="subtask-edit" 
-                                                class="subtask-edit-input"
-                                              >
-                                              <div class="subtask-icon-container">
-                                                <img (click)="saveSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/checkIconBlack.png" alt="Save">
-                                                <div class="line"></div>
-                                                <img (click)="cancelSubtaskEdit(subtask.subtaskName)" src="./assets/img/icons/CloseIcon.png" alt="Cancel">
-                                              </div>
-                                            </div>
-                                          } @else {
-                                            <span>{{ subtask.subtaskName }}</span>
-                                            <div class="subtask-icon-container">
-                                              <img (click)="startEditingSubtask(subtask.subtaskName)" src="./assets/img/editIcon.png" alt="Edit">
-                                              <div class="line"></div>
-                                              <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png" alt="Delete">
-                                            </div>
-                                          }
-                                    </div>
-                                    }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
-                @if (isOverlay) {
-                <div class="clear-or-create-buttons">
-                    <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span class="close-x">×</span></button>
-                    @if (title.valid && date.touched && date.valid) {
-                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="./assets/img/add-task/check.png"
-                        alt="check"></button>
-                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="./assets/img/add-task/check.png"
-                        alt="check"></button>}
-                </div>
-                }
             </div>
         </div>
-        @if (!isOverlay) {
-            <div class="lowest-section">
-                <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
-                <div class="clear-or-create-buttons">
-                    <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span class="close-x">×</span></button>
-                    @if (title.valid && date.touched && date.valid) {
-                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="./assets/img/add-task/check.png"
-                        alt="check"></button>
-                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="./assets/img/add-task/check.png"
-                        alt="check"></button>}
+        <div class="separation-line"></div>
+        <div class="right-side">
+            <div class="due-date">
+                <p>Due date<span class="red-star">*</span></p>
+                <input type="date" #date="ngModel" [attr.min]="today" [(ngModel)]="task.date" name="date" id="date"
+                    required>
+                @if (!date.valid && date.touched) {
+                <span class="red-star required-error"> Please choose a date!</span>
+                }
+            </div>
+            <div class="choose-priority">
+                <p>Priority</p>
+                <div class="prio-buttons full-width">
+                    <button type="button" (click)="changePriority('Urgent')" [class.active]="isPriorityActive('Urgent')"
+                        [class.active-background]="isPriorityActive('Urgent')">
+                        Urgent
+                        <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
+                    </button>
+
+                    <button type="button" (click)="changePriority('Medium')" [class.active]="isPriorityActive('Medium')"
+                        [class.active-background]="isPriorityActive('Medium')">
+                        Medium
+                        <img [src]="getPrioImagePath('Medium')" alt="Medium">
+                    </button>
+
+                    <button type="button" (click)="changePriority('Low')" [class.active]="isPriorityActive('Low')"
+                        [class.active-background]="isPriorityActive('Low')">
+                        Low
+                        <img [src]="getPrioImagePath('Low')" alt="Low">
+                    </button>
                 </div>
             </div>
+            <div class="category">
+                <p>Category</p>
+                <select [(ngModel)]="task.category" name="task-category" id="task-category"
+                    placeholder="Select task category">
+                    @for (item of taskCategories; track $index) {
+                    <option>{{ item.category }}</option>
+                    }
+                </select>
+            </div>
+            <div class="subtasks">
+                <div class="subtask-input">
+                    <p>Subtask</p>
+                    <div class="input-container">
+                        <input [(ngModel)]="newSubtaskName" name="subtask" type="text"
+                            (keydown.enter)="addSubtask($event)" placeholder="Add new subtask..."
+                            (ngModelChange)="this.cdRef.detectChanges();">
+                        @if (newSubtaskName !== '') {
+                        <img (click)="addSubtask()" src="./assets/img/add-task/add.png" alt="add">
+                        }
+                    </div>
+                    <div class="subtask-list">
+                        <ul>
+                            @for (subtask of task.subtasks; track $index) {
+                            <div class="single-subtask">
+                                <span class="bullet-point">● </span>
+                                @if (editingSubtasks.has(subtask.subtaskName)) {
+                                <div class="subtask-edit-input-container">
+                                    <input [ngModel]="editingSubtasks.get(subtask.subtaskName)"
+                                        (ngModelChange)="updateEditingSubtask(subtask.subtaskName, $event)"
+                                        name="subtask-edit" class="subtask-edit-input">
+                                    <div class="subtask-icon-container">
+                                        <img (click)="saveSubtaskEdit(subtask.subtaskName)"
+                                            src="./assets/img/icons/checkIconBlack.png" alt="Save">
+                                        <div class="line"></div>
+                                        <img (click)="cancelSubtaskEdit(subtask.subtaskName)"
+                                            src="./assets/img/icons/CloseIcon.png" alt="Cancel">
+                                    </div>
+                                </div>
+                                } @else {
+                                <span>{{ subtask.subtaskName }}</span>
+                                <div class="subtask-icon-container">
+                                    <img (click)="startEditingSubtask(subtask.subtaskName)"
+                                        src="./assets/img/editIcon.png" alt="Edit">
+                                    <div class="line"></div>
+                                    <img (click)="deleteSubTask(subtask.subtaskName)" src="./assets/img/trash.png"
+                                        alt="Delete">
+                                </div>
+                                }
+                            </div>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
+            @if (isOverlay) {
+            <div class="clear-or-create-buttons">
+                <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span
+                        class="close-x">×</span></button>
+                @if (title.valid && date.touched && date.valid) {
+                <button class="create-btn" type="submit" value="Submit">Create Task <img
+                        src="./assets/img/add-task/check.png" alt="check"></button>
+                } @else {<button class="create-btn btn-disabled" disabled>Create Task <img
+                        src="./assets/img/add-task/check.png" alt="check"></button>}
+            </div>
+            }
+        </div>
+        </div>
+        @if (!isOverlay) {
+        <div class="lowest-section">
+            <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+            <div class="clear-or-create-buttons">
+                <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span
+                        class="close-x">×</span></button>
+                @if (title.valid && date.touched && date.valid) {
+                <button class="create-btn" type="submit" value="Submit">Create Task <img
+                        src="./assets/img/add-task/check.png" alt="check"></button>
+                } @else {<button class="create-btn btn-disabled" disabled>Create Task <img
+                        src="./assets/img/add-task/check.png" alt="check"></button>}
+            </div>
+        </div>
         }
         @if (taskAdded) {
-            <div class="task-created-message-overlay">
-                <div class="task-created-message" [ngClass]="{'slide-message':taskAdded}">
-                    <h2>Task wurde dem Board hinzugefügt!</h2>
-                </div>
+        <div class="task-created-message-overlay">
+            <div class="task-created-message" [ngClass]="{'slide-message':taskAdded}">
+                <h2>Task wurde dem Board hinzugefügt!</h2>
             </div>
+        </div>
         }
     </form>
 </section>

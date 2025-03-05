@@ -40,7 +40,7 @@ export class AddTaskComponent {
     {
       title: '',
       description: '',
-      contacts: [""],
+      contacts: [],
       date: '10.10.2020',
       priority: 'Medium',
       category: 'User Story',
@@ -59,11 +59,15 @@ export class AddTaskComponent {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contacts = contactList;
       this.filteredContacts = [...this.contacts];
+
       this.cdRef.detectChanges();
     });
 
   }
-
+logme(description: string, any: any){
+    console.log(description, any);
+    
+  }
   filterContacts(event: any) {
     const query = event.target.value.toLowerCase();
     this.filteredContacts = this.contacts.filter(contact =>
