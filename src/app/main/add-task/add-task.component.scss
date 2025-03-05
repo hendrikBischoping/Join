@@ -1,17 +1,50 @@
 @import '../../styles/mixins.scss';
 @import '../../../styles.scss';
 
+@keyframes slideUp {
+    0% {
+        transform: translateY(30vh);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+}
+
 .d-none {
     display: none;
 }
-
-
 
 .add-task {
     padding: 6rem 10rem;
     font-family: 'inter';
     position: relative;
     max-width: 1600px;
+
+    .task-created-message-overlay {
+        position: fixed;
+        transition: align-items 75s;
+        @include standard-flex (center, center);
+        top: 0vh;
+        left: 0;
+        z-index: 12;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        div {
+            color: white;
+            background-color: rgb(42, 54, 71);
+            padding: 4rem;
+            margin: 1rem;
+            border-radius: 2rem;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+    }
+
+    align-items: center;
 
     >form {
         position: relative;
@@ -292,6 +325,7 @@
         height: 3rem;
         overflow: auto;
         margin-bottom: 0;
+
         .single-subtask {
             @include standard-flex(flex-start, center);
             height: 1rem;
@@ -402,6 +436,7 @@
         }
     }
 }
+
 .clear-or-create-buttons {
     gap: 1rem;
     @include standard-flex(center, center);
@@ -482,6 +517,7 @@
 
         .assigned-list {
             width: 24rem;
+
             .initials-circle {
                 width: 3.6rem;
             }
@@ -492,6 +528,7 @@
                 right: -5rem;
             }
         }
+
         .subtask-edit-input-container {
             .subtask-edit-input {
                 max-width: 100%;
@@ -550,9 +587,10 @@
 @media (max-width: 1100px) {
     .add-task {
         padding: 4rem;
-        
+
         .assigned-list {
             width: 18rem;
+
             .initials-circle {
                 width: 3.6rem;
             }
@@ -565,6 +603,7 @@
     .left-side,
     .right-side {
         max-width: 16rem;
+
         p {
             font-size: 0.8rem;
         }
@@ -582,7 +621,8 @@
         .assignment-container {
 
             .dropdown-input {
-                width: 14rem; 
+                width: 14rem;
+
                 .dropdown-content {
                     width: 100%;
                     max-width: 100%;
@@ -599,6 +639,7 @@
                 right: -1rem;
             }
         }
+
         .subtask-list {
             ul .single-subtask {
                 min-width: fit-content;
@@ -608,15 +649,27 @@
     }
 }
 
+@media (max-width: 1000px) {
+    .task-created-message {
+        font-size: 2rem;
+        padding: 3rem;
+        text-align: center;
+        h2 {
+            line-height: 3rem;
+        }
+    }
+}
+
 @media (max-width: 800px) {
     .add-task {
         padding: 10vw;
         max-height: calc(100% - 20vh - 1px);
         overflow-y: scroll;
+
         .required-info-mobile {
             display: block;
         }
-        
+
         .assigned-list {
             width: 100%;
         }
@@ -627,7 +680,8 @@
             }
         }
 
-        .lowest-section, .lowest-section-overlay {
+        .lowest-section,
+        .lowest-section-overlay {
             justify-content: flex-end;
             margin-top: 0;
             padding: 0 8rem;
@@ -636,18 +690,21 @@
             height: 8rem;
             right: 0;
             left: 0;
-            bottom: 6rem;
+            bottom: 4rem;
             background-color: rgb(229, 229, 229);
+
             >div {
                 margin-right: 16px;
             }
+
             .required-info-normal {
                 display: none;
             }
         }
 
 
-        .left-side, .right-side {
+        .left-side,
+        .right-side {
             padding: 0;
             margin-right: 0;
             margin: 0;
@@ -656,8 +713,8 @@
 
             input,
             textarea {
-               min-width: calc(100%);
-               min-width: 97.6%;
+                min-width: calc(100%);
+                min-width: 97.6%;
             }
 
             .dropdown-input {
@@ -679,9 +736,11 @@
 
             .input-container {
                 width: 100%;
+
                 >input {
                     min-width: 97.6%;
                 }
+
                 img {
                     right: 1rem;
                 }
@@ -700,22 +759,27 @@
 }
 
 @media (max-width: 550px) {
-    .add-task{
+    .add-task {
         .right-side {
             margin-bottom: 0rem;
+
             .subtask-edit-input-container {
                 display: flex;
                 align-items: center;
+
                 .intpu {
                     height: 1rem;
                 }
-    }
+            }
         }
 
-        .lowest-section, .lowest-section-overlay {
-            bottom: 9rem;
+        .lowest-section,
+        .lowest-section-overlay {
+            bottom: 4rem;
+
             .clear-or-create-buttons {
                 margin: 0;
+
                 button img {
                     height: 1.8rem;
                 }
@@ -727,25 +791,39 @@
             height: 10rem;
             bottom: -19rem;
         }
+    
+        .task-created-message-overlay div {
+            padding: 3rem;
+            text-align: center;
+            h2 {
+                font-size: 1.6rem;
+                line-height: 3rem;
+            }
+        }
     }
 }
 
 @media (max-width: 380px) {
-    .add-task{
+    .add-task {
         .input-container {
             max-width: 100%;
+
             >input {
                 min-width: 97.6%;
             }
+
             img {
                 right: 1rem;
             }
         }
-        .lowest-section, .lowest-section-overlay {
+
+        .lowest-section,
+        .lowest-section-overlay {
             justify-content: center;
-            bottom: 9rem;
+
             .clear-or-create-buttons {
                 margin: 0;
+
                 button {
                     font-size: 1.2rem;
                 }
@@ -755,11 +833,18 @@
         .lowest-section-overlay {
             bottom: 0;
         }
+        
+        .task-created-message-overlay div {
+            h2 {
+                font-size: 1.2rem;
+                line-height: 2rem;
+            }
+        }
     }
 }
 
 
-.task-overlay{
+.task-overlay {
     max-width: 1200px !important;
-    max-height: 70vh!important;
+    max-height: 70vh !important;
 }

@@ -173,5 +173,12 @@
                 </div>
             </div>
         }
+        @if (taskAdded) {
+            <div class="task-created-message-overlay">
+                <div class="task-created-message" [ngClass]="{'slide-message':taskAdded}">
+                    <h2>Task wurde dem Board hinzugefügt!</h2>
+                </div>
+            </div>
+        }
     </form>
 </section>
