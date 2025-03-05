@@ -35,17 +35,18 @@ export class DetailedDialogComponent {
     status: "todo",
     id: ""
   };
-  previewTask: ITask = {
-    title: "",
-    description: "",
-    contacts: [],
-    date: '0',
-    priority: "mid",
-    category: "",
-    subtasks: [],
-    status: "",
-    id: ""
-  };
+  previewTask!: ITask;
+  //  = {
+  //   title: "",
+  //   description: "",
+  //   contacts: [],
+  //   date: '0',
+  //   priority: "mid",
+  //   category: "",
+  //   subtasks: [],
+  //   status: "",
+  //   id: ""
+  // };
   contacts!: IContact[];
   filteredContacts: IContact[] = [];
   today: string = new Date().toISOString().split("T")[0];
@@ -74,11 +75,14 @@ export class DetailedDialogComponent {
         if (this.currentTaskId == element.id) {
           this.task = element;
           this.previewTask = JSON.parse(JSON.stringify(this.task));
+
+          this.previewTask.contacts = this.previewTask.contacts!.filter(contact => contact != '');
+
+          
         }
       });
     });
     this.initTask();
-
   }
 
   initTask() {
@@ -197,8 +201,8 @@ export class DetailedDialogComponent {
     if (subtask) {
       subtask.subtaskName = oldName;
     }
-    this.editingSubtasks.delete(oldName); // Bearbeitungsstatus zurücksetzen
-    this.cdRef.detectChanges(); // Falls das UI nicht automatisch aktualisiert wird
+    this.editingSubtasks.delete(oldName); 
+    this.cdRef.detectChanges(); 
   }
 
   cancelSubtaskEdit(subtaskName: string) {

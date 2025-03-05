@@ -4,6 +4,7 @@ import { TaskDataService } from '../../services/task-data.service';
 import { ITask } from '../../interfaces/itask';
 import { CommonModule } from '@angular/common';
 import { RouterModule} from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-summary',
@@ -14,11 +15,15 @@ import { RouterModule} from '@angular/router';
 })
 export class SummaryComponent {
   isGuest = false;
-  currentUser = "Gott Devil";
+  currentUser = "";
   tasks: ITask[] = [];
   upcomingTask!: ITask;
 
-  constructor(public firebaseService: FirebaseService, private taskDataService: TaskDataService) {}
+  constructor(public firebaseService: FirebaseService, private taskDataService: TaskDataService, private authService: AuthService) {
+    if (authService.getUserName() && authService.getUserName() != "Guest") {
+      this.currentUser = authService.getUserName();
+    }
+  }
 
   ngOnInit() {
     this.taskDataService.getTasks().subscribe((taskList) => {

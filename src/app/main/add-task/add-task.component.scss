@@ -239,15 +239,15 @@
         @include standard-flex(flex-start, center);
         flex-wrap: wrap;
         width: 27rem;
-        height: 4.1rem;
-        overflow: scroll;
+        height: auto;
+        // overflow: scroll;
         margin-top: 4px;
         margin-left: 4px;
 
         >.initials-circle {
-            font-size: 1.2rem;
+            font-size: 1.0rem;
             margin: 0.25rem;
-            width: 3.8rem;
+            width: 3.0rem;
         }
     }
 
@@ -518,9 +518,9 @@
         .assigned-list {
             width: 24rem;
 
-            .initials-circle {
-                width: 3.6rem;
-            }
+            // .initials-circle {
+            //     width: 3.6rem;
+            // }
         }
 
         .input-container {
@@ -591,9 +591,9 @@
         .assigned-list {
             width: 18rem;
 
-            .initials-circle {
-                width: 3.6rem;
-            }
+            // .initials-circle {
+            //     width: 3.6rem;
+            // }
         }
     }
 }

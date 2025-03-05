@@ -2,83 +2,83 @@
     <img [ngClass]="{ 'moveLogo': logoTransition}" src="./assets/img/icons/joinLogoSmall.png" alt="">
     <div class="dummy"></div>
     @if (stateLogin) {
-    <div class="signup-button-container">
-        <span>Not a Join user?</span>
-        <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
-    </div>
-    <section class="login-content">
-        <div class="headline-container">
-            <h1>Log in</h1>
-            <div class="line"></div>
+        <div class="signup-button-container">
+            <span>Not a Join user?</span>
+            <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
         </div>
-        <div class="input-container">
-            <input [(ngModel)]="user.email" type="email" id="email" name="email" placeholder="email" required
-                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
-            <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
-        </div>
-        <div class="input-container">
-            <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="password"
-                required>
-            <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
-        </div>
-        @if (!authSucceeded) {
-        <span>mail or password incorrect</span>
-        }
-        <div class="login-buttons">
-            <button class="button-dark-bg" (click)="logIn()">Log in</button>
-            <button class="button-bright-bg" (click)="successAuth()">Guest Log in</button>
-        </div>
-    </section>
-    <div class="mobile-signup-button-container">
-        <span>Not a Join user?</span>
-        <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
-    </div>
-    }@else {
-    <div></div>
-    <section class="signup-content">
-        <div class="signup-head">
-            <div class="back-arrow" (click)="toggleSignUp()">
-                <img src="./assets/img/icons/LeftArrowIcon.png" alt="">
-            </div>
-            <div>
-                <h1>Sign up</h1>
+        <section class="login-content">
+            <div class="headline-container">
+                <h1>Log in</h1>
                 <div class="line"></div>
             </div>
-            <div></div>
+            <div class="input-container">
+                <input [(ngModel)]="user.email" type="email" id="email" name="email" placeholder="email" required
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mailIcon">
+            </div>
+            <div class="input-container">
+                <input [(ngModel)]="user.password" type="password" id="password" name="password" placeholder="password"
+                    required>
+                <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
+            </div>
+            @if (!authSucceeded) {
+                <span>mail or password incorrect</span>
+            }
+            <div class="login-buttons">
+                <button class="button-dark-bg" (click)="logIn()">Log in</button>
+                <button class="button-bright-bg" (click)="successAuth()">Guest Log in</button>
+            </div>
+        </section>
+        <div class="mobile-signup-button-container">
+            <span>Not a Join user?</span>
+            <button (click)="toggleSignUp()" class="button-dark-bg">Sign up</button>
         </div>
-        <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
-            <div class="input-container">
-              <input type="text" name="name" placeholder="name" required [(ngModel)]="user.name">
-              <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="person icon">
+    }@else {
+        <div></div>
+        <section class="signup-content">
+            <div class="signup-head">
+                <div class="back-arrow" (click)="toggleSignUp()">
+                    <img src="./assets/img/icons/LeftArrowIcon.png" alt="">
+                </div>
+                <div class="signup-headline">
+                    <h1>Sign up</h1>
+                    <div class="line"></div>
+                </div>
+                <div></div>
             </div>
-            <div class="input-container">
-              <input type="email" id="email" name="email" placeholder="email" required
-                     pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" [(ngModel)]="user.email">
-              <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mail icon">
-            </div>
-            <div class="input-container">
-              <input type="password" id="password" name="password" placeholder="password" required
-                     [(ngModel)]="user.password">
-              <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
-            </div>
-            <div class="input-container">
-              <input type="password" id="secondPassword" name="secondPassword" placeholder="confirm password" required
-                     [(ngModel)]="user.secondPassword">
-              <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
-            </div>
-            @if (passwordMismatch) {
-                <span class="error-message">Passwords do not match!</span>
-            }
-            @if (registrationSuccess) {
-                <span class="success-message">Register successful. You can log in now</span>
-            }
-            <div class="privacy-check">
-                <input type="checkbox" id="privacyPolicy" name="privacyPolicy" [(ngModel)]="privacyAccepted" required>
-                <label for="privacyPolicy">I accept the <a href="" (click)="scrollToTop()">privacy policy</a></label>
-              </div>
-              <button class="button-dark-bg" type="submit" [disabled]="!privacyAccepted">Sign up</button>
-        </form>
-    </section>
+            <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+                <div class="input-container">
+                <input type="text" name="name" placeholder="name" required [(ngModel)]="user.name">
+                <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="person icon">
+                </div>
+                <div class="input-container">
+                <input type="email" id="email" name="email" placeholder="email" required
+                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" [(ngModel)]="user.email">
+                <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mail icon">
+                </div>
+                <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="password" required
+                        [(ngModel)]="user.password">
+                <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
+                </div>
+                <div class="input-container">
+                <input type="password" id="secondPassword" name="secondPassword" placeholder="confirm password" required
+                        [(ngModel)]="user.secondPassword">
+                <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
+                </div>
+                @if (passwordMismatch) {
+                    <span class="error-message">Passwords do not match!</span>
+                }
+                @if (registrationSuccess) {
+                    <span class="success-message">Register successful. You can log in now</span>
+                }
+                <div class="privacy-check">
+                    <input type="checkbox" id="privacyPolicy" name="privacyPolicy" [(ngModel)]="privacyAccepted" required>
+                    <label for="privacyPolicy">I accept the <a href="" (click)="scrollToTop()">privacy policy</a></label>
+                </div>
+                <button class="button-dark-bg" type="submit" [disabled]="!privacyAccepted">Sign up</button>
+            </form>
+        </section>
     }
     <div class="link-container">
         <a href="">privacy policy</a>

@@ -1,6 +1,9 @@
 @use "../../styles/mixins.scss" as *;
 @use "../../../styles.scss" as *;
 
+$initialsDistance: 2;
+$initialsDistanceMobile: 1.5;
+
 main {
   max-width: 84vw;
 
@@ -389,17 +392,14 @@ header {
 
         .initials-circle {
           position: absolute;
-          p {margin-top: 2px;}
           bottom: 0rem;
           left: 0rem;
           width: 3rem;
           height: 3rem;
-          line-height: 80%;
-          line-break: normal;
 
-          @for $i from 1 through 10 {
+          @for $i from 1 through 5 {
             &:nth-child(#{$i}) {
-              left: #{($i - 1) * 2}rem;
+              left: #{($i - 0.5) * $initialsDistance}rem;
             }
           }
 
@@ -408,11 +408,24 @@ header {
             height: 2rem;
             font-size: 1rem;
 
-            @for $i from 1 through 10 {
+            @for $i from 1 through 5 {
               &:nth-child(#{$i}) {
-                left: #{($i - 1) * 1.5}rem;
+                left: #{($i - 0.5) * $initialsDistanceMobile}rem;
               }
             }
+          }
+        }
+
+        .plus-count {
+          position: absolute;
+          bottom: 1rem;
+          left: -0.25rem;
+
+          @media (max-width: 1275px) {
+            font-size: 0.75rem;
+            bottom: 0.5rem;
+            left: -0.5rem;
+
           }
         }
 
