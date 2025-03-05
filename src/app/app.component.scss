@@ -4,9 +4,14 @@ $headHeight: 8vh;
 $headBorderHeight: 6px;
 $navHeightMobile: 8vh;
 
+.join-background {
+    width: 100%;
+    background-color: rgb(246,247,248);
+}
+
 .join-content {
     max-width: 1920px;
-    margin: auto;
+    // margin: auto;
     height: 100vh;
     overflow: hidden;
 }
@@ -137,6 +142,12 @@ main {
             height: calc(100vh - $navHeightMobile);
         }
 
+        .header-bg {
+            max-width: unset;
+            width: 100%;
+            background-color: white;
+        }
+
         .top-content {
             @include standard-flex(space-between);
             height: $headHeight;
@@ -198,7 +209,8 @@ main {
         }
 
         .routing-content {
-            background-color: rgba($color: #000000, $alpha: 0.1);
+            // background-color: rgba($color: #000000, $alpha: 0.1);
+            background-color: rgb(246,247,248);
             height: calc(100% - $headHeight - $headBorderHeight);
 
             @media (max-width:800px) {

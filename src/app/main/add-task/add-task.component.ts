@@ -4,11 +4,12 @@ import { TaskDataService } from '../../services/task-data.service';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IContact } from '../../interfaces/icontact';
 import { ITask } from '../../interfaces/itask';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -129,7 +130,10 @@ export class AddTaskComponent {
     return dateData;
   }
 
-  addSubtask() {
+  addSubtask(event?: Event) {
+    if (event) {
+      event.preventDefault(); // Verhindert das Standardverhalten von Enter in Formularen
+    }
     if (this.newSubtaskName == "") {
       return;
     }
@@ -172,8 +176,11 @@ export class AddTaskComponent {
     this.newSubtaskName = "";
   }
 
-  clearForm() {
-    location.reload();
+  clearForm(form: NgForm) {
+    form.resetForm();
+    this.task.contacts = [];
+    this.task.subtasks = [];
+    this.changePriority('Medium')
   }
 
   async submitTask(form: NgForm) {
@@ -183,9 +190,10 @@ export class AddTaskComponent {
     this.taskAdded = true;
     this.task.status = this.predefinedStatus;
     await this.taskDataService.addTask(this.task).then(() => {
-      console.log("abruf", this.task.contacts);
       this.taskAdded = false;
       form.resetForm();
+      this.task.contacts = [];
+      this.task.subtasks = [];
     })
   }
 }

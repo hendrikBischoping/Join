@@ -128,8 +128,6 @@ export class DetailedDialogComponent {
   }
 
   editTask(inEditMode = false) {
-    console.log(this.task);
-
     if (inEditMode) {
       Object.assign(this.task, this.previewTask);
       this.toggleEditMode();

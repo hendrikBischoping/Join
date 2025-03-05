@@ -1,14 +1,14 @@
 <main>
     <header>
         <h1>Board</h1>
-        <div class="resposniv-for-h">
+        <div class="responsiv-for-h">
             <span>Board</span>
             <img class="responsiv-add" (click)="openAddTaskDialog()" src="./assets/img/Board/responsiv-add.png" alt="">
         </div>
         <div class="menu">
             <div class="input-container">
                 <input type="text" [(ngModel)]="searchQuery" placeholder="Find Task">
-                <div class="border">
+                <div class="find-task-icon">
                     <img src="./assets/img/Board/search.png" alt="">
                 </div>
             </div>
@@ -16,10 +16,7 @@
         </div>
     </header>
     <div cdkDropListGroup class="collection">
-
         @for (rowId of boardRows; track $index) {
-
-
         <div class="single-collection">
             <div class="add-task">
                 <h2>{{getRowName(rowId)}}</h2>
@@ -27,9 +24,12 @@
             </div>
 
             <div id="{{rowId}}" cdkDropList [cdkDropListData]="getRowData(rowId)" class="drop-area"
-                (cdkDropListDropped)="drop($event)">
+                [ngClass]="{'highlight': highlightedColumn === rowId, 'no-task': getFilteredTasks(rowId).length === 0}"
+                (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="onDragEntered(rowId)"
+                (cdkDropListExited)="onDragExited()">
                 @for (task of getFilteredTasks(rowId); track $index) {
-                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag>
+                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag
+                    [cdkDragStartDelay]="{ touch: 500, mouse: 0 }">
                     <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
                         <div class="story-container">{{task.category}}</div>
                     </div>
@@ -38,38 +38,40 @@
                         <p>{{task.description}}</p>
                     </div>
                     @if (task.subtasks!.length >= 1) {
-                        <div class="progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" [style.width.%]="getProgress(task)"></div>
-                            </div>
-                            <span>{{getDoneSubtask(task)}}/{{task.subtasks!.length}} Subtasks</span>
+                    <div class="progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" [style.width.%]="getProgress(task)"></div>
                         </div>
+                        <span>{{getDoneSubtask(task)}}/{{task.subtasks!.length}} Subtasks</span>
+                    </div>
                     }@else {
-                        <div class="progress"></div>
+                    <div class="progress"></div>
                     }
 
                     <div class="contacts-for-tag">
-                        @for (taskContact of task.contacts; track $index) {
-                        @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
+                        <div class="for-circle">
+                            @for (taskContact of task.contacts; track $index) {
+                            @for (contact of contacts; track $index) {
+                            @if (taskContact == contact.id) {
+                            <div class="initials-circle bg-{{contact.styleSelector}}">
+                                <p>{{contact.initials}}</p>
+                            </div>
+                            }
+                            }
+                            }
                         </div>
-                        }
-                        }
-                        }
                         <div class="prioprie">
                             <img src="{{getPrioImagePath(task,task.priority, true)}}" alt="{{task.priority}} icon">
                         </div>
                     </div>
+
                 </div>
                 }
             </div>
         </div>
         }
-
     </div>
-    
+
     <!-- <div cdkDropListGroup class="collection-for-responsiv">
         <div class="single-collection">
             <div class="add-task">

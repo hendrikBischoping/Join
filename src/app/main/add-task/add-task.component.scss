@@ -5,10 +5,17 @@
     display: none;
 }
 
+
+
 .add-task {
     padding: 6rem 10rem;
     font-family: 'inter';
     position: relative;
+    max-width: 1600px;
+
+    >form {
+        position: relative;
+    }
 
     .close-btn-overlay {
         position: absolute;
@@ -199,6 +206,8 @@
         @include standard-flex(flex-start, center);
         flex-wrap: wrap;
         width: 27rem;
+        height: 4.1rem;
+        overflow: scroll;
         margin-top: 4px;
         margin-left: 4px;
 
@@ -280,6 +289,9 @@
     }
 
     .subtask-list ul {
+        height: 3rem;
+        overflow: auto;
+        margin-bottom: 0;
         .single-subtask {
             @include standard-flex(flex-start, center);
             height: 1rem;
@@ -334,7 +346,6 @@
 
     .lowest-section {
         @include standard-flex(space-between, center);
-        margin-top: 6rem;
 
         .clear-or-create-buttons {
             gap: 1rem;
@@ -391,6 +402,60 @@
         }
     }
 }
+.clear-or-create-buttons {
+    gap: 1rem;
+    @include standard-flex(center, center);
+
+    >button {
+        @include standard-flex(center, center);
+        padding: 1rem;
+        gap: 0.5rem;
+        width: fit-content;
+        height: 3.5rem;
+        border: solid 2px rgba(93, 190, 231, 0);
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            cursor: pointer;
+            color: rgb(93, 190, 231);
+            border: solid 2px rgb(93, 190, 231);
+            ;
+        }
+
+        >.close-x {
+            font-family: 'inter';
+            font-size: 1.7rem;
+        }
+    }
+
+    >.create-btn {
+        color: white;
+        background-color: rgb(42, 54, 71);
+        transition: background-color 0.25s;
+        font-weight: 700;
+
+        &:hover {
+            color: white;
+            background-color: rgb(93, 190, 231);
+        }
+    }
+
+    >.btn-disabled {
+        background-color: rgb(176, 176, 176);
+        text-decoration: line-through;
+
+        &:hover {
+            color: white;
+            background-color: rgb(176, 176, 176);
+            border: solid 2px rgba(93, 190, 231, 0);
+            box-shadow: 0 rgba(0, 0, 0, 0.25);
+            cursor: default;
+        }
+    }
+}
+
 
 @media (max-width: 1550px) {
     .add-task {
@@ -413,6 +478,13 @@
         select {
             max-width: 21rem;
             min-width: 21rem;
+        }
+
+        .assigned-list {
+            width: 24rem;
+            .initials-circle {
+                width: 3.6rem;
+            }
         }
 
         .input-container {
@@ -478,6 +550,13 @@
 @media (max-width: 1100px) {
     .add-task {
         padding: 4rem;
+        
+        .assigned-list {
+            width: 18rem;
+            .initials-circle {
+                width: 3.6rem;
+            }
+        }
     }
 }
 
@@ -537,6 +616,10 @@
         .required-info-mobile {
             display: block;
         }
+        
+        .assigned-list {
+            width: 100%;
+        }
 
         .single-subtask {
             >span {
@@ -544,7 +627,7 @@
             }
         }
 
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             justify-content: flex-end;
             margin-top: 0;
             padding: 0 8rem;
@@ -565,7 +648,6 @@
 
 
         .left-side, .right-side {
-            // min-width: 45rem;
             padding: 0;
             margin-right: 0;
             margin: 0;
@@ -605,10 +687,6 @@
                 }
             }
         }
-
-        .right-side {
-            margin-bottom: 8rem;
-        }
     }
 
     .task-inputs {
@@ -634,7 +712,7 @@
     }
         }
 
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             bottom: 9rem;
             .clear-or-create-buttons {
                 margin: 0;
@@ -642,6 +720,12 @@
                     height: 1.8rem;
                 }
             }
+        }
+
+        .lowest-section-overlay {
+            position: absolute;
+            height: 10rem;
+            bottom: -19rem;
         }
     }
 }
@@ -657,7 +741,7 @@
                 right: 1rem;
             }
         }
-        .lowest-section {
+        .lowest-section, .lowest-section-overlay {
             justify-content: center;
             bottom: 9rem;
             .clear-or-create-buttons {
@@ -667,5 +751,15 @@
                 }
             }
         }
+
+        .lowest-section-overlay {
+            bottom: 0;
+        }
     }
+}
+
+
+.task-overlay{
+    max-width: 1200px !important;
+    max-height: 70vh!important;
 }

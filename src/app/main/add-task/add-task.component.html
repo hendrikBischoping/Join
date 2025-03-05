@@ -1,7 +1,7 @@
-<section class="add-task">
+<section class="add-task" [ngClass]="{'task-overlay':isOverlay}">
     <h1>Add Task</h1>
     @if (isOverlay) {
-        <div class="close-btn-overlay" (click)="close()" ><img src="../../../assets/img/icons/CloseIcon.png" alt="close-btn"></div>
+        <div class="close-btn-overlay" (click)="close()" ><img src="./assets/img/icons/CloseIcon.png" alt="close-btn"></div>
     }
     <form (ngSubmit)="submitTask(addTaskForm)" #addTaskForm="ngForm">
 
@@ -108,10 +108,10 @@
                     <div class="subtask-input">
                         <p>Subtask</p>
                         <div class="input-container">
-                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text" (keydown.enter)="addSubtask()"
+                            <input [(ngModel)]="newSubtaskName" name="subtask" type="text" (keydown.enter)="addSubtask($event)"
                                 placeholder="Add new subtask..." (ngModelChange)="this.cdRef.detectChanges();">
                             @if (newSubtaskName !== '') {
-                            <img (click)="addSubtask()" src="../../../assets/img/add-task/add.png" alt="add">
+                            <img (click)="addSubtask()" src="./assets/img/add-task/add.png" alt="add">
                             }
                         </div>
                         <div class="subtask-list">
@@ -148,18 +148,30 @@
                     </div>
                 </div>
                 <p class="required d-none required-info-mobile"><span class="red-star">*</span>This field is required</p>
+                @if (isOverlay) {
+                <div class="clear-or-create-buttons">
+                    <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span class="close-x">×</span></button>
+                    @if (title.valid && date.touched && date.valid) {
+                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="./assets/img/add-task/check.png"
+                        alt="check"></button>
+                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="./assets/img/add-task/check.png"
+                        alt="check"></button>}
+                </div>
+                }
             </div>
         </div>
-        <div class="lowest-section">
-            <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
-            <div class="clear-or-create-buttons">
-                <button class="clear-btn" type="button" (click)="clearForm()">Clear <span class="close-x">×</span></button>
-                @if (title.valid && date.touched && date.valid) {
-                    <button class="create-btn" type="submit" value="Submit">Create Task <img src="../../../assets/img/add-task/check.png"
-                    alt="check"></button>
-                } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="../../../assets/img/add-task/check.png"
-                    alt="check"></button>}
+        @if (!isOverlay) {
+            <div class="lowest-section">
+                <p class="required required-info-normal"><span class="red-star">*</span>This field is required</p>
+                <div class="clear-or-create-buttons">
+                    <button class="clear-btn" type="button" (click)="clearForm(addTaskForm)">Clear <span class="close-x">×</span></button>
+                    @if (title.valid && date.touched && date.valid) {
+                        <button class="create-btn" type="submit" value="Submit">Create Task <img src="./assets/img/add-task/check.png"
+                        alt="check"></button>
+                    } @else {<button class="create-btn btn-disabled" disabled>Create Task <img src="./assets/img/add-task/check.png"
+                        alt="check"></button>}
+                </div>
             </div>
-        </div>
+        }
     </form>
 </section>
