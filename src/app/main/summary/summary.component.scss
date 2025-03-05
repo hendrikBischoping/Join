@@ -110,7 +110,7 @@ main {
         > img {
             width: 1.5rem;
             height: 1.5rem;
-            filter: invert(0); // Standard bleibt unverändert
+            filter: invert(0);
             transition: filter 0.1s ease;
         }
     }
@@ -121,20 +121,20 @@ main {
 
     &:hover {
         cursor: pointer;
-        background-color: #2A3647; // Hintergrund wird dunkel
-        color: white; // Text wird weiß
+        background-color: #2A3647;
+        color: white;
         transform: scale(1.1);
 
         .icon-bg {
-            background-color: white; // Icon-Hintergrund wird weiß
+            background-color: white;
 
             > img {
-                filter: invert(1); // Icon wird schwarz (weil es vorher weiß war)
+                filter: invert(1);
             }
         }
 
         .count {
-            color: white; // Zähler und Text bleiben weiß
+            color: white;
         }
     }
 }
@@ -198,12 +198,12 @@ main {
 
     &:hover {
         cursor: pointer;
-        background-color: #2A3647; // Hintergrund wird dunkel
-        color: white; // Text wird weiß
+        background-color: #2A3647;
+        color: white;
         transform: scale(1.1);
 
         .count {
-            color: white; // Zähler und Text bleiben weiß
+            color: white;
         }
 
         .line {
@@ -221,6 +221,17 @@ main {
 
     .count {
         @include countLine();
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #2A3647 !important;
+        color: white;
+        transform: scale(1.1);
+
+        .count {
+            color: white;
+        }
     }
 }
 

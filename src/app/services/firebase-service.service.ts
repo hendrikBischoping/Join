@@ -110,9 +110,9 @@ export class FirebaseService {
     return {
       name: capitalizedName,
       eMail: obj.eMail || "",
-      password: obj.password || "",
-      initials: nameInitials,
-      id: id || "",
+      // password: obj.password || "",
+      // initials: nameInitials,
+      // id: id || "",
     };
   }
 
