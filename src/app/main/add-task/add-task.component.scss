@@ -113,17 +113,20 @@
         padding: 0 0.5rem;
         min-width: 26rem;
         height: 2rem;
+        box-sizing: border-box;
     }
 
     select {
         min-width: 27rem;
         max-width: 25rem;
+        box-sizing: border-box;
     }
 
     textarea {
         min-height: 6rem;
         padding: 0.25rem 1rem;
         max-width: 25rem;
+        box-sizing: border-box;
     }
 
     button {
@@ -188,8 +191,8 @@
     .dropdown-content {
         position: absolute;
         background-color: white;
-        width: 94%;
-        max-width: 94%;
+        width: 100%;
+        max-width: 100%;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         z-index: 1;
         padding: 10px;
@@ -565,10 +568,6 @@
         min-width: 20rem;
     }
 
-    .add-task {
-        min-width: 20rem;
-    }
-
     .dropdown-input {
         width: 18rem;
     }
@@ -666,8 +665,19 @@
         max-height: calc(100% - 20vh - 1px);
         overflow-y: scroll;
 
+        h1 {
+            font-size: 3rem!important;
+            margin-bottom: 2rem!important;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
         .required-info-mobile {
             display: block;
+            margin-top: 0;
+            margin-bottom: 2rem;
         }
 
         .assigned-list {
@@ -682,7 +692,7 @@
 
         .lowest-section,
         .lowest-section-overlay {
-            justify-content: flex-end;
+            justify-content: center;
             margin-top: 0;
             padding: 0 8rem;
             position: fixed;
@@ -700,6 +710,15 @@
             .required-info-normal {
                 display: none;
             }
+
+            button {
+                height: 2.5rem;
+                white-space: nowrap;
+                font-size: 16px;
+                img {
+                    height: 1.8rem;
+                }
+            }
         }
 
 
@@ -714,11 +733,11 @@
             input,
             textarea {
                 min-width: calc(100%);
-                min-width: 97.6%;
+                min-width: 100%;
             }
 
             .dropdown-input {
-                min-width: 96%;
+                min-width: 100%;
             }
 
             #task-category {
@@ -738,7 +757,7 @@
                 width: 100%;
 
                 >input {
-                    min-width: 97.6%;
+                    min-width: 100%;
                 }
 
                 img {
@@ -780,8 +799,11 @@
             .clear-or-create-buttons {
                 margin: 0;
 
-                button img {
-                    height: 1.8rem;
+                button {
+                    height: 2rem;
+                    img {
+                        height: 1.2rem;
+                    }
                 }
             }
         }
@@ -803,13 +825,28 @@
     }
 }
 
+@media (max-width: 410px) {
+    .prio-buttons button {
+        @include standard-flex (center, center);
+        flex-direction: column;
+        img {
+            margin: 4px;
+        }
+    }
+}
+
 @media (max-width: 380px) {
     .add-task {
+
+        h1 {
+            margin-bottom: 1rem!important;
+        }
+
         .input-container {
             max-width: 100%;
 
             >input {
-                min-width: 97.6%;
+                min-width: 100%;
             }
 
             img {
