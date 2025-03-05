@@ -52,6 +52,7 @@ export class BoardComponent {
     this.taskDataService.getTasks().subscribe((taskList) => {
       this.tasks = taskList;
     });
+    
   }
 
   getRowData(status: string): ITask[] {
