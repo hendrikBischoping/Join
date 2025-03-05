@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase-service.service';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInAnonymously, updateProfile } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInAnonymously, updateProfile, User } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
-import { getDoc, setDoc } from '@firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
   private authSubject = new BehaviorSubject<boolean>(false);
   auth$ = this.authSubject.asObservable();
-  private userName = 'Guest';
+  
+  private userNameSubject = new BehaviorSubject<string>('Guest');
+  userName$ = this.userNameSubject.asObservable(); // Öffentliches Observable für den Usernamen
 
   constructor(private firebaseService: FirebaseService, private auth: Auth) { }
-
 
   async registerUser(name: string, email: string, password: string) {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       if (userCredential.user) {
         await updateProfile(userCredential.user, {displayName: name});
+        this.userNameSubject.next(name);
       }
       return userCredential.user;
     } catch (error) {
@@ -33,7 +33,8 @@ export class AuthService {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       if (userCredential.user) {
-        this.userName = userCredential.user.displayName ?? "Guest";
+        const userName = userCredential.user.displayName ?? "Guest";
+        this.userNameSubject.next(userName);
       }
       this.authSubject.next(true);
       return userCredential.user;
@@ -46,6 +47,7 @@ export class AuthService {
   async logout() {
     await signOut(this.auth);
     this.authSubject.next(false);
+    this.userNameSubject.next('Guest'); // Zurücksetzen des Namens auf "Guest"
   }
 
   async successAuth() {
@@ -53,7 +55,7 @@ export class AuthService {
       const userCredential = await signInAnonymously(this.auth);
       if (userCredential.user) {
         await updateProfile(userCredential.user, { displayName: 'Guest' });
-        this.userName = 'Guest';
+        this.userNameSubject.next('Guest');
         this.authSubject.next(true);
       }
     } catch (error) {
@@ -62,30 +64,6 @@ export class AuthService {
   }
 
   getUserName() {
-    return this.userName;
+    return this.userNameSubject.getValue(); // Gibt den aktuellen Wert zurück
   }
 }
-
-// getUsers() {
-//   return this.firebaseService.UserList;
-// }
-
-// getUserName() {
-//   return this.userName;
-// }
-
-// async addUser(user: IUser) {
-//   await this.firebaseService.addToDB(this.collectionName, user);
-// }
-
-// checkAuth(mail: string, pw: string): boolean {
-//   const users = this.getUsers();
-//   const isAuthenticated = users.some(user => user.eMail == mail && user.password == pw);
-//   this.authSubject.next(isAuthenticated);
-
-//   return isAuthenticated;
-// }
-
-// forceAuth() {
-//   this.authSubject.next(true);
-// }

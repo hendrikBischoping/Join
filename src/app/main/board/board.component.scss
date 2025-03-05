@@ -316,7 +316,8 @@ header {
           text-overflow: ellipsis;
           color: #979191;
           font-size: 1rem;
-          flex: 1;
+          flex: 1;    
+          line-height: 1.2rem;
 
           @media (max-width: 981px) {
             font-size: 0.7rem;
