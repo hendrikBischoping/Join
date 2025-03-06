@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -16,8 +16,10 @@ export class AppComponent implements OnInit {
   authenticated = true;
   userName: string = 'Guest';
   userInitials: string = '';
+  isSmallMenuOpen: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, 
+      private cdRef: ChangeDetectorRef,) {}
 
   ngOnInit() {
     this.authService.auth$.subscribe((authStatus) => {
@@ -34,4 +36,24 @@ export class AppComponent implements OnInit {
     const words = name.trim().split(/\s+/);
     return words.map(word => word[0].toUpperCase()).join("");
   }
+
+  toggleSmallMenu(event: Event) {
+    event.stopPropagation();
+    this.isSmallMenuOpen = !this.isSmallMenuOpen;
+
+    if (this.isSmallMenuOpen) {
+      document.addEventListener('click', this.closeSmallMenu);
+    } else {
+      document.removeEventListener('click', this.closeSmallMenu);
+    }
+  }
+
+  closeSmallMenu = (event: Event) => {
+    const menu = document.querySelector('.editButtom');
+    if (menu && !menu.contains(event.target as Node)) {
+      this.isSmallMenuOpen = false;
+      document.removeEventListener('click', this.closeSmallMenu);
+      this.cdRef.detectChanges();
+    }
+  };
 }

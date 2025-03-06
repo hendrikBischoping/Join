@@ -18,11 +18,18 @@
         <section>
           <div class="header-bg">
             <div class="top-content">
-              <img src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+              <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
               <span>Kanban Project Management Tool</span>
               <div>
-                <img src="./assets/img/icons/HelpIcon.png" alt="">
-                <div>{{ userInitials }}</div>
+                <img src="../assets/img/icons/helpIcon.png" alt="help">
+                <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
+                <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
+                  <ul>
+                    <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
+                    <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
+                    <li routerLink="/" (click)="toggleSmallMenu($event)">Log out</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
