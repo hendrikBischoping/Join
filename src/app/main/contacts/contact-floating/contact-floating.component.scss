@@ -100,8 +100,11 @@ main {
       flex-direction: row;
       width: 100%;
       gap: 2rem;
+      margin-bottom: 2rem;
+
       h2{
-        font-size: 2rem;
+        margin-top: 2rem !important;
+        font-size: 1.5rem;
         margin-bottom: 2rem;
       }
 
@@ -164,6 +167,7 @@ main {
       }
 
       .images-for-contact {
+        margin-top: 1rem;
         width: 10rem;
         height: 2.2rem;
         @include standard-flex(space-between, start);
@@ -202,10 +206,11 @@ main {
         font-size: 2rem;
       }
       .email {
+        margin-bottom: 3rem;
         color: #29abe2;
         cursor: pointer;
       }
-      row-gap:2rem;
+      row-gap:0.5rem;
     }
 
     .overlay {
