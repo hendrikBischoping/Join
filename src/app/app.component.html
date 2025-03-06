@@ -18,11 +18,18 @@
         <section>
           <div class="header-bg">
             <div class="top-content">
-              <img src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+              <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
               <span>Kanban Project Management Tool</span>
               <div>
-                <img src="./assets/img/icons/HelpIcon.png" alt="">
-                <div>{{ userInitials }}</div>
+                <img src="../assets/img/icons/helpIcon.png" alt="help">
+                <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
+                <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
+                  <ul>
+                    <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
+                    <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
+                    <li routerLink="/" (click)="toggleSmallMenu($event)">Log out</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -33,7 +40,34 @@
       </main>
     
     } @else {
-      <app-login></app-login>
+      @if (limitedAccessState == "login") {
+        <app-login (topicSelected)="changeTopic($event)"></app-login>
+      } @else {
+        <main>
+          <nav class="login-nav">
+            <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
+            <ul class="login-list">
+              <li (click)="changeTopic('login')"><img src="./assets/img/icons/LoginIcon.png" alt=""> Log In</li>
+            </ul>
+            <div class="login-topics">
+              <a (click)="changeTopic('privacy')">Privacy policy</a>
+              <a (click)="changeTopic('legal')">Legal Notice</a>
+            </div>
+          </nav>
+          <section>
+            <div class="header-bg">
+              <div class="top-content">
+                <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+                <span>Kanban Project Management Tool</span>
+              </div>
+            </div>
+            <div class="routing-content">
+              @if (limitedAccessState == "privacy") { <app-privacy-policy></app-privacy-policy> }
+              @if (limitedAccessState == "legal") { <app-legal-notice></app-legal-notice> }
+            </div>
+          </section>
+        </main>
+      }
     }
   </section>
 </section>

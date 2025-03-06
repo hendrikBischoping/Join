@@ -1,5 +1,17 @@
 @use './styles/mixins.scss' as *;
 
+@keyframes slideIn {
+    0% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0vh);
+        opacity: 1;
+    }
+}
+
 $headHeight: 8vh;
 $headBorderHeight: 6px;
 $navHeightMobile: 8vh;
@@ -153,7 +165,7 @@ main {
             height: $headHeight;
             border-bottom:  solid 4px rgb(202, 202, 202);
             
-            img {
+            .logo-for-mobile {
                 display: none;
                 width: 3rem;
                 margin-left: 2rem;
@@ -174,6 +186,7 @@ main {
             >div {
                 @include standard-flex();
                 gap: 1rem;
+                position: relative;
 
                 >img {
                     border-radius: 100%;
@@ -188,7 +201,7 @@ main {
                     }
                 }
 
-                >div {
+                >.user-initials {
                     border: 2px solid #2A3647;
                     font-size: 1.5rem;
                     font-weight: bold;
@@ -204,6 +217,40 @@ main {
                         background-color: rgba($color: #000000, $alpha: 0.1);
 
                     }
+
+                    &.show {
+                        position: absolute;
+                    }
+                }
+
+                .small-menu {
+                    display: none;
+
+                    &.show {
+                        display: block;
+                        position: absolute;
+                        z-index: 4;
+                        top: 4rem;
+                        right: 1rem;
+                        background-color: #2A3647;
+                        border-radius: 16px 0 16px 16px;
+                        animation: slideIn 0.5s ease-out forwards;
+                        ul {
+                            list-style-type: none;
+                            white-space:nowrap;
+                            line-height: 3rem;
+                            padding: 0 1rem;
+                            min-width: fit-content;
+                            color: white;
+                            li {
+                                padding: 0 4px;
+                                &:hover {
+                                    cursor: pointer;
+                                    background-color: #2A3D59;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -217,5 +264,23 @@ main {
                 height: calc(100vh - $headHeight - $headBorderHeight - $navHeightMobile);
             }
         }
+    }
+}
+
+@media (max-width: 800px) {
+    
+    
+    .login-nav {
+        flex-direction: row !important;
+    }
+    
+    .login-list {
+        margin-left: 2rem !important;
+    }
+    
+    .login-topics {
+        display: flex !important;
+        flex-direction: row !important;
+        margin-bottom: 0 !important;
     }
 }
