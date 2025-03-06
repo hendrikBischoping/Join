@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
+import { PrivacyPolicyComponent } from './main/privacy-policy/privacy-policy.component';
+import { LegalNoticeComponent } from './main/legal-notice/legal-notice.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterModule, LoginComponent],
+  imports: [CommonModule, RouterOutlet, RouterModule, LoginComponent, PrivacyPolicyComponent, LegalNoticeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit {
   userName: string = 'Guest';
   userInitials: string = '';
   isSmallMenuOpen: boolean = false;
+  limitedAccessState : string = "login";
 
   constructor(private authService: AuthService, 
       private cdRef: ChangeDetectorRef,) {}
@@ -56,4 +59,8 @@ export class AppComponent implements OnInit {
       this.cdRef.detectChanges();
     }
   };
+
+  changeTopic(topic: string) {
+    this.limitedAccessState = topic;
+  }
 }

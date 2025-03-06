@@ -40,7 +40,34 @@
       </main>
     
     } @else {
-      <app-login></app-login>
+      @if (limitedAccessState == "login") {
+        <app-login (topicSelected)="changeTopic($event)"></app-login>
+      } @else {
+        <main>
+          <nav class="login-nav">
+            <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
+            <ul class="login-list">
+              <li (click)="changeTopic('login')"><img src="./assets/img/icons/LoginIcon.png" alt=""> Log In</li>
+            </ul>
+            <div class="login-topics">
+              <a (click)="changeTopic('privacy')">Privacy policy</a>
+              <a (click)="changeTopic('legal')">Legal Notice</a>
+            </div>
+          </nav>
+          <section>
+            <div class="header-bg">
+              <div class="top-content">
+                <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+                <span>Kanban Project Management Tool</span>
+              </div>
+            </div>
+            <div class="routing-content">
+              @if (limitedAccessState == "privacy") { <app-privacy-policy></app-privacy-policy> }
+              @if (limitedAccessState == "legal") { <app-legal-notice></app-legal-notice> }
+            </div>
+          </section>
+        </main>
+      }
     }
   </section>
 </section>

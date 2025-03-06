@@ -266,3 +266,21 @@ main {
         }
     }
 }
+
+@media (max-width: 800px) {
+    
+    
+    .login-nav {
+        flex-direction: row !important;
+    }
+    
+    .login-list {
+        margin-left: 2rem !important;
+    }
+    
+    .login-topics {
+        display: flex !important;
+        flex-direction: row !important;
+        margin-bottom: 0 !important;
+    }
+}

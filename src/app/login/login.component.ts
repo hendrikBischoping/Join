@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 // import { IUser } from '../interfaces/iuser';
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  @Output() topicSelected = new EventEmitter<string>()
   user = {
     name: '',
     email: '',
@@ -71,6 +72,10 @@ export class LoginComponent {
   
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  selectTopic(topic: string) {
+    this.topicSelected.emit(topic);
   }
 }
 
