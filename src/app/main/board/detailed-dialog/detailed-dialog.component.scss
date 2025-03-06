@@ -4,6 +4,10 @@ main {
     position: relative;
     width: 38rem;
 
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+
     .close-container {
         position: absolute;
         top: 1rem;
@@ -16,6 +20,10 @@ main {
         &:hover {
             background-color: rgba($color: #000000, $alpha: 0.1);
             border-radius: 100%;
+        }
+
+        @media (max-width: 600px) {
+            right: 1rem;
         }
     }
         
@@ -49,6 +57,7 @@ main {
             line-height: 5rem;
             font-size: 6rem;
             font-weight: 700;
+            word-break: break-all;
         }
         
         
@@ -106,6 +115,10 @@ main {
         gap: 1rem;
         align-self: end;
         margin-right: 2rem;
+
+        @media (max-width: 600px) {
+            bottom: 1rem;
+        }
 
         .interaction-button {
             @include standard-flex();
@@ -165,6 +178,10 @@ main {
                     width: 3rem;
                     height: 3rem;
                     font-size: 1.5rem;
+
+                    @media (max-width: 600px) {
+                        margin-right: 0;
+                    }
                 }
             }
 
@@ -177,6 +194,10 @@ main {
         right: 2rem;
         @include standard-flex();
         gap: 0.5rem;
+
+        @media (max-width: 600px) {
+            bottom: 1rem;
+        }
     }
 }
 
@@ -237,16 +258,24 @@ main {
     width: 100%;
 
 
+
     >button {
         width: 30%;
         height: 2.5rem;
-        // border: 1px transparent rgba($color: #000000, $alpha: 0.1);
         border-radius: 6px;
         outline: unset;
         margin-left: 1rem;
         font-size: 1.5rem;
         @include standard-flex();
         gap: 1rem;
+
+        @media (max-width: 550px) {
+            font-size: 1rem;
+            width: 35%;
+            margin-left: 0;
+            margin-right: 1rem;
+            gap: 2px;
+        }
 
         &:hover {
             cursor: pointer;
@@ -291,26 +320,8 @@ main {
 
 .subtask-container {
 
-    // width: 100%;
     .input-container {
         position: relative;
-        // display: flex;
-        // align-items: center;
-        // width: 100%;
-
-        // >input {
-            // width: 100%;
-            // padding: 1rem;
-            // margin-top: 1rem;
-            // border: 1px solid rgba(0, 0, 0, 0.4);
-            // border-radius: 12px;
-            // font-family: 'Inter';
-            // font-size: 1.5rem;
-
-
-            // &:focus {
-                // border-color: #29abe2;
-            
         
     }
 

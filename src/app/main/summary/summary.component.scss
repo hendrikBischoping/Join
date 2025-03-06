@@ -7,20 +7,51 @@ $bubbleHeight: 6rem;
     width: 5rem;
     transition: color 0.3s ease;
 
+    @media (max-width: 800px) {
+        width: 4rem;
+    }
+
+    @media (max-width: 550px) {
+        width: 3rem;
+    }
+
     .bottom-count-line {
         font-size: 4rem;
         font-weight: bold;
         line-height: 4rem;
         transition: color 0.1s ease;
+
+        @media (max-width: 800px) {
+            
+            font-size: 3rem;
+            line-height: 3rem;
+        }
+
+        @media (max-width: 550px) {
+            font-size: 2rem;
+            line-height: 2rem;
+        }
+    }
+
+    .bottom-count-location {
+        @media (max-width: 550px) {
+            width: 6rem;
+            font-size: 1rem;
+        }
     }
 }
 
 
 main {
-    height: 80vh;
+    height: 70vh;
+    margin-top: 8vh;
     width: 100%;
     @include standard-flex(center, start);
     flex-direction: column;
+
+    // @media (max-width: 600px) {
+    //     height: 60vh;
+    // }
 
 
     .headline {
@@ -29,26 +60,59 @@ main {
         margin-left: 4rem;
         margin-bottom: 4rem;
 
+        @media (max-width: 950px) {
+            flex-direction: column;
+            align-items: start;
+            gap: 2rem;
+            margin-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
         >h1 {
             font-size: 4.5rem !important;
             margin: 0 !important;
+
+            @media (max-width: 950px) {
+                font-size: 3rem !important;
+            }
+        
         }
 
-        .line {
+        .line-vertical {
             height: 5rem;
             width: 4px;
             background-color: #29abe2;
+
+            @media (max-width: 950px) {
+                display: none;
+            }
         }
 
         span {
             font-size: 2rem;
+            @media (max-width: 950px) {
+                font-size: 1.5rem;
+            }
+        }
+
+        .line-horizontal {
+            display: none;
+            height: 3px;
+            width: 50%;
+            background-color: #29abe2;
+
+            @media (max-width: 950px) {
+                display: block;
+            }
         }
     }
 
     >section {
         @include standard-flex(center);
-        gap: 8rem;
+        gap: 7rem;
+        height: 60vh;
         width: 100%;
+        
 
         .info-bubbles-container {
 
@@ -56,10 +120,18 @@ main {
             gap: 2rem;
             flex-direction: column;
 
+            @media (max-width: 800px) {
+                gap: 1vh;
+            }
+
 
             .upper-bubbles {
                 width: 40rem;
                 @include standard-flex(space-between);
+
+                @media (max-width: 800px) {
+                    width: 90vw;
+                }
             }
 
             .lower-bubbles {
@@ -82,6 +154,10 @@ main {
             font-size: 1.8rem;
             line-height: 3rem;
 
+            @media (max-width: 1150px) {
+                display: none;
+            }
+
             .username {
                 font-size: 2.5rem;
                 color: #29abe2;
@@ -99,6 +175,10 @@ main {
     border-radius: 1rem;
     transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
 
+    @media (max-width: 800px) {
+        padding: 2vw 2vh;
+    }
+
     .icon-bg {
         @include standard-flex();
         border-radius: 100%;
@@ -107,11 +187,21 @@ main {
         height: 3rem;
         transition: background-color 0.1s ease;
 
+        @media (max-width: 800px) {
+            width: 2rem;
+            height: 2rem;
+        }
+
         > img {
             width: 1.5rem;
             height: 1.5rem;
             filter: invert(0);
             transition: filter 0.1s ease;
+
+            @media (max-width: 800px) {
+                width: 1rem;
+                height: 1rem;
+            }
         }
     }
 
@@ -148,6 +238,12 @@ main {
     border-radius: 1rem;
     transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
 
+    @media (max-width: 800px) {
+        width: 90vw;
+        gap: 5vw;
+        padding: 2vw 0;
+    }
+
     .left-inside-bubble {
         @include standard-flex();
         gap: 1rem;
@@ -157,10 +253,20 @@ main {
             border-radius: 100%;
             width: 3rem;
             height: 3rem;
+
+            @media (max-width: 800px) {
+                width: 2rem;
+                height: 2rem;
+            }
     
             > img {
                 width: 1rem;
                 height: 1rem;
+
+                @media (max-width: 800px) {
+                    width: 0.5rem;
+                    height: 0.5rem;
+                }
             }
         }
 
@@ -218,6 +324,12 @@ main {
     background-color: white;
     border-radius: 1rem;
     transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+
+    @media (max-width: 800px) {
+        padding: 0;
+        height: 5vh;
+        width: 12vw;
+    }
 
     .count {
         @include countLine();
