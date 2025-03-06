@@ -3,7 +3,7 @@ import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, onSnapshot, upda
 import { BehaviorSubject } from 'rxjs';
 import { IContact } from '../interfaces/icontact';
 import { ITask } from '../interfaces/itask';
-import { IUser } from '../interfaces/iuser';
+// import { IUser } from '../interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,9 @@ export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
   unsubscribeContacts: () => void;
-  unsubscribeUsers: () => void;
+  // unsubscribeUsers: () => void;
   unsubscribeTasks: () => void;
-  UserList: IUser[] = [];
+  // UserList: IUser[] = [];
 
   private contactSubject = new BehaviorSubject<IContact[]>([]);
   contact$ = this.contactSubject.asObservable();
@@ -29,18 +29,18 @@ export class FirebaseService {
 
   constructor() {
     this.unsubscribeContacts = this.subContactList();
-    this.unsubscribeUsers = this.subUserList();
+    // this.unsubscribeUsers = this.subUserList();
     this.unsubscribeTasks = this.subTaskList();
 
   }
 
-  subUserList() {
-    return onSnapshot(this.getColRef("User"), (snapshot) => {
-      snapshot.forEach((doc) => {
-        this.UserList.push(this.setUserData(doc.data() as IUser, doc.id));
-      });
-    });
-  }
+  // subUserList() {
+  //   return onSnapshot(this.getColRef("User"), (snapshot) => {
+  //     snapshot.forEach((doc) => {
+  //       this.UserList.push(this.setUserData(doc.data() as IUser, doc.id));
+  //     });
+  //   });
+  // }
 
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
@@ -104,17 +104,17 @@ export class FirebaseService {
     };
   }
 
-  setUserData(obj: IUser, id: string): IUser {
-    const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
-    const nameInitials = this.getInitials(capitalizedName);
-    return {
-      name: capitalizedName,
-      eMail: obj.eMail || "",
-      password: obj.password || "",
-      initials: nameInitials,
-      id: id || "",
-    };
-  }
+  // setUserData(obj: IUser, id: string): IUser {
+  //   const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
+  //   const nameInitials = this.getInitials(capitalizedName);
+  //   return {
+  //     name: capitalizedName,
+  //     eMail: obj.eMail || "",
+  //     // password: obj.password || "",
+  //     // initials: nameInitials,
+  //     // id: id || "",
+  //   };
+  // }
 
   setTaskData(obj: ITask, id: string): ITask {
     return {
@@ -175,7 +175,7 @@ export class FirebaseService {
     }
   }
 
-  async addToDB(colId: string, item: ITask | IContact | IUser) {
+  async addToDB(colId: string, item: ITask | IContact) {
     try {
       await addDoc(this.getColRef(colId), item);
     } catch (err) {
@@ -202,8 +202,8 @@ export class FirebaseService {
     if (this.unsubscribeContacts) {
       this.unsubscribeContacts();
     }
-    if (this.unsubscribeUsers) {
-      this.unsubscribeUsers();
-    }
+    // if (this.unsubscribeUsers) {
+    //   this.unsubscribeUsers();
+    // }
   }
 }

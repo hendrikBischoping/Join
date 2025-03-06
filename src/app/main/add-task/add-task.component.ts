@@ -5,11 +5,12 @@ import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IContact } from '../../interfaces/icontact';
 import { ITask } from '../../interfaces/itask';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -39,7 +40,7 @@ export class AddTaskComponent {
     {
       title: '',
       description: '',
-      contacts: [""],
+      contacts: [],
       date: '10.10.2020',
       priority: 'Medium',
       category: 'User Story',
@@ -52,17 +53,21 @@ export class AddTaskComponent {
     { category: 'Technical Task' },
     { category: 'User Story' }
   ];
-  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService,) { };
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef, private taskDataService: TaskDataService, private router: Router) { };
 
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contacts = contactList;
       this.filteredContacts = [...this.contacts];
+
       this.cdRef.detectChanges();
     });
 
   }
-
+logme(description: string, any: any){
+    console.log(description, any);
+    
+  }
   filterContacts(event: any) {
     const query = event.target.value.toLowerCase();
     this.filteredContacts = this.contacts.filter(contact =>
@@ -184,16 +189,19 @@ export class AddTaskComponent {
   }
 
   async submitTask(form: NgForm) {
-    if (form.valid && form.submitted) {
-      this.getDate();
-    }
+    // if (form.valid && form.submitted) {
+    //   this.getDate();
+    // }
     this.taskAdded = true;
-    this.task.status = this.predefinedStatus;
-    await this.taskDataService.addTask(this.task).then(() => {
-      this.taskAdded = false;
-      form.resetForm();
-      this.task.contacts = [];
-      this.task.subtasks = [];
-    })
+    // this.task.status = this.predefinedStatus;
+    // await this.taskDataService.addTask(this.task).then(() => {
+      // form.resetForm();
+      // this.task.contacts = [];
+      // this.task.subtasks = [];
+      // setTimeout(() => {
+        // this.taskAdded = false;
+        // this.router.navigate(['/board']);
+      // }, 1500);
+    // })
   }
 }

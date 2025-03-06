@@ -3,21 +3,27 @@ import { FirebaseService } from '../../services/firebase-service.service';
 import { TaskDataService } from '../../services/task-data.service';
 import { ITask } from '../../interfaces/itask';
 import { CommonModule } from '@angular/common';
+import { RouterModule} from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent {
   isGuest = false;
-  currentUser = "Gott Devil";
+  currentUser = "";
   tasks: ITask[] = [];
   upcomingTask!: ITask;
 
-  constructor(public firebaseService: FirebaseService, private taskDataService: TaskDataService) {}
+  constructor(public firebaseService: FirebaseService, private taskDataService: TaskDataService, private authService: AuthService) {
+    if (authService.getUserName() && authService.getUserName() != "Guest") {
+      this.currentUser = authService.getUserName();
+    }
+  }
 
   ngOnInit() {
     this.taskDataService.getTasks().subscribe((taskList) => {
@@ -47,7 +53,7 @@ export class SummaryComponent {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
   
-    this.upcomingTask = (this.tasks as (ITask & { parsedDate: Date | null })[])
+    this.upcomingTask = (this.tasks)
     .filter(task => task.parsedDate && task.parsedDate >= today && task.status != "done")
     .sort((a, b) => a.parsedDate!.getTime() - b.parsedDate!.getTime())[0];
   
@@ -78,22 +84,17 @@ export class SummaryComponent {
   }
 
   getUpcomingTaskPrio(): string {
-    if (!this.upcomingTask) {
-      return "No upcoming tasks";
-    }
+    if (!this.upcomingTask) { return "No upcoming tasks"; }
     return this.upcomingTask.priority;
   }
+
   getUpcomingTaskPrioClass(): string {
-    switch (this.getUpcomingTaskPrio()) {
-      case "Low":
-        return "bg-low";
-      case "Medium":
-        return "bg-medium";
-      case "Urgent":
-        return "bg-urgent";
-      default:
-        return "";
-    }
+    return `bg-${this.getUpcomingTaskPrio().toLocaleLowerCase()}`
   }
+
+  getUpcomingTaskPrioIcon(): string {
+    return `./assets/img/add-task/${this.getUpcomingTaskPrio().toLowerCase()}-active.png`
+  }
+
   
 }

@@ -1,7 +1,7 @@
-export interface IUser {
-    name: string;
-    eMail: string;
-    password: string;
-    initials?: string;
-    id?: string;
-}
+// export interface IUser {
+//     name: string;
+//     eMail: string;
+    // password: string;
+    // initials?: string;
+    // id?: string;
+// }

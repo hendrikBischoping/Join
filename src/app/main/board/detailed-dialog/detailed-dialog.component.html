@@ -123,17 +123,21 @@
             </div>
             <div class="assigned-list">
                 @for (taskContact of previewTask.contacts; track $index) {
-                    @for (contact of contacts; track $index) {
-                        @if (taskContact == contact.id) {
-
-                        <div class="initials-circle bg-{{contact.styleSelector}}">
-                            {{contact.initials}}
-                        </div>
-
+                    @if ($index < 5) {
+                        @for (contact of contacts; track null) {
+                            @if (taskContact == contact.id) {
+                            <div class="initials-circle bg-{{contact.styleSelector}}">
+                                {{contact.initials}}
+                            </div>
+                            }
                         }
                     }
                 }
+                @if (previewTask.contacts!.length >= 6) {
+                    + {{previewTask.contacts!.length - 5}}
+                }
             </div>
+            
         </div>
         <div class="subtask-container">
             <p>Subtasks</p>
