@@ -2,6 +2,43 @@
 @use "../../../styles.scss" as *;
 
 main{
-    @include standard-flex(center,flex-start);
+    @include standard-flex(flex-start,flex-start);
     flex-direction: column;
+    padding: 1rem;
+    margin-top: 9rem;
+    margin-left: 8rem;
+    margin-right: 8rem;
+    max-height: calc(80vh - 10.6rem);
+    overflow: auto;
+    height: fit-content;
+    h1{
+        margin-bottom: 4rem;
+        font-weight: bolder;
+        font-size: 5rem;
+    }
+
+    .description{
+        @include standard-flex(center,flex-start);
+        flex-direction: column;
+       li{
+        font-family: 'Inter' !important;
+       }
+        h2{
+           margin-top: 1rem;
+           font-weight: bold;
+           font-size: 2.2rem;
+        }
+        h3{
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.2;
+        }
+      span{
+        color: #29ABE2;
+        font-family: 'Inter' !important;
+      }
+      p{
+        font-family: 'Inter' !important;
+      }
+    }
 }
