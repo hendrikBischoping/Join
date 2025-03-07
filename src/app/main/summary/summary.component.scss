@@ -143,6 +143,10 @@ main {
                     padding: 2rem;
                     background-color: white;
                     border-radius: 12px;
+                    
+                    @media (max-width: 390px) {
+                        width: 7vw;
+                    }
                 }
             }
         }
