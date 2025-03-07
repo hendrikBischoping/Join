@@ -21,11 +21,11 @@
               <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
               <span>Kanban Project Management Tool</span>
               <div>
-                <img src="../assets/img/icons/helpIcon.png" alt="help">
+                <img src="../assets/img/icons/helpIcon.png" alt="help" routerLink="/help-component">
                 <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
                 <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
                   <ul>
-                    <li routerLink="/help" class="help-link" (click)="toggleSmallMenu($event)">Help</li>
+                    <li routerLink="/help-component" class="help-link" (click)="toggleSmallMenu($event)">Help</li>
                     <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
                     <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
                     <li routerLink="/" (click)="toggleSmallMenu($event)">Log out</li>

@@ -497,7 +497,7 @@
 
 @media (max-width: 1550px) {
     .add-task {
-        padding: 6rem;
+        padding: 6rem 6rem 3rem 6rem;
     }
 }
 
@@ -585,7 +585,7 @@
 
 @media (max-width: 1100px) {
     .add-task {
-        padding: 4rem;
+        padding: 4rem 4rem 2rem 4rem;
 
         .assigned-list {
             width: 18rem;
@@ -661,8 +661,8 @@
 
 @media (max-width: 800px) {
     .add-task {
-        padding: 10vw;
-        max-height: calc(100% - 20vh - 1px);
+        padding: 10vw 10vw 0 10vw;
+        height: calc(100% - 10rem);
         overflow-y: scroll;
 
         h1 {
@@ -697,10 +697,10 @@
             padding: 0 8rem;
             position: fixed;
             width: calc(100vw - 16rem);
-            height: 8rem;
+            height: 6rem;
             right: 0;
             left: 0;
-            bottom: 4rem;
+            bottom: 5rem;
             background-color: rgb(229, 229, 229);
 
             >div {
@@ -794,7 +794,7 @@
 
         .lowest-section,
         .lowest-section-overlay {
-            bottom: 4rem;
+            bottom: 5rem;
 
             .clear-or-create-buttons {
                 margin: 0;
@@ -868,7 +868,7 @@
         }
 
         .lowest-section-overlay {
-            bottom: 0;
+            bottom: 5rem;
         }
         
         .task-created-message-overlay div {
