@@ -48,26 +48,39 @@
             </div>
             <form class="forms" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
                 <div class="input-container">
-                <input type="text" name="name" placeholder="name" required [(ngModel)]="user.name">
-                <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="person icon">
+                    <input #name="ngModel" type="text" name="name" placeholder="name" required [(ngModel)]="user.name">
+                    <img class="icon" src="./assets/img/icons/PersonIcon.png" alt="person icon">
                 </div>
+                @if (!name.valid && (name.touched || tryRegister)){
+                    <span class="error-message">name missing!</span>
+                }
                 <div class="input-container">
-                <input type="email" id="email" name="email" placeholder="email" required
-                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" [(ngModel)]="user.email">
-                <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mail icon">
+                    <input #email="ngModel" type="email" id="email" name="email" placeholder="email" required
+                            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" [(ngModel)]="user.email">
+                    <img class="icon" src="./assets/img/icons/MailIcon.png" alt="mail icon">
                 </div>
+                @if (!email.valid && (email.touched || tryRegister)){
+                    <span class="error-message">mail missing!</span>
+                }
                 <div class="input-container">
-                <input type="password" id="password" name="password" placeholder="password" required
-                        [(ngModel)]="user.password">
-                <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
+                    <input #password="ngModel" type="password" id="password" name="password" placeholder="password" required
+                            [(ngModel)]="user.password">
+                    <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
                 </div>
+                @if (!password.valid && (password.touched || tryRegister)){
+                    <span class="error-message">password missing!</span>
+                }
                 <div class="input-container">
-                <input type="password" id="secondPassword" name="secondPassword" placeholder="confirm password" required
-                        [(ngModel)]="user.secondPassword">
-                <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
+                    <input type="password" id="secondPassword" name="secondPassword" placeholder="confirm password"
+                            [(ngModel)]="user.secondPassword">
+                    <img class="icon" src="./assets/img/icons/LockIcon.png" alt="lock icon">
                 </div>
+                
                 @if (passwordMismatch) {
                     <span class="error-message">Passwords do not match!</span>
+                }
+                @if (privacyAcceptedMismatch) {
+                    <span class="error-message">Please Accept privacy policy!</span>
                 }
                 @if (registrationSuccess) {
                     <span class="success-message">Register successful. You can log in now</span>
@@ -76,7 +89,7 @@
                     <input type="checkbox" id="privacyPolicy" name="privacyPolicy" [(ngModel)]="privacyAccepted" required>
                     <label for="privacyPolicy">I accept the <a href="" (click)="scrollToTop()">privacy policy</a></label>
                 </div>
-                <button class="button-dark-bg" type="submit" [disabled]="!privacyAccepted">Sign up</button>
+                <button class="button-dark-bg" type="submit" value="submit">Sign up</button>
             </form>
         </section>
     }

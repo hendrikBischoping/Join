@@ -23,6 +23,8 @@ export class LoginComponent {
   stateLogin: boolean = true;
   authSucceeded: boolean = true;
   privacyAccepted: boolean = false;
+  privacyAcceptedMismatch: boolean = false;
+  tryRegister: boolean = false;
   registrationSuccess: boolean = false;
   passwordMismatch: boolean = false;
   logoTransition: boolean = false;
@@ -43,11 +45,23 @@ export class LoginComponent {
   }
 
   async onSubmit(form: NgForm) {
-    if (form.invalid || this.user.password !== this.user.secondPassword) {
+    if (form.invalid) {
+      this.tryRegister = true;
+      return;
+    }
+
+    if (!this.privacyAccepted) {
+      this.privacyAcceptedMismatch = true;
+      return;
+    }
+    this.privacyAcceptedMismatch = false;
+
+    if (this.user.password !== this.user.secondPassword) {
       this.passwordMismatch = true;
       return;
     }
     this.passwordMismatch = false;
+    
   
     const result = await this.authService.registerUser(this.user.name, this.user.email, this.user.password);
     if (result) {
@@ -55,7 +69,6 @@ export class LoginComponent {
       setTimeout(() => this.stateLogin = true, 2000);
     }
   }
-
   
   async logIn() {
     const user = await this.authService.loginUser(this.user.email, this.user.password);
@@ -78,40 +91,3 @@ export class LoginComponent {
     this.topicSelected.emit(topic);
   }
 }
-
-// async onSubmit(form: NgForm) {
-//   if (form.invalid) {
-//     return;
-//   }
-
-//   if (this.user.password !== this.user.secondPassword) {
-//     this.passwordMismatch = true;
-//     return;
-//   }
-//   this.passwordMismatch = false;
-
-//   const newUser: IUser = {
-//     name: this.user.name,
-//     eMail: this.user.email,
-//     password: this.user.password
-//   };
-
-  // await this.authService.addUser(newUser).then(() => {
-  //   this.registrationSuccess = true;
-  //   setTimeout(() => {
-  //     this.stateLogin = true;
-  //   }, 2000);
-
-  // });
-
-// }
-
-// logIn() {
-//   this.authSucceeded = this.authService.checkAuth(this.user.email, this.user.password);
-//   if (!this.authSucceeded) {
-//     setTimeout(() => {
-//       this.authSucceeded = true;
-//     }, 1800);
-//   }
-
-// }
