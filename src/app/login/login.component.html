@@ -87,7 +87,7 @@
                 }
                 <div class="privacy-check">
                     <input type="checkbox" id="privacyPolicy" name="privacyPolicy" [(ngModel)]="privacyAccepted" required>
-                    <label for="privacyPolicy">I accept the <a href="" (click)="scrollToTop()">privacy policy</a></label>
+                    <label for="privacyPolicy">I accept the <a (click)="selectTopic('privacy')">privacy policy</a></label>
                 </div>
                 <button class="button-dark-bg" type="submit" value="submit">Sign up</button>
             </form>

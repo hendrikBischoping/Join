@@ -77,6 +77,10 @@ main {
                 font-size: 10vw;
                 font-weight: bold;
             }
+
+            @media (min-width: 1920px) {
+                font-size: 6rem;
+            }
         }
         .line {
             border-top: 5px solid #29abe2;

@@ -177,10 +177,14 @@ $customBlue: #29abe2;
   background: white;
   border-radius: 2rem;
   width: 85%;
-  height: 80vh;
-  // overflow: visible;
+  max-width: 1800px;
+  height: 60vh;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.5s ease-out forwards;
+
+  // @media (min-width: 1920px) {
+    
+  // }
 }
 
 // Standard-Animation (Desktop: Slide von rechts)
@@ -193,6 +197,20 @@ $customBlue: #29abe2;
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@media (min-width: 1920px) {
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 }
 

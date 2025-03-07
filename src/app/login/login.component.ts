@@ -89,5 +89,6 @@ export class LoginComponent {
 
   selectTopic(topic: string) {
     this.topicSelected.emit(topic);
+    this.scrollToTop();
   }
 }
