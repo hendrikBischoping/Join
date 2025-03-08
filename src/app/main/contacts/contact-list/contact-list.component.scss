@@ -170,7 +170,7 @@
         }
     }
     .contact-list-per-letter {
-        >.contact-small-info {
+        .contact-small-info {
             >div>p {
                 font-size: 0.8rem;
             }
@@ -181,7 +181,9 @@
 @media (max-width: 800px) {
     .contacts {
         width: 100%;
+        height: calc(100vh - 10rem);
         >.contacts-left {
+            padding: unset;
             >.add-contact-big {
                 display: none;
             }
@@ -193,7 +195,7 @@
                 aspect-ratio: 1 / 1;
                 border-radius: 50%;
                 margin: 0;
-                padding: 2rem 2rem;
+                padding: 1rem 1rem;
                 >img {
                     height: 3rem;
                     aspect-ratio: 1 / 1;
@@ -202,29 +204,85 @@
         }
     }
     .contact-list {
-        max-height: calc(100vh - 10.6rem - 11.2vh + 4.5rem);
+        max-height: calc(100vh - 10rem);
         overflow: auto;
         >h2 {
-            font-size: 4rem;
-            padding: 2rem 8rem;
+            font-size: 3rem;
+            padding: 1rem 8rem;
         }
     }
     .contact-list-per-letter {
         >.contact-small-info {
-            padding: 1rem 4rem;
-            >.initials-circle {
-                min-width: 6rem;
-                max-width: 6rem;
+            padding: 0 5rem;
+            .initials-circle {
+                min-width: 4rem;
+                font-size: 2rem;
                 margin: 1rem;
-                font-size: 2.5rem;
             }
             >div>.contact-name {
-                font-size: 2rem;
+                font-size: 1.5rem;
+                line-height: 1.5rem;
             }
             >div>.contact-mail {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
+                line-height: 1.5rem;
             }
         }
     }
     
+}
+
+@media (max-width: 550px) {
+    .contact-list-per-letter {
+        >.contact-small-info {
+            padding: 0 3rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts .contacts-left {
+        .add-contact-small {
+            right: 3rem;
+            bottom: 3rem;
+            img {
+                height: 1.6rem;
+            }
+        }
+    }
+    .contact-list {
+        >h2 {
+            font-size: 2em;
+            padding: 1rem 6rem;
+        }
+    }
+    .contact-list-per-letter {
+        .contact-small-info {
+            div {
+                .contact-name {
+                    font-size: 1.2rem
+                }
+                .contact-mail{
+                    font-size: 1rem
+                }
+            }
+            .initials-circle {
+                min-width: 3rem;
+                font-size: 1.3rem;
+                margin: 0.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .contact-list h2 {
+        font-size: 1.8rem;
+        padding: 0.5rem 3rem;
+    }
+    .contact-list-per-letter {
+        .contact-small-info {
+            padding: 0 1rem;
+        }
+    }
 }
