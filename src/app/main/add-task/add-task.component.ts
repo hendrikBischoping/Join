@@ -189,19 +189,19 @@ logme(description: string, any: any){
   }
 
   async submitTask(form: NgForm) {
-    // if (form.valid && form.submitted) {
-    //   this.getDate();
-    // }
+    if (form.valid && form.submitted) {
+      this.getDate();
+    }
     this.taskAdded = true;
-    // this.task.status = this.predefinedStatus;
-    // await this.taskDataService.addTask(this.task).then(() => {
-      // form.resetForm();
-      // this.task.contacts = [];
-      // this.task.subtasks = [];
-      // setTimeout(() => {
-        // this.taskAdded = false;
-        // this.router.navigate(['/board']);
-      // }, 1500);
-    // })
+    this.task.status = this.predefinedStatus;
+    await this.taskDataService.addTask(this.task).then(() => {
+      form.resetForm();
+      this.task.contacts = [];
+      this.task.subtasks = [];
+      setTimeout(() => {
+        this.taskAdded = false;
+        this.router.navigate(['/board']);
+      }, 1500);
+    })
   }
 }
