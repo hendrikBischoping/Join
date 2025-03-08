@@ -1,24 +1,25 @@
 @use '../../../styles/mixins.scss' as *;
 
 main {
-    @include standard-flex();
+    @include standard-flex(flex-start, center);
 
     @media (max-width: 800px) {
+        height: calc(100vh - 10rem);
         aspect-ratio: unset;
         flex-direction: column;
         position: relative;
     }
-    
+
     .logo-section {
         position: relative;
         background-color: #2A3647;
         width: 35%;
         height: 100%;
-        @include standard-flex(center, start);
+        @include standard-flex(unset, start);
         flex-direction: column;
         gap: 2rem;
         padding-left: 2rem;
-        border-radius: 1rem;
+        border-radius: 2rem 0 0 2rem;
 
         @media (max-width: 1050px) {
             width: 25%;
@@ -26,10 +27,11 @@ main {
 
         @media (max-width: 800px) {
             width: 100%;
-            height: calc(100vh - 16vh - 50%);
+            height: 25vh;
             aspect-ratio: unset;
             flex-direction: column;
-            padding-left: 0;
+            padding: 7rem 0 0 0;
+            border-radius: 2rem 2rem 0 0;
         }
 
         .close-container-mobile {
@@ -64,15 +66,15 @@ main {
             font-size: 4vw;
             color: white;
 
-            @media (max-width: 800px) {
-                margin-left: 2rem;
-                font-size: 10vw;
-                font-weight: bold;
-            }
-
             @media (min-width: 1920px) {
                 font-size: 6rem;
-              }
+            }
+
+            @media (max-width: 800px) {
+                margin: 0 0 0 2rem;
+                font-size: 9vw;
+                font-weight: bold;
+            }
         }
 
         >span {
@@ -87,7 +89,7 @@ main {
 
             @media (min-width: 1920px) {
                 font-size: 2rem;
-              }
+            }
         }
 
         .line {
@@ -107,8 +109,10 @@ main {
 
         @media (max-width: 800px) {
             position: absolute;
+            align-items: unset;
+            top: 30vh;
         }
-        
+
 
         >div {
             width: 9rem;
@@ -124,7 +128,7 @@ main {
             @media (max-width: 800px) {
                 width: 8rem;
                 height: 8rem;
-                background-color: grey;
+                background-color: rgb(209, 209, 209);
                 border: 2px solid white;
             }
 
@@ -227,6 +231,7 @@ main {
 
             @media (max-width: 800px) {
                 height: 100%;
+                padding-top: 3rem;
             }
 
             >span {
@@ -254,6 +259,10 @@ main {
                         padding: 0.5rem;
                         margin-left: 2rem;
                         margin-right: 2rem;
+                    }
+
+                    @media (max-width: 800px) {
+                        height: 1.5rem;
                     }
 
                     &:focus {
