@@ -52,8 +52,8 @@
 
     .close-btn-overlay {
         position: absolute;
-        right: 6rem;
-        top: 6rem;
+        right: 4rem;
+        top: 4rem;
 
         img {
             height: 1.2rem;
@@ -779,6 +779,7 @@
 
 @media (max-width: 550px) {
     .add-task {
+        height: calc(100% - 8rem);
         .right-side {
             margin-bottom: 0rem;
 
