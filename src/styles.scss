@@ -42,15 +42,11 @@
   border-radius: 16px !important;
 }
 
-
-
-// Falls nötig, auch für den body:
 body {
   margin: 0;
   font: 400 16px/20px "Inter", sans-serif !important;
 
 }
-
 
 html,
 body {
@@ -181,10 +177,6 @@ $customBlue: #29abe2;
   height: 60vh;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.5s ease-out forwards;
-
-  // @media (min-width: 1920px) {
-    
-  // }
 }
 
 // Standard-Animation (Desktop: Slide von rechts)
@@ -228,15 +220,6 @@ $customBlue: #29abe2;
     }
   }
 }
-
-// .custom-dialog-container {
-//   animation: slideInRight 0.4s ease-out forwards;
-// }
-
-// .custom-dialog-container-exit {
-//   animation: slideOutRight 0.4s ease-in forwards;
-// }
-
 
 /** initials-circles: backgroundcolors*/
 
@@ -359,5 +342,3 @@ $customBlue: #29abe2;
   .bg-default {
     background-color: #b17d1d;
   }
-
- 

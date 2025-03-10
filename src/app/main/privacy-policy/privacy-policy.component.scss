@@ -4,22 +4,13 @@
 main {
   @include standard-flex(flex-start, flex-start);
   flex-direction: column;
-  padding: 3rem;
-  padding-top: 9rem;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  padding: 9rem 8rem 3rem 8rem;
   max-height: calc(67vh);
   overflow: auto;
   @media (max-width: 1000px) {
-    padding: 2rem;
-    padding-top: 6rem;
-    padding-left: 4rem;
-    padding-right: 6rem;
+    padding: 6rem 6rem 2rem 4rem;
     @media (max-width: 500px) {
       padding: 2rem;
-    padding-top: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
     }
   }
   h1 {

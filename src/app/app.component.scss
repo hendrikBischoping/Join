@@ -136,7 +136,6 @@ main {
                 display: none;
             }
 
-
             >a {
                 text-decoration: none;
                 color: white;
@@ -146,15 +145,12 @@ main {
                 }
             }
         }
-
-
     }
 
     >section {
         flex: 1;
 
         @media (max-width:800px) {
-            // @include standard-flex();
             width: 100%;
             flex: unset;
             height: calc(100vh - $navHeightMobile);

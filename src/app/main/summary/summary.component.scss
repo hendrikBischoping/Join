@@ -22,7 +22,6 @@ $bubbleHeight: 6rem;
         transition: color 0.1s ease;
 
         @media (max-width: 800px) {
-            
             font-size: 3rem;
             line-height: 3rem;
         }
@@ -49,11 +48,6 @@ main {
     @include standard-flex(center, start);
     flex-direction: column;
 
-    // @media (max-width: 600px) {
-    //     height: 60vh;
-    // }
-
-
     .headline {
         @include standard-flex();
         gap: 1rem;
@@ -75,7 +69,6 @@ main {
             @media (max-width: 950px) {
                 font-size: 3rem !important;
             }
-        
         }
 
         .line-vertical {
@@ -112,7 +105,6 @@ main {
         gap: 7rem;
         height: 60vh;
         width: 100%;
-        
 
         .info-bubbles-container {
 
@@ -123,7 +115,6 @@ main {
             @media (max-width: 800px) {
                 gap: 1vh;
             }
-
 
             .upper-bubbles {
                 width: 40rem;
@@ -303,7 +294,6 @@ main {
         .date {
             font-weight: bold;
         }
-
     }
 
     &:hover {

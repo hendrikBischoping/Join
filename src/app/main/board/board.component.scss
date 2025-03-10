@@ -138,10 +138,6 @@ header {
           width: 4rem;
           height: 1.8rem;
         }
-
-        // @media (max-width: 550px) {
-        //   right: 0.5rem;
-        // }
       }
     }
 
@@ -258,7 +254,6 @@ header {
         min-width: 15rem;
       }
 
-
       .category {
 
         @include standard-flex(flex-start, flex-start);
@@ -268,9 +263,6 @@ header {
         text-align: start;
         padding: 4px 1rem 4px 1rem;
         border-bottom: 4rem;
-        // @media (max-width: 550px){
-        //   font-size: 1rem;
-        // }
       }
 
       .user-story-bg {
@@ -279,14 +271,12 @@ header {
         @media (max-width: 981px) {
           .story-container {
             font-size: 0.6rem;
-            
           }
         }
 
         .story-container {
           @media (max-width: 800px) {
             font-size: 1rem;
-
           }
         }
       }
@@ -304,14 +294,9 @@ header {
           @media (max-width: 981px) {
             font-size: 0.7rem;
           }
-
           @media (max-width: 800px) {
             font-size: 1rem;
           }
-
-          // @media (max-width: 550px) {
-          //   font-size: 1.5rem;
-          // }
         }
 
         p {
@@ -325,14 +310,9 @@ header {
           @media (max-width: 981px) {
             font-size: 0.7rem;
           }
-
           @media (max-width: 800px) {
             font-size: 1rem;
           }
-
-          // @media (max-width: 550px) {
-          //   font-size: 1.5rem;
-          // }
         }
       }
 
@@ -348,18 +328,12 @@ header {
           @media (max-width: 1439px) {
             font-size: 0.6rem;
           }
-
           @media (max-width: 973px) {
             font-size: 0.5rem;
           }
-
           @media (max-width: 800px) {
             font-size: 1rem;
           }
-
-          // @media (max-width: 550px) {
-          //   font-size: 1.5rem;
-          // }
         }
 
         .progress-bar {
@@ -390,11 +364,7 @@ header {
         line-height: 80%;
         line-break: normal;
         .for-circle{
-          // width: 75px;
-          // height: 75px;
           position: absolute;
-          // top: 5rem;
-          // left: -18px;
         }
 
         .initials-circle {
@@ -427,8 +397,6 @@ header {
           position: absolute;
           top: -3.1rem;
           left: 10rem;
-
-
           background-color: rgb(187, 187, 187);
           height: 3rem;
           aspect-ratio: 1;

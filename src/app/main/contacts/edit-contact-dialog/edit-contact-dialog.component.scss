@@ -2,7 +2,6 @@
 
 
 main {
-
     @include standard-flex();
 
     @media (max-width: 1300px) {
@@ -132,8 +131,6 @@ main {
         }
     }
 
-    
-
     .edit-section {
         position: relative;
         width: 50%;
@@ -243,8 +240,6 @@ main {
                 }
             }
 
-
-
             .icon {
                 position: absolute;
                 top: 50%;
@@ -255,10 +250,6 @@ main {
                      right: 15%;
                 }
             }
-
         }
-
-
-
     }
 }

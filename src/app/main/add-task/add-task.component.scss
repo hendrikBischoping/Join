@@ -18,10 +18,7 @@
 }
 
 .add-task {
-    padding: 6rem 10rem;
     font-family: 'inter';
-    position: relative;
-    max-width: 1600px;
 
     .task-created-message-overlay {
         position: fixed;
@@ -58,7 +55,6 @@
         img {
             height: 1.2rem;
             padding: 0.25rem;
-
             &:hover {
                 cursor: pointer;
                 border-radius: 50%;
@@ -200,8 +196,6 @@
         max-height: 200px;
         overflow-y: auto;
 
-
-
         >label {
             @include standard-flex(space-between, center);
             cursor: pointer;
@@ -243,7 +237,6 @@
         flex-wrap: wrap;
         width: 27rem;
         height: auto;
-        // overflow: scroll;
         margin-top: 4px;
         margin-left: 4px;
 
@@ -279,11 +272,6 @@
             }
         }
     }
-
-
-
-
-
 
     .input-container {
         position: relative;
@@ -378,8 +366,6 @@
     .subtask-icon-container {
         display: none;
     }
-
-
 
     .lowest-section {
         @include standard-flex(space-between, center);
@@ -520,10 +506,6 @@
 
         .assigned-list {
             width: 24rem;
-
-            // .initials-circle {
-            //     width: 3.6rem;
-            // }
         }
 
         .input-container {
@@ -589,10 +571,6 @@
 
         .assigned-list {
             width: 18rem;
-
-            // .initials-circle {
-            //     width: 3.6rem;
-            // }
         }
     }
 }
@@ -888,7 +866,6 @@
         }
     }
 }
-
 
 .task-overlay {
     max-width: 1200px !important;

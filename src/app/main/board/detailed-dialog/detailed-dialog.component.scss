@@ -28,7 +28,6 @@ main {
             right: 1rem;
         }
     }
-        
     
     .main-content {
         @include standard-flex(start, start);
@@ -127,8 +126,6 @@ main {
         
 
     .interaction-container {
-        // position: fixed;
-        // top: 0;
         @include standard-flex();
         height: 4rem;
         gap: 1rem;
@@ -234,8 +231,6 @@ main {
     margin: 1rem 2rem;
 }
 
-
-
 .dropdown {
     position: relative;
     display: inline-block;
@@ -261,8 +256,6 @@ main {
     max-height: 200px;
     overflow-y: auto;
 
-
-
     >label {
         display: block;
         padding: 5px;
@@ -285,8 +278,6 @@ main {
 .prio-buttons {
     @include standard-flex(space-between);
     width: 100%;
-
-
 
     >button {
         width: 30%;
@@ -326,10 +317,7 @@ main {
                 background-color: #7AE229;
             }
         }
-
     }
-
-
 }
 
 .no-results {
@@ -348,10 +336,8 @@ main {
 }
 
 .subtask-container {
-
     .input-container {
         position: relative;
-        
     }
 
     .icon {
@@ -412,7 +398,6 @@ main {
                     border: 1px solid blue;
                 }
             }
-
         }
 
         >span {
@@ -426,9 +411,6 @@ main {
             top: 25%;
             right: 0;
             @include standard-flex();
-
-            
-
 
             >div {
                 height: 1.5rem;
