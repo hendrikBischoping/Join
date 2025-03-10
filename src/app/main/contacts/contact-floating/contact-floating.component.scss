@@ -2,27 +2,40 @@
 @use "../../../../styles.scss" as *;
 
 main {
-  margin: 5rem 1.5rem;
+  padding: 5rem 1.5rem 0 1.5rem;
   @include standard-flex(flex-start, start);
   flex-direction: column;
   gap: 6rem;
-
+  width: 94%;
   @media (max-width: 800px) {
     font-size: 12px;
-    height: 100%;
+    height: calc(100vh - 14rem);
+    overflow: scroll;
+    padding-top: 2.5rem;
+    font-size: 12px;
+    gap: 3rem;
   }
 
   .headline-content {
     @include standard-flex(space-between, center);
     width: 100%;
-    margin-top: 2rem;
+    h1 {
+      word-break: keep-all;
+    }
+    h2 {
+      word-break: break-word;
+      @media (max-width: 1300px) {
+        font-size: 2rem;
+        padding-right: 1rem;
+      }
+    }
     .go-back {
       display: none;
     }
 
     @media (max-width: 800px) {
-      font-size: 12px;
       .go-back {
+        margin-right: 1rem;
         display: block;
         &:hover {
           cursor: pointer;
@@ -113,12 +126,16 @@ main {
         height: 8rem !important;
         font-size: 3.5rem !important;
         @media (max-width: 1200px) {
-          word-break: break-all;
+          word-break: break-word;
         }
         @media (max-width: 799px) {
-          width: 8rem !important;
-          height: 8rem !important;
-          font-size: 3rem !important;
+          width: 6rem !important;
+          height: 6rem !important;
+          font-size: 2rem !important;
+        }
+        @media (max-width: 400px) {
+          width: 5rem !important;
+          height: 5rem !important;
         }
       }
       p {
@@ -127,13 +144,27 @@ main {
       }
       @media (max-width: 1200px) {
         p {
-          word-break: break-all;
+          word-break: break-word;
         }
+      }
+      @media (max-width: 800px) {
+        margin-bottom: 0;
+        gap: 1rem;
       }
     }
     @media (max-width: 799px) {
       h2 {
-        margin: 2rem 0;
+        margin: 1rem 0;
+      }
+    }
+    @media (max-width: 450px) {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 350px) {
+      h2 {
+        font-size: 1.6rem;
       }
     }
 
@@ -145,6 +176,7 @@ main {
        
         .contact-name {
           margin: 0;
+          padding-right: 1rem;
           line-height: 80%;
           line-break: normal;
           font-size: 3rem;
@@ -159,7 +191,7 @@ main {
           @media (max-width: 799px) {
             font-size: 26px;
             font-weight: bold;
-            line-height: 80%;
+            line-height: 100%;
             line-break: normal;
           }
         }
@@ -210,6 +242,11 @@ main {
         cursor: pointer;
       }
       row-gap:0.5rem;
+      @media (max-width: 400px) {
+        p {
+          font-size: 1.5rem;
+        }
+      }
     }
 
     .overlay {
@@ -236,7 +273,7 @@ main {
 }
 
 .mobile-content {
-  background-color: aqua;
+  display: none;
   width: 100%;
   .edit-for-mobile {
     > .edit-menu {
@@ -250,10 +287,13 @@ main {
         display: flex;
         align-self: flex-end;
         cursor: pointer;
-        bottom: 4px;
-        right: 3rem;
+        bottom: 2rem;
+        right: 2rem;
       }
     }
+  }
+  @media (max-width: 799px) {
+    display: block;
   }
 }
 
@@ -268,6 +308,7 @@ main {
 }
 
 .edit-buttom {
+  display: none;
   position: absolute;
   bottom: 4px;
   right: -12rem;
@@ -281,6 +322,7 @@ main {
   background-color: white;
 
   &.show {
+    display: flex;
     right: 2rem;
     bottom: 4px;
   }
