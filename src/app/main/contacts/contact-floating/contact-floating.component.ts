@@ -31,16 +31,26 @@ export class ContactFloatingComponent {
     private overlayService: OverlayService
   ) { }
 
+  /**
+   * Initialisiert die Komponente und abonniert die Kontaktliste.
+   */
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
       this.contactsFromList = contactList;
     });
   }
 
+  /**
+   * Bereinigt Ereignislistener beim Zerstören der Komponente.
+   */
   ngOnDestroy() {
     document.removeEventListener('click', this.closeEditMenu);
   }
 
+  /**
+   * Wechselt das Bearbeitungsmenü.
+   * @param event Das Ereignis, das die Funktion ausgelöst hat.
+   */
   toggleEditMenu(event: Event) {
     event.stopPropagation();
     this.isEditMenuOpen = !this.isEditMenuOpen;
@@ -52,6 +62,10 @@ export class ContactFloatingComponent {
     }
   }
 
+  /**
+   * Schließt das Bearbeitungsmenü, wenn ein Klick außerhalb erfolgt.
+   * @param event Das Ereignis, das die Funktion ausgelöst hat.
+   */
   closeEditMenu = (event: Event) => {
     const menu = document.querySelector('.editButtom');
     if (menu && !menu.contains(event.target as Node)) {
@@ -61,10 +75,13 @@ export class ContactFloatingComponent {
     }
   };
 
+  /**
+   * Bearbeitet die Daten des angegebenen Kontakts.
+   * @param contactId Die ID des zu bearbeitenden Kontakts.
+   */
   editData(contactId?: string) {
     this.isEditMenuOpen = false;
     this.cdRef.detectChanges();
-  
     const selectedContact = this.contactsFromList.find(
       (contact) => contact.id === contactId
     );
@@ -72,16 +89,22 @@ export class ContactFloatingComponent {
       console.error('Contact not found!');
       return;
     }
-  
     this.overlayService.openEditContactOverlay(selectedContact);
   }
-  
+
+  /**
+   * Löscht die Daten des angegebenen Kontakts.
+   * @param contactId Die ID des zu löschenden Kontakts.
+   */
   deleteData(contactId?: string) {
     this.isEditMenuOpen = false;
     this.cdRef.detectChanges();
     this.contactService.deleteContact(contactId!);
   }
 
+  /**
+   * Wechselt die Anzeige der Kontaktliste.
+   */
   toggleSlideList() {
     this.slideListToggled.emit();
   }

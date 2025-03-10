@@ -3,25 +3,29 @@ import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, onSnapshot, upda
 import { BehaviorSubject } from 'rxjs';
 import { IContact } from '../interfaces/icontact';
 import { ITask } from '../interfaces/itask';
-// import { IUser } from '../interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  /** Firestore-Instanz */
   firestore: Firestore = inject(Firestore);
 
+  /** Funktionen zum Abbestellen der Firestore-Abonnements */
   unsubscribeContacts: () => void;
-  // unsubscribeUsers: () => void;
   unsubscribeTasks: () => void;
-  // UserList: IUser[] = [];
 
+  /** Subject für die Kontaktliste */
   private contactSubject = new BehaviorSubject<IContact[]>([]);
+  /** Observable für die Kontaktliste */
   contact$ = this.contactSubject.asObservable();
 
+  /** Subject für die Task-Liste */
   private taskSubject = new BehaviorSubject<ITask[]>([]);
+  /** Observable für die Task-Liste */
   task$ = this.taskSubject.asObservable();
 
+  /** Kategorien für Tasks */
   todo: ITask[] = [];
   inProgress: ITask[] = [];
   awaitFeedback: ITask[] = [];
@@ -29,46 +33,48 @@ export class FirebaseService {
 
   constructor() {
     this.unsubscribeContacts = this.subContactList();
-    // this.unsubscribeUsers = this.subUserList();
     this.unsubscribeTasks = this.subTaskList();
-
   }
 
-  // subUserList() {
-  //   return onSnapshot(this.getColRef("User"), (snapshot) => {
-  //     snapshot.forEach((doc) => {
-  //       this.UserList.push(this.setUserData(doc.data() as IUser, doc.id));
-  //     });
-  //   });
-  // }
-
+  /**
+   * Abonniert die Kontaktliste aus Firestore und aktualisiert das Observable.
+   * @returns Eine Funktion zum Abbestellen des Snapshots.
+   */
   subContactList() {
     return onSnapshot(this.getColRef("Contacts"), (snapshot) => {
       const updatedContacts: IContact[] = [];
       snapshot.forEach((doc) => {
         updatedContacts.push(this.setContactData(doc.data(), doc.id));
-
       });
       this.contactSubject.next(updatedContacts);
     });
   }
 
+  /**
+   * Abonniert die Task-Liste aus Firestore und aktualisiert das Observable.
+   * @returns Eine Funktion zum Abbestellen des Snapshots.
+   */
   subTaskList() {
     return onSnapshot(this.getColRef("Tasks"), (snapshot) => {
       this.todo = [];
       this.inProgress = [];
       this.awaitFeedback = [];
       this.done = [];
+
       const updatedTasks: ITask[] = [];
       snapshot.forEach((doc) => {
-        updatedTasks.push(this.setTaskData(doc.data() as ITask, doc.id));
         const task = this.setTaskData(doc.data() as ITask, doc.id);
+        updatedTasks.push(task);
         this.categorizeTask(task);
       });
       this.taskSubject.next(updatedTasks);
     });
   }
 
+  /**
+   * Kategorisiert einen Task basierend auf seinem Status.
+   * @param task - Der zu kategorisierende Task
+   */
   categorizeTask(task: ITask) {
     if (task.status === 'todo') {
       this.todo.push(task);
@@ -81,6 +87,11 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Aktualisiert den Status eines Tasks in der Datenbank.
+   * @param taskId - Die ID des Tasks
+   * @param newStatus - Der neue Status des Tasks
+   */
   async updateTaskStatus(taskId: string, newStatus: string) {
     const taskDocRef = doc(this.firestore, `Tasks/${taskId}`);
     await updateDoc(taskDocRef, { status: newStatus })
@@ -89,6 +100,12 @@ export class FirebaseService {
       });
   }
 
+  /**
+   * Erstellt ein IContact-Objekt aus Firestore-Daten.
+   * @param obj - Das empfangene Objekt aus Firestore
+   * @param id - Die ID des Kontakts
+   * @returns Ein IContact-Objekt
+   */
   setContactData(obj: any, id: string): IContact {
     const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
     const nameInitials = this.getInitials(capitalizedName);
@@ -104,18 +121,12 @@ export class FirebaseService {
     };
   }
 
-  // setUserData(obj: IUser, id: string): IUser {
-  //   const capitalizedName = obj.name ? this.capitalizeName(obj.name) : "";
-  //   const nameInitials = this.getInitials(capitalizedName);
-  //   return {
-  //     name: capitalizedName,
-  //     eMail: obj.eMail || "",
-  //     // password: obj.password || "",
-  //     // initials: nameInitials,
-  //     // id: id || "",
-  //   };
-  // }
-
+  /**
+   * Erstellt ein ITask-Objekt aus Firestore-Daten.
+   * @param obj - Das empfangene Objekt aus Firestore
+   * @param id - Die ID des Tasks
+   * @returns Ein ITask-Objekt
+   */
   setTaskData(obj: ITask, id: string): ITask {
     return {
       title: obj.title || "Unknown title",
@@ -130,6 +141,11 @@ export class FirebaseService {
     };
   }
 
+  /**
+   * Kapitalisiert einen Namen (z. B. "max mustermann" -> "Max Mustermann").
+   * @param name - Der Name als String
+   * @returns Der kapitalisierte Name
+   */
   capitalizeName(name: string): string {
     return name
       .toLowerCase()
@@ -138,44 +154,62 @@ export class FirebaseService {
       .join(" ");
   }
 
-  getInitials(name: string) {
+  /**
+   * Extrahiert die Initialen eines Namens.
+   * @param name - Der vollständige Name
+   * @returns Die Initialen des Namens
+   */
+  getInitials(name: string): string {
     if (!name) return "";
-    const words = name.trim().split(/\s+/);
-    const initials = words.map(word => word[0].toUpperCase()).join("");
-    return initials;
+    return name.trim().split(/\s+/).map(word => word[0].toUpperCase()).join("");
   }
 
-  getBgSelector(name: string) {
+  /**
+   * Bestimmt den Hintergrund-Selektor basierend auf dem dritten Buchstaben eines Namens.
+   * @param name - Der Name
+   * @returns Ein Selektor für den Hintergrundstil
+   */
+  getBgSelector(name: string): string {
     if (!name) return "";
-    if (!name[2]) {
-      const bgSelector = 'default';
-      return bgSelector;
-    } else {
-      const bgSelector = name[2].toLocaleLowerCase();
-      return bgSelector;
-    }
+    return name.length > 2 ? name[2].toLocaleLowerCase() : 'default';
   }
 
+  /**
+   * Ruft eine Referenz auf eine Firestore-Sammlung ab.
+   * @param colId - Die ID der Sammlung
+   * @returns Die CollectionReference
+   */
   getColRef(colId: string) {
     return collection(this.firestore, colId);
   }
 
+  /**
+   * Ruft eine Referenz auf ein Firestore-Dokument ab.
+   * @param colId - Die ID der Sammlung
+   * @param docId - Die ID des Dokuments
+   * @returns Die DocumentReference
+   */
   getSingleDocRef(colId: string, docId: string) {
-    return doc((this.getColRef(colId)), docId);
+    return doc(this.getColRef(colId), docId);
   }
 
+  /**
+   * Ruft ein einzelnes Dokument aus Firestore ab.
+   * @param colId - Die ID der Sammlung
+   * @param docId - Die ID des Dokuments
+   * @returns Ein Promise mit dem Dokument oder `null`, falls es nicht existiert
+   */
   async getSingleDoc(colId: string, docId: string): Promise<IContact | ITask | null> {
     const docSnap = await getDoc(this.getSingleDocRef(colId, docId));
-
-    if (docSnap.exists()) {
-      return docSnap.data() as IContact | ITask;
-    } else {
-      console.log("No such document!");
-      return null;
-    }
+    return docSnap.exists() ? (docSnap.data() as IContact | ITask) : null;
   }
 
-  async addToDB(colId: string, item: ITask | IContact) {
+  /**
+   * Fügt ein neues Dokument zur Firestore-Datenbank hinzu.
+   * @param colId - Die ID der Sammlung
+   * @param item - Das hinzuzufügende Objekt
+   */
+  async addToDB(colId: string, item: ITask | IContact): Promise<void> {
     try {
       await addDoc(this.getColRef(colId), item);
     } catch (err) {
@@ -183,27 +217,38 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * Aktualisiert ein Dokument in Firestore.
+   * @param colId - Die ID der Sammlung
+   * @param docId - Die ID des Dokuments
+   * @param updatedData - Die zu aktualisierenden Daten
+   */
   async updateDoc(colId: string, docId: string, updatedData: Partial<IContact | ITask>): Promise<void> {
     try {
       await updateDoc(this.getSingleDocRef(colId, docId), updatedData);
-      console.log(`Document ${docId} successfully updated.`);
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error("Error updating document:", error);
     }
   }
 
-  async deleteDocument(colId: string, docId: string) {
-    await deleteDoc(this.getSingleDocRef(colId, docId)).catch(
-      (err) => (console.log(err))
-    );
+  /**
+   * Löscht ein Dokument aus Firestore.
+   * @param colId - Die ID der Sammlung
+   * @param docId - Die ID des Dokuments
+   */
+  async deleteDocument(colId: string, docId: string): Promise<void> {
+    try {
+      await deleteDoc(this.getSingleDocRef(colId, docId));
+    } catch (err) {
+      console.error("Error deleting document:", err);
+    }
   }
 
+  /**
+   * Entfernt Abonnements, wenn die Komponente zerstört wird.
+   */
   ngOnDestroy() {
-    if (this.unsubscribeContacts) {
-      this.unsubscribeContacts();
-    }
-    // if (this.unsubscribeUsers) {
-    //   this.unsubscribeUsers();
-    // }
+    this.unsubscribeContacts?.();
   }
 }
+

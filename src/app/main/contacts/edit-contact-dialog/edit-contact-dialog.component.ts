@@ -20,27 +20,35 @@ export class EditContactDialogComponent {
 
   editedContact!: IContact;
 
-  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef) {
-    
-  }
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef) {}
 
+  /**
+   * Lifecycle Hook: Wird bei der Initialisierung des Komponenten aufgerufen.
+   * Initialisiert 'editedContact' mit den Werten des 'contact'-Inputs.
+   */
   ngOnInit(): void {
     this.editedContact = { ...this.contact };
   }
 
+  /**
+   * Löscht den aktuellen Kontakt und schließt den Dialog.
+   */
   deleteContact() {
     this.contactService.deleteContact(this.contact.id!);
     this.close();
   }
 
+  /**
+   * Speichert die aktualisierten Kontaktdaten.
+   * @param ngForm - Das Angular-Formularobjekt, das die Validierung übernimmt.
+   */
   async saveContactInfo(ngForm: NgForm) {
-    if (!this.editedContact.id) {return};
+    if (!this.editedContact.id) { return; } 
     if (!ngForm.valid) {
-      this.cdRef.detectChanges();
-      return
+      this.cdRef.detectChanges(); 
+      return;
     }
-
-    await this.contactService.updateContact(this.editedContact.id, this.editedContact);
-    this.close();
+    await this.contactService.updateContact(this.editedContact.id, this.editedContact); 
+    this.close(); 
   }
 }
