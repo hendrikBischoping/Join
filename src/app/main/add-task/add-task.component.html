@@ -51,7 +51,6 @@
                     <div class="assigned-list">
 
                         @for (taskContact of task.contacts; track $index) {
-                            {{logme("task",taskContact)}}
                             @if ($index < 5) { 
                                 @for (contact of contacts; track $index) { 
                                     @if (taskContact==contact.id) {
