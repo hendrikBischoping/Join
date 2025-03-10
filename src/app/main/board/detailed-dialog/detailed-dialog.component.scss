@@ -3,6 +3,8 @@
 main {
     position: relative;
     width: 38rem;
+    height: calc(100vh - 10rem);
+    overflow: scroll;
 
     @media (max-width: 600px) {
         width: 100%;
@@ -207,6 +209,10 @@ main {
     margin-left: 2rem;
 }
 
+.task-description {
+    max-height: 6rem;
+    overflow: scroll;
+}
 
 
 .dropdown {
