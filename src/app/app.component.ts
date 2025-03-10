@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   userInitials: string = '';
   isSmallMenuOpen: boolean = false;
   limitedAccessState : string = "login";
+  currentRoute : string = "summarytest";
 
   constructor(private authService: AuthService, 
       private cdRef: ChangeDetectorRef,) {}
@@ -33,6 +34,9 @@ export class AppComponent implements OnInit {
       this.userInitials = this.getUserInitials(name)    
     });
   }
+setCurrentRoute (name:string){
+  this.currentRoute = name;
+}
 
   getUserInitials(name: string) {
     if (!name) return "";

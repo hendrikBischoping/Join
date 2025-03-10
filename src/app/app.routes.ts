@@ -12,7 +12,7 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent },
     { path: 'add-task', component: AddTaskComponent },
     { path: 'contacts', component: ContactsComponent },
-    { path: 'help-component', component: HelpComponentComponent },
+    { path: 'help-component/:returnHelp', component: HelpComponentComponent },
     { path: 'legal-notice', component: LegalNoticeComponent },
     { path: 'privacy-police', component: PrivacyPolicyComponent },
 ];
