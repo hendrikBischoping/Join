@@ -9,16 +9,13 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './help-component.component.scss'
 })
 export class HelpComponentComponent {
+
   currentRoute: string = "";
-constructor (private _route:ActivatedRoute) {
-  // console.log(this.returnHelp);
   
-}
-ngOnInit(){
-  this._route.params.subscribe(params => {
-    this.currentRoute = params["returnHelp"];
-  });
-  console.log(this.currentRoute);
-  
-}
+  constructor(private _route: ActivatedRoute) { }
+  ngOnInit() {
+    this._route.params.subscribe(params => {
+      this.currentRoute = params["returnHelp"];
+    });
+  }
 }
