@@ -23,6 +23,7 @@ main {
     }
   }
   h1 {
+    word-break: break-word;
     margin-bottom: 4rem;
     font-weight: bolder;
     font-size: 5rem;
@@ -42,9 +43,11 @@ main {
     @include standard-flex(center, flex-start);
     flex-direction: column;
     li {
+      word-break: break-word;
       font-family: "Inter" !important;
     }
     h2 {
+      word-break: break-word;
       margin-top: 1rem;
       font-weight: bold;
       font-size: 2.2rem;
@@ -56,11 +59,13 @@ main {
       }
     }
     h3 {
+      word-break: break-word;
       margin-top: 1rem;
       font-weight: bold;
       font-size: 1.2;
     }
     span {
+      word-break: break-word;
       color: #29abe2;
       font-family: "Inter" !important;
       @media(max-width: 520px) {
@@ -68,6 +73,7 @@ main {
       }
     }
     p {
+      word-break: break-word;
       font-family: "Inter" !important;
     }
   }
