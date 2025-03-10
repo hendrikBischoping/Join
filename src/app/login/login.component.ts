@@ -20,6 +20,7 @@ export class LoginComponent {
     password: '',
     secondPassword: ''
   };
+  rememberMe: boolean = false;
   stateLogin: boolean = true;
   authSucceeded: boolean = true;
   privacyAccepted: boolean = false;
@@ -37,6 +38,14 @@ export class LoginComponent {
       this.logoTransition = true;
       this.isVisible = true;
     }, 100);
+
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    const savedPassword = localStorage.getItem('rememberedPassword');
+    if (savedEmail && savedPassword) {
+      this.user.email = savedEmail;
+      this.user.password = savedPassword;
+      this.rememberMe = true;
+    }
     
   }
 
@@ -74,8 +83,16 @@ export class LoginComponent {
     const user = await this.authService.loginUser(this.user.email, this.user.password);
     this.authSucceeded = !!user;
     
-    if (!this.authSucceeded) {
-      setTimeout(() => this.authSucceeded = true, 1800);
+    if (this.authSucceeded) {
+      if (this.rememberMe) {
+        localStorage.setItem('rememberedEmail', this.user.email);
+        localStorage.setItem('rememberedPassword', this.user.password);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+        localStorage.removeItem('rememberedPassword');
+      }
+    } else {
+      setTimeout(() => (this.authSucceeded = true), 1800);
     }
   }
   

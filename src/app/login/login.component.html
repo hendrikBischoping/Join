@@ -21,6 +21,10 @@
                     required>
                 <img class="icon" src="./assets/img/icons/LockIcon.png" alt="keyIcon">
             </div>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe">
+                <label for="rememberMe">Remember Me</label>
+            </div>
             @if (!authSucceeded) {
                 <span>mail or password incorrect</span>
             }
