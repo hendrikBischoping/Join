@@ -1,7 +1,11 @@
 <section class="join-background">
+  <div [ngClass]="{'header-bg-big': authenticated}">
+    <div class="top-content"></div>
+  </div>
   <section class="join-content">
     @if (authenticated) {
       <main>
+        
         <nav>
           <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
           <ul>
@@ -21,7 +25,7 @@
               <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
               <span>Kanban Project Management Tool</span>
               <div>
-                <img src="../assets/img/icons/helpIcon.png" alt="help"  [routerLink]="['/help-component',currentRoute]" >
+                <img src="./assets/img/icons/helpIcon.png" alt="help"  [routerLink]="['/help-component',currentRoute]" >
                 <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
                 <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
                   <ul>
