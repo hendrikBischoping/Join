@@ -25,6 +25,7 @@ main {
   .headline-container{
     @include standard-flex(space-between,center);
     width: 100%;
+    cursor: pointer;
     h1 {
       margin-bottom: 2rem;
       font-weight: bolder;
