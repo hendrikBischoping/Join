@@ -5,14 +5,14 @@
         <nav>
           <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
           <ul>
-            <li routerLink="summary"><img src="./assets/img/icons/SummaryIcon.png" alt=""> Summary</li>
-            <li routerLink="add-task"><img src="./assets/img/icons/TaskIcon.png" alt=""> Add Task</li>
-            <li routerLink="board"><img src="./assets/img/icons/BoardIcon.png" alt=""> Board</li>
-            <li routerLink="contacts"><img src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
+            <li routerLink="summary" (click)="setCurrentRoute('summary')"><img src="./assets/img/icons/SummaryIcon.png" alt=""> Summary</li>
+            <li routerLink="add-task" (click)="setCurrentRoute('add-task')"><img src="./assets/img/icons/TaskIcon.png" alt=""> Add Task</li>
+            <li routerLink="board" (click)="setCurrentRoute('board')"><img src="./assets/img/icons/BoardIcon.png" alt=""> Board</li>
+            <li routerLink="contacts" (click)="setCurrentRoute('contacts')"><img src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
           </ul>
           <div>
-            <a routerLink="privacy-police">Privacy policy</a>
-            <a routerLink="legal-notice">Legal Notice</a>
+            <a routerLink="privacy-police" (click)="setCurrentRoute('privacy-police')">Privacy policy</a>
+            <a routerLink="legal-notice" (click)="setCurrentRoute('legal-notice')">Legal Notice</a>
           </div>
         </nav>
         <section>
@@ -21,11 +21,11 @@
               <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
               <span>Kanban Project Management Tool</span>
               <div>
-                <img src="../assets/img/icons/helpIcon.png" alt="help" routerLink="/help-component">
+                <img src="../assets/img/icons/helpIcon.png" alt="help"  [routerLink]="['/help-component',currentRoute]" >
                 <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
                 <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
                   <ul>
-                    <li routerLink="/help-component" class="help-link" (click)="toggleSmallMenu($event)">Help</li>
+                    <li [routerLink]="['/help-component',currentRoute]" class="help-link" (click)="toggleSmallMenu($event)" >Help</li>
                     <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
                     <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
                     <li routerLink="/" (click)="toggleSmallMenu($event)">Log out</li>

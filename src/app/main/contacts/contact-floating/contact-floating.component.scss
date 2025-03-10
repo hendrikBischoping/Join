@@ -147,8 +147,7 @@ main {
           margin: 0;
           line-height: 80%;
           line-break: normal;
-          font-size: 32px;
-          font-size: 4rem;
+          font-size: 3rem;
           font-weight: bold;          
           @include standard-flex(space-between, start);
           @media (max-width: 1210px) {

@@ -22,19 +22,23 @@ main {
     padding-right: 2rem;
     }
   }
-  h1 {
-    margin-bottom: 4rem;
-    font-weight: bolder;
-    font-size: 5rem;
-    @media (max-width: 1000px) {
+  .headline-container{
+    @include standard-flex(space-between,center);
+    width: 100%;
+    h1 {
       margin-bottom: 2rem;
-      font-size: 3rem !important;
-    }
-    @media (max-width: 610px) {
-      font-size: 2rem !important;
-    }
-    @media (max-width: 380px) {
-      font-size: 1.5rem !important;
+      font-weight: bolder;
+      font-size: 5rem;
+      @media (max-width: 1000px) {
+        margin-bottom: 2rem;
+        font-size: 3rem !important;
+      }
+      @media (max-width: 610px) {
+        font-size: 2rem !important;
+      }
+      @media (max-width: 380px) {
+        font-size: 1.5rem !important;
+      }
     }
   }
 
