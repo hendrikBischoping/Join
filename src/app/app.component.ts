@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   limitedAccessState: string = "login";
 
   /** Aktuell aktive Route */
-  currentRoute: string = "summarytest";
+  currentRoute: string = "summary";
 
   /**
    * Erstellt eine Instanz der AppComponent.
