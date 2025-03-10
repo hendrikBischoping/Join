@@ -17,17 +17,16 @@ $headBorderHeight: 6px;
 $navHeightMobile: 5rem;
 
 .join-background {
-    width: 100%;
-    background-color: rgb(246,247,248);
+    width: 100vw;
+    background-color: rgb(246, 247, 248);
 }
 
 .join-content {
     max-width: 1920px;
-    // margin: auto;
     height: 100vh;
     overflow: hidden;
 }
-
+    
 main {
     margin: 0;
     display: flex;
@@ -72,8 +71,6 @@ main {
             flex-direction: column;
             width: 100%;
 
-            
-
             @media (max-width:800px) {
                 width: 95%;
                 height: $navHeightMobile;
@@ -101,7 +98,7 @@ main {
                     align-items: center;
                     flex-direction: column;
                     padding-left: 0;
-                    white-space:nowrap;
+                    white-space: nowrap;
                 }
 
                 &:hover {
@@ -167,13 +164,14 @@ main {
             max-width: unset;
             width: 100%;
             background-color: white;
+            z-index: 0;
         }
 
         .top-content {
             @include standard-flex(space-between);
             height: $headHeight;
-            border-bottom:  solid 4px rgb(202, 202, 202);
-            
+            border-bottom: solid 4px rgb(202, 202, 202);
+
             .logo-for-mobile {
                 display: none;
                 width: 3rem;
@@ -183,10 +181,11 @@ main {
                     display: block;
                 }
             }
-            
+
             >span {
                 margin-left: 2rem;
                 font-size: 2rem;
+
                 @media (max-width:800px) {
                     display: none;
                 }
@@ -224,7 +223,6 @@ main {
                     &:hover {
                         cursor: pointer;
                         background-color: rgba($color: #000000, $alpha: 0.1);
-
                     }
 
                     &.show {
@@ -244,22 +242,27 @@ main {
                         background-color: #2A3647;
                         border-radius: 16px 0 16px 16px;
                         animation: slideIn 0.5s ease-out forwards;
+
                         ul {
                             list-style-type: none;
-                            white-space:nowrap;
+                            white-space: nowrap;
                             line-height: 3rem;
                             padding: 0 1rem;
                             min-width: fit-content;
                             color: white;
+
                             li {
                                 padding: 0 4px;
+
                                 &:hover {
                                     cursor: pointer;
                                     background-color: #2A3D59;
                                 }
                             }
+
                             .help-link {
                                 display: none;
+
                                 @media (max-width:800px) {
                                     display: block;
                                 }
@@ -271,8 +274,7 @@ main {
         }
 
         .routing-content {
-            // background-color: rgba($color: #000000, $alpha: 0.1);
-            background-color: rgb(246,247,248);
+            background-color: rgb(246, 247, 248);
             height: calc(100% - $headHeight - $headBorderHeight);
 
             @media (max-width:800px) {
@@ -283,19 +285,33 @@ main {
 }
 
 @media (max-width: 800px) {
-    
-    
+
     .login-nav {
         flex-direction: row !important;
     }
-    
+
     .login-list {
         margin-left: 2rem !important;
     }
-    
+
     .login-topics {
         display: flex !important;
         flex-direction: row !important;
         margin-bottom: 0 !important;
+    }
+}
+
+@media (min-width: 1920px) {
+    
+    .header-bg-big {
+        position: absolute;
+        left: 1920px;
+        width: 100vw;
+        background-color: white;
+        
+        .top-content {
+            height: $headHeight;
+            border-bottom: solid 4px rgb(202, 202, 202);
+        }
     }
 }

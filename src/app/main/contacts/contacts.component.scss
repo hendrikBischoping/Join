@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 
-$listWidth: 40%;
+$listWidth: 35%;
 
 main {
     display: flex;
@@ -42,7 +42,7 @@ main {
 
 @media (max-width: 550px) {
     .detailed {
-        height: calc(92vh - 6px - 8vh) !important;
+        height: calc(100vh - 10rem) !important;
     }
     
 }

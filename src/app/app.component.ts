@@ -14,36 +14,71 @@ import { LegalNoticeComponent } from './main/legal-notice/legal-notice.component
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  /** Titel der Anwendung */
   title = 'join';
+
+  /** Status der Authentifizierung */
   authenticated = true;
+
+  /** Benutzername des aktuellen Nutzers */
   userName: string = 'Guest';
+
+  /** Initialen des Benutzers */
   userInitials: string = '';
+
+  /** Status, ob das kleine Menü geöffnet ist */
   isSmallMenuOpen: boolean = false;
-  limitedAccessState : string = "login";
-  currentRoute : string = "summarytest";
 
-  constructor(private authService: AuthService, 
-      private cdRef: ChangeDetectorRef,) {}
+  /** Zustand für eingeschränkten Zugriff */
+  limitedAccessState: string = "login";
 
+  /** Aktuell aktive Route */
+  currentRoute: string = "summary";
+
+  /**
+   * Erstellt eine Instanz der AppComponent.
+   * @param authService - Der Authentifizierungsservice
+   * @param cdRef - ChangeDetectorRef für manuelles Change Detection
+   */
+  constructor(private authService: AuthService, private cdRef: ChangeDetectorRef) {}
+
+  /**
+   * Initialisiert die Komponente und setzt Abonnements für Authentifizierung und Benutzername.
+   */
   ngOnInit() {
     this.authService.auth$.subscribe((authStatus) => {
       this.authenticated = authStatus;
-    })
+    });
+
     this.authService.userName$.subscribe(name => {
       this.userName = name;
-      this.userInitials = this.getUserInitials(name)    
+      this.userInitials = this.getUserInitials(name);
     });
   }
-setCurrentRoute (name:string){
-  this.currentRoute = name;
-}
+  
+  /**
+   * Setzt die aktuelle Route.
+   * @param name - Name der neuen Route
+   */
+  setCurrentRoute(name: string) {
+    this.currentRoute = name;
+  }
 
-  getUserInitials(name: string) {
+  /**
+   * Ermittelt die Initialen eines Benutzernamens.
+   * @param name - Der vollständige Name des Benutzers
+   * @returns Die Initialen des Benutzers in Großbuchstaben
+   */
+  getUserInitials(name: string): string {
     if (!name) return "";
     const words = name.trim().split(/\s+/);
     return words.map(word => word[0].toUpperCase()).join("");
   }
 
+  /**
+   * Öffnet oder schließt das kleine Menü.
+   * @param event - Das Click-Event, um das Schließen durch andere Klicks zu verhindern
+   */
   toggleSmallMenu(event: Event) {
     event.stopPropagation();
     this.isSmallMenuOpen = !this.isSmallMenuOpen;
@@ -55,6 +90,10 @@ setCurrentRoute (name:string){
     }
   }
 
+  /**
+   * Schließt das kleine Menü, wenn außerhalb geklickt wird.
+   * @param event - Das Click-Event
+   */
   closeSmallMenu = (event: Event) => {
     const menu = document.querySelector('.editButtom');
     if (menu && !menu.contains(event.target as Node)) {
@@ -64,6 +103,10 @@ setCurrentRoute (name:string){
     }
   };
 
+  /**
+   * Ändert das aktuelle Thema im eingeschränkten Zugriffsmodus.
+   * @param topic - Das neue Thema
+   */
   changeTopic(topic: string) {
     this.limitedAccessState = topic;
   }

@@ -24,13 +24,12 @@ export class AddContactDialogComponent {
   sendForm = false;
   @Input() close!: () => void;
 
-  constructor(
-    private contactService: ContactService,
-    public cdRef: ChangeDetectorRef
-  ) {
-  }
+  constructor(private contactService: ContactService,public cdRef: ChangeDetectorRef) {}
   
-
+   /**
+   * Verarbeitet das Absenden des Formulars zum Hinzufügen eines Kontakts.
+   * @param form Das Formular mit den Kontaktdaten.
+   */
   async onSubmit(form: NgForm) {
     if (form.invalid) {
       form.form.markAllAsTouched();

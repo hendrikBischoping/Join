@@ -2,7 +2,7 @@
 @import '../../../../styles.scss';
 
 .contacts{
-    width: 85%;
+    width: 100%;
     background-color: white;
 }
 
@@ -11,6 +11,7 @@
     padding-right: 0.25rem;
     position: relative;
     height: 100%;
+    
     >button{
         margin: 1rem auto;
         padding: 0.5rem 3rem;
