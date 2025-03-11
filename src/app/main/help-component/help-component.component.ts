@@ -8,11 +8,23 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   templateUrl: './help-component.component.html',
   styleUrl: './help-component.component.scss'
 })
-export class HelpComponentComponent {
 
+/**
+ * Represents a component that provides help information based on the current route.
+ */
+export class HelpComponentComponent {
   currentRoute: string = "";
-  
+
+  /**
+   * Constructor to initialize the HelpComponentComponent.
+   * @param _route - The activated route to access route parameters.
+   */
   constructor(private _route: ActivatedRoute) { }
+
+  /**
+   * Lifecycle Hook: Called on component initialization.
+   * Subscribes to route parameters to get the current help route.
+   */
   ngOnInit() {
     this._route.params.subscribe(params => {
       this.currentRoute = params["returnHelp"];

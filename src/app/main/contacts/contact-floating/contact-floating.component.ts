@@ -12,9 +12,14 @@ import { OverlayService } from '../../../services/overlay.service';
   templateUrl: './contact-floating.component.html',
   styleUrl: './contact-floating.component.scss',
 })
+
+/**
+ * Represents a detailed view to a contact
+ */
 export class ContactFloatingComponent {
   @Output() slideListToggled = new EventEmitter<void>();
   @Input() watchTarget: string = "";
+  
   contactsFromList: IContact[] = [
     {
       name: 'Hendrik Bischoping',
@@ -22,6 +27,7 @@ export class ContactFloatingComponent {
       phone: 31245,
     },
   ];
+  
   readonly dialog = inject(MatDialog);
   isEditMenuOpen: boolean = false;
 
@@ -29,10 +35,10 @@ export class ContactFloatingComponent {
     private contactService: ContactService,
     private cdRef: ChangeDetectorRef,
     private overlayService: OverlayService
-  ) { }
+  ) {}
 
   /**
-   * Initialisiert die Komponente und abonniert die Kontaktliste.
+   * Initializes the component and subscribes to the contact list.
    */
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -41,15 +47,15 @@ export class ContactFloatingComponent {
   }
 
   /**
-   * Bereinigt Ereignislistener beim Zerstören der Komponente.
+   * Cleans up event listeners when the component is destroyed.
    */
   ngOnDestroy() {
     document.removeEventListener('click', this.closeEditMenu);
   }
 
   /**
-   * Wechselt das Bearbeitungsmenü.
-   * @param event Das Ereignis, das die Funktion ausgelöst hat.
+   * Toggles the edit menu.
+   * @param event The event that triggered the function.
    */
   toggleEditMenu(event: Event) {
     event.stopPropagation();
@@ -63,8 +69,8 @@ export class ContactFloatingComponent {
   }
 
   /**
-   * Schließt das Bearbeitungsmenü, wenn ein Klick außerhalb erfolgt.
-   * @param event Das Ereignis, das die Funktion ausgelöst hat.
+   * Closes the edit menu if a click occurs outside.
+   * @param event The event that triggered the function.
    */
   closeEditMenu = (event: Event) => {
     const menu = document.querySelector('.editButtom');
@@ -76,8 +82,8 @@ export class ContactFloatingComponent {
   };
 
   /**
-   * Bearbeitet die Daten des angegebenen Kontakts.
-   * @param contactId Die ID des zu bearbeitenden Kontakts.
+   * Edits the data of the specified contact.
+   * @param contactId The ID of the contact to be edited.
    */
   editData(contactId?: string) {
     this.isEditMenuOpen = false;
@@ -93,8 +99,8 @@ export class ContactFloatingComponent {
   }
 
   /**
-   * Löscht die Daten des angegebenen Kontakts.
-   * @param contactId Die ID des zu löschenden Kontakts.
+   * Deletes the data of the specified contact.
+   * @param contactId The ID of the contact to be deleted.
    */
   deleteData(contactId?: string) {
     this.isEditMenuOpen = false;
@@ -103,7 +109,7 @@ export class ContactFloatingComponent {
   }
 
   /**
-   * Wechselt die Anzeige der Kontaktliste.
+   * Toggles the display of the contact list.
    */
   toggleSlideList() {
     this.slideListToggled.emit();

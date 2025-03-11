@@ -13,9 +13,14 @@ import { OverlayService } from '../../../services/overlay.service';
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
 })
+
+/**
+ * Represents a component that displays a list of contacts.
+ */
 export class ContactListComponent {
-  @Output() contactSelected = new EventEmitter<string>()
-  groupedContacts: {letter: string; contacts: IContact[]}[] = [];
+  @Output() contactSelected = new EventEmitter<string>();
+  
+  groupedContacts: { letter: string; contacts: IContact[] }[] = [];
   
   contactsFromList: IContact[] = [];  
   readonly dialog = inject(MatDialog);
@@ -27,8 +32,8 @@ export class ContactListComponent {
   }
   
   /**
-   * Lifecycle Hook: Wird bei der Initialisierung der Komponente aufgerufen.
-   * Abonniert die Kontaktliste und gruppiert die Kontakte nach dem Empfang.
+   * Lifecycle Hook: Called when the component is initialized.
+   * Subscribes to the contact list and groups the contacts upon receipt.
    */
   ngOnInit() {
     this.contactService.getContacts().subscribe((contactList) => {
@@ -39,8 +44,8 @@ export class ContactListComponent {
   }
 
   /**
-   * Gruppiert die Kontakte nach dem Anfangsbuchstaben ihres Namens.
-   * Sortiert die Kontakte zuerst alphabetisch und erstellt dann Gruppen.
+   * Groups contacts by the first letter of their name.
+   * Sorts contacts alphabetically and then creates groups.
    */
   groupContacts() {
     const sortedContacts = this.contactsFromList.sort((a, b) => a.name.localeCompare(b.name));
@@ -59,15 +64,15 @@ export class ContactListComponent {
   }
 
   /**
-   * Öffnet das Overlay zum Hinzufügen eines neuen Kontakts.
+   * Opens the overlay to add a new contact.
    */
   addContact() {
     this.overlayService.openAddContactOverlay();
   }
 
   /**
-   * Wählt einen Kontakt aus und gibt die ID des ausgewählten Kontakts über das EventEmitter-Objekt aus.
-   * @param contactId - Die ID des ausgewählten Kontakts.
+   * Selects a contact and emits the ID of the selected contact through the EventEmitter object.
+   * @param contactId - The ID of the selected contact.
    */
   selectContact(contactId: string) {
     this.contactSelected.emit(contactId);

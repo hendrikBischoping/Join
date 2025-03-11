@@ -24,6 +24,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
+
+/**
+ * Component for displaying the task board
+ */
 export class BoardComponent {
   tasks: ITask[] = [{
     title: "Unknown",
@@ -55,9 +59,9 @@ export class BoardComponent {
   }
 
   /**
-   * Gibt die Aufgaben für eine bestimmte Statusreihe zurück.
-   * @param status Der Status der Aufgabenreihe.
-   * @returns Eine Liste von Aufgaben im angegebenen Status.
+   * Returns the tasks for a specific status row.
+   * @param status The status of the task row.
+   * @returns A list of tasks with the given status.
    */
   getRowData(status: string): ITask[] {
     let tasks: ITask[];
@@ -76,9 +80,9 @@ export class BoardComponent {
   }
 
   /**
-   * Filtert die Aufgaben basierend auf der Suchanfrage.
-   * @param status Der Status der Aufgabenreihe.
-   * @returns Eine gefilterte Liste von Aufgaben.
+   * Filters tasks based on the search query.
+   * @param status The status of the task row.
+   * @returns A filtered list of tasks.
    */
   getFilteredTasks(status: string): ITask[] {
     return this.getRowData(status).filter(task =>
@@ -88,9 +92,9 @@ export class BoardComponent {
   }
 
   /**
-   * Gibt den Anzeigenamen für eine bestimmte Statusreihe zurück.
-   * @param status Der Status der Aufgabenreihe.
-   * @returns Der Anzeigename der Aufgabenreihe.
+   * Returns the display name for a specific status row.
+   * @param status The status of the task row.
+   * @returns The display name of the task row.
    */
   getRowName(status: string): string {
     switch (status) {
@@ -103,9 +107,9 @@ export class BoardComponent {
   }
 
   /**
-   * Gibt die Anzahl der erledigten Unteraufgaben für eine Aufgabe zurück.
-   * @param task Die Aufgabe, deren Unteraufgaben überprüft werden.
-   * @returns Die Anzahl der erledigten Unteraufgaben.
+   * Returns the number of completed subtasks for a given task.
+   * @param task The task whose subtasks are checked.
+   * @returns The number of completed subtasks.
    */
   getDoneSubtask(task: ITask) {
     if (!task.subtasks || task.subtasks.length === 0) return 0;
@@ -113,9 +117,9 @@ export class BoardComponent {
   }
 
   /**
-   * Berechnet den Fortschritt einer Aufgabe basierend auf den Unteraufgaben.
-   * @param task Die Aufgabe, deren Fortschritt berechnet wird.
-   * @returns Der Fortschritt in Prozent.
+   * Calculates the progress of a task based on its subtasks.
+   * @param task The task whose progress is calculated.
+   * @returns The progress in percentage.
    */
   getProgress(task: ITask): number {
     const doneSubtasks = this.getDoneSubtask(task);
@@ -123,32 +127,32 @@ export class BoardComponent {
   }
 
   /**
-   * Überprüft, ob die Kategorie einer Aufgabe "User Story" ist.
-   * @param task Die zu überprüfende Aufgabe.
-   * @returns Wahr, wenn die Kategorie "User Story" ist, andernfalls falsch.
+   * Checks if the category of a task is "User Story".
+   * @param task The task to check.
+   * @returns True if the category is "User Story", otherwise false.
    */
   checkCategory(task: ITask) {
     return task.category === "User Story";
   }
 
   /**
-   * Hervorheben einer Spalte beim Drag & Drop.
-   * @param columnId Die ID der hervorgehobenen Spalte.
+   * Highlights a column during drag & drop.
+   * @param columnId The ID of the highlighted column.
    */
   onDragEntered(columnId: string) {
     this.highlightedColumn = columnId;
   }
 
   /**
-   * Entfernt die Hervorhebung der Spalte beim Verlassen des Drag & Drop.
+   * Removes the highlight from a column when leaving drag & drop.
    */
   onDragExited() {
     this.highlightedColumn = null;
   }
 
   /**
-   * Behandelt das Ablegen einer Aufgabe in einer neuen Spalte.
-   * @param event Das Drag & Drop-Ereignis.
+   * Handles dropping a task into a new column.
+   * @param event The drag & drop event.
    */
   drop(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
@@ -168,11 +172,11 @@ export class BoardComponent {
   }
 
   /**
-   * Gibt den Pfad zu einem Bild basierend auf der Priorität einer Aufgabe zurück.
-   * @param task Die Aufgabe, deren Priorität überprüft wird.
-   * @param prio Die Priorität, die überprüft wird.
-   * @param forceInactive Gibt an, ob das Bild als inaktiv angezeigt werden soll.
-   * @returns Der Pfad zum Bild.
+   * Returns the path to an image based on a task's priority.
+   * @param task The task whose priority is checked.
+   * @param prio The priority to check.
+   * @param forceInactive Whether the image should be displayed as inactive.
+   * @returns The path to the image.
    */
   getPrioImagePath(task: ITask, prio: string, forceInactive = false): string {
     if (forceInactive) {
@@ -185,38 +189,37 @@ export class BoardComponent {
   }
 
   /**
-   * Ändert die Priorität einer Aufgabe.
-   * @param task Die Aufgabe, deren Priorität geändert werden soll.
-   * @param prio Die neue Priorität.
+   * Changes the priority of a task.
+   * @param task The task whose priority should be changed.
+   * @param prio The new priority.
    */
   changePriority(task: ITask, prio: string) {
     task.priority = prio;
   }
 
   /**
-   * Überprüft, ob eine Priorität aktiv ist.
-   * @param task Die Aufgabe, deren Priorität überprüft wird.
-   * @param prio Die zu überprüfende Priorität.
-   * @returns Wahr, wenn die Priorität aktiv ist, andernfalls falsch.
+   * Checks if a priority is active.
+   * @param task The task whose priority is checked.
+   * @param prio The priority to check.
+   * @returns True if the priority is active, otherwise false.
    */
   isPriorityActive(task: ITask, prio: string): boolean {
     return task.priority === prio;
   }
 
   /**
-   * Öffnet den Bearbeitungsdialog für eine Aufgabe.
-   * @param id Die ID der zu bearbeitenden Aufgabe.
+   * Opens the edit dialog for a task.
+   * @param id The ID of the task to edit.
    */
   openEditDialog(id: string) {
     this.overlayService.openEditTaskOverlay(id);
   }
 
   /**
-   * Öffnet den Dialog zum Hinzufügen einer Aufgabe.
-   * @param status Der Status der neuen Aufgabe (standardmäßig "todo").
+   * Opens the dialog to add a task.
+   * @param status The status of the new task (default is "todo").
    */
   openAddTaskDialog(status = "todo") {
     this.overlayService.openAddTaskOverlay(status);
   }
 }
-

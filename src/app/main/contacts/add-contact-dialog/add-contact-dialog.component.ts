@@ -14,21 +14,25 @@ import { NgForm } from '@angular/forms';
   templateUrl: './add-contact-dialog.component.html',
   styleUrl: './add-contact-dialog.component.scss'
 })
+
+/**
+ * Represents a dialog component for adding a contact.
+ */
 export class AddContactDialogComponent {
-  contact: IContact =
-    {
-      name: '',
-      eMail: '',
-      phone: '',
-    }
+  contact: IContact = {
+    name: '',
+    eMail: '',
+    phone: '',
+  };
+
   sendForm = false;
   @Input() close!: () => void;
 
-  constructor(private contactService: ContactService,public cdRef: ChangeDetectorRef) {}
-  
-   /**
-   * Verarbeitet das Absenden des Formulars zum Hinzufügen eines Kontakts.
-   * @param form Das Formular mit den Kontaktdaten.
+  constructor(private contactService: ContactService, public cdRef: ChangeDetectorRef) {}
+
+  /**
+   * Handles the submission of the form to add a contact.
+   * @param form The form containing the contact data.
    */
   async onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -51,7 +55,6 @@ export class AddContactDialogComponent {
         this.sendForm = false;
         this.close();
       }, 2000);
-      
     });
   }
 }
