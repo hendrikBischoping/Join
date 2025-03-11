@@ -55,6 +55,23 @@ export class DetailedDialogComponent {
 
   }
 
+  ngOnInit() {
+    this.contactService.getContacts().subscribe((contactList) => {
+      this.contacts = contactList;
+      this.filteredContacts = [...this.contacts];
+      this.cdRef.detectChanges();
+    });
+    this.taskDataService.getTasks().subscribe((taskList) => {
+      taskList.forEach(element => {
+        if (this.currentTaskId == element.id) {
+          this.task = element;
+          this.previewTask = JSON.parse(JSON.stringify(this.task));
+          this.previewTask.contacts = this.previewTask.contacts!.filter(contact => contact != '');
+        }
+      });
+    });
+    this.initTask();
+  }
 
   /**
     * Initializes the task and checks if it is a user story.
