@@ -20,55 +20,6 @@
                     <textarea [(ngModel)]="task.description" name="task-description" id="task-description"
                         placeholder="Enter a Description"></textarea>
                 </div>
-                <div class="assignment-container">
-                    <p>Assigned to</p>
-                    <div class="dropdown">
-                        <input type="text" name="assigned-contacts" (input)="filterContacts($event)"
-                            (click)="openDropdown($event)" placeholder="Search contacts..." [(ngModel)]="searchTerm"
-                            class="dropdown-input">
-                        @if (dropdownOpen) {
-
-                        <div class="dropdown-content">
-                            @for (contact of filteredContacts; track $index) {
-                            <label>
-                                <div class="contact-names">
-                                    <div class="initials-circle bg-{{contact.styleSelector}}">
-                                        {{contact.initials}}
-                                    </div>
-                                    <p>{{ contact.name }}</p>
-                                </div>
-                                <input type="checkbox" name="checkbox" [checked]="task.contacts!.includes(contact.id!)"
-                                    (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
-
-                            </label>
-                            @if (filteredContacts.length == 0) {
-                            <p class="no-result">No contacts found</p>
-                            }
-                            }
-                        </div>
-                        }
-                    </div>
-                    <div class="assigned-list">
-
-                        @for (taskContact of task.contacts; track $index) {
-                            @if ($index < 5) { 
-                                @for (contact of contacts; track $index) { 
-                                    @if (taskContact==contact.id) {
-                                    <div class="initials-circle bg-{{contact.styleSelector}}">
-                                        {{contact.initials}}
-                                    </div>
-                                }
-                            }
-                        }
-                    }
-                    @if (task.contacts!.length >= 6) {
-                        + {{task.contacts!.length - 5}}
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="separation-line"></div>
-        <div class="right-side">
             <div class="due-date">
                 <p>Due date<span class="red-star">*</span></p>
                 <input type="date" #date="ngModel" [attr.min]="today" [(ngModel)]="task.date" name="date" id="date"
@@ -77,6 +28,10 @@
                 <span class="red-star required-error"> Please choose a date!</span>
                 }
             </div>
+                
+        </div>
+        <div class="separation-line"></div>
+        <div class="right-side">
             <div class="choose-priority">
                 <p>Priority</p>
                 <div class="prio-buttons full-width">
@@ -99,6 +54,52 @@
                     </button>
                 </div>
             </div>
+            <div class="assignment-container">
+                <p>Assigned to</p>
+                <div class="dropdown">
+                    <input type="text" name="assigned-contacts" value="Select contacts to assign" (input)="filterContacts($event)"
+                        (click)="openDropdown($event)" placeholder="Search contacts..." [(ngModel)]="searchTerm"
+                        class="dropdown-input">
+                    @if (dropdownOpen) {
+
+                    <div class="dropdown-content">
+                        @for (contact of filteredContacts; track $index) {
+                        <label>
+                            <div class="contact-names">
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}
+                                </div>
+                                <p>{{ contact.name }}</p>
+                            </div>
+                            <input type="checkbox" class="checkbox" name="checkbox" [checked]="task.contacts!.includes(contact.id!)"
+                                (click)="$event.stopPropagation()" (change)="toggleContactAssignment(contact.id!)">
+
+                        </label>
+                        @if (filteredContacts.length == 0) {
+                        <p class="no-result">No contacts found</p>
+                        }
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="assigned-list">
+
+                    @for (taskContact of task.contacts; track $index) {
+                        @if ($index < 5) { 
+                            @for (contact of contacts; track $index) { 
+                                @if (taskContact==contact.id) {
+                                <div class="initials-circle bg-{{contact.styleSelector}}">
+                                    {{contact.initials}}
+                                </div>
+                            }
+                        }
+                    }
+                }
+                @if (task.contacts!.length >= 6) {
+                    + {{task.contacts!.length - 5}}
+                }
+            </div>
+        </div>
             <div class="category">
                 <p>Category</p>
                 <select [(ngModel)]="task.category" name="task-category" id="task-category"
@@ -184,7 +185,7 @@
         @if (taskAdded) {
         <div class="task-created-message-overlay">
             <div class="task-created-message" [ngClass]="{'slide-message':taskAdded}">
-                <h2>Task wurde dem Board hinzugefügt!</h2>
+                <h2>Task added to Board!</h2>
             </div>
         </div>
         }
