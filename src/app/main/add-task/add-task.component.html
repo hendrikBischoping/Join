@@ -36,19 +36,19 @@
                 <p>Priority</p>
                 <div class="prio-buttons full-width">
                     <button type="button" (click)="changePriority('Urgent')" [class.active]="isPriorityActive('Urgent')"
-                        [class.active-background]="isPriorityActive('Urgent')">
+                        [class.active-background-urgent]="isPriorityActive('Urgent')">
                         Urgent
                         <img [src]="getPrioImagePath('Urgent')" alt="Urgent">
                     </button>
 
                     <button type="button" (click)="changePriority('Medium')" [class.active]="isPriorityActive('Medium')"
-                        [class.active-background]="isPriorityActive('Medium')">
+                        [class.active-background-medium]="isPriorityActive('Medium')">
                         Medium
                         <img [src]="getPrioImagePath('Medium')" alt="Medium">
                     </button>
 
                     <button type="button" (click)="changePriority('Low')" [class.active]="isPriorityActive('Low')"
-                        [class.active-background]="isPriorityActive('Low')">
+                        [class.active-background-low]="isPriorityActive('Low')">
                         Low
                         <img [src]="getPrioImagePath('Low')" alt="Low">
                     </button>

@@ -282,8 +282,18 @@
         }
     }
 
-    .active-background {
+    .active-background-low {
+        background-color: rgb(122,226,41)!important;
+        color: white;
+    }
+
+    .active-background-medium {
         background-color: rgb(255, 168, 0)!important;
+        color: white;
+    }
+
+    .active-background-urgent {
+        background-color: rgb(255,61,0)!important;
         color: white;
     }
 
@@ -327,8 +337,9 @@
     }
 
     .subtask-list ul {
-        height: 3rem;
-        overflow: hidden;
+        height: 4rem;
+        overflow: auto;
+        overflow-x: hidden;
         margin-bottom: 0;
 
         .single-subtask {
