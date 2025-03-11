@@ -1,14 +1,21 @@
 @use '../../../styles/mixins.scss' as *;
 
+@mixin grayHead() {
+    font-size: 2rem;
+
+}
+
 main {
     position: relative;
     width: 38rem;
     max-height: calc(100vh - 10rem);
-    overflow-y: scroll;
+    overflow-y: auto;
 
-    @media (max-width: 600px) {
-        width: 100%;
+    @media (max-width: 800px) {
+        width: 90%;
+        height: 80vh;
     }
+
 
     .close-container {
         position: absolute;
@@ -18,7 +25,7 @@ main {
         width: 2rem;
         height: 2rem;
         @include standard-flex();
-        
+
         &:hover {
             background-color: rgba($color: #000000, $alpha: 0.1);
             border-radius: 100%;
@@ -28,15 +35,20 @@ main {
             right: 1rem;
         }
     }
-    
+
     .main-content {
         @include standard-flex(start, start);
+        max-height: 55vh;
         flex-direction: column;
         gap: 0.5rem;
         width: 100%;
 
+        @media (max-width: 800px) {
+            max-height: 100%;
+        }
+
         .story-container {
-            margin-top: 2rem;
+            margin-top: 1rem;
             margin-left: 2rem;
             @include standard-flex();
             color: white;
@@ -46,64 +58,80 @@ main {
             font-size: 1.5rem;
             border-radius: 0.5rem;
         }
-        
+
         .user-story-bg {
-            
+
             background-color: #0038FF;
         }
-        
+
         h1 {
             line-height: 3rem;
-            font-size: 3rem!important;
+            font-size: 3rem !important;
             font-weight: 700;
             word-break: break-word;
+
             @media (max-width: 800px) {
                 line-height: 2rem;
-                font-size: 2rem!important;
+                font-size: 2rem !important;
             }
         }
-        
+
         .task-description {
+            height: fit-content;
             max-height: 6rem;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
-        
+
         .task-description {
-            font-size: 1.5rem;
+            font-size: 1rem;
             max-height: 10rem;
-            overflow-y: scroll;
+            overflow-y: auto;
+
             @media (max-width: 800px) {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
         }
-        
+
+        .date-container {
+            font-size: 1rem;
+
+            >span {
+                color: rgb(61, 61, 61)
+            }
+        }
+
         .prio-container {
             @include standard-flex();
-            font-size: 1.5rem;
-            
+            font-size: 1rem;
+
+            >span {
+                color: rgb(61, 61, 61)
+            }
+
             >div {
                 @include standard-flex();
                 margin-left: 1rem;
                 gap: 0.5rem;
             }
-            
+
         }
-        
+
         >ul {
             font-size: 1.5rem;
             padding-inline-start: 2rem;
             margin-block-end: 0;
-            height: 10rem;
+            max-height: 12.5rem;
             width: 80%;
-            overflow-y: scroll;
+            overflow-y: auto;
+
             @media (max-width: 800px) {
                 font-size: 1.2rem;
             }
-            
+
             >div {
                 @include standard-flex(start);
                 margin: 0.5rem;
-                
+
                 >div {
                     padding: 1rem;
                     margin-right: 1rem;
@@ -113,8 +141,10 @@ main {
                 }
             }
         }
+
         .checklist {
             >div {
+
                 >input {
                     width: 1rem;
                     height: 1rem;
@@ -123,7 +153,7 @@ main {
             }
         }
     }
-        
+
 
     .interaction-container {
         @include standard-flex();
@@ -132,8 +162,7 @@ main {
         align-self: end;
         background-color: white;
 
-        @media (max-width: 600px) {
-        }
+        @media (max-width: 600px) {}
 
         .interaction-button {
             @include standard-flex();
@@ -151,12 +180,17 @@ main {
     }
 
     .edit-content {
-        margin-top: 1rem;
+        margin-top: 2rem;
         width: 100%;
-        height: 70vh;
+        max-height: 50vh;
         @include standard-flex(start);
         flex-direction: column;
-        overflow-y: scroll;
+        overflow-y: auto;
+
+        @media (max-width: 800px) {
+            max-height: 100%;
+            height: 80%;
+        }
 
         >div {
             width: calc(80%);
@@ -166,6 +200,7 @@ main {
         p {
             margin: 1rem 0;
             font-size: 1.5rem;
+
             @media (max-width: 800px) {
                 font-size: 1.2rem;
             }
@@ -184,6 +219,7 @@ main {
             &:focus {
                 border: 1px solid blue;
             }
+
             @media (max-width: 800px) {
                 font-size: 1.2rem;
             }
@@ -198,9 +234,11 @@ main {
                     width: 3rem;
                     height: 3rem;
                     font-size: 1.5rem;
+
                     @media (max-width: 800px) {
                         font-size: 1.2rem;
                     }
+
                     @media (max-width: 600px) {
                         margin-right: 0;
                     }
@@ -208,9 +246,9 @@ main {
             }
 
         }
+
         .subtask-list-container {
             height: 10rem;
-            overflow-y: scroll;
         }
     }
 
@@ -229,6 +267,10 @@ main {
 
 .ml-2 {
     margin: 1rem 2rem;
+
+    @media (max-width: 600px) {
+        margin: 0 2rem;
+    }
 }
 
 .dropdown {
@@ -412,6 +454,10 @@ main {
             right: 0;
             @include standard-flex();
 
+            @media (max-width: 550px) {
+                top: 10%;
+            }
+
             >div {
                 height: 1.5rem;
                 width: 2px;
@@ -429,7 +475,7 @@ main {
                 }
 
                 @media (max-width: 550px) {
-                    width: 2rem;
+                    width: 1.25rem;
                 }
 
                 &:hover {
@@ -440,4 +486,3 @@ main {
         }
     }
 }
-

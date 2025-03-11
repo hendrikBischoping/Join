@@ -14,25 +14,12 @@ import { LegalNoticeComponent } from './main/legal-notice/legal-notice.component
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  /** Titel der Anwendung */
   title = 'join';
-
-  /** Status der Authentifizierung */
   authenticated = true;
-
-  /** Benutzername des aktuellen Nutzers */
   userName: string = 'Guest';
-
-  /** Initialen des Benutzers */
   userInitials: string = '';
-
-  /** Status, ob das kleine Menü geöffnet ist */
   isSmallMenuOpen: boolean = false;
-
-  /** Zustand für eingeschränkten Zugriff */
   limitedAccessState: string = "login";
-
-  /** Aktuell aktive Route */
   currentRoute: string = "summary";
 
   /**
@@ -109,5 +96,12 @@ export class AppComponent implements OnInit {
    */
   changeTopic(topic: string) {
     this.limitedAccessState = topic;
+  }
+
+
+  async logout() {
+    await this.authService.logout();
+    this.authenticated = false;
+    window.location.reload();
   }
 }

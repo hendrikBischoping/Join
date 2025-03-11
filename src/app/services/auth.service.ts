@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseService } from './firebase-service.service';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInAnonymously, updateProfile, User } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInAnonymously, updateProfile, User, onAuthStateChanged, setPersistence, browserLocalPersistence } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,21 @@ export class AuthService {
   private userNameSubject = new BehaviorSubject<string>('Guest');
   userName$ = this.userNameSubject.asObservable(); // Öffentliches Observable für den Usernamen
 
-  constructor(private firebaseService: FirebaseService, private auth: Auth) {}
+  constructor(private firebaseService: FirebaseService, private auth: Auth, private router: Router) {
+    this.initializeAuthState();
+  }
+
+  private initializeAuthState() {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.authSubject.next(true);
+        this.userNameSubject.next(user.displayName ?? 'Guest');
+      } else {
+        this.authSubject.next(false);
+        this.userNameSubject.next('Guest');
+      }
+    });
+  }
 
   /**
    * Registriert einen neuen Benutzer mit E-Mail und Passwort.
@@ -52,6 +67,7 @@ export class AuthService {
         this.userNameSubject.next(userName);
       }
       this.authSubject.next(true);
+      this.router.navigate(['/summary']);
       return userCredential.user;
     } catch (error) {
       console.error('Login Error:', error);

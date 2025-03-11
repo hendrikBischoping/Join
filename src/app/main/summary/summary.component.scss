@@ -105,6 +105,10 @@ main {
         gap: 7rem;
         height: 60vh;
         width: 100%;
+        
+        @media (max-width: 1500px) {
+            gap: 3%;
+        }
 
         .info-bubbles-container {
 

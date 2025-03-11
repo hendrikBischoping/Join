@@ -26,6 +26,11 @@ $navHeightMobile: 5rem;
     height: 100vh;
     overflow: hidden;
 }
+
+.join-content-login {
+    max-width: unset !important;
+    width: 100%;
+}
     
 main {
     margin: 0;
