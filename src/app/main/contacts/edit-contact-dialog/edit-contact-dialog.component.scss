@@ -5,11 +5,12 @@ main {
     @include standard-flex();
 
     @media (max-width: 1300px) {
-        min-height: 50vh;
+        min-height: 80%;
     }
 
     @media (max-width: 800px) {
         aspect-ratio: unset;
+        justify-content: space-between;
         flex-direction: column;
         position: relative;
     }
@@ -31,7 +32,7 @@ main {
 
         @media (max-width: 800px) {
             width: 100%;
-            height: calc(100vh - 16vh - 70%);
+            height: 28vh;
             aspect-ratio: unset;
             flex-direction: column;
             padding-left: 0;
@@ -97,7 +98,7 @@ main {
 
         @media (max-width: 800px) {
             position: absolute;
-            top: 22%;
+            top: 20vh;
             height: unset;
         }
 
@@ -145,6 +146,7 @@ main {
         @media (max-width: 800px) {
             width: 100%;
             height: calc(100vh - 16vh - 30%);
+            margin-bottom: 2rem;
         }
 
         .close-container {
