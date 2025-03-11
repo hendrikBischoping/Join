@@ -2,7 +2,7 @@
   <div [ngClass]="{'header-bg-big': authenticated}">
     <div class="top-content"></div>
   </div>
-  <section class="join-content">
+  <section class="join-content" [ngClass]="{'join-content-login': !authenticated}">
     @if (authenticated) {
       <main>
         
@@ -32,7 +32,7 @@
                     <li [routerLink]="['/help-component',currentRoute]" class="help-link" (click)="toggleSmallMenu($event)" >Help</li>
                     <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
                     <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
-                    <li onClick="window.location.reload();" (click)="toggleSmallMenu($event)">Log out</li>
+                    <li (click)="logout()" (click)="toggleSmallMenu($event)">Log out</li>
                   </ul>
                 </div>
               </div>
