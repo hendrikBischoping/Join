@@ -337,6 +337,9 @@
             padding: 0.5rem;
             padding-left: 1.5rem;
             left: -2.5rem;
+            min-width: 100%;
+            padding-right: 1rem;
+            overflow: hidden;
 
             &:hover {
                 @include standard-flex(space-between, center);
@@ -362,6 +365,7 @@
 
     .subtask-edit-input-container {
         position: relative;
+        min-width: 103%;
 
         .subtask-icon-container {
             position: absolute;
@@ -373,6 +377,7 @@
             padding: 0 0.25rem;
             height: 1.4rem;
             font-size: 1rem;
+            min-width: 100%;
         }
     }
 

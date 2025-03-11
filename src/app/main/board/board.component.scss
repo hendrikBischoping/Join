@@ -180,7 +180,7 @@ header {
 }
 
 .collection {
-  @include standard-flex(flex-start, center);
+  @include standard-flex(flex-start, flex-start);
   height: calc(100vh - 5rem);
   height: fit-content;
   gap: 1rem;
