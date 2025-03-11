@@ -6,9 +6,12 @@ import { DetailedDialogComponent } from '../main/board/detailed-dialog/detailed-
 import { AddTaskComponent } from '../main/add-task/add-task.component';
 
 @Injectable({ providedIn: 'root' })
+/**
+ * Service for managing overlays for editing contacts and tasks.
+ */
 export class OverlayService {
   /**
-   * Referenz auf das aktuell geöffnete Overlay-Component.
+   * Reference to the currently opened overlay component.
    */
   private overlayComponentRef: ComponentRef<
     EditContactDialogComponent | AddContactDialogComponent | DetailedDialogComponent | AddTaskComponent
@@ -17,11 +20,11 @@ export class OverlayService {
   constructor(
     private appRef: ApplicationRef,
     private environmentInjector: EnvironmentInjector
-  ) {}
+  ) { }
 
   /**
-   * Öffnet das Overlay zur Bearbeitung eines Kontakts.
-   * @param contact - Der Kontakt, der bearbeitet werden soll.
+   * Opens the overlay for editing a contact.
+   * @param contact - The contact to be edited.
    */
   openEditContactOverlay(contact: IContact): void {
     const container = this.createOverlayContainer();
@@ -37,8 +40,8 @@ export class OverlayService {
   }
 
   /**
-   * Öffnet das Overlay zur Bearbeitung eines Tasks.
-   * @param id - Die ID des Tasks, der bearbeitet werden soll.
+   * Opens the overlay for editing a task.
+   * @param id - The ID of the task to be edited.
    */
   openEditTaskOverlay(id: string): void {
     const container = this.createOverlayContainer();
@@ -54,8 +57,8 @@ export class OverlayService {
   }
 
   /**
-   * Öffnet das Overlay zum Hinzufügen eines Tasks mit einem vordefinierten Status.
-   * @param status - Der vorgegebene Status für den neuen Task.
+   * Opens the overlay to add a task with a predefined status.
+   * @param status - The predefined status for the new task.
    */
   openAddTaskOverlay(status: string): void {
     const container = this.createOverlayContainer();
@@ -72,7 +75,7 @@ export class OverlayService {
   }
 
   /**
-   * Öffnet das Overlay zum Hinzufügen eines neuen Kontakts.
+   * Opens the overlay to add a new contact.
    */
   openAddContactOverlay(): void {
     const container = this.createOverlayContainer();
@@ -87,8 +90,8 @@ export class OverlayService {
   }
 
   /**
-   * Erstellt ein HTML-Container-Element für das Overlay.
-   * @returns Das erstellte `div`-Element.
+   * Creates an HTML container element for the overlay.
+   * @returns The created `div` element.
    */
   private createOverlayContainer(): HTMLElement {
     const container = document.createElement('div');
@@ -98,8 +101,8 @@ export class OverlayService {
   }
 
   /**
-   * Schließt das aktuell geöffnete Overlay und entfernt dessen Container aus dem DOM.
-   * @param container - Das `div`-Element, das das Overlay enthält.
+   * Closes the currently opened overlay and removes its container from the DOM.
+   * @param container - The `div` element that contains the overlay.
    */
   closeOverlay(container: HTMLElement): void {
     if (this.overlayComponentRef) {

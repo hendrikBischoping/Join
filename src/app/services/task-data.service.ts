@@ -5,37 +5,40 @@ import { ITask } from '../interfaces/itask';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service for managing task data operations with Firestore.
+ */
 export class TaskDataService {
-  /** Name der Firestore-Sammlung für Tasks */
+  /** Name of the Firestore collection for tasks */
   private collectionName = 'Tasks'; 
   
   /**
-   * Erstellt eine Instanz des TaskDataService.
-   * @param firebaseService - Der Firebase-Service für Datenbankoperationen
+   * Creates an instance of the TaskDataService.
+   * @param firebaseService - The Firebase service for database operations
    */
   constructor(private firebaseService: FirebaseService) {}
 
   /**
-   * Abonniert alle Task-Dokumente aus der Datenbank.
-   * @returns Ein Observable mit der Task-Liste
+   * Subscribes to all task documents from the database.
+   * @returns An Observable containing the list of tasks
    */
   getTasks() {
     return this.firebaseService.task$;
   }
 
   /**
-   * Ruft ein einzelnes Task-Dokument anhand der ID ab.
-   * @param taskId - Die ID des gewünschten Tasks
-   * @returns Ein Promise mit dem Task-Dokument
+   * Retrieves a single task document by its ID.
+   * @param taskId - The ID of the desired task
+   * @returns A Promise containing the task document
    */
   getTaskById(taskId: string) {
     return this.firebaseService.getSingleDoc(this.collectionName, taskId);
   }
 
   /**
-   * Fügt einen neuen Task zur Datenbank hinzu.
-   * @param task - Das Task-Objekt, das hinzugefügt werden soll
-   * @returns Ein Promise, das die Fertigstellung der Operation signalisiert
+   * Adds a new task to the database.
+   * @param task - The task object to be added
+   * @returns A Promise that signals the completion of the operation
    */
   async addTask(task: ITask): Promise<void> {
     console.log(task);
@@ -43,22 +46,21 @@ export class TaskDataService {
   }
 
   /**
-   * Aktualisiert einen bestehenden Task in der Datenbank.
-   * @param taskId - Die ID des Tasks, der aktualisiert werden soll
-   * @param updatedData - Die neuen Daten für den Task
-   * @returns Ein Promise mit dem aktualisierten Dokument
+   * Updates an existing task in the database.
+   * @param taskId - The ID of the task to be updated
+   * @param updatedData - The new data for the task
+   * @returns A Promise with the updated document
    */
   async updateTask(taskId: string, updatedData: Partial<ITask>) {
     return await this.firebaseService.updateDoc(this.collectionName, taskId, updatedData);
   }
 
   /**
-   * Löscht einen Task aus der Datenbank.
-   * @param taskId - Die ID des zu löschenden Tasks
-   * @returns Ein Promise, das die Fertigstellung der Löschung signalisiert
+   * Deletes a task from the database.
+   * @param taskId - The ID of the task to be deleted
+   * @returns A Promise that signals the completion of the deletion
    */
   async deleteTask(taskId: string) {
     return await this.firebaseService.deleteDocument(this.collectionName, taskId);
   }
 }
-

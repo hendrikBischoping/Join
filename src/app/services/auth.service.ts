@@ -7,19 +7,32 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Service for managing authentication and user login.
+ */
 export class AuthService {
-  /** BehaviorSubject, das den Authentifizierungsstatus speichert (angemeldet/nicht angemeldet). */
+  /** BehaviorSubject that stores the authentication status (logged in/not logged in). */
   private authSubject = new BehaviorSubject<boolean>(false);
   auth$ = this.authSubject.asObservable();
 
-  /** BehaviorSubject, das den Benutzernamen speichert. */
+  /** BehaviorSubject that stores the username. */
   private userNameSubject = new BehaviorSubject<string>('Guest');
-  userName$ = this.userNameSubject.asObservable(); // Öffentliches Observable für den Usernamen
+  userName$ = this.userNameSubject.asObservable(); // Public observable for the username
 
+  /**
+   * Constructor to initialize the AuthService.
+   * @param firebaseService - The service for interacting with Firebase.
+   * @param auth - The authentication service from Firebase.
+   * @param router - The router for navigation.
+   */
   constructor(private firebaseService: FirebaseService, private auth: Auth, private router: Router) {
     this.initializeAuthState();
   }
 
+  /**
+   * Initializes the authentication state based on the current user.
+   */
   private initializeAuthState() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
@@ -33,11 +46,11 @@ export class AuthService {
   }
 
   /**
-   * Registriert einen neuen Benutzer mit E-Mail und Passwort.
-   * @param name - Der Name des Benutzers.
-   * @param email - Die E-Mail-Adresse des Benutzers.
-   * @param password - Das Passwort des Benutzers.
-   * @returns Das Benutzer-Objekt oder null im Falle eines Fehlers.
+   * Registers a new user with email and password.
+   * @param name - The name of the user.
+   * @param email - The user's email address.
+   * @param password - The user's password.
+   * @returns The user object or null in case of an error.
    */
   async registerUser(name: string, email: string, password: string) {
     try {
@@ -54,10 +67,10 @@ export class AuthService {
   }
 
   /**
-   * Meldet einen Benutzer mit E-Mail und Passwort an.
-   * @param email - Die E-Mail-Adresse des Benutzers.
-   * @param password - Das Passwort des Benutzers.
-   * @returns Das Benutzer-Objekt oder null im Falle eines Fehlers.
+   * Logs in a user with email and password.
+   * @param email - The user's email address.
+   * @param password - The user's password.
+   * @returns The user object or null in case of an error.
    */
   async loginUser(email: string, password: string) {
     try {
@@ -76,7 +89,7 @@ export class AuthService {
   }
 
   /**
-   * Meldet den aktuellen Benutzer ab.
+   * Logs out the current user.
    */
   async logout() {
     await signOut(this.auth);
@@ -85,8 +98,8 @@ export class AuthService {
   }
 
   /**
-   * Meldet einen anonymen Gastbenutzer an.
-   * Setzt den Benutzernamen auf 'Guest' und aktualisiert den Authentifizierungsstatus.
+   * Logs in an anonymous guest user.
+   * Sets the username to 'Guest' and updates the authentication status.
    */
   async successAuth() {
     try {
@@ -102,8 +115,8 @@ export class AuthService {
   }
 
   /**
-   * Gibt den aktuellen Benutzernamen zurück.
-   * @returns Der Benutzername des aktuell angemeldeten Benutzers.
+   * Returns the current username.
+   * @returns The username of the currently logged-in user.
    */
   getUserName() {
     return this.userNameSubject.getValue();

@@ -13,12 +13,22 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
+
+/**
+ * Represents a component that displays a summary of tasks for the current user.
+ */
 export class SummaryComponent {
   isGuest = false;
   currentUser = "";
   tasks: ITask[] = [];
   upcomingTask!: ITask;
 
+  /**
+   * Constructor to initialize the SummaryComponent.
+   * @param firebaseService - The Firebase service for data interaction.
+   * @param taskDataService - The service for task data management.
+   * @param authService - The authentication service to get user information.
+   */
   constructor(public firebaseService: FirebaseService, private taskDataService: TaskDataService, private authService: AuthService) {
     if (authService.getUserName() && authService.getUserName() != "Guest") {
       this.currentUser = authService.getUserName();
@@ -26,8 +36,8 @@ export class SummaryComponent {
   }
 
   /**
-   * Lifecycle Hook: Wird bei der Initialisierung des Komponenten aufgerufen.
-   * Abonniert die Liste der Aufgaben und bereitet sie für die Anzeige vor.
+   * Lifecycle Hook: Called on component initialization.
+   * Subscribes to the task list and prepares it for display.
    */
   ngOnInit() {
     this.taskDataService.getTasks().subscribe((taskList) => {
@@ -40,10 +50,10 @@ export class SummaryComponent {
   }
 
   /**
-   * Wandelt einen Datums-String in ein Date-Objekt um.
-   * Unterstützt verschiedene Datumsformate.
-   * @param dateString - Der zu parsende Datums-String.
-   * @returns Ein Date-Objekt oder null, wenn der String ungültig ist.
+   * Converts a date string into a Date object.
+   * Supports various date formats.
+   * @param dateString - The date string to parse.
+   * @returns A Date object or null if the string is invalid.
    */
   parseDate(dateString: string): Date | null {
     if (!dateString) return null;
@@ -55,10 +65,10 @@ export class SummaryComponent {
     }
     return null;
   }
-  
+
   /**
-   * Findet die nächste anstehende Aufgabe basierend auf dem aktuellen Datum.
-   * Setzt die Eigenschaft 'upcomingTask' auf die nächstgelegene Aufgabe.
+   * Finds the next upcoming task based on the current date.
+   * Sets the 'upcomingTask' property to the nearest task.
    */
   findUpcomingTask() {
     const today = new Date();
@@ -69,8 +79,8 @@ export class SummaryComponent {
   }
 
   /**
-   * Gibt eine Begrüßungsnachricht basierend auf der aktuellen Uhrzeit zurück.
-   * @returns Eine Begrüßungsnachricht als String.
+   * Returns a greeting message based on the current time.
+   * @returns A greeting message as a string.
    */
   getWelcomeMessage(): string {
     const currentDate = new Date().getHours();
@@ -84,8 +94,8 @@ export class SummaryComponent {
   }
 
   /**
-   * Gibt das Datum der nächsten anstehenden Aufgabe zurück.
-   * @returns Das Datum als formatierter String oder eine Nachricht, wenn keine Aufgabe vorhanden ist.
+   * Returns the date of the next upcoming task.
+   * @returns The date as a formatted string or a message if no task is available.
    */
   getDateOfUpcomingTask(): string {
     if (!this.upcomingTask || !this.upcomingTask.parsedDate) {
@@ -100,8 +110,8 @@ export class SummaryComponent {
   }
 
   /**
-   * Gibt die Priorität der nächsten anstehenden Aufgabe zurück.
-   * @returns Die Priorität der Aufgabe oder eine Nachricht, wenn keine Aufgabe vorhanden ist.
+   * Returns the priority of the next upcoming task.
+   * @returns The priority of the task or a message if no task is available.
    */
   getUpcomingTaskPrio(): string {
     if (!this.upcomingTask) { return "No upcoming tasks"; }
@@ -109,16 +119,16 @@ export class SummaryComponent {
   }
 
   /**
-   * Gibt die CSS-Klasse basierend auf der Priorität der nächsten anstehenden Aufgabe zurück.
-   * @returns Eine CSS-Klasse als String.
+   * Returns the CSS class based on the priority of the next upcoming task.
+   * @returns A CSS class as a string.
    */
   getUpcomingTaskPrioClass(): string {
     return `bg-${this.getUpcomingTaskPrio().toLocaleLowerCase()}`;
   }
 
   /**
-   * Gibt den Pfad zum Symbol für die Priorität der nächsten anstehenden Aufgabe zurück.
-   * @returns Der Pfad zum Symbol als String.
+   * Returns the path to the icon for the priority of the next upcoming task.
+   * @returns The path to the icon as a string.
    */
   getUpcomingTaskPrioIcon(): string {
     return `./assets/img/add-task/${this.getUpcomingTaskPrio().toLowerCase()}-active.png`;

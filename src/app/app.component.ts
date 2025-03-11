@@ -23,14 +23,14 @@ export class AppComponent implements OnInit {
   currentRoute: string = "summary";
 
   /**
-   * Erstellt eine Instanz der AppComponent.
-   * @param authService - Der Authentifizierungsservice
-   * @param cdRef - ChangeDetectorRef für manuelles Change Detection
+   * Creates an instance of the AppComponent.
+   * @param authService - The authentication service
+   * @param cdRef - ChangeDetectorRef for manual change detection
    */
   constructor(private authService: AuthService, private cdRef: ChangeDetectorRef) {}
 
   /**
-   * Initialisiert die Komponente und setzt Abonnements für Authentifizierung und Benutzername.
+   * Initializes the component and sets subscriptions for authentication and username.
    */
   ngOnInit() {
     this.authService.auth$.subscribe((authStatus) => {
@@ -44,17 +44,17 @@ export class AppComponent implements OnInit {
   }
   
   /**
-   * Setzt die aktuelle Route.
-   * @param name - Name der neuen Route
+   * Sets the current route.
+   * @param name - Name of the new route
    */
   setCurrentRoute(name: string) {
     this.currentRoute = name;
   }
 
   /**
-   * Ermittelt die Initialen eines Benutzernamens.
-   * @param name - Der vollständige Name des Benutzers
-   * @returns Die Initialen des Benutzers in Großbuchstaben
+   * Gets the initials of a username.
+   * @param name - The full name of the user
+   * @returns The user's initials in uppercase
    */
   getUserInitials(name: string): string {
     if (!name) return "";
@@ -63,8 +63,8 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Öffnet oder schließt das kleine Menü.
-   * @param event - Das Click-Event, um das Schließen durch andere Klicks zu verhindern
+   * Toggles the small menu open or closed.
+   * @param event - The click event to prevent closing by other clicks
    */
   toggleSmallMenu(event: Event) {
     event.stopPropagation();
@@ -78,8 +78,8 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Schließt das kleine Menü, wenn außerhalb geklickt wird.
-   * @param event - Das Click-Event
+   * Closes the small menu if clicked outside.
+   * @param event - The click event
    */
   closeSmallMenu = (event: Event) => {
     const menu = document.querySelector('.editButtom');
@@ -91,14 +91,16 @@ export class AppComponent implements OnInit {
   };
 
   /**
-   * Ändert das aktuelle Thema im eingeschränkten Zugriffsmodus.
-   * @param topic - Das neue Thema
+   * Changes the current topic in limited access mode.
+   * @param topic - The new topic
    */
   changeTopic(topic: string) {
     this.limitedAccessState = topic;
   }
 
-
+  /**
+   * Logs out the user and reloads the window.
+   */
   async logout() {
     await this.authService.logout();
     this.authenticated = false;

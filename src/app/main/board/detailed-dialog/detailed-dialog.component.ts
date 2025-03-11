@@ -9,6 +9,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+/**
+ * Component for showing detailed information and editing task.
+ */
 @Component({
   selector: 'app-detailed-dialog',
   standalone: true,
@@ -53,27 +56,9 @@ export class DetailedDialogComponent {
   }
 
 
-  ngOnInit() {
-    this.contactService.getContacts().subscribe((contactList) => {
-      this.contacts = contactList;
-      this.filteredContacts = [...this.contacts];
-      this.cdRef.detectChanges();
-    });
-    this.taskDataService.getTasks().subscribe((taskList) => {
-      taskList.forEach(element => {
-        if (this.currentTaskId == element.id) {
-          this.task = element;
-          this.previewTask = JSON.parse(JSON.stringify(this.task));
-          this.previewTask.contacts = this.previewTask.contacts!.filter(contact => contact != '');
-        }
-      });
-    });
-    this.initTask();
-  }
-
   /**
-   * Initialisiert die Aufgabe und überprüft, ob es sich um eine Benutzerstory handelt.
-   */
+    * Initializes the task and checks if it is a user story.
+    */
   initTask() {
     if (this.task.category == "User Story") {
       this.isUserStory = true;
@@ -81,8 +66,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Filtert die Kontakte basierend auf der Benutzereingabe.
-   * @param event Das Ereignis, das die Eingabe auslöst.
+   * Filters contacts based on user input.
+   * @param {Event} event - The event triggered by user input.
    */
   filterContacts(event: any) {
     const query = event.target.value.toLowerCase();
@@ -93,10 +78,10 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Gibt den Pfad zu einem Bild basierend auf der Priorität zurück.
-   * @param prio Die Priorität der Aufgabe.
-   * @param forceInactive Gibt an, ob das Bild als inaktiv angezeigt werden soll.
-   * @returns Der Pfad zum Bild.
+   * Returns the image path based on the task priority.
+   * @param {string} prio - The priority of the task.
+   * @param {boolean} [forceInactive=false] - Whether to show the inactive image.
+   * @returns {string} The path to the priority image.
    */
   getPrioImagePath(prio: string, forceInactive = false): string {
     if (forceInactive) {
@@ -109,25 +94,25 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Ändert die Priorität der Aufgabe.
-   * @param prio Die neue Priorität.
+   * Changes the priority of the task.
+   * @param {string} prio - The new priority.
    */
   changePriority(prio: string) {
     this.previewTask.priority = prio;
   }
 
   /**
-   * Überprüft, ob eine Priorität aktiv ist.
-   * @param prio Die zu überprüfende Priorität.
-   * @returns Wahr, wenn die Priorität aktiv ist, andernfalls falsch.
+   * Checks if a given priority is active.
+   * @param {string} prio - The priority to check.
+   * @returns {boolean} True if the priority is active, otherwise false.
    */
   isPriorityActive(prio: string): boolean {
     return this.previewTask.priority === prio;
   }
 
   /**
-   * Wechselt den Status einer Unteraufgabe.
-   * @param subtask Die Unteraufgabe, deren Status geändert wird.
+   * Toggles the completion status of a subtask.
+   * @param {ISubtask} subtask - The subtask to update.
    */
   toggleSubtaskDone(subtask: ISubtask) {
     subtask.subtaskDone = !subtask.subtaskDone;
@@ -136,8 +121,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Ändert den Status einer Unteraufgabe basierend auf ihrem Namen.
-   * @param name Der Name der Unteraufgabe.
+   * Changes the status of a subtask based on its name.
+   * @param {string} name - The name of the subtask.
    */
   changeSubtaskStatus(name: string) {
     this.task.subtasks!.forEach(element => {
@@ -149,8 +134,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Bearbeitet die Aufgabe und aktualisiert sie im Dienst.
-   * @param inEditMode Gibt an, ob die Aufgabe im Bearbeitungsmodus ist.
+   * Updates the task and saves changes.
+   * @param {boolean} [inEditMode=false] - Whether the task is in edit mode.
    */
   editTask(inEditMode = false) {
     if (inEditMode) {
@@ -162,7 +147,7 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Löscht die Aufgabe und schließt den Dialog.
+   * Deletes the task and closes the dialog.
    */
   deleteTask() {
     this.taskDataService.deleteTask(this.currentTaskId);
@@ -170,7 +155,7 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Wechselt den Bearbeitungsmodus.
+   * Toggles the edit mode.
    */
   toggleEditMode() {
     this.editView = !this.editView;
@@ -178,8 +163,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Schließt das Dropdown-Menü, wenn außerhalb geklickt wird.
-   * @param event Das Klick-Ereignis.
+   * Closes the dropdown menu when clicking outside of it.
+   * @param {Event} event - The click event.
    */
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
@@ -189,8 +174,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Öffnet das Dropdown-Menü.
-   * @param event Das Klick-Ereignis.
+   * Opens the dropdown menu.
+   * @param {Event} event - The click event.
    */
   openDropdown(event: Event) {
     event.stopPropagation();
@@ -199,7 +184,7 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Schließt das Dropdown-Menü.
+   * Closes the dropdown menu.
    */
   closeDropdown() {
     this.dropdownOpen = false;
@@ -207,9 +192,9 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Überprüft, ob der Klick innerhalb des Dropdowns erfolgt ist.
-   * @param event Das Klick-Ereignis.
-   * @returns Wahr, wenn der Klick innerhalb des Dropdowns erfolgt ist, andernfalls falsch.
+   * Checks if the click event occurred inside the dropdown.
+   * @param {Event} event - The click event.
+   * @returns {boolean} True if the click was inside the dropdown, otherwise false.
    */
   isClickInsideDropdown(event: Event): boolean {
     const dropdownContainer = document.querySelector(".assignment-container");
@@ -217,8 +202,8 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Wechselt die Zuweisung eines Kontakts zur Aufgabe.
-   * @param contactId Die ID des Kontakts.
+   * Toggles the assignment of a contact to the task.
+   * @param {string} contactId - The ID of the contact.
    */
   toggleContactAssignment(contactId: string) {
     const index = this.previewTask.contacts!.indexOf(contactId);
@@ -230,50 +215,50 @@ export class DetailedDialogComponent {
   }
 
   /**
-   * Fügt eine neue Unteraufgabe hinzu.
+   * Adds a new subtask.
    */
   addSubtask() {
     if (this.subtaskTerm == "") {
       return;
     }
- 
+
     this.previewTask.subtasks?.push({ subtaskName: this.subtaskTerm, subtaskDone: false });
     this.subtaskTerm = "";
     this.cdRef.detectChanges();
   }
 
   /**
-   * Beginnt die Bearbeitung einer Unteraufgabe.
-   * @param subtaskName Der Name der Unteraufgabe.
+   * Starts editing a subtask.
+   * @param {string} subtaskName - The name of the subtask.
    */
   startEditingSubtask(subtaskName: string) {
     this.editingSubtasks.set(subtaskName, true);
   }
 
   /**
-   * Speichert die Bearbeitung einer Unteraufgabe.
-   * @param oldName Der alte Name der Unteraufgabe.
+   * Saves the edited subtask.
+   * @param {string} oldName - The original name of the subtask.
    */
   saveSubtaskEdit(oldName: string) {
     const subtask = this.previewTask.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
       subtask.subtaskName = oldName;
     }
-    this.editingSubtasks.delete(oldName); 
-    this.cdRef.detectChanges(); 
+    this.editingSubtasks.delete(oldName);
+    this.cdRef.detectChanges();
   }
 
   /**
-   * Bricht die Bearbeitung einer Unteraufgabe ab.
-   * @param subtaskName Der Name der Unteraufgabe.
+   * Cancels the editing of a subtask.
+   * @param {string} subtaskName - The name of the subtask.
    */
   cancelSubtaskEdit(subtaskName: string) {
     this.editingSubtasks.delete(subtaskName);
   }
 
   /**
-   * Löscht eine Unteraufgabe basierend auf ihrem Namen.
-   * @param name Der Name der zu löschenden Unteraufgabe.
+   * Deletes a subtask by name.
+   * @param {string} name - The name of the subtask to delete.
    */
   deleteSubTask(name: string) {
     this.previewTask.subtasks = this.previewTask.subtasks?.filter(subtask => subtask.subtaskName != name);

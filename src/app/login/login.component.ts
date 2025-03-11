@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-// import { IUser } from '../interfaces/iuser';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,6 +10,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
+/**
+ * Component for user login and registration.
+ */
 export class LoginComponent {
   @Output() topicSelected = new EventEmitter<string>()
   user = {
@@ -49,15 +52,15 @@ export class LoginComponent {
   }
 
   /**
-   * Wechselt zwischen Anmeldungs- und Registrierungsmodus.
+   * Toggles between login and registration mode.
    */
   toggleSignUp() {
     this.stateLogin = !this.stateLogin;
   }
 
   /**
-   * Verarbeitet das Anmelde- oder Registrierungsformular.
-   * @param form Das Formular, das übermittelt wird.
+   * Handles the login or registration form submission.
+   * @param form The submitted form.
    */
   async onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -85,7 +88,7 @@ export class LoginComponent {
   }
 
   /**
-   * Meldet den Benutzer an.
+   * Logs the user in.
    */
   async logIn() {
     const user = await this.authService.loginUser(this.user.email, this.user.password);
@@ -104,22 +107,22 @@ export class LoginComponent {
   }
 
   /**
-   * Bestätigt die erfolgreiche Authentifizierung.
+   * Confirms successful authentication.
    */
   successAuth() {
     this.authService.successAuth();
   }
 
   /**
-   * Scrollt zur Oberseite der Seite.
+   * Scrolls to the top of the page.
    */
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   /**
-   * Wählt ein Thema aus und gibt es an die übergeordnete Komponente weiter.
-   * @param topic Das ausgewählte Thema.
+   * Selects a topic and emits it to the parent component.
+   * @param topic The selected topic.
    */
   selectTopic(topic: string) {
     this.topicSelected.emit(topic);

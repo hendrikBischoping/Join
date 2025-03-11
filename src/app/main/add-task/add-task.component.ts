@@ -15,6 +15,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './add-task.component.scss'
 })
 
+/**
+ * Component for adding a new task.
+ */
 export class AddTaskComponent {
   @Input() predefinedStatus = "todo";
   @Input() close!: () => void;
@@ -64,8 +67,8 @@ export class AddTaskComponent {
   }
   
   /**
-   * Filtert die Kontakte basierend auf der Benutzereingabe.
-   * @param event Das Ereignis, das die Eingabe auslöst.
+   * Filters contacts based on user input.
+   * @param event The event triggering the input.
    */
   filterContacts(event: any) {
     const query = event.target.value.toLowerCase();
@@ -76,8 +79,8 @@ export class AddTaskComponent {
   }
 
   /**
-   * Schließt das Dropdown-Menü, wenn außerhalb geklickt wird.
-   * @param event Das Klick-Ereignis.
+   * Closes the dropdown menu when clicking outside.
+   * @param event The click event.
    */
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
@@ -87,7 +90,7 @@ export class AddTaskComponent {
   }
 
   /**
-   * Schließt das Dropdown-Menü.
+   * Closes the dropdown menu.
    */
   closeDropdown() {
     this.dropdownOpen = false;
@@ -95,9 +98,9 @@ export class AddTaskComponent {
   }
 
   /**
-   * Überprüft, ob der Klick innerhalb des Dropdowns erfolgt ist.
-   * @param event Das Klick-Ereignis.
-   * @returns Wahr, wenn der Klick innerhalb des Dropdowns erfolgt ist, andernfalls falsch.
+   * Checks if the click occurred inside the dropdown.
+   * @param event The click event.
+   * @returns True if the click occurred inside, otherwise false.
    */
   isClickInsideDropdown(event: Event): boolean {
     const dropdownContainer = document.querySelector(".assignment-container");
@@ -105,8 +108,8 @@ export class AddTaskComponent {
   }
 
   /**
-   * Öffnet das Dropdown-Menü.
-   * @param event Das Klick-Ereignis.
+   * Opens the dropdown menu.
+   * @param event The click event.
    */
   openDropdown(event: Event) {
     event.stopPropagation();
@@ -115,17 +118,17 @@ export class AddTaskComponent {
   }
 
   /**
-   * Initialisiert die Aufgabe und überprüft, ob es sich um eine Benutzerstory handelt.
+   * Initializes the task and checks if it is a User Story.
    */
   initTask() {
-    if (this.task.category == "User Story") {
+    if (this.task.category === "User Story") {
       this.isUserStory = true;
     }
   }
 
   /**
-   * Wechselt die Zuweisung eines Kontakts zur Aufgabe.
-   * @param contactId Die ID des Kontakts.
+   * Toggles the assignment of a contact to the task.
+   * @param contactId The ID of the contact.
    */
   toggleContactAssignment(contactId: string) {
     const index = this.task.contacts!.indexOf(contactId);
@@ -137,10 +140,10 @@ export class AddTaskComponent {
   }
 
   /**
-   * Gibt den Pfad zu einem Bild basierend auf der Priorität zurück.
-   * @param prio Die Priorität der Aufgabe.
-   * @param forceInactive Gibt an, ob das Bild als inaktiv angezeigt werden soll.
-   * @returns Der Pfad zum Bild.
+   * Returns the image path based on the task priority.
+   * @param prio The priority of the task.
+   * @param forceInactive Whether to display the inactive image.
+   * @returns The image path.
    */
   getPrioImagePath(prio: string, forceInactive = false): string {
     if (forceInactive) {
@@ -153,109 +156,104 @@ export class AddTaskComponent {
   }
 
   /**
-   * Ändert die Priorität der Aufgabe.
-   * @param prio Die neue Priorität.
+   * Changes the priority of the task.
+   * @param prio The new priority.
    */
   changePriority(prio: string) {
     this.task.priority = prio;
   }
 
   /**
-   * Überprüft, ob eine Priorität aktiv ist.
-   * @param prio Die zu überprüfende Priorität.
-   * @returns Wahr, wenn die Priorität aktiv ist, andernfalls falsch.
+   * Checks if a priority is active.
+   * @param prio The priority to check.
+   * @returns True if the priority is active, otherwise false.
    */
   isPriorityActive(prio: string): boolean {
     return this.task.priority === prio;
   }
 
   /**
-   * Gibt das Datum der Aufgabe im gewünschten Format zurück.
-   * @returns Das formatierte Datum.
+   * Returns the formatted task date.
+   * @returns The formatted date.
    */
   getDate() {
-    let dateData: string = this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : '';
-    return dateData;
+    return this.task.date ? new Date(this.task.date).toLocaleDateString('en-US') : '';
   }
 
   /**
-   * Fügt eine neue Unteraufgabe hinzu.
-   * @param event Optionales Ereignis, um das Standardverhalten zu verhindern.
+   * Adds a new subtask.
+   * @param event Optional event to prevent default behavior.
    */
   addSubtask(event?: Event) {
-    if (event) {
-      event.preventDefault();
-    }
-    if (this.newSubtaskName == "") {
-      return;
-    }
+    if (event) event.preventDefault();
+    if (!this.newSubtaskName) return;
+    
     this.task.subtasks?.push({ subtaskName: this.newSubtaskName, subtaskDone: false });
     this.newSubtaskName = "";
     this.cdRef.detectChanges();
   }
 
   /**
-   * Beginnt die Bearbeitung einer Unteraufgabe.
-   * @param subtaskName Der Name der Unteraufgabe.
+   * Starts editing a subtask.
+   * @param subtaskName The name of the subtask.
    */
   startEditingSubtask(subtaskName: string) {
-    this.editingSubtasks.set(subtaskName, subtaskName); 
+    this.editingSubtasks.set(subtaskName, subtaskName);
   }
 
   /**
-   * Aktualisiert die Bearbeitung einer Unteraufgabe mit einem neuen Wert.
-   * @param subtaskName Der Name der Unteraufgabe.
-   * @param newValue Der neue Wert der Unteraufgabe.
+   * Updates the edited subtask with a new value.
+   * @param subtaskName The name of the subtask.
+   * @param newValue The new value of the subtask.
    */
   updateEditingSubtask(subtaskName: string, newValue: string) {
-    this.editingSubtasks.set(subtaskName, newValue); 
+    this.editingSubtasks.set(subtaskName, newValue);
   }
 
   /**
-   * Speichert die Bearbeitung einer Unteraufgabe.
-   * @param oldName Der alte Name der Unteraufgabe.
-   * @param event Optionales Ereignis, um das Standardverhalten zu verhindern.
+   * Saves the edited subtask.
+   * @param oldName The old name of the subtask.
+   * @param event Optional event to prevent default behavior.
    */
   saveSubtaskEdit(oldName: string, event?: Event) {
-    if (event) {
-      event.preventDefault();
-    }
+    if (event) event.preventDefault();
+    
     const subtask = this.task.subtasks?.find(s => s.subtaskName === oldName);
     if (subtask) {
-      subtask.subtaskName = this.editingSubtasks.get(oldName) || oldName; 
+      subtask.subtaskName = this.editingSubtasks.get(oldName) || oldName;
     }
-    this.editingSubtasks.delete(oldName); 
+    this.editingSubtasks.delete(oldName);
     this.cdRef.detectChanges();
     (event?.target as HTMLInputElement)?.blur();
   }
 
   /**
-   * Bricht die Bearbeitung einer Unteraufgabe ab.
-   * @param subtaskName Der Name der Unteraufgabe.
+   * Cancels subtask editing.
+   * @param subtaskName The name of the subtask.
    */
   cancelSubtaskEdit(subtaskName: string) {
-    this.editingSubtasks.delete(subtaskName); 
+    this.editingSubtasks.delete(subtaskName);
   }
 
   /**
-   * Löscht eine Unteraufgabe basierend auf ihrem Namen.
-   * @param name Der Name der zu löschenden Unteraufgabe.
+   * Deletes a subtask based on its name.
+   * @param name The name of the subtask to delete.
    */
   deleteSubTask(name: string) {
-    this.task.subtasks = this.task.subtasks?.filter(subtask => subtask.subtaskName != name);
+    this.task.subtasks = this.task.subtasks?.filter(subtask => subtask.subtaskName !== name);
     this.cdRef.detectChanges();
   }
 
   /**
-   * Löscht den Inhalt des Eingabefelds für Unteraufgaben.
+   * Clears the subtask input field.
    */
   clearSubtask() {
     this.newSubtaskName = "";
   }
 
   /**
-   * Löscht das Formular und setzt die Aufgabe zurück.
-   * @param form Das Formular, das zurückgesetzt werden soll.
+   * Clears the form and resets the task.
+   * @param form The form to reset.
    */
   clearForm(form: NgForm) {
     form.resetForm();
@@ -265,8 +263,8 @@ export class AddTaskComponent {
   }
 
   /**
-   * Übermittelt die Aufgabe und speichert sie im Dienst.
-   * @param form Das Formular, das übermittelt werden soll.
+   * Submits the task and saves it to the service.
+   * @param form The form to submit.
    */
   async submitTask(form: NgForm) {
     if (form.valid && form.submitted) {
@@ -274,6 +272,7 @@ export class AddTaskComponent {
     }
     this.taskAdded = true;
     this.task.status = this.predefinedStatus;
+    
     await this.taskDataService.addTask(this.task).then(() => {
       form.resetForm();
       this.task.contacts = [];
@@ -282,6 +281,6 @@ export class AddTaskComponent {
         this.taskAdded = false;
         this.router.navigate(['/board']);
       }, 1500);
-    })
+    });
   }
 }
