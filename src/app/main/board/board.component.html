@@ -14,6 +14,7 @@
             </div>
             <button (click)="openAddTaskDialog()">Add task +</button>
         </div>
+        <p class="how-to-move">Hold a task to move it!</p>
     </header>
     <div cdkDropListGroup class="collection">
         @for (rowId of boardRows; track $index) {
@@ -28,7 +29,7 @@
                 (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="onDragEntered(rowId)"
                 (cdkDropListExited)="onDragExited()">
                 @for (task of getFilteredTasks(rowId); track $index) {
-                <div class="info-task" (click)="openEditDialog(task.id)" cdkDrag
+                <div class="info-task" (contextmenu)="$event.preventDefault()" (click)="openEditDialog(task.id)" cdkDrag
                     [cdkDragStartDelay]="{ touch: 500, mouse: 0 }">
                     <div class="category" [ngClass]="{'user-story-bg': checkCategory(task)}">
                         <div class="story-container">{{task.category}}</div>

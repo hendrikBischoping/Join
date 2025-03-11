@@ -6,6 +6,7 @@ $initialsDistanceMobile: 1.5;
 
 main {
   max-width: 84vw;
+  height: calc(100vh - 5rem);
   @media (max-width: 800px){
     max-width: 100vw;
     padding: 5vw 0 0 5vw;
@@ -25,7 +26,7 @@ header {
     @include standard-flex(flex-start, flex-start);
     flex-direction: column;
     width: 100%;
-    gap: 2rem;
+    gap: 1.2rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     padding: 0 0 1rem 0;
@@ -165,11 +166,22 @@ header {
       }
     }
   }
+
+  .how-to-move {
+    display: none;
+    @media (max-width: 938px) {
+      display: block;
+      padding: 0.25rem;
+      font-weight: 700;
+      background-color: #979191;
+      border-radius: 0.25rem;
+    }
+  }
 }
 
 .collection {
   @include standard-flex(flex-start, center);
-  align-items: flex-start;
+  height: calc(100vh - 5rem);
   height: fit-content;
   gap: 1rem;
   margin-left: 2rem;
@@ -463,9 +475,11 @@ header {
   width: 100%;
   margin-bottom: 8rem;
 
+  @media (max-width: 938px) {
+    margin-bottom: 0rem;
+  }
   @media (max-width: 915px) {
     max-height: unset;
-    margin-bottom: 0rem;
   }
 }
 
