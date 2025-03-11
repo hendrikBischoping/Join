@@ -9,17 +9,18 @@
         <div class="story-container" [ngClass]="{'user-story-bg':isUserStory}">{{task.category}}</div>
         <h1 class="ml-2">{{task.title}}</h1>
         <p class="ml-2 task-description">{{task.description}}</p>
-        <p class="ml-2 date-container"><span>Due date:</span> {{task.date}}</p>
+        <p class="ml-2 date-container"><span class="topic-span">Due date:</span> {{task.date}}</p>
         <div class="prio-container ml-2">
-            <span>Priority: </span>
+            <span class="topic-span">Priority: </span>
             <div>
                 <span>{{task.priority}}</span>
                 <img src="{{getPrioImagePath(task.priority, true)}}" alt="{{task.priority}} icon">
             </div>
 
         </div>
+        <span class="ml-2 topic-span">Assigned to:</span>
         <ul>
-            <span>Assigned to:</span>
+            
 
             @for (assignedContact of task.contacts; track $index) {
                 @for (contact of contacts; track $index) {
@@ -35,9 +36,9 @@
             }
 
         </ul>
-
+        <span class="ml-2 topic-span">Subtask:</span>
         <ul class="checklist">
-            <span>Subtask:</span>
+            
             
 
             @for (subtask of task.subtasks; track $index) {
