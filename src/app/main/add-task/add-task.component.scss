@@ -235,6 +235,7 @@
                 right: 1rem;
                 height: 1rem;
                 max-width: 1rem!important;
+                min-width: unset;
                 aspect-ratio: 1 / 1;
             }
         }
@@ -714,6 +715,9 @@
 
             .dropdown-input {
                 min-width: 100%;
+                .dropdown-content {
+                    width: 95%;
+                }
             }
 
             #task-category {
