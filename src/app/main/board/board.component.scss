@@ -1,8 +1,8 @@
 @use "../../styles/mixins.scss" as *;
 @use "../../../styles.scss" as *;
 
-$initialsDistance: 1.8;
-$initialsDistanceMobile: 1.5;
+$initialsDistance: 1.5;
+$initialsDistanceMobile: 1.1;
 
 main {
   max-width: 84vw;
@@ -24,6 +24,7 @@ header {
   @include standard-flex(space-between, center);
   width: 100%;
   padding-bottom: 4rem;
+  gap: 2vw;
 
   .responsiv-for-h {
     display: none;
@@ -153,6 +154,7 @@ header {
       @include standardButton();
       padding: 0.4rem 1rem;
       background-color: $standardColor;
+      white-space: nowrap;
       color: white;
       width: 14rem;
       gap: 4px;
@@ -267,8 +269,7 @@ header {
       margin-bottom: 2rem;
 
       @media (max-width: 938px) {
-        width: 15rem;
-        min-width: 15rem;
+        min-width: 12rem;
       }
 
       .category {
@@ -382,14 +383,16 @@ header {
         line-break: normal;
         .for-circle{
           position: absolute;
+          left: -1rem;
         }
 
         .initials-circle {
           position: absolute;
           bottom: 0rem;
           left: 0rem;
-          width: 3rem;
-          height: 3rem;
+          width: 2rem;
+          height: 2rem;
+          font-size: 1rem;
 
           @for $i from 1 through 5 {
             &:nth-child(#{$i}) {
@@ -412,30 +415,24 @@ header {
 
         .plus-count {
           position: absolute;
-          top: -3.1rem;
-          left: 10rem;
+          top: -2.1rem;
+          left: 8rem;
           background-color: rgb(187, 187, 187);
-          height: 3rem;
+          height: 2rem;
           aspect-ratio: 1;
           border: solid rgb(228, 222, 222) 1px;
           color: rgb(255, 255, 255);
           border-radius: 50%;
           text-align: center;
-          line-height: 3rem;
-          font-size: 1.4rem;
+          line-height: 2rem;
+          font-size: 1rem;
 
           @media (max-width: 1420px) {
             height: 2rem;
             font-size: 1rem;
             top: -2.1rem;
-            left: 8rem;
+            left: 5.9rem;
             line-height: 2rem;
-          }
-          @media (max-width: 1200px) {
-            left: 6.8rem;
-          }
-          @media (max-width: 938px) {
-            left: 8rem;
           }
         }
 
@@ -445,7 +442,7 @@ header {
           position: absolute;
           top: -1.5rem;    
           @media (max-width: 1200px) {
-            right: -0.8rem;  
+            right: -0.5rem;  
           }
           @media (max-width: 938px) {
             right: 1rem;  

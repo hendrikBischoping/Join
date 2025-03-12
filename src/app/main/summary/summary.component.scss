@@ -122,6 +122,7 @@ main {
             @include standard-flex();
             gap: 2rem;
             flex-direction: column;
+            width: 35rem;
 
             @media (max-width: 800px) {
                 gap: 1vh;
@@ -142,6 +143,10 @@ main {
                     background-color: white;
                     border-radius: 12px;
                     
+                    @media (max-width: 450px) {
+                        padding: 1.8rem;
+                    }
+
                     @media (max-width: 390px) {
                         width: 7vw;
                     }
@@ -172,13 +177,13 @@ main {
 .single-bubble-top {
     @include standard-flex();
     gap: 1rem;
-    padding: 2rem 4rem;
+    padding: 1rem 2rem;
     background-color: white;
     border-radius: 1rem;
     transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
 
     @media (max-width: 800px) {
-        padding: 2vw 2vh;
+        padding: 1rem;
     }
 
     .icon-bg {
@@ -233,7 +238,7 @@ main {
 
 .single-bubble-mid {
     @include standard-flex(center);
-    gap: 5rem;
+    gap: 2.5rem;
     width: 100%;
     padding: 2rem 0;
     background-color: white;
@@ -243,6 +248,10 @@ main {
     @media (max-width: 800px) {
         gap: 5vw;
         padding: 2vw 0;
+    }
+    
+    @media (max-width: 400px) {
+        gap: vw;
     }
 
     .left-inside-bubble {
@@ -326,7 +335,7 @@ main {
     transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
 
     @media (max-width: 800px) {
-        padding: 0;
+        padding: 1rem;
         height: 5vh;
         width: 12vw;
     }
