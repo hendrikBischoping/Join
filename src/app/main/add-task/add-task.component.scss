@@ -143,7 +143,7 @@
     }
 
     .task-inputs {
-        @include standard-flex(center, center);
+        @include standard-flex(flex-start, center);
         gap: 2rem;
     }
 
@@ -636,7 +636,7 @@
 
 @media (max-width: 800px) {
     .add-task {
-        padding: 10vw 10vw 0 10vw;
+        padding: 2rem 2rem 0 2rem;
         height: calc(100% - 10rem);
         overflow-y: scroll;
 
