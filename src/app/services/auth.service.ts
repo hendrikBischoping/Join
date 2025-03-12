@@ -107,6 +107,7 @@ export class AuthService {
       if (userCredential.user) {
         await updateProfile(userCredential.user, { displayName: 'Guest' });
         this.userNameSubject.next('Guest');
+        this.router.navigate(['/summary']);
         this.authSubject.next(true);
       }
     } catch (error) {

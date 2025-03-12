@@ -4,75 +4,82 @@
   </div>
   <section class="join-content" [ngClass]="{'join-content-login': !authenticated}">
     @if (authenticated) {
-      <main>
-        
-        <nav>
+    <main>
+
+      <nav>
+        <div class="nav-wrapper">
           <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
           <ul>
-            <li routerLink="summary" (click)="setCurrentRoute('summary')"><img src="./assets/img/icons/SummaryIcon.png" alt=""> Summary</li>
-            <li routerLink="add-task" (click)="setCurrentRoute('add-task')"><img src="./assets/img/icons/TaskIcon.png" alt=""> Add Task</li>
-            <li routerLink="board" (click)="setCurrentRoute('board')"><img src="./assets/img/icons/BoardIcon.png" alt=""> Board</li>
-            <li routerLink="contacts" (click)="setCurrentRoute('contacts')"><img src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
+            <li routerLink="summary" (click)="setCurrentRoute('summary')"><img src="./assets/img/icons/SummaryIcon.png"
+                alt=""> Summary</li>
+            <li routerLink="add-task" (click)="setCurrentRoute('add-task')"><img src="./assets/img/icons/TaskIcon.png"
+                alt=""> Add Task</li>
+            <li routerLink="board" (click)="setCurrentRoute('board')"><img src="./assets/img/icons/BoardIcon.png"
+                alt=""> Board</li>
+            <li routerLink="contacts" (click)="setCurrentRoute('contacts')"><img
+                src="./assets/img/icons/ContactsIcon.png" alt=""> Contacts</li>
           </ul>
           <div>
             <a routerLink="privacy-police" (click)="setCurrentRoute('privacy-police')">Privacy policy</a>
             <a routerLink="legal-notice" (click)="setCurrentRoute('legal-notice')">Legal Notice</a>
           </div>
-        </nav>
-        <section>
-          <div class="header-bg">
-            <div class="top-content">
-              <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
-              <span>Kanban Project Management Tool</span>
-              <div>
-                <img src="./assets/img/icons/helpIcon.png" alt="help"  [routerLink]="['/help-component',currentRoute]" >
-                <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
-                <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
-                  <ul>
-                    <li [routerLink]="['/help-component',currentRoute]" class="help-link" (click)="toggleSmallMenu($event)" >Help</li>
-                    <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
-                    <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
-                    <li (click)="logout()" (click)="toggleSmallMenu($event)">Log out</li>
-                  </ul>
-                </div>
+        </div>
+      </nav>
+      <section>
+        <div class="header-bg">
+          <div class="top-content">
+            <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+            <span>Kanban Project Management Tool</span>
+            <div>
+              <img src="./assets/img/icons/helpIcon.png" alt="help" [routerLink]="['/help-component',currentRoute]">
+              <div class="user-initials" (click)="toggleSmallMenu($event)">{{ userInitials }}</div>
+              <div class="small-menu" [ngClass]="{ 'show': isSmallMenuOpen }">
+                <ul>
+                  <li [routerLink]="['/help-component',currentRoute]" class="help-link"
+                    (click)="toggleSmallMenu($event)">Help</li>
+                  <li routerLink="/legal-notice" (click)="toggleSmallMenu($event)">Legal Notice</li>
+                  <li routerLink="/privacy-police" (click)="toggleSmallMenu($event)">Privacy Policy</li>
+                  <li (click)="logout()" (click)="toggleSmallMenu($event)">Log out</li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="routing-content">
-            <router-outlet></router-outlet>
-          </div>
-        </section>
-      </main>
-    
+        </div>
+        <div class="routing-content">
+          <router-outlet></router-outlet>
+        </div>
+      </section>
+    </main>
+
     } @else {
-      @if (limitedAccessState == "login") {
-        <app-login (topicSelected)="changeTopic($event)"></app-login>
-      } @else {
-        <main>
-          <nav class="login-nav">
-            <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
-            <ul class="login-list">
-              <li (click)="changeTopic('login')"><img src="./assets/img/icons/LoginIcon.png" alt=""> Log In</li>
-            </ul>
-            <div class="login-topics">
-              <a (click)="changeTopic('privacy')">Privacy policy</a>
-              <a (click)="changeTopic('legal')">Legal Notice</a>
-            </div>
-          </nav>
-          <section>
-            <div class="header-bg">
-              <div class="top-content">
-                <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
-                <span>Kanban Project Management Tool</span>
-              </div>
-            </div>
-            <div class="routing-content">
-              @if (limitedAccessState == "privacy") { <app-privacy-policy></app-privacy-policy> }
-              @if (limitedAccessState == "legal") { <app-legal-notice></app-legal-notice> }
-            </div>
-          </section>
-        </main>
-      }
+    @if (limitedAccessState == "login") {
+    <app-login (topicSelected)="changeTopic($event)"></app-login>
+    } @else {
+    <main>
+      <nav class="login-nav">
+        <img src="./assets/img/icons/joinLogoSmallWhite.png" alt="Join-Logo">
+        <ul class="login-list">
+          <li (click)="changeTopic('login')"><img src="./assets/img/icons/LoginIcon.png" alt=""> Log In</li>
+        </ul>
+        <div class="login-topics">
+          <a (click)="changeTopic('privacy')">Privacy policy</a>
+          <a (click)="changeTopic('legal')">Legal Notice</a>
+        </div>
+      </nav>
+      <section>
+        <div class="header-bg">
+          <div class="top-content">
+            <img class="logo-for-mobile" src="./assets/img/icons/joinLogoSmall.png" alt="Join-Logo">
+            <span>Kanban Project Management Tool</span>
+          </div>
+        </div>
+        <div class="routing-content">
+          @if (limitedAccessState == "privacy") { <app-privacy-policy></app-privacy-policy> }
+          @if (limitedAccessState == "legal") { <app-legal-notice></app-legal-notice> }
+        </div>
+      </section>
+    </main>
+    }
     }
   </section>
 </section>

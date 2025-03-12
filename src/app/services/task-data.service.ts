@@ -41,7 +41,6 @@ export class TaskDataService {
    * @returns A Promise that signals the completion of the operation
    */
   async addTask(task: ITask): Promise<void> {
-    console.log(task);
     await this.firebaseService.addToDB(this.collectionName, task);
   }
 
